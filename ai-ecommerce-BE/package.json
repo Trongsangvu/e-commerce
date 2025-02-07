@@ -4,6 +4,11 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "concurrently --kill-others \"npm run watch\" \"nodemon dist/app.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,6 +20,7 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.1",
+    "concurrently": "^9.1.2",
     "tslint": "^6.1.3",
     "typescript": "^5.7.3"
   }
