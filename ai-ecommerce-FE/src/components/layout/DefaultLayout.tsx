@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
-
+import { Header } from './Header';
 
 type DefaultLayoutProps = {
     children: ReactNode
 }
 
-function DefaultLayout({ children }: DefaultLayoutProps) {
+export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
     return ( 
         <div>
+            <Header />
             {children}
         </div>
      );
