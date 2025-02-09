@@ -4,7 +4,6 @@ import DefaultLayout from './components/layout/DefaultLayout';
 import './App.css'
 
 function App() {
-
   return (
     <Router>
         <div className='app'>

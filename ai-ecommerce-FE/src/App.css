@@ -1,7 +1,10 @@
 @import "tailwindcss";
+@import './assets//font/font.css';
+
 
 :root {
     --font-family: 'GucciSansPro', Helvetica, Arial, sans-serif;
+    --font-pops: 'Poppins', sans-serif;
 }
 
 *{
@@ -9,32 +12,3 @@
     box-sizing: border-box;
 }
 
-@font-face {
-    font-family: GucciSansPro;
-    src: url('./assets/font/GucciSansPro-Medium.woff2');
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: GucciSansPro;
-    src: url('./assets/font/GucciSansPro-Bold.woff2');
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: GucciSansPro;
-    src: url('./assets/font/GucciSansPro-Book.woff2');
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: GucciSansPro;
-    src: url('./assets/font/GucciSansPro-Light.woff2');
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: GucciSansPro;
-    src: url('./assets/font/Poppins-Regular.ttf');
-    font-weight: 500;
-}

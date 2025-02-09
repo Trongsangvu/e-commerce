@@ -89,3 +89,20 @@ export const ContactIcon: React.FC<IconProps> = ({ className, width=16, height=1
         </path>
     </svg>
 )
+
+export const MenuToggle: React.FC<IconProps> = ({ className, width='24px', height='24px', fillColor='currentColor'}) => (
+    <svg 
+        className={className} 
+        width={width}
+        height={height}
+        viewBox="0 0 24 24" 
+        fill={fillColor} 
+        xmlns="http://www.w3.org/2000/svg" 
+        aria-hidden="true"
+    >
+        <path 
+            d="M20 6.5H4V5H20V6.5ZM20 11.25H4V12.75H20V11.25ZM20 17.5H4V19H20V17.5Z" 
+            fill="var(--_g-icon-fill-color)">
+        </path>
+    </svg>
+);

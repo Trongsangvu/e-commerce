@@ -1,5 +1,5 @@
 import config from "../config/config";
-import Home from '../pages/Home';
+import { Home } from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Checkout from '../pages/Checkout';

@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom';
 import config from '../../config/config';
 import '../../App.css';
 import images from '../../assets/images/images';
-import { ContactIcon, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
-
-
-
+import { ContactIcon, MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 
 export const Header: React.FC = () => {
     return (
@@ -16,21 +13,11 @@ export const Header: React.FC = () => {
                         <ContactIcon />
                         <span className='font-[--font-family]'>Contact Us</span>
                     </button>
-
-                    {/* <div>
-                        <span>Home</span>
-                        <span>Shop</span>
-                        <span>Features</span>
-                        <span>Blog</span>
-                        <span>About</span>
-                        <span>Contact</span>
-                        </div> */}
                 </div>
                 <Link to={config.routes.home} className='mr-10'>
                     <img src={images.logo} alt='COZASTORE'/>
                 </Link>
-
-                <ul className='flex'>
+                <ul className='flex '>
                     <li>
                         <ShoppingCartIcon />
                     </li>
@@ -40,7 +27,12 @@ export const Header: React.FC = () => {
                     <li className='pl-6'>
                         <SearchIcon />
                     </li>
-
+                    <li>
+                        <nav className='flex items-center pl-6 gap-2'>
+                            <MenuToggle />
+                            <span className='uppercase text-xs'>menu</span>
+                        </nav>
+                    </li>
                 </ul>
                 
             </div>
