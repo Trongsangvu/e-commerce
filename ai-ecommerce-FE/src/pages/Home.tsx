@@ -1,42 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import images from '../assets/images/images';
-import '../App.css';
 
 export const Home:React.FC = () => {
     const [isFixed, setIsFixed] = useState(true);
-    // const [isFollowing, setIsFollowing] = useState(false);
+    const bannerRef = useRef<HTMLDivElement>(null);
+
+    const handleScroll = useCallback(() => {
+        if (!bannerRef.current) return;
+
+        const scrollY = window.scrollY;
+        const bannerHeight = 450;
+        const threshold = bannerHeight - 100;
+
+        setIsFixed(scrollY < threshold);
+    }, []);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-            const startStick = 300;
-            const stopStick = 900;
-
-            if(scrollY < startStick) {
-                setIsFixed(true);
-                // setIsFollowing(false);
-            } else if(scrollY >= startStick && scrollY < stopStick) {
-                setIsFixed(true);
-                // setIsFollowing(false);
-            } else {
-                setIsFixed(false);
-                // setIsFollowing(true);
-            }
-        }
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [])
+    }, [handleScroll]);
 
     return (
         <div className='h-[2000px]'>
-            <div className='relative'> 
+            <div ref={bannerRef}  className='relative'> 
                 <img src={images.banner} />
-            </div>
-            <div className="sticky top-0 z-10 flex justify-center">
-                <div className={`
-                        ${isFixed ? "fixed top-[70%] left-1/2 transform -translate-x-1/2" : "absolute top-[900px]"}
-                            transition-all duration-300 ease-in-out text-center w-full
-                    `}
+                <div className={`transition-[transform] duration-300 ease-in-out text-center w-full   
+                    ${isFixed ? "fixed top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2" : "absolute bottom-[40px] left-1/2 -translate-x-1/2"}`}
                 >
                     <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">
                         Spring Summer 2025
@@ -50,6 +39,8 @@ export const Home:React.FC = () => {
                         </a>
                     </div>
                 </div>
+            </div>
+            <div className="sticky top-0 z-10 flex justify-center">
             </div>
 
         </div>

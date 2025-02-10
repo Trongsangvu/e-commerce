@@ -1,10 +1,12 @@
 @import "tailwindcss";
-@import './assets//font/font.css';
+
+@import './assets/font/font.css';
 
 
 :root {
     --font-family: 'GucciSansPro', Helvetica, Arial, sans-serif;
     --font-pops: 'Poppins', sans-serif;
+    --spacing: 1px; 
 }
 
 *{
