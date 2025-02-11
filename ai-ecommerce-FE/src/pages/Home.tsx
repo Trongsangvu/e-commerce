@@ -30,11 +30,11 @@ export const Home:React.FC = () => {
                     <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">
                         Spring Summer 2025
                     </span>
-                    <div className="flex gap-5 justify-center pt-6">
-                        <a className="uppercase bg-white px-5 py-3 rounded-sm text-black text-sm font-semibold tracking-[2px]">
+                    <div className="flex gap-15 justify-center pt-20">
+                        <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">
                         For Her
                         </a>
-                        <a className="uppercase bg-white px-5 py-3 rounded-sm text-black text-sm font-semibold tracking-[2px]">
+                        <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">
                         For Him
                         </a>
                     </div>

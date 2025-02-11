@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
                 <div className='flex items-center justify-between'>
                     <button className='flex items-center'>
                         <ContactIcon />
-                        <span className='font-[--font-family]'>Contact Us</span>
+                        <span className='font-montserrat font-semibold'>Contact Us</span>
                     </button>
                 </div>
                 <Link to={config.routes.home} className='mr-10'>
@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
                     <li>
                         <nav className='flex items-center pl-15 gap-2'>
                             <MenuToggle />
-                            <span className='uppercase text-xs'>menu</span>
+                            <span className='font-montserrat font-bold uppercase text-xs'>menu</span>
                         </nav>
                     </li>
                 </ul>
