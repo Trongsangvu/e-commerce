@@ -107,7 +107,7 @@ export const MenuToggle: React.FC<IconProps> = ({ className, width='24px', heigh
     </svg>
 );
 
-export const CloseIcon: React.FC<IconProps> = ({ className, width='24px', height='24px', fillColor='currentColor'}) => (
+export const CloseIcon: React.FC<IconProps> = ({ className, width='24px', height='24px', fillColor='white'}) => (
     <svg 
         className={className}
         aria-hidden="true" 
