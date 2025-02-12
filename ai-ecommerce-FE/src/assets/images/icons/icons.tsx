@@ -106,3 +106,23 @@ export const MenuToggle: React.FC<IconProps> = ({ className, width='24px', heigh
         </path>
     </svg>
 );
+
+export const CloseIcon: React.FC<IconProps> = ({ className, width='24px', height='24px', fillColor='currentColor'}) => (
+    <svg 
+        className={className}
+        aria-hidden="true" 
+        xmlns="http://www.w3.org/2000/svg" 
+        width={width}
+        height={height}
+        viewBox="0 0 24 24" 
+        fill={fillColor}
+    >
+        <path 
+            fillRule="evenodd" 
+            clipRule="evenodd" 
+            d="M10.4951 11.5557L5.02539 17.0254L6.08605 18.086L11.5557 12.6164L17.0254 18.0861L18.086 17.0254L12.6164 11.5557L18.086 6.08605L17.0254 5.02539L11.5557 10.4951L6.08605 5.0254L5.02539 6.08606L10.4951 11.5557Z" 
+            fill="var(--_g-icon-stroke-color)"
+        >
+        </path>
+    </svg>
+);

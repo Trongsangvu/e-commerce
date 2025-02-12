@@ -40,9 +40,6 @@ export const Home:React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="sticky top-0 z-10 flex justify-center">
-            </div>
-
         </div>
     )
 }

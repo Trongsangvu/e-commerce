@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import config from '../../config/config';
 import images from '../../assets/images/images';
 import { ContactIcon, MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
+import { MENU_ITEMS, MENU_ITEMS_2 } from '../../config/menu';
 
 export const Header: React.FC = () => {
     return (
@@ -27,14 +28,30 @@ export const Header: React.FC = () => {
                         <SearchIcon />
                     </li>
                     <li>
-                        <nav className='flex items-center pl-15 gap-2'>
+                        <nav className='flex items-center pl-15 gap-2 hover:cursor-pointer relative'>
                             <MenuToggle />
                             <span className='font-montserrat font-bold uppercase text-xs'>menu</span>
                         </nav>
+                                   
                     </li>
                 </ul>
-                
+                <div className='absolute top-0 right-0 p-80 bg-red-500 min-w-lg min-h-1131'>
+                    <div>
+                        <ul>
+                            {MENU_ITEMS.map((item, index) => (
+                                <li className='font-montserrat pb-24' key={index}>
+                                    {item.title}
+                                </li>
+                            ))}
+
+                            {MENU_ITEMS_2.map((item, index) => (
+                                <li className='font-montserrat pb-24' key={index}>{item.title}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div> 
             </div>
         </header>
     )
 }
+
