@@ -25,7 +25,7 @@ export const Home:React.FC = () => {
             <div ref={bannerRef}  className='relative top-72'> 
                 <img src={images.banner} />
                 <div className={`transition-[transform] duration-300 ease-in-out text-center w-full   
-                    ${isFixed ? "fixed top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2" : "absolute bottom-[40px] left-1/2 -translate-x-1/2"}`}
+                    ${isFixed ? "fixed top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2" : "absolute bottom-[40px] left-1/2 -translate-x-1/2"}`}
                 >
                     <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">
                         Spring Summer 2025
