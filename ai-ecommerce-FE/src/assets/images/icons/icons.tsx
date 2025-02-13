@@ -126,3 +126,22 @@ export const CloseIcon: React.FC<IconProps> = ({ className, width='24px', height
         </path>
     </svg>
 );
+
+export const AngleRightIcon: React.FC<IconProps> = ({ className, width='16px', height='16px', fillColor='currentColor'}) => (
+    <svg 
+        className={className} 
+        aria-hidden="true" 
+        xmlns="http://www.w3.org/2000/svg" 
+        width={width} 
+        height={height} 
+        viewBox="0 0 16 16" 
+        fill={fillColor}
+    >
+        <path 
+            d="M6 12L10 8L6 4" 
+            stroke="" 
+            stroke-width="1.5" 
+            stroke-linejoin="round"
+        ></path>
+    </svg>
+)

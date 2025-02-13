@@ -3,7 +3,7 @@ import React from 'react';
 import { CloseIcon } from '../../assets/images/icons/icons';
 import { useSidebar } from '../../hooks/useSidebar';
 import { usePreventScroll } from '../../hooks/usePreventScroll';
-import { MenuList } from '../ui/menuList';
+import { MenuList } from '../ui/MenuList';
 import { Overlay } from '../common/Overlay';
 
 
