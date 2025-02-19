@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/products', productRoutes);
 
 // Handler Error
-app.use(errorHandler)
+app.use(errorHandler);
 
 // Connect to MongoDB
 connectDB();

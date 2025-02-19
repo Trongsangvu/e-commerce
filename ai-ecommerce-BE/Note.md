@@ -148,3 +148,80 @@ GET /api/users/addresses - Quản lý địa chỉ giao hàng
 
 POST /api/products/{id}/reviews - Đánh giá sản phẩm
 GET /api/products/{id}/reviews - Xem đánh giá
+
+
+
+# Example for each backend process like an e-commerce website:
+*1. Manages Database Operations*
+Example: A user adds a product to their cart.
+
+The backend stores this cart item in a database table.
+If the user removes the item, the backend updates the database.
+If the user checks out, the backend processes the purchase and updates stock.
+
+`Tech: MySQL, PostgreSQL, MongoDB`
+
+*2. Handles Business Logic*
+Example: Applying a discount on a purchase.
+
+If a user applies a 20% discount code, the backend checks if it’s valid.
+If valid, it calculates the new price:
+```ini
+final_price = original_price - (original_price * discount)
+```
+Then, it returns the updated price to the frontend.
+`Tech: Node.js, Python (Django), Java (Spring Boot)`
+
+*3. Authentication & Authorization*
+Example: Logging in to an account.
+
+A user enters their email & password.
+The backend checks if the email exists and verifies the password.
+If correct, it generates a JWT token or session.
+If the user is an admin, they get access to extra features.
+`Tech: OAuth, Firebase Auth, JWT`
+
+*4. Processes API Requests*
+Example: The frontend requests the latest products.
+
+The frontend calls `GET /api/products`
+The backend retrieves data from the database and sends a JSON response:
+```json
+[
+  { "id": 1, "name": "Laptop", "price": 1000 },
+  { "id": 2, "name": "Phone", "price": 500 }
+]
+```
+`Tech: REST API, GraphQL`
+
+*5. Integrates with External Services*
+Example: Processing a payment.
+
+A user enters credit card details and clicks "Pay".
+The backend calls Stripe API to process the payment.
+If successful, the order is confirmed.
+If failed, an error message is sent to the frontend.
+
+`Tech: Stripe, PayPal, Twilio (SMS), Firebase`
+
+*6. Ensures Security & Performance*
+Example: Protecting user data.
+
+Passwords are hashed before storing in the database:
+```ini
+hashed_password = bcrypt.hash(password)
+```
+The backend limits API requests to prevent attacks (rate limiting).
+Implements CORS policies to prevent unauthorized requests.
+
+`Tech: bcrypt, Helmet.js, Cloudflare`
+
+*7. Manages Server Infrastructure*
+Example: Scaling a website during a sale event.
+
+More users visit the site during a Black Friday Sale.
+The backend auto-scales servers using cloud services (AWS, Google Cloud).
+A load balancer distributes traffic across multiple servers.
+
+`Tech: AWS, Kubernetes, Nginx`
+
