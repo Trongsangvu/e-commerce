@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 interface Products extends Document {
     name: string;
     price: number;
-    category: "men" | "women";
+    category?: "men" | "women";
     currency: "USD";
     description?: string;
     imageUrl?: string;
@@ -13,7 +13,7 @@ const productSchema = new Schema<Products>(
         name: { type: String, required: true },
         price: { type: Number, required: true, min: 0 },
         currency: { type: String, default: "USD" },
-        category: { type: String, enum: ["men", "women"], required: true},
+        category: { type: String, enum: ["men", "women"] },
         description: { type: String },
         imageUrl: { type: String, required: true },
     },
