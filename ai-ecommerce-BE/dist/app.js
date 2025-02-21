@@ -13,6 +13,7 @@ const app = (0, express_1.default)();
 const port = process.env.PORT;
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+// API
 app.use('/api/products', productRoutes_1.default);
 // Handler Error
 app.use(Errorhandler_1.default);

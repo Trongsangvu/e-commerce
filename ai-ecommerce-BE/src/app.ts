@@ -8,16 +8,18 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+// Connect to MongoDB
+connectDB();
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Routes
 app.use('/api/products', productRoutes);
 
 // Handler Error
 app.use(errorHandler);
-
-// Connect to MongoDB
-connectDB();
 
 // Start server
 app.listen(port, () => {

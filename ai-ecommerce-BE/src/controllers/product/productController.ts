@@ -1,4 +1,4 @@
-import { Product } from "../models/Product";
+import { Product } from "../../models/Product";
 import { Request, Response, NextFunction } from "express";
 
 
@@ -41,27 +41,17 @@ export const updateProduct = async (req: Request, res: Response, next: NextFunct
 
         // if category is null, use $unset toremove it
         if(updateData.category === null) {
-            const product = await Product.findByIdAndUpdate(
-                id, 
-                { $unset: { category: "" } },
-                { new: true }
-            );
-            
-            if(!product) {
-                res.status(404).json({ message: "Product not found" });
-                return;
-            }
-            res.status(200).json(product);
+            updateData.$unset = { category: "" };
+            delete updateData.category;
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(id, updateData, { new: true });
+
+        if(!updatedProduct) {
+            res.status(404).json({ message: "Product not found" });
             return;
         }
-
-        const product = await Product.findByIdAndUpdate(id, req.body, { new: true });
-
-        if(!product) {
-            res.status(404).json({ message: "Product not found" });
-        }
-
-        res.status(201).json(product);
+        res.status(200).json(updatedProduct);
     }
     catch(err) {
         next(err);
