@@ -3,6 +3,7 @@ import { getProducts, getProductById, createProduct, updateProduct, deleteProduc
 
 const router = express.Router();
 
+// Public
 router.get('/', getProducts);
 router.get('/:id', getProductById);
 

@@ -11,14 +11,15 @@ const Errorhandler_1 = __importDefault(require("./middleware/Errorhandler"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
+// Connect to MongoDB
+(0, database_1.connectDB)();
+// Middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-// API
+// Routes
 app.use('/api/products', productRoutes_1.default);
 // Handler Error
 app.use(Errorhandler_1.default);
-// Connect to MongoDB
-(0, database_1.connectDB)();
 // Start server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
