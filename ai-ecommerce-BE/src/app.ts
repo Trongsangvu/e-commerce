@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/products', productRoutes);
-app.use('/api/auth', userRoutes);
+app.use('/api/users', userRoutes);
 
 // Handler Error
 app.use(errorHandler);

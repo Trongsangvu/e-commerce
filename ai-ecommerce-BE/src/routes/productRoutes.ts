@@ -1,7 +1,7 @@
 import express from 'express';
 import { getProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/product/productController';
-import { validateToken, isAdmin } from '../middleware/index';
-
+import { isAdmin } from '../middleware/index';
+import { validateToken } from '../utils/jwt';
 const router = express.Router();
 
 // Public
