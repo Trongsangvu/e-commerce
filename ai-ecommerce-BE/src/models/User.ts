@@ -1,11 +1,5 @@
 import { Schema, model } from 'mongoose';
-
-interface Users extends Document {
-    name: string;
-    email: string;
-    password: string;
-    role?: "admin" | "user";
-}
+import { Users } from "../types/user/user-types";
 
 const userSchema = new Schema<Users>(
     {

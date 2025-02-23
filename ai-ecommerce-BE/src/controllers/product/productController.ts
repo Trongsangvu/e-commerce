@@ -1,7 +1,6 @@
 import { Product } from "../../models/Product";
 import { Request, Response, NextFunction } from "express";
 
-
 export const getProducts = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const product = await Product.find({});
@@ -66,7 +65,7 @@ export const deleteProduct = async (req: Request, res: Response, next: NextFunct
             res.status(404).json({ message: "Product not found" });
             return;
         }
-        res.status(200).json(product);
+        res.status(200).json({ message: "Product deleted successfully" });
     }
     catch(err) {
         next(err);

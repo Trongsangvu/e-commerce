@@ -1,12 +1,5 @@
 import { Schema, model } from "mongoose";
-interface Products extends Document {
-    name: string;
-    price: number;
-    category?: "men" | "women";
-    currency: "USD";
-    description?: string;
-    imageUrl?: string;
-}
+import { Products } from "../types/product/product-types";
 
 const productSchema = new Schema<Products>(
     {
