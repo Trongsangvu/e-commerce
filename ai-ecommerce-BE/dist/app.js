@@ -21,7 +21,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 // Routes
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/users', userRoutes_1.default);
-app.use('/api/cart', cartRoutes_1.default);
+app.use('/api/carts', cartRoutes_1.default);
 // Handler Error
 app.use(Errorhandler_1.default);
 // Start server

@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/cart', cartRoutes);
+app.use('/api/carts', cartRoutes);
 
 
 // Handler Error

@@ -1,6 +1,6 @@
 import express from "express";
 import { validateToken } from '../utils/jwt';
-import { getCart, addToCart } from "../controllers/cart/cartController";
+import { getCart, addToCart } from "../controllers/cart/cart.controller";
 
 const router = express.Router();
 

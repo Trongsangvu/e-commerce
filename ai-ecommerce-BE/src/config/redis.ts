@@ -1,22 +1,16 @@
-import { createClient } from "redis";
+import { createClient } from 'redis';
 
 const redisClient = createClient({
-    url: 'redis://127.0.0.1:6379'
+  socket: {
+    host: process.env.REDIS_HOST || 'localhost',
+    port: parseInt(process.env.REDIS_PORT || '6379', 10),
+    reconnectStrategy: (retries: number) => {
+      return Math.min(retries * 50, 2000);
+    }
+  }
 });
 
-redisClient.on("connect", () => console.log("Connected to Redis"));
-
-redisClient.on("error", (err) => console.log("Redis Client Error: ", err));
-
-async function connectRedis() {
-    try {
-        await redisClient.connect();
-        console.log('Redis connection established');
-      } catch (err) {
-        console.error('Failed to connect to Redis:', err);
-      }
-}
-
-connectRedis();
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
+redisClient.on('connect', () => console.log('Connected to Redis'));
 
 export default redisClient;

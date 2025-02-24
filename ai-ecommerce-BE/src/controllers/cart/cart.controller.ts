@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { Cart } from "../../models/Cart";
-import redisClient from "../../config/redis";
+import { RedisService } from "../../services/redis.service";
+// import handleRedisConnect from "../../utils/handleRedisConnect";
 
 export const getCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const userId = req.user?.id;
-        const cachedCart = await redisClient.get(`cart:${userId}`);
+
+        const cacheKey = `cart:${userId}`;
+        const cachedCart = await RedisService.get(cacheKey);
         if(cachedCart) {
             res.status(200).json(JSON.parse(cachedCart));
             return;
@@ -17,7 +20,7 @@ export const getCart = async (req: Request, res: Response, next: NextFunction): 
             return;
         }
 
-        await redisClient.setEx(`cart: ${userId}`, 3600, JSON.stringify(cart));
+        await RedisService.set(`cart: ${userId}`, JSON.stringify(cart), 3600);
         res.status(200).json(cart);
     }
     catch(error) {
@@ -43,8 +46,14 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
         }
 
         await cart.save();
-        await redisClient.del(`cart:${userId}`);
-        res.status(200).json({ message: "Product added to cart successfully" });
+
+        try {
+            await RedisService.del(`cart:${userId}`);
+        } catch(error) {
+            console.log('Redis cache deletion falied:', error);
+        }
+
+        res.status(200).json({ message: "Product added to cart successfully", cart });
     }
     catch(error) {
         next(error);
