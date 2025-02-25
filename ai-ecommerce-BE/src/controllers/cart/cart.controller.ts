@@ -1,14 +1,21 @@
 import { Request, Response, NextFunction } from "express";
 import { Cart } from "../../models/Cart";
 import { RedisService } from "../../services/redis.service";
-// import handleRedisConnect from "../../utils/handleRedisConnect";
 
 export const getCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const userId = req.user?.id;
 
-        const cacheKey = `cart:${userId}`;
-        const cachedCart = await RedisService.get(cacheKey);
+        const cacheKey = `cart: ${userId}`;
+        let cachedCart;
+
+        try {
+            cachedCart = await RedisService.get(cacheKey);
+
+        } catch(err) {
+            console.warn('Redis cache fetch failed, falling back to database', err);
+        }
+
         if(cachedCart) {
             res.status(200).json(JSON.parse(cachedCart));
             return;

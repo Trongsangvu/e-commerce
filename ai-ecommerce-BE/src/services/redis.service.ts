@@ -19,7 +19,7 @@ export class RedisService {
         }
     }
 
-    static async set(key: string, value: string, expireTime: number) {
+    static async set(key: string, value: string, expireTime?: number) {
         try {
             await this.ensureConnection();
             if(expireTime) {
