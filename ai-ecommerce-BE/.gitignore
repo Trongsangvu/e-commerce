@@ -4,4 +4,4 @@ logs
 *.logs
 *.env
 Note.md
-ai-ecommerce-BE/src/firebase/*.json
+firebase/*.json
