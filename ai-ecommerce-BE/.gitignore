@@ -4,4 +4,3 @@ logs
 *.logs
 *.env
 Note.md
-firebase/*.json
