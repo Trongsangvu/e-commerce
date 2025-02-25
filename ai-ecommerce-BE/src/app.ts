@@ -1,10 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/database';
-import productRoutes from './routes/productRoutes';
-import userRoutes from './routes/userRoutes';
-import cartRoutes from './routes/cartRoutes';
+import productRoutes from './routes/product.routes';
+import userRoutes from './routes/user.routes';
+import cartRoutes from './routes/cart.routes';
+import orderRoutes from './routes/order.routes';
 import errorHandler from './middleware/Errorhandler';
+
 
 dotenv.config();
 const app = express();
@@ -21,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/carts', cartRoutes);
+app.use('/api/orders', orderRoutes);
 
 
 // Handler Error
