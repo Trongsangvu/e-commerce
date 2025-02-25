@@ -1,6 +1,7 @@
 import admin from 'firebase-admin';
-import * as serviceAccount from '../firebase/ai-ecommerce-de56e-firebase-adminsdk-fbsvc-df3077cefb.json';
 
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG as string);
+console.log(serviceAccount);
 const serviceAccountTyped = serviceAccount as admin.ServiceAccount;
 
 admin.initializeApp({
