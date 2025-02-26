@@ -2,8 +2,16 @@ import redisClient from "../config/redis";
 
 export class RedisService {
     private static async ensureConnection() {
-        if (!redisClient.isOpen) {
-            await RedisService.connect();
+        try {
+            if (!redisClient.isOpen) {
+                await RedisService.connect();
+            } else {
+                await redisClient.ping();
+            }
+        }
+        catch(error) {
+            console.error('Redis ping failed, reconnecting...', error);
+            await redisClient.connect();
         }
     }
 
@@ -11,6 +19,7 @@ export class RedisService {
         try {
             if (!redisClient.isOpen) {
                 await redisClient.connect();
+                console.log('Redis connected successfully');
             }
         }
         catch(error) {

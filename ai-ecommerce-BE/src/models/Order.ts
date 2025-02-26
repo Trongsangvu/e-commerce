@@ -11,6 +11,7 @@ const orderSchema = new Schema<Orders>(
             }
         ],
         totalAmount: { type: Number, required: true },
+        currency: { type: String, default: "USD" },
         status: {
             type: String,
             enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
@@ -20,10 +21,22 @@ const orderSchema = new Schema<Orders>(
             type: String,
             enum: ['cash', 'credit_card', 'paypal'],
             required: true
-        }
+        },
+        userFcmToken: { type: String },
+        userPhone: { type: String }
     },
     {
-        timestamps: true
+        timestamps: true,
+        toJSON: {
+            transform: (_doc, ret) => {
+                const currencySybl: Record<string, string> = {
+                    USD: "$"
+                }
+                const symbol = currencySybl[ret.currency];
+                ret.totalAmount = `${symbol}${ret.totalAmount.toFixed(3)}`;
+                return ret;
+            }
+        }
     }
 );
 

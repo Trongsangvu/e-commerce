@@ -63,10 +63,60 @@ export const createOrders = async (req: Request, res: Response, next: NextFuncti
 
         // Send order to warehouse system via Kafka
         await sendOrderToWarehouse(newOrder);
-        
+
         res.status(201).json({ message: "Order placed successfully", order: newOrder});
     }
     catch(error) {
         next(error);
     }
+}
+
+export const updateOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const { id } = req.params;
+
+        const order = await Order.findByIdAndUpdate(id, req.body);
+        if(!order) {
+            res.status(404).json({ message: "Order not found" });
+            return;
+        }
+        await order.save();
+
+        // if(req.body.userFcmToken) {
+        //     await sendPushNotification(req.body.userFcmToken, "update order", `Your order status ${req.body.status}`)
+        // }
+
+        if(req.body.userPhone){
+            await sendOrderNotification(req.body.userPhone, "Your order has been placed successfully!");
+        }
+        res.status(200).json({ message: "Order updated successfully", order: order });
+    }   
+    catch(error) {
+        next(error);
+    }
+}
+
+export const updateOrderStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+        const order = await Order.findById(id);
+
+        if(!order) {
+            res.status(404).json({ message: "Order not found" });
+            return
+        }
+
+        order.status = status;
+        await order.save()
+
+        if(req.body.userFcmToken) {
+            await sendPushNotification(req.body.userFcmToken, "Update order status", `Your order status ${status}`);
+        }
+        res.status(200).json({ message: "Order status updated successfully", order: order });
+    }   
+    catch(error) {
+        next(error);
+    }
+
 }
