@@ -4,7 +4,8 @@ import redisClient from '../../config/redis';
 import { sendPushNotification } from '../../services/firebase.service';
 import { sendOrderNotification } from '../../services/twilio.service';
 import { sendOrderToWarehouse } from '../../services/kafka.service';
-
+import { RedisService } from '../../services/redis.service';
+// import { io } from '../../config/socket';
 
 export const getOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -18,7 +19,10 @@ export const getOrders = async (req: Request, res: Response, next: NextFunction)
         }
 
         // If not have cache, query from DB
-        const orders = await Order.find({ userId }).sort({ createdAt: -1 });
+        const orders = await Order.find({ userId })
+            .select("products totalAmount status createdAt")
+            .sort({ createdAt: -1 });
+
         redisClient.setEx(cacheKey, 3600, JSON.stringify(orders));
 
         res.status(200).json(orders);
@@ -51,18 +55,11 @@ export const createOrders = async (req: Request, res: Response, next: NextFuncti
         const cacheKey = `orders:${userId}`;
         redisClient.del(cacheKey); // delete cache to update new data
 
-        // if we have userFcmToken send message success
-        if(userFcmToken) {
-            await sendPushNotification(userFcmToken, "New Order", "Order placed successfully");
-        }
-
-        // Send SMS notification if userPhone exists
-        if (userPhone) {
-            await sendOrderNotification(userPhone, `Your order #${newOrder._id} has been placed successfully.`);
-        }
-
-        // Send order to warehouse system via Kafka
-        await sendOrderToWarehouse(newOrder);
+        await Promise.all([
+            userFcmToken && sendPushNotification(userFcmToken, "New order", " Order placed successfully"),// if we have userFcmToken send message success
+            userPhone && sendOrderNotification(userPhone, `Your order #${newOrder._id} has been placed successfully`),// Send SMS notification if userPhone exists
+            sendOrderToWarehouse(newOrder) // Send order to warehouse system via Kafka
+        ])
 
         res.status(201).json({ message: "Order placed successfully", order: newOrder});
     }
@@ -74,13 +71,16 @@ export const createOrders = async (req: Request, res: Response, next: NextFuncti
 export const updateOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const { id } = req.params;
+        const userId = req.user?.id;
 
-        const order = await Order.findByIdAndUpdate(id, req.body);
+        const order = await Order.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if(!order) {
             res.status(404).json({ message: "Order not found" });
             return;
         }
-        await order.save();
+
+        const cachekey = `orders:${userId}`;
+        await RedisService.del(cachekey);
 
         // if(req.body.userFcmToken) {
         //     await sendPushNotification(req.body.userFcmToken, "update order", `Your order status ${req.body.status}`)
@@ -99,16 +99,20 @@ export const updateOrders = async (req: Request, res: Response, next: NextFuncti
 export const updateOrderStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const { id } = req.params;
+        const userId = req.user?.id;
         const { status } = req.body;
-        const order = await Order.findById(id);
+
+        const order = await Order.findByIdAndUpdate(id, { status }, { new: true, runValidators: true });
 
         if(!order) {
             res.status(404).json({ message: "Order not found" });
             return
         }
 
-        order.status = status;
-        await order.save()
+        // io.emit('orderUpdated', order);
+
+        const cachekey = `orders:${userId}`;
+        await RedisService.del(cachekey);
 
         if(req.body.userFcmToken) {
             await sendPushNotification(req.body.userFcmToken, "Update order status", `Your order status ${status}`);

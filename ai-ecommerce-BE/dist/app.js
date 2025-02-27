@@ -3,14 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.server = void 0;
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const http_1 = __importDefault(require("http"));
 const database_1 = require("./config/database");
 const product_routes_1 = __importDefault(require("./routes/product.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const cart_routes_1 = __importDefault(require("./routes/cart.routes"));
 const order_routes_1 = __importDefault(require("./routes/order.routes"));
 const Errorhandler_1 = __importDefault(require("./middleware/Errorhandler"));
+// import { server } from './config/socket';
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
@@ -19,6 +22,8 @@ const port = process.env.PORT;
 // Middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+// Create http server
+exports.server = http_1.default.createServer(app);
 // Routes
 app.use('/api/products', product_routes_1.default);
 app.use('/api/users', user_routes_1.default);

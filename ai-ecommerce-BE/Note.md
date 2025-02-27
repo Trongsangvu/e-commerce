@@ -225,3 +225,5 @@ A load balancer distributes traffic across multiple servers.
 
 `Tech: AWS, Kubernetes, Nginx`
 
+*Sử Dụng Promise.all() Để Tăng Tốc Độ*
+- Đối với nhiều await trong một hàm ta có thể sử Promise.all() để xử lí song song

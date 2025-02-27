@@ -73,17 +73,17 @@ export const removeFromCart = async (req: Request, res: Response, next: NextFunc
     try {
         console.log("req.params:", req.params); // Debug
         const userId = req.user?.id; // User's token
-        const { id } = req.params; // product's id
+        const { productId } = req.params; // product's id
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            console.log("Received productId:", id);
+        if (!mongoose.Types.ObjectId.isValid(productId)) {
+            console.log("Received productId:", productId);
             res.status(400).json({ message: "Invalid product ID" });
             return;
         }
 
         const cart = await Cart.findOneAndUpdate(
             { userId }, // Tìm giỏ hàng của user
-            { $pull: { items: { productId: new mongoose.Types.ObjectId(id) } } }, // Xóa sản phẩm khỏi giỏ hàng
+            { $pull: { items: { productId: new mongoose.Types.ObjectId(productId) } } }, // Xóa sản phẩm khỏi giỏ hàng
             { new: true } // Trả về giỏ hàng sau khi cập nhật
         );
 
@@ -99,7 +99,7 @@ export const removeFromCart = async (req: Request, res: Response, next: NextFunc
             console.log("Redis cache delete failed", error);
         }
 
-        res.status(200).json({ message: "Product removed from cart successfully", cart: cart });
+        res.status(200).json({ message: "Product removed from cart successfully", cart });
     }
     catch(error) {
         next(error);

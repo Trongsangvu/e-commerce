@@ -1,2 +1,2 @@
-export { login } from './loginController';
-export { register } from './registerController';
+export { login } from './login.controller';
+export { register } from './register.controller';
