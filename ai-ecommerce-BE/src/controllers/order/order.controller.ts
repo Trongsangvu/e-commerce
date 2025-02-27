@@ -9,7 +9,7 @@ import { sendOrderToWarehouse } from '../../services/kafka.service';
 export const getOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const userId = req.user?.id;
-        const cacheKey = `orders: ${userId}`;
+        const cacheKey = `orders:${userId}`;
         const cachedOrders = await redisClient.get(cacheKey);
 
         if(cachedOrders) {
@@ -48,7 +48,7 @@ export const createOrders = async (req: Request, res: Response, next: NextFuncti
         });
 
         await newOrder.save();
-        const cacheKey = `orders: ${userId}`;
+        const cacheKey = `orders:${userId}`;
         redisClient.del(cacheKey); // delete cache to update new data
 
         // if we have userFcmToken send message success
@@ -89,8 +89,8 @@ export const updateOrders = async (req: Request, res: Response, next: NextFuncti
         if(req.body.userPhone){
             await sendOrderNotification(req.body.userPhone, "Your order has been placed successfully!");
         }
-        res.status(200).json({ message: "Order updated successfully", order: order });
-    }   
+        res.status(200).json({ message: "Order updated successfully", order });
+    }
     catch(error) {
         next(error);
     }
@@ -113,8 +113,8 @@ export const updateOrderStatus = async (req: Request, res: Response, next: NextF
         if(req.body.userFcmToken) {
             await sendPushNotification(req.body.userFcmToken, "Update order status", `Your order status ${status}`);
         }
-        res.status(200).json({ message: "Order status updated successfully", order: order });
-    }   
+        res.status(200).json({ message: "Order status updated successfully", order });
+    }
     catch(error) {
         next(error);
     }

@@ -1,19 +1,20 @@
 import { Request, Response, NextFunction } from "express";
 import { Cart } from "../../models/Cart";
 import { RedisService } from "../../services/redis.service";
+import mongoose from 'mongoose';
 
 export const getCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const userId = req.user?.id;
 
-        const cacheKey = `cart: ${userId}`;
+        const cacheKey = `cart:${userId}`;
         let cachedCart;
 
         try {
             cachedCart = await RedisService.get(cacheKey);
 
         } catch(err) {
-            console.warn('Redis cache fetch failed, falling back to database', err);
+            console.log('Redis cache fetch failed, falling back to database', err);
         }
 
         if(cachedCart) {
@@ -27,7 +28,7 @@ export const getCart = async (req: Request, res: Response, next: NextFunction): 
             return;
         }
 
-        await RedisService.set(`cart: ${userId}`, JSON.stringify(cart), 3600);
+        await RedisService.set(`cart:${userId}`, JSON.stringify(cart), 3600);
         res.status(200).json(cart);
     }
     catch(error) {
@@ -46,6 +47,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
         }
 
         const itemIndex = cart.items.findIndex((item) => item.productId.toString() === productId);
+
         if(itemIndex > -1) {
             cart.items[itemIndex].quantity += quantity;
         } else {
@@ -61,6 +63,43 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
         }
 
         res.status(200).json({ message: "Product added to cart successfully", cart });
+    }
+    catch(error) {
+        next(error);
+    }
+}
+
+export const removeFromCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        console.log("req.params:", req.params); // Debug
+        const userId = req.user?.id; // User's token
+        const { id } = req.params; // product's id
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            console.log("Received productId:", id);
+            res.status(400).json({ message: "Invalid product ID" });
+            return;
+        }
+
+        const cart = await Cart.findOneAndUpdate(
+            { userId }, // Tìm giỏ hàng của user
+            { $pull: { items: { productId: new mongoose.Types.ObjectId(id) } } }, // Xóa sản phẩm khỏi giỏ hàng
+            { new: true } // Trả về giỏ hàng sau khi cập nhật
+        );
+
+        if(!cart) {
+            res.status(404).json({ message: "Cart not found" });
+            return;
+        }
+
+        try {
+            await RedisService.del(`cart:${userId}`);
+        }
+        catch(error) {
+            console.log("Redis cache delete failed", error);
+        }
+
+        res.status(200).json({ message: "Product removed from cart successfully", cart: cart });
     }
     catch(error) {
         next(error);
