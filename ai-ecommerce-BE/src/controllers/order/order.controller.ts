@@ -42,6 +42,7 @@ export const createOrders = async (req: Request, res: Response, next: NextFuncti
             return;
         }
 
+
         // create new order
         const newOrder = new Order({
             userId,
@@ -56,8 +57,8 @@ export const createOrders = async (req: Request, res: Response, next: NextFuncti
         redisClient.del(cacheKey); // delete cache to update new data
 
         await Promise.all([
-            userFcmToken && sendPushNotification(userFcmToken, "New order", " Order placed successfully"),// if we have userFcmToken send message success
-            userPhone && sendOrderNotification(userPhone, `Your order #${newOrder._id} has been placed successfully`),// Send SMS notification if userPhone exists
+            // userFcmToken && sendPushNotification(userFcmToken, "New order", " Order placed successfully"),// if we have userFcmToken send message success
+            // userPhone && sendOrderNotification(userPhone, `Your order #${newOrder._id} has been placed successfully`),// Send SMS notification if userPhone exists
             sendOrderToWarehouse(newOrder) // Send order to warehouse system via Kafka
         ])
 

@@ -76,7 +76,6 @@ export const removeFromCart = async (req: Request, res: Response, next: NextFunc
         const { productId } = req.params; // product's id
 
         if (!mongoose.Types.ObjectId.isValid(productId)) {
-            console.log("Received productId:", productId);
             res.status(400).json({ message: "Invalid product ID" });
             return;
         }
