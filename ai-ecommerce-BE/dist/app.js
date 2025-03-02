@@ -12,8 +12,8 @@ const product_routes_1 = __importDefault(require("./routes/product.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const cart_routes_1 = __importDefault(require("./routes/cart.routes"));
 const order_routes_1 = __importDefault(require("./routes/order.routes"));
+const payment_routes_1 = __importDefault(require("./routes/payment.routes"));
 const Errorhandler_1 = __importDefault(require("./middleware/Errorhandler"));
-// import { server } from './config/socket';
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
@@ -29,6 +29,7 @@ app.use('/api/products', product_routes_1.default);
 app.use('/api/users', user_routes_1.default);
 app.use('/api/carts', cart_routes_1.default);
 app.use('/api/orders', order_routes_1.default);
+app.use('/api/payment', payment_routes_1.default);
 // Handler Error
 app.use(Errorhandler_1.default);
 // Start server
