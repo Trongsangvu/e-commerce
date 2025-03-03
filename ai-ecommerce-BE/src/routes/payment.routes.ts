@@ -1,12 +1,11 @@
 import express from 'express';
 import { checkoutPayment } from '../controllers/payment/payment.controller';
-import { stripeWebhook } from '../webhooks/stripe.webhook';
-import { paypalWebhook } from '../webhooks/paypal.webhook';
+import { validateToken } from '../utils/jwt';
+
 
 const router = express.Router();
 
-router.post('/checkout', checkoutPayment);
-router.post('/webhook/stripe', stripeWebhook);
-router.post('/webhook/paypal', paypalWebhook);
+
+router.post('/checkout', validateToken, checkoutPayment);
 
 export default router;

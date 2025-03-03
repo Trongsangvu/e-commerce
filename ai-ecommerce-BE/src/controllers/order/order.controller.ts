@@ -5,6 +5,7 @@ import { sendPushNotification } from '../../services/firebase.service';
 import { sendOrderNotification } from '../../services/twilio.service';
 import { sendOrderToWarehouse } from '../../services/kafka.service';
 import { RedisService } from '../../services/redis.service';
+import { calculateTotalAmount } from '../../utils/calculateTotal';
 // import { io } from '../../config/socket';
 
 export const getOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -14,7 +15,7 @@ export const getOrders = async (req: Request, res: Response, next: NextFunction)
         const cachedOrders = await redisClient.get(cacheKey);
 
         if(cachedOrders) {
-            res.status(200).json(JSON.parse(cachedOrders))
+            res.status(200).json(JSON.parse(cachedOrders));
             return;
         }
 
@@ -34,7 +35,7 @@ export const getOrders = async (req: Request, res: Response, next: NextFunction)
 
 export const createOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { products, totalAmount, paymentMethod, userFcmToken, userPhone } = req.body;
+        const { products, paymentMethod, userFcmToken, userPhone } = req.body;
         const userId = req.user?.id;
 
         if (!products || products.length === 0) {
@@ -42,6 +43,12 @@ export const createOrders = async (req: Request, res: Response, next: NextFuncti
             return;
         }
 
+        const totalAmount = await calculateTotalAmount(products);
+
+        if(isNaN(totalAmount) || totalAmount <=0) {
+            res.status(400).json({ message: 'Invalid total amount' });
+            return;
+        }
 
         // create new order
         const newOrder = new Order({

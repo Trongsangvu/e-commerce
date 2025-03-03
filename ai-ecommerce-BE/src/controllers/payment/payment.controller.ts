@@ -2,11 +2,26 @@ import { Request, Response, NextFunction } from 'express';
 import stripe from '../../config/payment/stripe';
 import paypalClient from '../../config/payment/paypal';
 import checkoutNodeJssdk from '@paypal/checkout-server-sdk';
+import { Order } from '../../models/Order';
 
 export const checkoutPayment = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { amount, currency, method } = req.body;
+        const { orderId, method } = req.body;
         let response;
+
+        const order = await Order.findById(orderId);
+        if (!order) {
+            res.status(404).json({ error: 'Order not found' });
+            return;
+        }
+
+        const amount = Math.round(order.totalAmount * 100); 
+        if (isNaN(amount)) {
+            res.status(400).json({ error: 'Invalid totalAmount in order' });
+            return;
+        }
+        
+        const currency = "usd"; // Bạn có thể lấy currency từ đơn hàng nếu cần
 
         switch (method) {
             case 'stripe':
@@ -14,17 +29,28 @@ export const checkoutPayment = async (req: Request, res: Response, next: NextFun
                     amount,
                     currency,
                     payment_method_types: ['card'],
+                    metadata: { orderId: `${order._id}` }
                 });
+
+                console.log("Created Stripe PaymentIntent:", paymentIntent.id);
+
+                await Order.findByIdAndUpdate(
+                    orderId, 
+                    { $set: { stripePaymentId: paymentIntent.id }}, 
+                    { new: true }
+                );
+
                 response = { clientSecret: paymentIntent.client_secret};
                 break;
+                
             case 'paypal':
                 const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
                 request.requestBody({
                     intent: 'CAPTURE',
                     purchase_units: [{ amount: { currency_code: currency, value: amount.toFixed(2) }}]
                 })
-                const order = await paypalClient.execute(request);
-                response = { orderId: order.result.id, approvalUrl: order.result.links[1].href };
+                const paypalOrder = await paypalClient.execute(request);
+                response = { orderId: paypalOrder.result.id, approvalUrl: paypalOrder.result.links[1].href };
                 break;
             default:
                 res.status(400).json({ error: 'Invalid payment method' });

@@ -7,6 +7,7 @@ import userRoutes from './routes/user.routes';
 import cartRoutes from './routes/cart.routes';
 import orderRoutes from './routes/order.routes';
 import paymentRouters from './routes/payment.routes';
+import webhookRouters from './routes/webhook.routes';
 import errorHandler from './middleware/Errorhandler';
 
 
@@ -16,6 +17,10 @@ const port = process.env.PORT;
 
 // Connect to MongoDB
 connectDB();
+ 
+
+// Webhook
+app.use('/api/webhook', express.raw({ type: 'application/json' }), webhookRouters);
 
 // Middleware
 app.use(express.json());
@@ -30,7 +35,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payment', paymentRouters);
-app.use('/api/payment/webhook/stripe', express.raw({ type: 'application/json' }));
 
 
 // Handler Error

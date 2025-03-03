@@ -13,12 +13,15 @@ const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const cart_routes_1 = __importDefault(require("./routes/cart.routes"));
 const order_routes_1 = __importDefault(require("./routes/order.routes"));
 const payment_routes_1 = __importDefault(require("./routes/payment.routes"));
+const webhook_routes_1 = __importDefault(require("./routes/webhook.routes"));
 const Errorhandler_1 = __importDefault(require("./middleware/Errorhandler"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
 // Connect to MongoDB
 (0, database_1.connectDB)();
+// Webhook
+app.use('/api/webhook', express_1.default.raw({ type: 'application/json' }), webhook_routes_1.default);
 // Middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -30,7 +33,6 @@ app.use('/api/users', user_routes_1.default);
 app.use('/api/carts', cart_routes_1.default);
 app.use('/api/orders', order_routes_1.default);
 app.use('/api/payment', payment_routes_1.default);
-app.use('/api/payment/webhook/stripe', express_1.default.raw({ type: 'application/json' }));
 // Handler Error
 app.use(Errorhandler_1.default);
 // Start server

@@ -19,7 +19,7 @@ const orderSchema = new Schema<Orders>(
         },
         paymentMethod: {
             type: String,
-            enum: ['cash', 'credit_card', 'paypal'],
+            enum: ['cash', 'card', 'paypal', 'stripe'],
             required: true
         },
         userFcmToken: { type: String },
@@ -32,8 +32,14 @@ const orderSchema = new Schema<Orders>(
                 const currencySybl: Record<string, string> = {
                     USD: "$"
                 }
-                const symbol = currencySybl[ret.currency];
-                ret.totalAmount = `${symbol}${ret.totalAmount.toFixed(3)}`;
+                const symbol = currencySybl[ret.currency] || "";
+
+                if(typeof ret.totalAmount !== 'number') {
+                    ret.totalAmount = 'Invalid Amount';
+                } else {
+                    ret.totalAmount = `${symbol}${ret.totalAmount.toFixed(2)}`;
+                }
+
                 return ret;
             }
         }
