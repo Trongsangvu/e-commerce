@@ -30,6 +30,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payment', paymentRouters);
+app.use('/api/payment/webhook/stripe', express.raw({ type: 'application/json' }));
 
 
 // Handler Error

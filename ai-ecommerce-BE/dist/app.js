@@ -30,6 +30,7 @@ app.use('/api/users', user_routes_1.default);
 app.use('/api/carts', cart_routes_1.default);
 app.use('/api/orders', order_routes_1.default);
 app.use('/api/payment', payment_routes_1.default);
+app.use('/api/payment/webhook/stripe', express_1.default.raw({ type: 'application/json' }));
 // Handler Error
 app.use(Errorhandler_1.default);
 // Start server
