@@ -15,12 +15,12 @@ export const checkoutPayment = async (req: Request, res: Response, next: NextFun
             return;
         }
 
-        const amount = Math.round(order.totalAmount * 100); 
+        const amount = Math.round(order.totalAmount * 100);
         if (isNaN(amount)) {
             res.status(400).json({ error: 'Invalid totalAmount in order' });
             return;
         }
-        
+
         const currency = "usd"; // Bạn có thể lấy currency từ đơn hàng nếu cần
 
         switch (method) {
@@ -33,16 +33,18 @@ export const checkoutPayment = async (req: Request, res: Response, next: NextFun
                 });
 
                 console.log("Created Stripe PaymentIntent:", paymentIntent.id);
+                console.log("Metadata sent:", paymentIntent.metadata);
 
-                await Order.findByIdAndUpdate(
-                    orderId, 
-                    { $set: { stripePaymentId: paymentIntent.id }}, 
+                const updatedOrder = await Order.findByIdAndUpdate(
+                    orderId,
+                    { $set: { stripePaymentId: paymentIntent.id }},
                     { new: true }
                 );
+                console.log("Order updated with PaymentIntent:", updatedOrder);
 
                 response = { clientSecret: paymentIntent.client_secret};
                 break;
-                
+
             case 'paypal':
                 const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
                 request.requestBody({

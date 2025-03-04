@@ -48,10 +48,12 @@
 
 
 
-stripe listen --forward-to http://localhost:3000/api/payment/webhook/stripe 
+stripe listen --forward-to http://localhost:3000/api/webhook/stripe 
 
 Khi có webhook, Stripe CLI sẽ log stripe-signature, ví dụ:
 Webhook received: payment_intent.succeeded
 Stripe-Signature: t=1710001234,v1=abc123,v0=xyz456
 
 console.log("Received Stripe Signature:", req.headers["stripe-signature"]);
+
+stripe payment_intents confirm pi_3QymivQ4ZCJ00Aki2Hwq3dUb --payment-method=pm_card_visa
