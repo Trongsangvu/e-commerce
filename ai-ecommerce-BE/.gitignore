@@ -4,3 +4,4 @@ logs
 *.logs
 *.env
 Note.md
+env.md

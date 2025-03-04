@@ -65,3 +65,20 @@ export const checkoutPayment = async (req: Request, res: Response, next: NextFun
         res.status(500).json({ message: "Payment processing failed" });
     }
 }
+
+export const getStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const { orderId } = req.params;
+        const order = await Order.findById(orderId);
+
+        if(!order) {
+            res.status(404).json({ error: 'Order not found' });
+            return;
+        }
+
+        res.status(200).json({ status: order.status });
+    }
+    catch(error) {
+        next(error);
+    }
+}
