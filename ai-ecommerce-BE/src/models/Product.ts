@@ -9,6 +9,7 @@ const productSchema = new Schema<Products>(
         category: { type: String, enum: ["men", "women"] },
         description: { type: String },
         imageUrl: { type: String, required: true },
+        tags: { type: String }
     },
     {
         timestamps: true,

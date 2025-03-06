@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import http from 'http';
+// import http from 'http';
 import { connectDB } from './config/database';
 import productRoutes from './routes/product.routes';
 import userRoutes from './routes/user.routes';
@@ -18,7 +18,6 @@ const port = process.env.PORT;
 // Connect to MongoDB
 connectDB();
 
-
 // Webhook
 app.use('/api/webhook', express.raw({ type: 'application/json' }), webhookRouters);
 
@@ -27,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Create http server
-export const server = http.createServer(app);
+// export const server = http.createServer(app);
 
 // Routes
 app.use('/api/products', productRoutes);

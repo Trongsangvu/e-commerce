@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import { User } from '../../models/User';
 
-dotenv.config();
 export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const { email, password } = req.body;

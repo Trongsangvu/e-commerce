@@ -6,7 +6,6 @@ import { sendOrderNotification } from '../../services/twilio.service';
 import { sendOrderToWarehouse } from '../../services/kafka.service';
 import { RedisService } from '../../services/redis.service';
 import { calculateTotalAmount } from '../../utils/calculateTotal';
-// import { io } from '../../config/socket';
 
 export const getOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -88,15 +87,13 @@ export const updateOrders = async (req: Request, res: Response, next: NextFuncti
         }
 
         const cachekey = `orders:${userId}`;
-        await RedisService.del(cachekey);
 
-        // if(req.body.userFcmToken) {
-        //     await sendPushNotification(req.body.userFcmToken, "update order", `Your order status ${req.body.status}`)
-        // }
+        await Promise.all([
+            await RedisService.del(cachekey),
+            // await sendPushNotification(req.body.userFcmToken, "update order", `Your order status ${req.body.status}`),
+            // await sendOrderNotification(req.body.userPhone, "Your order has been placed successfully!")
+        ]);
 
-        if(req.body.userPhone){
-            await sendOrderNotification(req.body.userPhone, "Your order has been placed successfully!");
-        }
         res.status(200).json({ message: "Order updated successfully", order });
     }
     catch(error) {
@@ -114,17 +111,17 @@ export const updateOrderStatus = async (req: Request, res: Response, next: NextF
 
         if(!order) {
             res.status(404).json({ message: "Order not found" });
-            return
+            return;
         }
 
         // io.emit('orderUpdated', order);
 
         const cachekey = `orders:${userId}`;
-        await RedisService.del(cachekey);
+        await Promise.all([
+            await RedisService.del(cachekey),
+            await sendPushNotification(req.body.userFcmToken, "Update order status", `Your order status ${status}`)
+        ]);
 
-        if(req.body.userFcmToken) {
-            await sendPushNotification(req.body.userFcmToken, "Update order status", `Your order status ${status}`);
-        }
         res.status(200).json({ message: "Order status updated successfully", order });
     }
     catch(error) {
