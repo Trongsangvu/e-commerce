@@ -7,4 +7,5 @@ export interface Products extends Document {
     description?: string;
     imageUrl?: string;
     tags?: string[];
+    brand: string;
 }

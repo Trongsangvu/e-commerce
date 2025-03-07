@@ -6,28 +6,28 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <SidebarProvider>
-        <div className='app'>
-          <Routes>
-            {publicRoutes.map((route, index) => {
-                const Page = route.component;
-                return (
-                  <Route 
-                    key={index}
-                    path={route.path}
-                    element={
-                      <DefaultLayout>
-                        <Page />
-                      </DefaultLayout>
-                    }
-                  />
-                )
-            })}
-          </Routes>
-        </div>
-      </SidebarProvider>
-    </Router>
+    <SidebarProvider>
+      <Router>
+          <div className='app'>
+            <Routes>
+              {publicRoutes.map((route, index) => {
+                  const Page = route.component;
+                  return (
+                    <Route 
+                      key={index}
+                      path={route.path}
+                      element={
+                        <DefaultLayout>
+                          <Page />
+                        </DefaultLayout>
+                      }
+                    />
+                  )
+              })}
+            </Routes>
+          </div>
+      </Router>
+    </SidebarProvider>
   )
 }
 
