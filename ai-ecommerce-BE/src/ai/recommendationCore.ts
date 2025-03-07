@@ -25,7 +25,7 @@
 //         const priceRange = this.getPriceRange(product.price);
 //         if (!featureVector.priceRanges) featureVector.priceRanges = {};
 //         featureVector.priceRanges[priceRange] = 1;
-        
+
 //         if(product.tags && product.tags.length > 0) {
 //             if(!featureVector.tags) featureVector.tags = {};
 //             product.tags.forEach(tag => {
@@ -54,7 +54,7 @@
 //             priceRanges: new Set<string>(),
 //             tags: new Set<string>(),
 //             color: new Set<string>(),
-//             size: new Set<string>() 
+//             size: new Set<string>()
 //         };
 
 //         products.forEach(product => {
@@ -66,7 +66,7 @@
 //                         if (allFeatures[featureType]) allFeatures[featureType].add(feature);
 //                     });
 //                 }
-//             }); 
+//             });
 //         });
 
 //         const featureToIndex: Record<string, Record<string, number>> = {};

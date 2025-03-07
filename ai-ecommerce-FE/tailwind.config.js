@@ -3,9 +3,10 @@ export default {
     theme: {
       extend: {
         fontFamily: {
-          gucci: ['GucciSansPro', 'sans-serif'],
-          poppins: ['Poppins', 'sans-serif'],
-          montserrat: ['Monserrat', 'sans-serif'],
+          'gucci': ['GucciSansPro', 'sans-serif'],
+          'poppins': ['Poppins', 'sans-serif'],
+          'montserrat': ['Monserrat', 'sans-serif'],
+          'poppins-bold': ['Poppins-bold', 'sans-serif']
         },
       },
     },
