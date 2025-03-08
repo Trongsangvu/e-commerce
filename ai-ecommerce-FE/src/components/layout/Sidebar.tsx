@@ -1,5 +1,4 @@
 import React from 'react';
-// import { MENU_ITEMS, MENU_ITEMS_2 } from '../../config/menu';
 import { CloseIcon } from '../../assets/images/icons/icons';
 import { useSidebar } from '../../hooks/useSidebar';
 import { usePreventScroll } from '../../hooks/usePreventScroll';

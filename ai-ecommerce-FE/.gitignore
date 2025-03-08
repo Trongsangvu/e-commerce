@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+Note.md 
+Tech.md
+Install-features.md
