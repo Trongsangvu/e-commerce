@@ -140,8 +140,8 @@ export const AngleRightIcon: React.FC<IconProps> = ({ className, width='16px', h
         <path 
             d="M6 12L10 8L6 4" 
             stroke="" 
-            stroke-width="1.5" 
-            stroke-linejoin="round"
+            strokeWidth="1.5" 
+            strokeLinejoin="round"
         ></path>
     </svg>
 )

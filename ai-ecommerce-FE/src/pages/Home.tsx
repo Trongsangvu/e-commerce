@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import config from '../config/config';
+import { Container } from '../components/layout/container';
 import images from '../assets/images/images';
 
 export const Home:React.FC = () => {
@@ -44,7 +45,8 @@ export const Home:React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className='pt-150'>
+            {/* Banner */}
+            <div className='pt-150 pb-50'>
                 <div className='container'>
                     <div className='flex flex-wrap justify-center'>
                         <div className='px-15 pb-30'>
@@ -82,6 +84,11 @@ export const Home:React.FC = () => {
                             </div>
                     </div>
                 </div>
+            </div>
+
+            {/* Container */}
+            <div>
+                <Container />   
             </div>
         </>
     )
