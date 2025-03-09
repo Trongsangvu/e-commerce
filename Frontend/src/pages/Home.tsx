@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import config from '../config/config';
-import { Container } from '../components/layout/container';
+import { Banner } from '../features/home/Banner';
+import Container  from '../features/home/Container';
 import images from '../assets/images/images';
 
 export const Home:React.FC = () => {
@@ -25,70 +24,28 @@ export const Home:React.FC = () => {
 
     return (
         <>
-            <div className=''>
+            <div className='w-full'>
                 <div ref={bannerRef}  className='relative top-72'> 
                     <img src={images.slider} />
                     <div className={`transition-[transform] duration-300 ease-in-out text-center w-full   
                         ${isFixed ? "fixed top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2" : "absolute bottom-[40px] left-1/2 -translate-x-1/2"}`}
                     >
-                        <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">
-                            Spring Summer 2025
-                        </span>
+                        <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">Spring Summer 2025</span>
                         <div className="flex gap-15 justify-center pt-20">
-                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">
-                            For Her
-                            </a>
-                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">
-                            For Him
-                            </a>
+                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">For Her</a>
+                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">For Him</a>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* Banner */}
-            <div className='pt-150 pb-50'>
-                <div className='container'>
-                    <div className='flex flex-wrap justify-center'>
-                        <div className='px-15 pb-30'>
-                            <div className='w-[428px] h-[289px] m-0 border border-[#e6e6e6] cursor-pointer'>
-                                <Link to={config.routes.products}>
-                                    <img className='' src={images.banner1} alt="banner1" />
-                                </Link>
-                                <div className='flex flex-col relative py-34 px-38 bottom-[260px]'>
-                                    <span className='capitalize text-[28px] font-bold font-[Poppins]'>women</span>
-                                    <span className='font-normal font-[Poppins] text-sm text-[#555]'>Spring 2025</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='px-15 pb-30'>
-                            <div className='w-[428px] h-[289px] border border-[#e6e6e6] cursor-pointer'>
-                                    <Link to={config.routes.products}>
-                                        <img className='' src={images.banner2} alt="banner1" />
-                                    </Link>
-                                    <div className='flex flex-col relative py-34 px-38 bottom-[260px]'>
-                                        <span className='capitalize text-[28px] font-bold font-[Poppins]'>men</span>
-                                        <span className='font-normal font-[Poppins] text-sm text-[#555]'>Spring 2025</span>
-                                    </div>
-                                </div>
-                            </div>
-                        <div className='px-15 pb-30'>
-                            <div className='w-[428px] h-[289px] border border-[#e6e6e6] cursor-pointer'>
-                                    <Link to={config.routes.products}>
-                                        <img className='' src={images.banner3} alt="banner1" />
-                                    </Link>
-                                    <div className='flex flex-col relative py-34 px-38 bottom-[260px]'>
-                                        <span className='capitalize text-[28px] font-bold font-[Poppins]'>Accessories</span>
-                                        <span className='font-normal font-[Poppins] text-sm text-[#555]'>Spring 2025</span>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
+            
+            <div className='container mx-auto px-4 max-w-[1600px]'>
+                <div className='flex justify-center'>
+                    <Banner />
                 </div>
             </div>
-
-            {/* Container */}
-            <div>
-                <Container />   
+            <div className='container px-[173px] max-w-[1600px]'>
+                <Container />
             </div>
         </>
     )
