@@ -44,7 +44,7 @@ export const Home:React.FC = () => {
                     <Banner />
                 </div>
             </div>
-            <div className='container px-[173px] max-w-[1600px]'>
+            <div className='container px-[173px] max-w-[1600px] h-[1000px]'>
                 <Container />
             </div>
         </>
