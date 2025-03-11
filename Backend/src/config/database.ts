@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
-dotenv.config();
 const mongouri = process.env.MONGODB_URI;
 
 if(!mongouri) {

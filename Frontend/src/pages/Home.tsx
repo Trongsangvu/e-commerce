@@ -30,10 +30,16 @@ export const Home:React.FC = () => {
                     <div className={`transition-[transform] duration-300 ease-in-out text-center w-full   
                         ${isFixed ? "fixed top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2" : "absolute bottom-[40px] left-1/2 -translate-x-1/2"}`}
                     >
-                        <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">Spring Summer 2025</span>
+                        <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">
+                            Spring Summer 2025
+                        </span>
                         <div className="flex gap-15 justify-center pt-20">
-                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">For Her</a>
-                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">For Him</a>
+                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">
+                                For Her
+                            </a>
+                            <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">
+                                For Him
+                            </a>
                         </div>
                     </div>
                 </div>
