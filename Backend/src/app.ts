@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-// import http from 'http';
+import cors from 'cors';
 import { connectDB } from './config/database';
 import productRoutes from './routes/product.routes';
 import userRoutes from './routes/user.routes';
@@ -17,6 +17,8 @@ const port = process.env.PORT;
 
 // Connect to MongoDB
 connectDB();
+
+app.use(cors());
 
 // Webhook
 app.use('/api/webhook', express.raw({ type: 'application/json' }), webhookRouters);

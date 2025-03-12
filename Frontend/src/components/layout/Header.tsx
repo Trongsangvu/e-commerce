@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
     return (
         <>
             <header className='relative'>
-                <div className='fixed gap-[100px] mt-0 top-0 right-0 left-0 height-72 z-1 bg-white flex items-center flex-1 justify-around pt-20 pb-20 px-7'>
+                <div className='fixed gap-[100px] mt-0 top-0 right-0 left-0 height-72 z-1 shadow-xs bg-white flex items-center flex-1 justify-around pt-20 pb-20 px-7'>
                     <div className='flex items-center justify-between'>
                         <button className='flex items-center'>
                             <ContactIcon />
@@ -28,9 +28,11 @@ export const Header: React.FC = () => {
                             </button>
                         </li>
                         <li className='pl-15'>
-                            <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'>
-                                <UserIcon />
-                            </button>
+                            <Link to={config.routes.login}>
+                                <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'>
+                                    <UserIcon />
+                                </button>
+                            </Link>
                         </li>
                         <li className='pl-15'>
                             <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'>

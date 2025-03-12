@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { SidebarChildrenProps } from '../types/sidebarContextTypes';
 import { SidebarContext } from '../providers/sidebarContext';
-// export const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
-
 export const SidebarProvider: React.FC<SidebarChildrenProps> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     
