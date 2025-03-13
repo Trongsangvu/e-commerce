@@ -37,7 +37,7 @@ export const Login:React.FC = () => {
                         type="text" 
                         placeholder="Password" 
                         id="password" 
-                        value={password}
+                        value={password.toString()}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <button type='submit'>Login</button>
