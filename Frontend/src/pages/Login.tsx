@@ -1,36 +1,21 @@
 import { useState } from 'react';
-import { ILogin } from '../model/Auth';
-import { login } from '../services/authService';    
+import { login } from '../redux/auth/authAction';    
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStore, AppDispatch } from '../redux/store';
 
 export const Login:React.FC = () => {
-    const [data, setData] = useState<ILogin>({
-        email: "",
-        password: ""
-    });
+    const dispatch: AppDispatch = useDispatch();
+    const { error } = useSelector((state: RootStore) => state.auth);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = e.target;
-        setData({ ...data, [id]: id === 'password' ? String(value) : value });
-    };
-
-    const handleFormSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
+    const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (data.email === "" && data.password === "") {
-            alert("Please enter email and password");
-            return;
-        }
-
-        try {
-            const result = await login(data);
-
-            if(result.status == 200) {
-                // Token
-                console.log(result);
-            }
-        } catch(error) {
-            console.error('Login failed:', error);
-        }
-    }
+        dispatch(login({ email, password }))
+            .then(() => console.log("Login action dispatched"))
+            .catch((error) => console.log("Error dispatching login action: ", error))
+    };
 
     return (
         <>
@@ -43,8 +28,8 @@ export const Login:React.FC = () => {
                         type="text" 
                         placeholder="Email" 
                         id="email" 
-                        value={data.email}
-                        onChange={handleInputChange}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <label htmlFor="password">Password</label>
@@ -52,12 +37,13 @@ export const Login:React.FC = () => {
                         type="text" 
                         placeholder="Password" 
                         id="password" 
-                        value={data.password}
-                        onChange={handleInputChange}    
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <button type='submit'>Login</button>
+                    {error && <p className='text-red-500'>{error}</p>}
                 </form>
             </div>
         </>
     )
-}
+};
