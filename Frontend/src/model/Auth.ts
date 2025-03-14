@@ -4,7 +4,7 @@ export enum roles {
 }
 
 export interface IUser {
-    username: string;
+    name: string;
     email: string;
     password: string;
     role: roles;
@@ -17,4 +17,9 @@ export interface ILogin {
 
 export interface ILoginResponse {
     token: string;
+    user: {
+        id: string;
+        email: string;
+        role: string;
+    }
 }

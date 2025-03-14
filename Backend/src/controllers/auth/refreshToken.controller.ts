@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { generateAccessToken } from './login.controller';
+import { generateAccessToken } from '../../utils/generateAccessToken';
 
 export const refreshToken = async (req: Request, res: Response): Promise<void> => {
     try {
