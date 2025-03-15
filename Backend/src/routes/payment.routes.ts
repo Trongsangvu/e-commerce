@@ -1,6 +1,6 @@
 import express from 'express';
 import { checkoutPayment, getStatus } from '../controllers/payment/payment.controller';
-import { validateToken } from '../utils/jwt';
+import { validateToken } from '../utils/validation/jwt';
 
 
 const router = express.Router();

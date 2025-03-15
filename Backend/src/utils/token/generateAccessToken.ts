@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 const accTokenExpire = process.env.AUTH_ACCESS_TOKEN_EXPIRY as ms.StringValue || '48h';
 
 // Generate Access Token
-export const generateAccessToken = (user: Object) => {
+export const generateAccessToken = (user: object) => {
     const jwtSecret = process.env.JWT_SECRET as jwt.Secret;
     if(!jwtSecret) throw new Error("JWT_SECRET is not defined in env variables");
 

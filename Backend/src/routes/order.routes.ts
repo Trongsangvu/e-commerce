@@ -1,5 +1,5 @@
 import express from 'express';
-import { validateToken } from '../utils/jwt';
+import { validateToken } from '../utils/validation/jwt';
 import { createOrders, getOrders, updateOrders, updateOrderStatus } from '../controllers/order/order.controller';
 
 const router = express.Router();
