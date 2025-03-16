@@ -7,7 +7,7 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
     'auth/login',
     async (data, { rejectWithValue }) => {
         try {
-            const response = await await loginService(data);
+            const response = await loginService(data);
             if(response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data)); // Convert to string
             }

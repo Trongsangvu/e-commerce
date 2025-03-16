@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
                                 <SearchIcon />
                             </button>
                         </li>
-                        {isSearchVisible && <Search />}
+                        {isSearchVisible && <Search isSearchVisible={isSearchVisible} setIsSearchVisible={setIsSearchVisible}/>}
                         <li>
                             <nav 
                                 className='flex items-center pl-15 gap-2 hover:cursor-pointer relative'
