@@ -33,7 +33,7 @@ export const Login:React.FC = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />  
-                        <span className='w-[15px] absolute top-[63%] right-[70px]'>
+                        <span className='w-[15px] absolute top-[63%] right-[20px]'>
                             <AddressIcon />
                         </span>
                     </div>
@@ -48,7 +48,7 @@ export const Login:React.FC = () => {
                             value={password.toString()}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <span className='w-[15px] absolute bottom-[20%] right-[70px]'>
+                        <span className='w-[15px] absolute bottom-[20%] right-[20px]'>
                             <EyeSlashIcon />
                         </span>
                     </div>

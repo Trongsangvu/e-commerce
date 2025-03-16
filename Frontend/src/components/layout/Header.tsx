@@ -1,12 +1,19 @@
+import { useState } from 'react';  
 import { Link } from 'react-router-dom';
 import config from '../../config/config';
 import images from '../../assets/images/images';
 import { ContactIcon, MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
+import { Search } from '../common/Search';
 import { useSidebar } from '../../hooks/useSidebar';
 
 export const Header: React.FC = () => {
     const { handleOpen } = useSidebar();
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
+
+    const handleSearch = () => {
+        setIsSearchVisible(!isSearchVisible);
+    }
 
     return (
         <>
@@ -35,10 +42,13 @@ export const Header: React.FC = () => {
                             </Link>
                         </li>
                         <li className='pl-15'>
-                            <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'>
+                            <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'
+                                onClick={handleSearch}
+                            >
                                 <SearchIcon />
                             </button>
                         </li>
+                        {isSearchVisible && <Search />}
                         <li>
                             <nav 
                                 className='flex items-center pl-15 gap-2 hover:cursor-pointer relative'
@@ -49,8 +59,6 @@ export const Header: React.FC = () => {
                             </nav>
                         </li>
                     </ul>
-
-                    
                 </div>
             </header>
             {/* {isOpen && <Sidebar />} */}
