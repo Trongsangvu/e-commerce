@@ -3,5 +3,7 @@ import HttpService from './HttpService';
 import { ISearch, ISearchResponse } from '../model/Search';
 
 export const search = (data: ISearch): Promise<AxiosResponse<ISearchResponse>> => {
-    return HttpService.get("/products", { params: { name: data.name } });
+    const response = HttpService.get("/products", { params: { name: data.name } });
+    console.log("API Response:", response); // ✅ Log full response
+    return response;
 }

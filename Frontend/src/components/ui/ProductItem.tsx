@@ -7,9 +7,11 @@ interface ProductItemProps {
 
 export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     return (
-        <div className='bg-red-600'>
+        <div className='flex items-center justify-between bg-red-600 h-[140px] px-7 mb-7'>
             <h2>{product.name}</h2>
-            <img src={product.imageUrl} alt={product.name} />
+            <div>
+                <img className='h-[130px] w-[106px]' src={product.imageUrl} alt={product.name} />
+            </div>
             {/* <p>{product.category}</p> */}
         </div>
     )

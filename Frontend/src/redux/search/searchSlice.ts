@@ -3,15 +3,14 @@ import { search } from './searchAction';
 import { Product } from '../../model/Search';
 
 // Define the ISearchResponse interface
-interface ISearchResponse {
-    products: Product[];
-    // ...other properties if any...
-}
+// interface ISearchResponse {
+//     products: Product[];
+// }
 
 interface SearchState {
     products: Product[];
     loading: boolean;
-    searchItem: string;
+    searchQuery: string;
     error: string | null;
 }
 
@@ -19,15 +18,18 @@ const initialState: SearchState = {
     products: [],
     loading: false,
     error: null,
-    searchItem: ''
+    searchQuery: ''
 }
 
 const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-        setSearchItem(state, action: PayloadAction<string>) {
-            state.searchItem = action.payload
+        setSearchQuery(state, action: PayloadAction<string>) {
+            state.searchQuery = action.payload;
+        },
+        clearSearchResult(state) {
+            state.products = [];
         }
     },
     extraReducers: (builder) => {
@@ -36,9 +38,9 @@ const searchSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(search.fulfilled, (state, action: PayloadAction<ISearchResponse>) => {
+            .addCase(search.fulfilled, (state, action: PayloadAction<Product[]>) => {
                 state.loading = false;
-                state.products = action.payload.products;
+                state.products = action.payload;
             })
             .addCase(search.rejected, (state, action) => {
                 state.loading = false;
@@ -47,5 +49,5 @@ const searchSlice = createSlice({
     }
 });
 
-export const { setSearchItem } = searchSlice.actions;
+export const { setSearchQuery, clearSearchResult } = searchSlice.actions;
 export default searchSlice.reducer;

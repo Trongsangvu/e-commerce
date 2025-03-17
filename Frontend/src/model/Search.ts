@@ -1,7 +1,7 @@
 export interface ISearch {
     name: string;
-    imageUrl: string;
-    category: string;
+    // imageUrl: string;
+    // category: string;
 }
 
 export interface Product {
@@ -16,6 +16,4 @@ export interface Product {
     category: string;
 }
 
-export interface ISearchResponse {
-    products: Product[];
-}
+export type ISearchResponse = Product[];

@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import  { AppDispatch, RootStore }  from '../../redux/store';
-import { setSearchItem } from '../../redux/search/searchSlice';
+import { setSearchQuery, clearSearchResult } from '../../redux/search/searchSlice';
 import { debounce } from 'lodash';
 import { ProductItem } from '../ui/ProductItem';
 import { search } from '../../redux/search/searchAction';
@@ -12,17 +12,19 @@ interface SearchProps {
 }
 
 export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisible }) => {
-    const [isHovered, setIsHovered] = useState(false);
     const dispatch: AppDispatch = useDispatch();
-    const searchItem = useSelector((state: RootStore) => state.search.searchItem);
-    const products = useSelector((state: RootStore) => state.search.products);
-    const [inputValue, setInputValue] = useState(searchItem);
+    const searchQuery = useSelector((state: RootStore) => state.search.searchQuery);
+    const products = useSelector((state: RootStore) => state.search.products || []);
+    const [isHovered, setIsHovered] = useState(false);
+    const [inputValue, setInputValue] = useState(searchQuery);
 
     // Debounced function to dispatch the search item
     const debouncedSetSearchItem = useRef(
-        debounce((term: string) => {
-            dispatch(setSearchItem(term));
-            dispatch(search({ name: term, imageUrl: '', category: '' }));
+        debounce((query: string) => {
+            dispatch(setSearchQuery(query));
+            if(query.trim().length > 0) {
+                dispatch(search({ name: query }));
+            }
         }, 300)
     ).current;
 
@@ -33,8 +35,15 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
     }, [debouncedSetSearchItem]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value);
-        debouncedSetSearchItem(e.target.value);
+        const value = e.target.value;
+        setInputValue(value);
+        debouncedSetSearchItem(value);
+        if(value.trim() === "") {
+            dispatch(clearSearchResult());
+        } else {
+            dispatch(search({ name: value }));
+        }
+
         console.log(e.target.value);
     }
 
@@ -73,9 +82,10 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                 </button>
             </div>
             <div>
-                {products && products.map((product, index) => (
-                    <ProductItem key={index} product={product} />
-                ))}
+                {Array.isArray(products) && products.length > 0 ? (
+                    products.map((product) => <ProductItem product={product} key={product._id}/>)
+                ): ( <p>No products found</p> )
+                }
             </div>
         </div>
     )
