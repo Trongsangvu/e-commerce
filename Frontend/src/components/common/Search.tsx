@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import  { RootStore }  from '../../redux/store';
+import  { AppDispatch, RootStore }  from '../../redux/store';
 import { setSearchItem } from '../../redux/search/searchSlice';
 import { debounce } from 'lodash';
-
+import { ProductItem } from '../ui/ProductItem';
+import { search } from '../../redux/search/searchAction';
 
 interface SearchProps {
     isSearchVisible: boolean;
@@ -12,30 +13,28 @@ interface SearchProps {
 
 export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisible }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
     const searchItem = useSelector((state: RootStore) => state.search.searchItem);
+    const products = useSelector((state: RootStore) => state.search.products);
     const [inputValue, setInputValue] = useState(searchItem);
 
     // Debounced function to dispatch the search item
     const debouncedSetSearchItem = useRef(
         debounce((term: string) => {
             dispatch(setSearchItem(term));
-        }, 300), // debounce delay as needed 
-    );
+            dispatch(search({ name: term, imageUrl: '', category: '' }));
+        }, 300)
+    ).current;
 
     useEffect(() => {
-        debouncedSetSearchItem.current = debounce((term: string) => {
-            dispatch(setSearchItem(term));
-        }, 300)
-        
         return () => {
-            debouncedSetSearchItem.current.cancel();
-        }
-    }, [dispatch]);
+            debouncedSetSearchItem.cancel();
+        };
+    }, [debouncedSetSearchItem]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
-        debouncedSetSearchItem.current(e.target.value);
+        debouncedSetSearchItem(e.target.value);
         console.log(e.target.value);
     }
 
@@ -72,6 +71,11 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                         `}
                     ></span>
                 </button>
+            </div>
+            <div>
+                {products && products.map((product, index) => (
+                    <ProductItem key={index} product={product} />
+                ))}
             </div>
         </div>
     )

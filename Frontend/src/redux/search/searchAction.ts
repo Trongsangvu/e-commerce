@@ -11,7 +11,7 @@ export const search = createAsyncThunk<ISearchResponse, ISearch>(
                 name: data.name,
                 imageUrl: data.imageUrl,
                 category: data.category
-            })
+            });
 
             return response.data;
         }
