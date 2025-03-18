@@ -14,5 +14,5 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             </div>
             {/* <p>{product.category}</p> */}
         </div>
-    )
+    );
 }

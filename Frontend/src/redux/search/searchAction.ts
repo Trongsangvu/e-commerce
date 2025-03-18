@@ -5,15 +5,16 @@ import { AxiosError } from "axios";
 import { Product } from '../../model/Search';
 
 export const search = createAsyncThunk<Product[], ISearch>(
-    '/products',
+    '/products/search',
     async (data, { rejectWithValue }) => {
         try {
             const response = await searchService(data);
-            console.log("Fetched Products:", response.data);
-
+            
             if (!Array.isArray(response.data)) {
                 throw new Error("Invalid response structure");
             }
+            
+            console.log("Fetched Products:", response.data);
 
             return response.data;
         }

@@ -1,7 +1,5 @@
 export interface ISearch {
     name: string;
-    // imageUrl: string;
-    // category: string;
 }
 
 export interface Product {
@@ -11,8 +9,6 @@ export interface Product {
     currency: string;
     description: string;
     imageUrl: string;
-    createdAt: string;
-    updatedAt: string;
     category: string;
 }
 

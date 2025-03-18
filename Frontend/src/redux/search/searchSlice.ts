@@ -2,11 +2,6 @@ import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { search } from './searchAction';
 import { Product } from '../../model/Search';
 
-// Define the ISearchResponse interface
-// interface ISearchResponse {
-//     products: Product[];
-// }
-
 interface SearchState {
     products: Product[];
     loading: boolean;

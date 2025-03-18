@@ -12,7 +12,7 @@ interface SearchProps {
 }
 
 export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisible }) => {
-    const dispatch: AppDispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const searchQuery = useSelector((state: RootStore) => state.search.searchQuery);
     const products = useSelector((state: RootStore) => state.search.products || []);
     const [isHovered, setIsHovered] = useState(false);
