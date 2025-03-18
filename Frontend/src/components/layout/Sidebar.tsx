@@ -1,16 +1,21 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CloseIcon } from '../../assets/images/icons/icons';
-import { useSidebar } from '../../hooks/useSidebar';
 import { usePreventScroll } from '../../hooks/usePreventScroll';
 import { MenuList } from '../ui/MenuList';
 import { Overlay } from '../common/Overlay';
-
+import { AppDispatch } from '../../redux/store';
+import { RootStore } from '../../redux/store';
+import { sideBarHide } from '../../redux/sideBar/sideBarSlice';
 
 export const Sidebar: React.FC = () => {
-    const { isOpen, handleClose } = useSidebar();
-    console.log("isOpen state:", isOpen);
-
+    const dispatch = useDispatch<AppDispatch>();
+    const isOpen = useSelector((state: RootStore) => state.sideBar.isOpen);
     usePreventScroll(isOpen);
+
+    const handleClose = () => {
+        dispatch(sideBarHide())
+    }
 
     return (
         <>

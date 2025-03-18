@@ -17,6 +17,7 @@
     "@rollup/rollup-win32-x64-msvc": "^4.34.6",
     "@tailwindcss/oxide": "^4.0.4",
     "@tailwindcss/vite": "^4.0.4",
+    "@tanstack/react-query": "^5.68.0",
     "ai-ecommerce": "file:",
     "axios": "^1.8.3",
     "lodash": "^4.17.21",

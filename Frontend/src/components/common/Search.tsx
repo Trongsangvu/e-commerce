@@ -1,10 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import  { AppDispatch, RootStore }  from '../../redux/store';
-import { setSearchQuery, clearSearchResult } from '../../redux/search/searchSlice';
 import { debounce } from 'lodash';
 import { ProductItem } from '../ui/ProductItem';
-import { search } from '../../redux/search/searchAction';
+import { useQuery } from '@tanstack/react-query';
+import { searchProducts } from '../../services/searchService';
 
 interface SearchProps {
     isSearchVisible: boolean;
@@ -12,19 +10,14 @@ interface SearchProps {
 }
 
 export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisible }) => {
-    const dispatch = useDispatch<AppDispatch>();
-    const searchQuery = useSelector((state: RootStore) => state.search.searchQuery);
-    const products = useSelector((state: RootStore) => state.search.products || []);
     const [isHovered, setIsHovered] = useState(false);
-    const [inputValue, setInputValue] = useState(searchQuery);
+    const [inputValue, setInputValue] = useState("");
+    const [debounceTerm, setDebounceTerm] = useState("");
 
     // Debounced function to dispatch the search item
     const debouncedSetSearchItem = useRef(
         debounce((query: string) => {
-            dispatch(setSearchQuery(query));
-            if(query.trim().length > 0) {
-                dispatch(search({ name: query }));
-            }
+                setDebounceTerm(query.trim());
         }, 300)
     ).current;
 
@@ -34,21 +27,23 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
         };
     }, [debouncedSetSearchItem]);
 
+    // Query Data
+    const { data: products = [], isLoading, error } = useQuery({
+        queryKey: ['search', debounceTerm],
+        queryFn:  () => searchProducts({ name: debounceTerm }),
+        enabled: !!debounceTerm
+    })
+
+    // Handle Input when typing
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setInputValue(value);
         debouncedSetSearchItem(value);
-        if(value.trim() === "") {
-            dispatch(clearSearchResult());
-        } else {
-            dispatch(search({ name: value }));
-        }
-
-        console.log(e.target.value);
     }
 
+    // SHow/Hide Search bar
     const toggleSearchVisible = () => {
-        setIsSearchVisible(!isSearchVisible)
+        setIsSearchVisible(!isSearchVisible);
     }
 
     return (
@@ -75,17 +70,23 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                     >
                     <span>Cancel</span>
                     <span 
-                        className={`absolute left-0 bottom-2 h-2 bg-black transition-all duration-300
+                        className={`absolute left-0 bottom-2 h-1.5 bg-black transition-all duration-300
                             ${isHovered ? 'w-full' : 'w-0'}    
                         `}
                     ></span>
                 </button>
             </div>
-            <div>
-                {Array.isArray(products) && products.length > 0 ? (
-                    products.map((product) => <ProductItem product={product} key={product._id}/>)
-                ): ( <p>No products found</p> )
-                }
+
+            <div className="p-4">
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : error ? (
+                    <p className="text-red-500">Error fetching products</p>
+                ) : products.length === 0 ? (
+                    <p className='text-center font font-semibold'>No products found</p>
+                ) : (
+                    products.map((product) => <ProductItem product={product} key={product._id} />)
+                )}
             </div>
         </div>
     )

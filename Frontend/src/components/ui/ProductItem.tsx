@@ -12,7 +12,6 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             <div>
                 <img className='h-[130px] w-[106px]' src={product.imageUrl} alt={product.name} />
             </div>
-            {/* <p>{product.category}</p> */}
         </div>
     );
 }

@@ -20,4 +20,4 @@ export const searchProduct = async (req: Request, res: Response, next: NextFunct
         console.error("Lỗi API tìm kiếm:", err);
         next(err);
     }
-}    
+}

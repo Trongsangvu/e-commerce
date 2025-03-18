@@ -1,12 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { publicRoutes } from './routes/routes';
 import { DefaultLayout } from './components/layout/DefaultLayout';
-import { SidebarProvider } from './context/SidebarContext';
 import './App.css';
 
 function App() {
   return (
-    <SidebarProvider>
       <Router>
           <div className='app'>
             <Routes>
@@ -27,7 +25,6 @@ function App() {
             </Routes>
           </div>
       </Router>
-    </SidebarProvider>
   )
 }
 

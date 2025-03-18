@@ -1,15 +1,21 @@
 import { useState } from 'react';  
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import config from '../../config/config';
 import images from '../../assets/images/images';
 import { ContactIcon, MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
 import { Search } from '../common/Search';
-import { useSidebar } from '../../hooks/useSidebar';
+import { AppDispatch } from '../../redux/store';
+import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
 
 export const Header: React.FC = () => {
-    const { handleOpen } = useSidebar();
+    const dispatch = useDispatch<AppDispatch>();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
+
+    const handleShow = () => {
+        dispatch(sideBarShow())
+    }
 
     const handleSearch = () => {
         setIsSearchVisible(!isSearchVisible);
@@ -52,7 +58,7 @@ export const Header: React.FC = () => {
                         <li>
                             <nav 
                                 className='flex items-center pl-15 gap-2 hover:cursor-pointer relative'
-                                onClick={handleOpen}
+                                onClick={handleShow}
                             >
                                 <MenuToggle />
                                 <span className='font-montserrat font-bold uppercase text-xs'>menu</span>
@@ -61,7 +67,6 @@ export const Header: React.FC = () => {
                     </ul>
                 </div>
             </header>
-            {/* {isOpen && <Sidebar />} */}
             <Sidebar />
         </>
     )

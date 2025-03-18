@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { search } from './searchAction';
 import { Product } from '../../model/Search';
 
 interface SearchState {
@@ -27,21 +26,6 @@ const searchSlice = createSlice({
             state.products = [];
         }
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(search.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(search.fulfilled, (state, action: PayloadAction<Product[]>) => {
-                state.loading = false;
-                state.products = action.payload;
-            })
-            .addCase(search.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message || "Failed to fetch products";
-            })
-    }
 });
 
 export const { setSearchQuery, clearSearchResult } = searchSlice.actions;
