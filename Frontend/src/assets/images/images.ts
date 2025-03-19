@@ -6,6 +6,7 @@ import banner1 from './banner/banner-01.jpg';
 import banner2 from './banner/banner-02.jpg';
 import banner3 from './banner/banner-03.jpg';
 import searchIcon from './icon/search-svgrepo-com.svg';
+import heartIcon from './icons/heart-svgrepo-com.svg';
 
 interface Images {
     logo: string,
@@ -15,7 +16,8 @@ interface Images {
     banner2: string,
     banner3: string,
     filterIcon: string,
-    searchIcon: string
+    searchIcon: string,
+    heartIcon: string,
 }
 
 const images: Images = {
@@ -26,7 +28,8 @@ const images: Images = {
     banner2,
     banner3,
     filterIcon,
-    searchIcon
+    searchIcon,
+    heartIcon
 } as const
 
 export default images;

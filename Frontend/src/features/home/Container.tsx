@@ -15,7 +15,7 @@ const Container:React.FC = () => {
 
     return (
         <main className="w-full">
-            <div className="flex flex-col">
+            <div className="flex flex-col pb-52">
                 <div className="pb-10">
                     <h3 className="uppercase text-4xl font-bold">product overview</h3>
                 </div>

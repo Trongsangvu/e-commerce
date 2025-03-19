@@ -65,10 +65,14 @@ export const Login:React.FC = () => {
 
                     <div className='flex justify-between gap-[30px] m-[20px]'>
                         <div className='border border-[#dddddd] rounded-xl text-center w-[280px] cursor-pointer p-[10px]'>
-                            <button className='capitalize'>google</button>
+                            <a href="#">
+                                <button className='capitalize cursor-pointer '>google</button>
+                            </a>
                         </div>
                         <div className='border border-[#dddddd] rounded-xl text-center w-[280px] cursor-pointer p-[10px]'>
-                            <button className='capitalize'>facebook</button>
+                            <a href="#">
+                                <button className='capitalize cursor-pointer '>facebook</button>
+                            </a>
                         </div>
                     </div>
                     <span className='text-center mb-[50px]'>Don't have an account? Sign up now</span>

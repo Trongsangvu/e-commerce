@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Banner } from '../features/home/Banner';
 import Container  from '../features/home/Container';
+import { ProductList }  from '../components/ui/ProductList';
 import images from '../assets/images/images';
 
 export const Home:React.FC = () => {
-    // const [products, setProducts] = useState([]);
     const [isFixed, setIsFixed] = useState(true);
     const bannerRef = useRef<HTMLDivElement>(null);
 
@@ -22,14 +22,6 @@ export const Home:React.FC = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [handleScroll]);
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-
-        }
-
-        fetchProducts();
-    }, [])
 
     return (
         <>
@@ -62,6 +54,7 @@ export const Home:React.FC = () => {
                 </div>
                 <div className='container px-[173px] max-w-[1600px] h-[1000px]'>
                     <Container />
+                    <ProductList />
                 </div>
             </main>
         </>

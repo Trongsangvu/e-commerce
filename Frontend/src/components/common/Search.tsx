@@ -3,6 +3,7 @@ import { debounce } from 'lodash';
 import { ProductItem } from '../ui/ProductItem';
 import { useQuery } from '@tanstack/react-query';
 import { searchProducts } from '../../services/searchService';
+import { SearchProductIcon } from '../../assets/images/icons/icons';
 
 interface SearchProps {
     isSearchVisible: boolean;
@@ -47,8 +48,8 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
     }
 
     return (
-        <div className="fixed w-[500px] top-[10%] left-[51%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
-            <div className="flex  mx-auto px-[16px] pt-[16px] pb-8">
+        <div className="fixed w-[745px] h-[430px] top-[9%] left-[40%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
+            <div className="flex justify-between mx-auto mb-15 px-[16px] pt-[16px] pb-18">
                 <form action="">
                     <div className="border-0 border-b-2 border-b-amber-400">
                         <input 
@@ -56,7 +57,7 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                             value={inputValue}
                             type="text" 
                             placeholder="Search..."
-                            className="w-[400px] p-2 outline-none"
+                            className="w-[645px]  p-2 outline-none"
                         />
                     </div>
                 </form>
@@ -77,18 +78,40 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                 </button>
             </div>
 
-            <div className="p-4">
+            <div className="px-16 pb-16">
                 {isLoading ? (
                     <p>Loading...</p>
                 ) : error ? (
                     <p className="text-red-500">Error fetching products</p>
                 ) : products.length === 0 ? (
                     <p className='text-center font font-semibold'>No products found</p>
-                ) : (
-                    products.map((product) => <ProductItem product={product} key={product._id} />)
-                )}
+                ) : <div className='flex justify-between'>
+                        <ul className="list-none p-0 m-0">
+                            {products.map((product) => (
+                                <li key={product._id} className="cursor-pointer text-sm mb-18 font-medium list-none underline underline-offset-5">
+                                    <a href="#" className='flex items-center gap-5'>
+                                        <span>
+                                            <SearchProductIcon />
+                                        </span>
+                                        <span>
+                                            {product.name}
+                                        </span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                        <ul className='grid grid-cols-3 gap-10 p-0 m-0 list-none'>
+                            {products.map((product) => (
+                                <li key={product._id} className='mb-16 ml-16 cursor-pointer'>
+                                    <ProductItem product={product} />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                }
             </div>
         </div>
     )
 }
 
+// className='w-[106px]'

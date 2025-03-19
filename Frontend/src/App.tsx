@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { publicRoutes } from './routes/routes';
 import { DefaultLayout } from './components/layout/DefaultLayout';
-import './App.css';
+import './assets/styles/App.css';
 
 function App() {
   return (
