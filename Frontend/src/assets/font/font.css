@@ -47,3 +47,8 @@
     font-family: Poppins-medium;
     src: url(./Poppins-Medium.ttf);
 }
+
+@font-face {
+    font-family: Montserrat-Bold;
+    src: url(./Montserrat-Bold.ttf);
+}
