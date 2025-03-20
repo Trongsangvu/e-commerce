@@ -42,3 +42,8 @@
     font-family: Poppins-bold;
     src: url(./Poppins-Bold.ttf);
 }
+
+@font-face {
+    font-family: Poppins-medium;
+    src: url(./Poppins-Medium.ttf);
+}
