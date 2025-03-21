@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { login, register } from './authAction';
-import { ILoginResponse } from '../../model/Auth';
+import { AuthUser, ILoginResponse, IRegisterResponse } from '../../model/Auth';
 
 
 // Implicity authReducer
 interface AuthState {
-    user: ILoginResponse | null;
+    user: AuthUser | null;
     isAuthenticated: boolean;
     status: string;
     error: string | null;
@@ -43,11 +43,11 @@ const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, { payload }: PayloadAction<ILoginResponse>) => {
                 state.loading = false;
-                state.user = payload;
+                state.user = payload.user;
                 state.isAuthenticated = true;
                 state.status = 'succeeded';
                 state.error = null;
-                localStorage.setItem('user', JSON.stringify(payload));
+                localStorage.setItem('user', JSON.stringify(payload.user));
                 
             })
             .addCase(login.rejected, (state, action) => {
@@ -61,6 +61,18 @@ const authSlice = createSlice({
                 state.error = null;
                 state.status = "loading";
             })
+            .addCase(register.fulfilled, (state, { payload }: PayloadAction<IRegisterResponse>) => {
+                state.loading = false;
+                state.user = payload.user;
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(register.rejected, (state, action) => {
+                state.loading = false;
+                state.status = 'failed';
+                state.error = action.error.message || "Register failed";
+            })
+
     }
 });
 

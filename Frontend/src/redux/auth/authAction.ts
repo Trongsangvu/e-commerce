@@ -14,7 +14,7 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
             
             console.log("Login successful:", {
                 email: data.email,
-                password: data.password,
+                // password: data.password,
                 token: response.data.token
             });
 
