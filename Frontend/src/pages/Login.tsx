@@ -1,21 +1,28 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import config from '../config/config';
 import { login } from '../redux/auth/authAction';    
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../redux/store';
 import { AddressIcon, EyeSlashIcon } from '../assets/images/icons/icons';
 
 export const Login:React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const { error } = useSelector((state: RootStore) => state.auth);
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
+    // Handle Form submit events
     const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(login({ email, password }))
             .then(() => console.log("Login action dispatched"))
             .catch((error) => console.log("Error dispatching login action: ", error))
+
+        navigate('/');
     };
 
     return (
@@ -71,11 +78,15 @@ export const Login:React.FC = () => {
                         </div>
                         <div className='hover:bg-[#6774d5] hover:text-[white] border border-[#dddddd] rounded-xl text-center w-[280px] cursor-pointer p-[10px]'>
                             <a href="#">
-                                <button className='capitalize cursor-pointer '>facebook</button>
+                                <button className='capitalize cursor-pointer'>facebook</button>
                             </a>
                         </div>
                     </div>
-                    <span className='text-center mb-[50px]'>Don't have an account? Sign up now</span>
+                    <span className='text-center mb-[50px] font font-[Poppins-regular]'>Don't have an account? 
+                        <Link to={config.routes.register}>
+                            <span className='pl-5 underline underline-offset-4'>Sign up now</span>
+                        </Link>
+                    </span>
                     <span className='text-center text-[#b2b2b2] font font-[Poppins-regular]'>© {new Date().getFullYear()} COZA STORE. All rights reserved.</span>
                     {error && <p className='text-red-500'>{error}</p>}
                 </form>

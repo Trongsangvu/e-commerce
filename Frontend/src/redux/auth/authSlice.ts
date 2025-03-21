@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { login } from './authAction';
+import { login, register } from './authAction';
 import { ILoginResponse } from '../../model/Auth';
+
 
 // Implicity authReducer
 interface AuthState {
@@ -29,10 +30,12 @@ const authSlice = createSlice({
             state.user = null;
             state.isAuthenticated = false;
             localStorage.removeItem('user');
+            localStorage.removeItem("token");
         }
     },
     extraReducers: (builder) => {
         builder
+            // Login reducers
             .addCase(login.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -51,6 +54,12 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.status = 'failed';
                 state.error = action.error.message || 'Login failed';
+            })
+            // Register reducers
+            .addCase(register.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.status = "loading";
             })
     }
 });

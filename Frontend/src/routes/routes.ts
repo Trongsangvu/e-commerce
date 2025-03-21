@@ -1,7 +1,7 @@
 import config from "../config/config";
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
-import Register from '../pages/Register';
+import { Register } from '../pages/Register';
 import Checkout from '../pages/Checkout';
 import Profile from '../pages/Profile';
 import { ProductsList } from '../pages/ProductsList';

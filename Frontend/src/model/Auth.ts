@@ -20,6 +20,19 @@ export interface ILoginResponse {
     user: {
         id: string;
         email: string;
-        role: string;
+        role: roles;
+    }
+}
+
+export interface IRegister {
+    name: string;
+    email: string;
+    password: string;
+}
+
+export interface IRegisterResponse {
+    user: {
+        id: string;
+        email: string;
     }
 }
