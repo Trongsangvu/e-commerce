@@ -64,19 +64,19 @@ export const Login:React.FC = () => {
                     <span className='text-center text-[#767676] mt-[20px]'>Or continue with</span>
 
                     <div className='flex justify-between gap-[30px] m-[20px]'>
-                        <div className='border border-[#dddddd] rounded-xl text-center w-[280px] cursor-pointer p-[10px]'>
+                        <div className='hover:bg-[#6774d5] hover:text-[white] border border-[#dddddd] rounded-xl text-center w-[280px] cursor-pointer p-[10px]'>
                             <a href="#">
                                 <button className='capitalize cursor-pointer '>google</button>
                             </a>
                         </div>
-                        <div className='border border-[#dddddd] rounded-xl text-center w-[280px] cursor-pointer p-[10px]'>
+                        <div className='hover:bg-[#6774d5] hover:text-[white] border border-[#dddddd] rounded-xl text-center w-[280px] cursor-pointer p-[10px]'>
                             <a href="#">
                                 <button className='capitalize cursor-pointer '>facebook</button>
                             </a>
                         </div>
                     </div>
                     <span className='text-center mb-[50px]'>Don't have an account? Sign up now</span>
-                    <span className='text-center text-[#bebebe]'>© 2023 COZA STORE. All rights reserved.</span>
+                    <span className='text-center text-[#b2b2b2] font font-[Poppins-regular]'>© {new Date().getFullYear()} COZA STORE. All rights reserved.</span>
                     {error && <p className='text-red-500'>{error}</p>}
                 </form>
             </div>

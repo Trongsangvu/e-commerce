@@ -34,7 +34,7 @@ export const Home:React.FC = () => {
                                 ${isFixed ? "fixed top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2" : "absolute bottom-[40px] left-1/2 -translate-x-1/2"}`}
                             >
                                 <span className="capitalize text-[32px] tracking-[3px] font-(--font-family) leading-10 text-white">
-                                    Spring Summer 2025
+                                    Spring Summer {new Date().getFullYear()}
                                 </span>
                                 <div className="flex gap-15 justify-center pt-20">
                                     <a className="border-none uppercase bg-white p-15 rounded-xs text-black text-sm font-montserrat font-semibold tracking-[2px] hover:cursor-pointer">

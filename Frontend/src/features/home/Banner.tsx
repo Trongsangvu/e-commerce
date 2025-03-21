@@ -19,7 +19,7 @@ export const Banner:React.FC = () => {
                                         women
                                     </span>
                                     <span className='group-hover:text-white font-normal font font-[Poppins-regular] text-sm text-[#555]'>
-                                        Spring 2025
+                                        Spring {new Date().getFullYear()}
                                     </span>
                                 </div>
                                 <span className="absolute bottom-[-20px] left-[25%] -translate-x-1/2 top-[70%] text-xs font-[Poppins-medium] text-white uppercase opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-100">
@@ -40,7 +40,7 @@ export const Banner:React.FC = () => {
                                             men
                                         </span>
                                         <span className='group-hover:text-white font-normal font font-[Poppins-regular] text-sm text-[#555]'>
-                                            Spring 2025
+                                            Spring {new Date().getFullYear()}
                                         </span>
                                     </div>
                                     <span className="absolute bottom-[-20px] left-[25%] -translate-x-1/2 top-[70%] text-xs font-[Poppins-medium] text-white uppercase opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-100">
@@ -61,7 +61,7 @@ export const Banner:React.FC = () => {
                                         Accessories
                                     </span>
                                     <span className='group-hover:text-white font-normal font font-[Poppins-regular] text-sm text-[#555]'>
-                                        Spring 2025
+                                        Spring {new Date().getFullYear()}
                                     </span>
                                 </div>
                                 <span className="absolute bottom-[-20px] left-[25%] -translate-x-1/2 top-[70%] text-xs font-[Poppins-medium] text-white uppercase opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-100">

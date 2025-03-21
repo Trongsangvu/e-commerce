@@ -15,15 +15,15 @@ export const ProductList: React.FC = () => {
     return (
         <>
             <div>
-                <ul className='grid grid-cols-4'>    
+                <ul className='grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center'>    
                     {products && products.map((product) => (
                         <li 
                             key={product._id} 
-                            className='mb-35 w-[270px]'
+                            className='mb-35 max-w-[270px] w-full mx-auto'
                         >
-                            <div className='overflow-hidden relative group'>
+                            <div className='max-w-[270px] w-full overflow-hidden relative group'>
                                 <img 
-                                    className='w-full h-[335px] cursor-pointer transition-transform duration-500 group-hover:scale-110' 
+                                    className='max-w-[270px] w-full h-[335px] cursor-pointer transition-transform duration-500 group-hover:scale-110' 
                                     src={product.imageUrl} 
                                     alt={product.name} 
                                 />

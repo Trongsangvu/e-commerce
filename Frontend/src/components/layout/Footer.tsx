@@ -1,3 +1,5 @@
+import { FacebookIcon, IgIcon, WhatsAppIcon } from '../../assets/images/icons/icons';
+import images from '../../assets/images/images';
 function Footer() {
     return ( 
         <footer>
@@ -42,10 +44,16 @@ function Footer() {
                         <p className="font font-[Poppins-regular] text-[#b2b2b2] text-[13px]">
     						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
                         </p>
-                        <div>
-                            <a href=""></a>
-                            <a href=""></a>
-                            <a href=""></a>
+                        <div className='flex items-center gap-10 pt-30'>
+                            <a href="#">
+                                <FacebookIcon className={"hover:fill-[#6774d5]"}/>
+                            </a>
+                            <a href="#">
+                                <IgIcon className={"hover:fill-[#6774d5]"}/>
+                            </a>
+                            <a href="#">
+                                <WhatsAppIcon className={"hover:fill-[#6774d5]"}/>
+                            </a>
                         </div>
                     </div>
                     <div>
@@ -54,7 +62,7 @@ function Footer() {
                             <div>
                                 <div className="w-[310px] relative group">
                                     <input 
-                                        className="pb-5 w-full font font-[Poppins-regular] border-none outline-none text-[#e2e2e2]" type="text" placeholder="email@gmail.com"
+                                        className="pb-5 w-full text-[13px] font font-[Poppins-regular] border-none outline-none text-[white]" type="text" placeholder="email@gmail.com"
                                     />
                                     <div
                                         className="absolute bottom-0 left-0 w-full border-b transition-all duration-500 ease-in-out border-[#ccc] origin-left scale-x-100 group-focus-within:border-[#6774d5] group-focus-within:scale-x-100"
@@ -66,6 +74,15 @@ function Footer() {
                             </div>
                         </form> 
                     </div>
+                </div>
+                <div className='pt-35'>
+                    <p className=' flex justify-center font font-[Poppins-regular] text-[#717475] text-[13px]'>
+                        Copyright © {new Date().getFullYear()}. All Rights Reserved | Made with
+                        <img className='w-16 h-16 mx-4 transition-all duration-300 invert' src={images.heartIcon} alt="heart icon"/> by 
+                        <a href="#" className='mx-5 text-[#6774d5]'>Colorlib</a>
+                        & distributed by
+                        <a href="https://github.com/mangtrungzos" className='ml-5 text-[#6774d5]'>Mangtrungzos</a>
+                    </p>
                 </div>
             </div>
         </footer>
