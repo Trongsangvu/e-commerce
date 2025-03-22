@@ -26,63 +26,58 @@ export const Register:React.FC = () => {
 
     return (
         <>
-            <div className='absolute top-[60%] left-[47%] transform -translate-x-1/2 -translate-y-1/2 w-[450px]'>
-                <form action="" onSubmit={handleFormSubmit} className='flex flex-col p-10 mt-[20px]'>
-                    <h3 className='text-black text-center text-4xl font-semibold'>Login</h3>
-                    <div className='relative flex flex-col mb-[20px]'>
-                        <label htmlFor="email" className='mb-[10px]'>Username</label>
+            <div className='absolute top-[60%] left-[47%] transform -translate-x-1/2 -translate-y-1/2 w-[auto]'>
+                <form action="" onSubmit={handleFormSubmit} className='flex flex-col items-center p-10 mt-[20px]'>
+                    <h3 className='text-black text-center uppercase text-3xl mb-30 font font-[GucciSansPro-book]'>
+                        Continue with your email address
+                    </h3>
+                    <div className='relative flex flex-col mb-[50px] max-w-[450px]'>
+                        <label htmlFor="email" className='mb-[10px] text-[#838383] text-xs font font-[GucciSansPro-light]'>*Required field</label>
                         <input 
-                            className='text-black bg-[#f8f8f6] w-auto rounded-xl p-[10px]'
+                            className='font font-[GucciSansPro-light] uppercase text-sm text-[#666] bg-white border border-solid border-[#1b1b1b] p-[10px] h-[56px] w-[328px]'
                             type="text" 
-                            placeholder="user name" 
+                            placeholder="username*" 
                             id="name" 
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />  
-                        <span className='w-[15px] absolute top-[63%] right-[20px]'>
+                        <span className='w-[15px] absolute top-[59%] right-[20px]'>
                             <AddressIcon />
                         </span>
                     </div>
-                    <div className='relative flex flex-col mb-[20px]'>
-                        <label htmlFor="email" className='mb-[10px]'>Email Address</label>
+                    <div className='relative flex flex-col mb-[50px] max-w-[450px]'>
                         <input 
-                            className='text-black bg-[#f8f8f6] w-auto rounded-xl p-[10px]'
+                            className='font font-[GucciSansPro-light] uppercase text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]'
                             type="text" 
-                            placeholder="Your Email Address" 
+                            placeholder="email*" 
                             id="email" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />  
-                        <span className='w-[15px] absolute top-[63%] right-[20px]'>
+                        <span className='w-[15px] absolute top-[39%] right-[20px]'>
                             <AddressIcon />
                         </span>
                     </div>
 
-                    <div className='relative flex flex-col mb-[20px]'>
-                        <label className='mb-[10px]' htmlFor="password">Password</label>
+                    <div className='relative flex flex-col mb-[50px] max-w-[450px]'>
                         <input 
-                            className='text-black w-auto bg-[#f8f8f6] rounded-xl p-[10px]'
+                            className='font font-[GucciSansPro-light] flex items-center uppercase text-sm text-[#666] h-[56px] w-[328px] bg-white p-[10px] border border-solid border-[#1b1b1b]'
                             type="text" 
-                            placeholder="Your Password" 
+                            placeholder="create password*" 
                             id="password" 
                             value={password.toString()}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <span className='w-[15px] absolute bottom-[20%] right-[20px]'>
+                        <span className='w-[15px] absolute bottom-[35%] right-[20px]'>
                             <EyeSlashIcon />
                         </span>
                     </div>
                     
-                    <div className='flex justify-between mb-[30px]'>
-                        <span className='capitalize font-normal text-[#a1a1a1]'>remember me</span>
-                        <span className='capitalize text-[#e65540] font-medium cursor-pointer'>forgot password?</span>
-                    </div>
-
-                    <div className='bg-[#e65540] text-white rounded-xl cursor-pointer text-center w-auto p-[10px] font-medium'>
-                        <button type='submit'>Sign up</button>
+                    <div className='bg-[#1a1a1a] w-[328px] uppercase flex items-center justify-center h-[56px] text-white cursor-pointer text-center p-[10px] font font-[GucciSansPro-medium]'>
+                        <button type='submit' className='uppercase'>create my profile</button>
                     </div>
                     
-                    <span className='text-center text-[#b2b2b2] font font-[Poppins-regular]'>© {new Date().getFullYear()} COZA STORE. All rights reserved.</span>
+                    <span className='text-center pt-30 w-[450px] text-[#b2b2b2] font font-[Poppins-regular]'>© {new Date().getFullYear()} COZA STORE. All rights reserved.</span>
                     {error && <p className='text-red-500'>{error}</p>}
                 </form>
             </div>
