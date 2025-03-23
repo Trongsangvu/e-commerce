@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../redux/store';
 import { AddressIcon, EyeSlashIcon } from '../assets/images/icons/icons';
+import images from '../assets/images/images';
 
 export const Register:React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -32,28 +33,36 @@ export const Register:React.FC = () => {
                         Continue with your email address
                     </h3>
                     <div className='relative flex flex-col mb-[50px] max-w-[450px]'>
-                        <label htmlFor="email" className='mb-[10px] text-[#838383] text-xs font font-[GucciSansPro-light]'>*Required field</label>
+                        <label htmlFor="name" className='mb-[10px] text-[#838383] text-xs font font-[GucciSansPro-light]'>*Required field</label>
                         <input 
-                            className='font font-[GucciSansPro-light] uppercase text-sm text-[#666] bg-white border border-solid border-[#1b1b1b] p-[10px] h-[56px] w-[328px]'
+                            className='peer font font-[GucciSansPro-light] uppercase text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]'
                             type="text" 
-                            placeholder="username*" 
+                            placeholder="" 
                             id="name" 
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />  
+                        <label
+                            htmlFor="name"
+                            className="absolute left-[10px] font font-[GucciSansPro-light] uppercase -translate-y-1/2 text-sm text-[#666] transition-all peer-placeholder-shown:top-[65%] peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#666] peer-focus:top-[40px] peer-focus:text-xs peer-focus:text-[#666]"
+                        >username*</label>
                         <span className='w-[15px] absolute top-[59%] right-[20px]'>
-                            <AddressIcon />
+                            <img src={images.pencilIcon} alt="pencilIcon" />
                         </span>
                     </div>
                     <div className='relative flex flex-col mb-[50px] max-w-[450px]'>
                         <input 
-                            className='font font-[GucciSansPro-light] uppercase text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]'
+                            className='peer font font-[GucciSansPro-light] uppercase text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]'
                             type="text" 
-                            placeholder="email*" 
+                            placeholder="" 
                             id="email" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />  
+                        <label
+                            htmlFor="email"
+                            className="absolute left-[10px] font font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#666] peer-focus:top-[13px] peer-focus:text-xs peer-focus:text-[#666]"
+                        >email*</label>
                         <span className='w-[15px] absolute top-[39%] right-[20px]'>
                             <AddressIcon />
                         </span>
@@ -61,13 +70,17 @@ export const Register:React.FC = () => {
 
                     <div className='relative flex flex-col mb-[50px] max-w-[450px]'>
                         <input 
-                            className='font font-[GucciSansPro-light] flex items-center uppercase text-sm text-[#666] h-[56px] w-[328px] bg-white p-[10px] border border-solid border-[#1b1b1b]'
+                            className='peer font font-[GucciSansPro-light] flex items-center uppercase text-sm text-[#666] h-[56px] w-[328px] bg-white p-[10px] border border-solid border-[#1b1b1b]'
                             type="text" 
-                            placeholder="create password*" 
+                            placeholder="" 
                             id="password" 
                             value={password.toString()}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        <label
+                            htmlFor="email"
+                            className="absolute left-[10px] font font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#666] peer-focus:top-[14px] peer-focus:text-xs peer-focus:text-[#666]"
+                        >create password*</label>
                         <span className='w-[15px] absolute bottom-[35%] right-[20px]'>
                             <EyeSlashIcon />
                         </span>
