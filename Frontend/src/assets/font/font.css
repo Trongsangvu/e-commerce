@@ -17,10 +17,11 @@
 @font-face {
     font-family: GucciSansPro-book;
     src: url('./GucciSansPro-Book.woff2') format('woff2');
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
+
 
 @font-face {
     font-family: GucciSansPro-light;

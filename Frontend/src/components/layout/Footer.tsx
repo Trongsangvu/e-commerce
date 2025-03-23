@@ -2,7 +2,7 @@ import { FacebookIcon, IgIcon, WhatsAppIcon } from '../../assets/images/icons/ic
 import images from '../../assets/images/images';
 function Footer() {
     return ( 
-        <footer>
+        <footer className='mt-auto'>
             <div className="bg-[#222222] px-[164px] pt-[75px] pb-[32px]">
                 <div className="grid grid-cols-4 gap-10">
                     <div>
