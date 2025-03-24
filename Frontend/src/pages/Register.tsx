@@ -20,8 +20,8 @@ export const Register:React.FC = () => {
     const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(register({ name, email, password }))
-            .then(() => console.log("Login action dispatched"))
-            .catch((error) => console.log("Error dispatching login action: ", error))
+            .then(() => console.log("Register action dispatched"))
+            .catch((error) => console.log("Error dispatching register action: ", error))
 
         navigate('/login');
     };
@@ -39,7 +39,7 @@ export const Register:React.FC = () => {
                             <input 
                                 className='peer font font-[GucciSansPro-light] text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]'
                                 type="text" 
-                                placeholder="" 
+                                placeholder=" " 
                                 id="name" 
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -61,7 +61,7 @@ export const Register:React.FC = () => {
                             <input 
                                 className='peer font font-[GucciSansPro-light] text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]'
                                 type="text" 
-                                placeholder="" 
+                                placeholder=" " 
                                 id="email" 
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -83,8 +83,8 @@ export const Register:React.FC = () => {
                         <div className='relative flex flex-col mb-[50px] max-w-[450px]'>
                             <input 
                                 className='peer font font-[GucciSansPro-light] flex items-center text-sm text-[#666] h-[56px] w-[328px] bg-white p-[10px] border border-solid border-[#1b1b1b]'
-                                type="text" 
-                                placeholder="" 
+                                type="text"  
+                                placeholder=" " 
                                 id="password" 
                                 value={password.toString()}
                                 onChange={(e) => setPassword(e.target.value)}

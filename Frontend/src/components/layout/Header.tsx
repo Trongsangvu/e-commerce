@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import config from '../../config/config';
+import { MENU_PROFILE } from '../../config/menu';
+import { MenuProfile } from '../common/MenuProfile';
 import images from '../../assets/images/images';
 import { ContactIcon, MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
@@ -12,6 +14,7 @@ import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
 export const Header: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [isShow, setIsShow] = useState(false);
 
     const handleShow = () => {
         dispatch(sideBarShow())
@@ -19,6 +22,10 @@ export const Header: React.FC = () => {
 
     const handleSearch = () => {
         setIsSearchVisible(!isSearchVisible);
+    }
+
+    const handleShowMenuProfile = () => {
+        setIsShow(!isShow);
     }
 
     return (
@@ -34,18 +41,29 @@ export const Header: React.FC = () => {
                     <Link to={config.routes.home} className='mr-10'>
                         <img src={images.logo} alt='COZASTORE'/>
                     </Link>
-                    <ul className='flex '>
+                    <ul className='flex'>
                         <li>
                             <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'>
                                 <ShoppingCartIcon />    
                             </button>
                         </li>
                         <li className='pl-15'>
-                            <Link to={config.routes.login}>
-                                <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'>
-                                    <UserIcon />
-                                </button>
-                            </Link>
+                            <button 
+                                className='hover:opacity-80 hover:cursor-pointer transition-opacity'
+                                onClick={handleShowMenuProfile}
+                            >
+                                <UserIcon />
+                            </button>
+                            {isShow && (
+                                <div className='absolute right-1/9 rounded-sm bg-white shadow-xl'>
+                                    <ul className='px-16 py-32'>
+                                        {MENU_PROFILE.map((item, index) => (
+                                            <MenuProfile item={item} key={index} index={index}/>
+                                        ))}
+                                    </ul>
+                                    <div className='border-t mb-2'></div>
+                                </div>
+                            )}
                         </li>
                         <li className='pl-15'>
                             <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'
