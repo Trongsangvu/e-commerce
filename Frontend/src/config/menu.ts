@@ -4,7 +4,7 @@ export interface MenuItems {
     delay?: number,
 }
 
-
+// Menu Sidebar
 export const MENU_ITEMS: MenuItems[] = [
     { title: 'Gifts' ,},
     { title: 'New In' },
@@ -18,6 +18,7 @@ export const MENU_ITEMS: MenuItems[] = [
     { title: 'Fragrances & Make-Up' },
 ];
 
+// Menu Sidebar
 export const MENU_ITEMS_2: MenuItems[] = [
     { title: 'Gucci Services' },
     { title: 'World of Gucci' },
@@ -25,6 +26,7 @@ export const MENU_ITEMS_2: MenuItems[] = [
     
 ];
 
+// Menu Profile
 export const MENU_PROFILE: MenuItems[] = [
     // { title: 'my account' },
     { title: 'sign in', path: '/login' },
@@ -34,4 +36,14 @@ export const MENU_PROFILE: MenuItems[] = [
     { title: 'wallet' },
     { title: 'saved items' },
     { title: 'my appointments' },
+];
+
+// Menu categories
+export const categories = [
+    { id: 'all', label: 'All Products' },
+    { id: 'women', label: 'women' },
+    { id: 'men', label: 'men' },
+    { id: 'bag', label: 'bag' },
+    { id: 'shoes', label: 'shoes' },
+    { id: 'watches', label: 'watches' },
 ]

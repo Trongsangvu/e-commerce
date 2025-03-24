@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../redux/store';
 import { productsList } from '../../services/productService';
 import images from '../../assets/images/images';
 
@@ -9,6 +11,13 @@ export const ProductList: React.FC = () => {
         queryFn: productsList
     });
 
+    const selectedCategory = useSelector((state: RootStore) => state.category.selectedCategory)
+
+    // Filter products by categories
+    const filteredProducts = selectedCategory === "all"
+        ? products
+        : products.filter((product) => product.category === selectedCategory);
+
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error fetching products</p>;
 
@@ -16,7 +25,7 @@ export const ProductList: React.FC = () => {
         <>
             <div>
                 <ul className='grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center'>    
-                    {products && products.map((product) => (
+                    {filteredProducts && filteredProducts.map((product) => (
                         <li 
                             key={product._id} 
                             className='mb-35 max-w-[270px] w-full mx-auto'

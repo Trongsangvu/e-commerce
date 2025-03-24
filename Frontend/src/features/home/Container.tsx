@@ -1,17 +1,15 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import images from "../../assets/images/images";
+import { categories } from "../../config/menu";
+import { AppDispatch } from '../../redux/store';
+import { RootStore } from '../../redux/store';
+import { setCategory } from '../../redux/filterProducts/filterProductSlice';
 
 const Container:React.FC = () => {
-    const [activeTab, setActiveTab] = useState('all');  
-
-    const tabItems = [
-        { id: 'all', label: 'All Products' },
-        { id: 'women', label: 'women' },
-        { id: 'men', label: 'men' },
-        { id: 'bag', label: 'bag' },
-        { id: 'shoes', label: 'shoes' },
-        { id: 'watches', label: 'watches' },
-    ]
+    const dispatch = useDispatch<AppDispatch>();
+    const selectCategory = useSelector((state: RootStore) => state.category.selectedCategory);
+    // const [activeTab, setActiveTab] = useState('all');  
 
     return (
         <main className="w-full">
@@ -21,20 +19,20 @@ const Container:React.FC = () => {
                 </div>
                 <div className="flex flex-col md:flex-row justify-between items-center ">
                     <div className="flex flex-wrap mb-6 md:mb-0">
-                        {tabItems.map((item, index) => (
+                        {categories.map((item, index) => (
                             <div key={item.id} className="relative">
                                 <button
                                     className={`pb-5 ${index === 0 ? 'mr-[17px]' : 'mx-[17px]' } text-base leading-[1.2] cursor-pointer font-sans font[Poppins-regular] capitalize
-                                        ${activeTab === item.id ? 'text-[#333]' : 'text-[#888]'}
+                                        ${selectCategory === item.id ? 'text-[#333]' : 'text-[#888]'}
                                     `}
-                                    onClick={() => setActiveTab(item.id)}
+                                    onClick={() => dispatch(setCategory(item.id))}
                                 >
                                     
                                     <span className="relative inline-block font font-[Poppins-regular] pb-3">
                                         {item.label}
                                         <span 
                                             className={`absolute -bottom-1 left-0 h-1 bg-[#797979] transition-all duration-300 ease-in-out
-                                            ${activeTab === item.id ? 'w-full' : 'w-0'}`}
+                                            ${selectCategory === item.id ? 'w-full' : 'w-0'}`}
                                         ></span>
                                     </span>
                                 </button>

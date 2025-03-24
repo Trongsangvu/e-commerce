@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
 import searchReducer from './search/searchSlice';
 import sideBarReducer from './sideBar/sideBarSlice';
+import categoryReducer from './filterProducts/filterProductSlice';
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
         search: searchReducer,
-        sideBar: sideBarReducer
+        sideBar: sideBarReducer,
+        category: categoryReducer,
     }
 });
 

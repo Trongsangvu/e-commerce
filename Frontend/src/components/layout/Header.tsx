@@ -1,6 +1,6 @@
-import { useState } from 'react';  
+import { useEffect, useState } from 'react';  
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import config from '../../config/config';
 import { MENU_PROFILE } from '../../config/menu';
 import { MenuProfile } from '../common/MenuProfile';
@@ -13,6 +13,7 @@ import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
 
 export const Header: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const location = useLocation();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isShow, setIsShow] = useState(false);
 
@@ -27,6 +28,10 @@ export const Header: React.FC = () => {
     const handleShowMenuProfile = () => {
         setIsShow(!isShow);
     }
+
+    useEffect(() => {
+        setIsShow(false);
+    }, [location.pathname]);
 
     return (
         <>
