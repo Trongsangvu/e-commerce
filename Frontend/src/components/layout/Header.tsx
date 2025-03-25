@@ -16,7 +16,6 @@ export const Header: React.FC = () => {
     const location = useLocation();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isShow, setIsShow] = useState(false);
-    const [activeTab, setActiveTab] = useState('home');
 
     // Handle show sidebar
     const handleShow = () => {
@@ -52,9 +51,8 @@ export const Header: React.FC = () => {
                             {MENU_HEADER.map((item) => (
                                 <li 
                                     className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-medium] hover:text-[#6774d5]
-                                        ${activeTab === item.id ? 'text-[#6774d5]' : 'text-[#333]'}`
+                                        ${location.pathname === item.path ? 'text-[#6774d5]' : 'text-[#333]'}`
                                     } key={item.id}
-                                    onClick={() => setActiveTab(item.id || 'home')}
                                 >
                                     <Link to={item.path || '#'}>
                                         {item.title}

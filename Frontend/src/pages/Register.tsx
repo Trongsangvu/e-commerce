@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../redux/store';
 import { AddressIcon, EyeSlashIcon } from '../assets/images/icons/icons';
 import images from '../assets/images/images';
-import Footer from '../components/layout/Footer';
+import { Footer } from '../components/layout/Footer';
 
 export const Register:React.FC = () => {
     const dispatch: AppDispatch = useDispatch();

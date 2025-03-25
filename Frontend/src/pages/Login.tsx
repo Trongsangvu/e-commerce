@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../redux/store';
 import { AddressIcon, EyeSlashIcon } from '../assets/images/icons/icons';
-import Footer from '../components/layout/Footer';
+import { Footer } from '../components/layout/Footer';
 
 export const Login:React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
