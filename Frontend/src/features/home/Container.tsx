@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import images from "../../assets/images/images";
 import { categories } from "../../config/menu";
@@ -6,17 +5,22 @@ import { AppDispatch } from '../../redux/store';
 import { RootStore } from '../../redux/store';
 import { setCategory } from '../../redux/filterProducts/filterProductSlice';
 
-const Container:React.FC = () => {
+interface ContainerProps {
+    showTitle?: boolean;
+}
+
+export const Container: React.FC<ContainerProps> = ({ showTitle = true }) => {
     const dispatch = useDispatch<AppDispatch>();
     const selectCategory = useSelector((state: RootStore) => state.category.selectedCategory);
-    // const [activeTab, setActiveTab] = useState('all');  
 
     return (
         <main className="w-full">
             <div className="flex flex-col pb-52">
-                <div className="pb-10">
-                    <h3 className="uppercase text-4xl text-[#333] font font-[Poppins-bold]">product overview</h3>
-                </div>
+                    {showTitle && 
+                        <div className="pb-10">
+                            <h3 className="uppercase text-4xl text-[#333] font font-[Poppins-bold]">product overview</h3>
+                        </div>
+                    }
                 <div className="flex flex-col md:flex-row justify-between items-center ">
                     <div className="flex flex-wrap mb-6 md:mb-0">
                         {categories.map((item, index) => (
@@ -65,5 +69,3 @@ const Container:React.FC = () => {
         </main>
     );
 }
-
-export default Container;

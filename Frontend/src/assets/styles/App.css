@@ -9,6 +9,7 @@
     --font-pops: 'Poppins', sans-serif;
     --spacing: 1px; 
     --size: 44px;
+    --color-text-hover: #6774d5;
 }
 
 *{
@@ -16,6 +17,7 @@
     box-sizing: border-box;
 }
 
-.app {
-    /* height: 1800px; */
-}
+/* .app {
+    height: 1800px;
+} */
+

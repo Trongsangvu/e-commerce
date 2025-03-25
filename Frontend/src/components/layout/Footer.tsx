@@ -1,6 +1,6 @@
 import { FacebookIcon, IgIcon, WhatsAppIcon } from '../../assets/images/icons/icons';
 import images from '../../assets/images/images';
-function Footer() {
+export const Footer: React.FC = () => {
     return ( 
         <footer className='mt-auto'>
             <div className="bg-[#222222] px-[164px] pt-[75px] pb-[32px]">
@@ -88,5 +88,3 @@ function Footer() {
         </footer>
      );
 }
-
-export default Footer;

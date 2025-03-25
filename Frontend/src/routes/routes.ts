@@ -7,6 +7,7 @@ import Profile from '../pages/Profile';
 import { ProductsList } from '../pages/ProductsList';
 import ProductDetail from '../pages/ProductDetail';
 import Cart from '../pages/Cart';
+import { Shop } from '../pages/Shop';
 
 // Public routes: no need sign in to access
 const publicRoutes = [
@@ -18,6 +19,7 @@ const publicRoutes = [
     { path: config.routes.products, component: ProductsList },
     { path: config.routes.productDetail, component: ProductDetail },
     { path: config.routes.cart, component: Cart },
+    { path: config.routes.shop, component: Shop },
 ];
 
 // Private routes: need sign in to access

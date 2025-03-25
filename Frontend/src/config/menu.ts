@@ -1,4 +1,5 @@
 export interface MenuItems {
+    id?: string,
     title: string,
     path?: string,
     delay?: number,
@@ -46,4 +47,14 @@ export const categories = [
     { id: 'bag', label: 'bag' },
     { id: 'shoes', label: 'shoes' },
     { id: 'watches', label: 'watches' },
+]
+
+// Menu header
+export const MENU_HEADER: MenuItems[] = [
+    { id: 'home', title: 'Home', path: '/' },
+    { id: 'shop', title: 'Shop', path: '/shop' },
+    { id: 'features', title: 'Features', path: '/features' },
+    { id: 'blog', title: 'Blog', path: '/blog' },
+    { id: 'about', title: 'About', path: '/about' },
+    { id: 'contact', title: 'Contact', path: '/contact' },
 ]

@@ -1,4 +1,4 @@
-import logo from './logo/logo.svg';
+import logo from './logo/logo-01.png';
 import filterIcon from './icons/bars-filter-svgrepo-com.svg';
 import slider from './banner/HP_Hero-FullBleed-Desktop_Gucci-SS25-Jan25-1-9-0474-11-F_001_Default.avif';
 import angleRight from './icon/angle-right.svg';

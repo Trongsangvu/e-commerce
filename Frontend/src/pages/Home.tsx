@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Banner } from '../features/home/Banner';
-import Container  from '../features/home/Container';
-import Footer from '../components/layout/Footer';
+import { Container }  from '../features/home/Container';
+import { Footer } from '../components/layout/Footer';
 import { ProductList }  from '../components/ui/ProductList';
 import images from '../assets/images/images';
 
@@ -9,6 +9,7 @@ export const Home:React.FC = () => {
     const [isFixed, setIsFixed] = useState(true);
     const bannerRef = useRef<HTMLDivElement>(null);
 
+    // Handle scroll
     const handleScroll = useCallback(() => {
         if (!bannerRef.current) return;
 
