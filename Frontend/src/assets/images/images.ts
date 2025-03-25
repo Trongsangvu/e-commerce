@@ -5,6 +5,9 @@ import angleRight from './icon/angle-right.svg';
 import banner1 from './banner/banner-01.jpg';
 import banner2 from './banner/banner-02.jpg';
 import banner3 from './banner/banner-03.jpg';
+import bannerAbout from './banner/about.jpg';
+import bannerAboutStory from './banner/about-01.jpg';
+import bannerAboutStory1 from './banner/about-02.jpg';
 import searchIcon from './icon/search-svgrepo-com.svg';
 import heartIcon from './icons/heart-svgrepo-com.svg';
 import pencilIcon from './icons/pencil-edit-svgrepo-com.svg';
@@ -20,6 +23,9 @@ interface Images {
     searchIcon: string,
     heartIcon: string,
     pencilIcon: string,
+    bannerAbout: string,
+    bannerAboutStory: string,
+    bannerAboutStory1: string
 }
 
 const images: Images = {
@@ -32,7 +38,10 @@ const images: Images = {
     filterIcon,
     searchIcon,
     heartIcon,
-    pencilIcon
+    pencilIcon,
+    bannerAbout,
+    bannerAboutStory,
+    bannerAboutStory1
 } as const
 
 export default images;
