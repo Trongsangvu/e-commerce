@@ -8,6 +8,10 @@ import banner3 from './banner/banner-03.jpg';
 import bannerAbout from './banner/about.jpg';
 import bannerAboutStory from './banner/about-01.jpg';
 import bannerAboutStory1 from './banner/about-02.jpg';
+import bannerBlog from './banner/bg-02.jpg';
+import bannerBlog1 from './banner/blog-04.jpg';
+import bannerBlog2 from './banner/blog-05.jpg';
+import bannerBlog3 from './banner/blog-06.jpg';
 import searchIcon from './icon/search-svgrepo-com.svg';
 import heartIcon from './icons/heart-svgrepo-com.svg';
 import pencilIcon from './icons/pencil-edit-svgrepo-com.svg';
@@ -25,7 +29,11 @@ interface Images {
     pencilIcon: string,
     bannerAbout: string,
     bannerAboutStory: string,
-    bannerAboutStory1: string
+    bannerAboutStory1: string,
+    bannerBlog: string,
+    bannerBlog1: string,
+    bannerBlog2: string,
+    bannerBlog3: string,
 }
 
 const images: Images = {
@@ -41,7 +49,11 @@ const images: Images = {
     pencilIcon,
     bannerAbout,
     bannerAboutStory,
-    bannerAboutStory1
+    bannerAboutStory1,
+    bannerBlog,
+    bannerBlog1,
+    bannerBlog2,
+    bannerBlog3,
 } as const
 
 export default images;

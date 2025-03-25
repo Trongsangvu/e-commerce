@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface CategoryState {
     selectedCategory: string;
+    featureProducts: string;
 }
 
 const initialState: CategoryState = {
-    selectedCategory: 'all'
+    selectedCategory: 'all',
+    featureProducts: 'men'
 }
 
 const categorySlice = createSlice({
@@ -14,7 +16,7 @@ const categorySlice = createSlice({
     reducers: {
         setCategory: (state, action) => {
             state.selectedCategory = action.payload;
-        }
+        },
     }
 });
 
