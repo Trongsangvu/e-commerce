@@ -15,6 +15,7 @@ import bannerBlog3 from './banner/blog-06.jpg';
 import searchIcon from './icon/search-svgrepo-com.svg';
 import heartIcon from './icons/heart-svgrepo-com.svg';
 import pencilIcon from './icons/pencil-edit-svgrepo-com.svg';
+import arrowRight from './icons/right-arrow-svgrepo-com.svg';
 
 interface Images {
     logo: string,
@@ -34,6 +35,7 @@ interface Images {
     bannerBlog1: string,
     bannerBlog2: string,
     bannerBlog3: string,
+    arrowRight: string,
 }
 
 const images: Images = {
@@ -54,6 +56,7 @@ const images: Images = {
     bannerBlog1,
     bannerBlog2,
     bannerBlog3,
+    arrowRight,
 } as const
 
 export default images;

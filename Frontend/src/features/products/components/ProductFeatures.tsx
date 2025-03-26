@@ -20,9 +20,10 @@ export const ProductFeatures: React.FC = () => {
     
     return (
         <div>
+            <h3 className="font-[Poppins-bold] text-3xl mt-20 text-[#333]">Feature Products</h3>
             <ul>
-                {filterProductsByCty.map((product) => (
-                    <li className="flex gap-5 mt-30 mb-30 items-center">
+                {filterProductsByCty.map((product, index) => (
+                    <li key={index} className="flex gap-5 mt-30 mb-30 items-center">
                         <div className="w-[90px] h-[110px]">
                             <a href="#">
                                 <img src={product.imageUrl} alt="" />

@@ -32,6 +32,12 @@ export const Blog: React.FC = () => {
                                     <p className="font-[GucciSansPro-book] text-[#555]">
                                         Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius.
                                     </p>
+                                    <div className="pt-10">
+                                        <a className="flex items-center gap-7 justify-end" href="#">
+                                            <span className="uppercase font-[Poppins-medium] text-[15px]">continue reading</span>
+                                            <img className="w-15 h-15" src={images.arrowRight} alt="arrow" />
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -53,6 +59,12 @@ export const Blog: React.FC = () => {
                                     <p className="font-[GucciSansPro-book] text-[#555]">
                                         Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                                     </p>
+                                    <div className="pt-10">
+                                        <a className="flex items-center gap-7 justify-end" href="#">
+                                            <span className="uppercase font-[Poppins-medium] text-[15px]">continue reading</span>
+                                            <img className="w-15 h-15" src={images.arrowRight} alt="arrow" />
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -74,13 +86,19 @@ export const Blog: React.FC = () => {
                                     <p className="font-[GucciSansPro-book] text-[#555]">
                                         Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
                                     </p>
+                                    <div className="pt-10">
+                                        <a className="flex items-center gap-7 justify-end" href="#">
+                                            <span className="uppercase font-[Poppins-medium] text-[15px]">continue reading</span>
+                                            <img className="w-15 h-15" src={images.arrowRight} alt="arrow" />
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="px-15 w-[315px]">
+                    <div className="px-15 w-[325px]">
                         <div>
-                            <h4 className="font-[GucciSansPro-bold] text-3xl pb-[30px]">Categories</h4>
+                            <h4 className="font-[Poppins-bold] text-[#333] text-3xl pb-[30px]">Categories</h4>
                             <ul>
                                 <li className="cursor-pointer py-10 font-[GucciSansPro-light] border-t border-b border-[#ccc]">Fashion</li>
                                 <li className="cursor-pointer py-10 font-[GucciSansPro-light] border-b border-[#ccc]">Beauty</li>
@@ -92,10 +110,55 @@ export const Blog: React.FC = () => {
                         <div>
                             <ProductFeatures />
                         </div>
+                        <div>
+                            <h4 className="font-[Poppins-bold] text-[#333] text-3xl mb-20">Archive</h4>
+                            <ul>
+                                <li className="py-10">
+                                    <a className="group flex justify-between" href="#">
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">July {new Date().getFullYear()}</span>
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">(9)</span>
+                                    </a>
+                                </li>
+                                <li className="py-10">
+                                    <a className="group flex justify-between" href="#">
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">June {new Date().getFullYear()}</span>
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">(20)</span>
+                                    </a>
+                                </li>
+                                <li className="py-10">
+                                    <a className="flex justify-between group" href="#">
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">May {new Date().getFullYear()}</span>
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">(30)</span>
+                                    </a>
+                                </li>
+                                <li className="py-10">
+                                    <a className="flex justify-between group" href="#">
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">January {new Date().getFullYear()}</span>
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">(40)</span>
+                                    </a>
+                                </li>
+                                <li className="py-10">
+                                    <a className="flex justify-between group" href="#">
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">February {new Date().getFullYear()}</span>
+                                        <span className="font-[Poppins-regular] text-[#888] group-hover:text-[#717fe0]">(21)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 className="font-[Poppins-bold] text-3xl my-20">Tags</h4>
+                            <ul>
+                                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">Fashion</li>
+                                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">Lifestyle</li>
+                                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">Denim</li>
+                                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">Streetstyle</li>
+                                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">Crafts</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
             <Footer />
         </div>
-    )
+    );
 }
