@@ -2,12 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface CategoryState {
     selectedCategory: string;
-    featureProducts: string;
+    featureProductByMen: string;
+    featureProductByWomen: string;
 }
 
 const initialState: CategoryState = {
     selectedCategory: 'all',
-    featureProducts: 'men'
+    featureProductByMen: 'men',
+    featureProductByWomen:'women',
 }
 
 const categorySlice = createSlice({

@@ -10,7 +10,7 @@ export const ProductFeatures: React.FC = () => {
         queryFn: productsList
     });
 
-    const productByCategory = useSelector((state: RootStore) => state.category.featureProducts)
+    const productByCategory = useSelector((state: RootStore) => state.category.featureProductByMen)
 
     // Filter products by selected category
     const filterProductsByCty = products.filter((product) => product.category === productByCategory);

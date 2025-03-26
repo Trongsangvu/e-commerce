@@ -20,7 +20,7 @@ const routes: Routes = {
     login: '/login',
     register: '/register',
     products: '/products',
-    productDetail: '/product-detail',
+    productDetail: '/products/:id',
     profile: '/profile',
     checkout: '/checkout',
     shop: '/shop',

@@ -58,3 +58,12 @@ export const MENU_HEADER: MenuItems[] = [
     { id: 'about', title: 'About', path: '/about' },
     { id: 'contact', title: 'Contact', path: '/contact' },
 ]
+
+// Menu size
+export const MENU_SIZE = [
+    { id: 's', size: 'S' },
+    { id: 'm', size: 'M' },
+    { id: 'l', size: 'L' },
+    { id:'xl', size: 'XL' },
+    { id:'xxl', size: 'XXL' },
+]

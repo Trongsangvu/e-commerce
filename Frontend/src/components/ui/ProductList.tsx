@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
 import { productsList } from '../../services/productService';
 import images from '../../assets/images/images';
+
+import config from '../../config/config';
 
 export const ProductList: React.FC = () => {
     // Query data
@@ -26,32 +29,34 @@ export const ProductList: React.FC = () => {
             <div>
                 <ul className='grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center'>    
                     {filteredProducts && filteredProducts.map((product) => (
-                        <li 
-                            key={product._id} 
-                            className='mb-35 max-w-[270px] w-full mx-auto'
-                        >
-                            <div className='max-w-[270px] w-full overflow-hidden relative group'>
-                                <img 
-                                    className='max-w-[270px] w-full h-[335px] cursor-pointer transition-transform duration-500 group-hover:scale-110' 
-                                    src={product.imageUrl} 
-                                    alt={product.name} 
-                                />
-                                <a href="#" className='absolute flex justify-center hover:bg-[#222] hover:text-[white] hover:border-[#222] items-center mb-20 bottom-[-20px] left-1/2 -translate-x-1/2 bg-white rounded-[20px] min-w-[139px] h-[40px] font font-[Poppins-regular] text-[#333] text-[12px] opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-90'>
-                                    Quick view
-                                </a>
-                            </div>
-                            <div className='flex items-start justify-between pt-14 max-w-[270px]'>
-                                <div className='flex flex-col'>
-                                    <span className='text-[#999] pb-6 font font-[Poppins-regular] text-sm'>{product.name}</span>
-                                    <span className='text-[#666] font font-[Poppins-regular] text-sm'>{product.price}</span>
+                        <Link key={product._id} to={config.routes.productDetail.replace(':id', product._id)}>
+                            <li className='mb-35 max-w-[270px] w-full mx-auto'>
+                                <div className='max-w-[270px] w-full overflow-hidden relative group'>
+                                    <img 
+                                        className='max-w-[270px] w-full h-[335px] cursor-pointer transition-transform duration-500 group-hover:scale-110' 
+                                        src={product.imageUrl} 
+                                        alt={product.name} 
+                                    />
+                                    <button 
+                                        className='absolute cursor-pointer flex justify-center hover:bg-[#222] hover:text-[white] hover:border-[#222] items-center mb-20 bottom-[-20px] left-1/2 -translate-x-1/2 bg-white rounded-[20px] min-w-[139px] h-[40px] font font-[Poppins-regular] text-[#333] text-[12px] opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-90'
+                                        onClick={(e) => e.preventDefault()}
+                                    >
+                                        Quick view
+                                    </button>
                                 </div>
-                                <div className='flex'>
-                                    <a href="#">
-                                        <img className='w-18 h-16' src={images.heartIcon} alt="" />
-                                    </a>
+                                <div className='flex items-start justify-between pt-14 max-w-[270px]'>
+                                    <div className='flex flex-col'>
+                                        <span className='text-[#999] pb-6 font font-[Poppins-regular] text-sm'>{product.name}</span>
+                                        <span className='text-[#666] font font-[Poppins-regular] text-sm'>{product.price}</span>
+                                    </div>
+                                    <div className='flex'>
+                                        <button>
+                                            <img className='w-18 h-16' src={images.heartIcon} alt="" />
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        </Link>
                     ))}
                 </ul>
             </div>
