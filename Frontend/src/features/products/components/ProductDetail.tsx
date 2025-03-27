@@ -1,16 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Footer } from "../../../components/layout/Footer";
 import { Header } from "../../../components/layout/Header";
 import { getProductById } from "../../../services/productService";
 import { MENU_SIZE } from '../../../config/menu';
 import { SuggestProducts } from "../../../components/common/SuggestProducts";
+import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlide";
+import { AppDispatch, RootStore } from '../../../redux/store';
 
 export const ProductDetail: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
     const [isActive, setIsActive] = useState('');
     const { id } = useParams<{ id: string }>();
+
+    const upDateQuantity = useSelector((state: RootStore) => state.cart.quantity);
     
+    console.log(upDateQuantity);
     // Query data
     const { data: product, isLoading, error } = useQuery({
         queryKey: ['product', id],
@@ -25,6 +32,14 @@ export const ProductDetail: React.FC = () => {
     const handleActive = (size: string) => {
         setIsActive(size);
     };
+
+    const handleAddQuantity = () => {
+        dispatch(addQuantity());
+    } 
+
+    const handleDecreaseQuantity = () => {
+        dispatch(decreaseQuantity());
+    }
 
     return ( 
         <div>
@@ -47,7 +62,7 @@ export const ProductDetail: React.FC = () => {
                             <div className="py-25">
                                 <span className="font-[GucciSansPro-bold]">Color:</span>
                             </div>
-                            <div>
+                            <div className="mb-10">
                                 <span className="font-[GucciSansPro-bold]">Size:</span>
                                 <ul className="flex mt-10">
                                     {MENU_SIZE.map((item) => (
@@ -61,6 +76,29 @@ export const ProductDetail: React.FC = () => {
                                         </li>
                                     ))}
                                 </ul>
+                            </div>
+                            <div className="flex justify-center flex-col items-center mt-20">
+                                <div className="mb-10 flex">
+                                    <button 
+                                        className="w-[45px] h-[44px] cursor-pointer border border-[#ccc]"
+                                        onClick={handleDecreaseQuantity}
+                                    >-</button>
+                                    <input 
+                                        className="pl-10 bg-[#f7f7f7] w-[50px] h-[44px] text-center border-t border-b outline-none border-[#ccc]"
+                                        type="number"
+                                        value={upDateQuantity}
+                                        readOnly
+                                    />
+                                    <button 
+                                        className="w-[45px] h-[44px] cursor-pointer border border-[#ccc]"
+                                        onClick={handleAddQuantity}
+                                    >+</button>
+                                </div>
+                                <div>
+                                    <button 
+                                        className="cursor-pointer uppercase font-[GucciSansPro-bold] bg-[#6774d5] text-white py-10 px-20 rounded-[23px]"
+                                    >Add to cart</button>
+                                </div>
                             </div>
                         </div>
                     </div>
