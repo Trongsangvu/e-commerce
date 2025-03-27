@@ -74,4 +74,3 @@ export const ProductDetail: React.FC = () => {
      );
 }
 
-// ${isActive ? "text-[#6774d5] border-[#6774d5]": "text-[#ccc] border-[#ccc]"}
