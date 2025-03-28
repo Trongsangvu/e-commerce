@@ -8,14 +8,22 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
     async (data, { rejectWithValue }) => {
         try {
             const response = await loginService(data);
-            if(response.data) {
-                localStorage.setItem('user', JSON.stringify(response.data)); // Convert to string
+            const userData = response.data;
+            
+            // if(response.data) {
+            //     localStorage.setItem('user', JSON.stringify(response.data)); // Convert to string
+            // }
+            if(userData?.token) {
+                localStorage.setItem("token", userData.token);
+                localStorage.setItem("user", JSON.stringify(userData));
+            } else {
+                console.warn("No token received from API!");
             }
             
             console.log("Login successful:", {
                 email: data.email,
                 // password: data.password,
-                token: response.data.token
+                token: userData.token
             });
 
             return response.data;

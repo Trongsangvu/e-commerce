@@ -1,13 +1,24 @@
 import { AxiosResponse } from "axios";
 import HttpService from "./HttpService";
-import { AddToCartData, ICart, ICartResponse } from "../types/cart-type";
+import { AddToCartData, ICartResponse } from "../types/cart-type";
 
-const cart = (data: ICart): Promise<AxiosResponse<ICartResponse>> => {
-    return HttpService.get("/cart", { params: data });
+const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
+    const token = localStorage.getItem("token");
+    try {
+        const response = await HttpService.get<ICartResponse>("/carts", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch(error) {
+        console.error('Error fetching cart: ', error);
+        throw error;
+    }
 }
 
 const addToCart = (data: AddToCartData): Promise<AxiosResponse> => {
-    return HttpService.post("/cart/add", data);
+    return HttpService.post("/carts/add", { data });
 }
 
-export { addToCart, cart };
+export { addToCart, getCart };

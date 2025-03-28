@@ -6,7 +6,7 @@ import Checkout from '../pages/Checkout';
 import Profile from '../pages/Profile';
 import { ProductsList } from '../pages/ProductsList';
 import { ProductDetail } from '../features/products/components/ProductDetail';
-import Cart from '../pages/Cart';
+import { Cart } from '../pages/Cart';
 import { Shop } from '../pages/Shop';
 import { About } from '../pages/About';
 import { Blog } from "../pages/Blog";

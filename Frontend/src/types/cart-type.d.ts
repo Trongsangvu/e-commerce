@@ -1,9 +1,13 @@
 export interface ICartItem {
-    productId: string;
+    productId: {
+        _id: string;
+        quantity: number;
+        name: string;
+        price: number;
+        imageUrl: string;
+    };
     quantity: number;
-    name: string;
-    price: number;
-    imageUrl: string;
+    _id: string;
 }
 
 export interface AddToCartData {
@@ -17,6 +21,6 @@ export interface ICart {
     totalAmount: number;
 }
 
-export interface ICartResponse {
+export interface ICartResponse extends ICart {
     cart: ICart;
 }

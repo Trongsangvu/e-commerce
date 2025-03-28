@@ -53,7 +53,7 @@ export const categories = [
 export const MENU_HEADER: MenuItems[] = [
     { id: 'home', title: 'Home', path: '/' },
     { id: 'shop', title: 'Shop', path: '/shop' },
-    { id: 'features', title: 'Features', path: '/features' },
+    { id: 'features', title: 'Features', path: '/cart' },
     { id: 'blog', title: 'Blog', path: '/blog' },
     { id: 'about', title: 'About', path: '/about' },
     { id: 'contact', title: 'Contact', path: '/contact' },
