@@ -14,7 +14,7 @@ export const NextArrow = (props: { onClick?: () => void }) => {
     const { onClick } = props;
     return (
         <button 
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 p-10 cursor-pointer shadow-md z-10"
+            className="absolute right-25 top-1/2 -translate-y-1/2 bg-white/80 p-10 cursor-pointer shadow-md z-10"
             onClick={onClick}
         >
             →

@@ -7,7 +7,7 @@ import { Header } from "../../../components/layout/Header";
 import { getProductById } from "../../../services/productService";
 import { MENU_SIZE } from '../../../config/menu';
 import { SuggestProducts } from "../../../components/common/SuggestProducts";
-import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlide";
+import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlice";
 import { AppDispatch, RootStore } from '../../../redux/store';
 
 export const ProductDetail: React.FC = () => {

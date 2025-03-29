@@ -3,8 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { RootStore } from "../../redux/store";
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { NextArrow, PrevArrow } from "../customArrow/CustomArrow";
 
 export const SuggestProducts: React.FC = () => {
@@ -36,14 +34,14 @@ export const SuggestProducts: React.FC = () => {
 
     return (
         <div className="mt-[50px] pt-[50px]">
-            <h3 className="uppercase font-[GucciSansPro-medium] pb-10">you may also like</h3>
+            <h3 className="uppercase font-[GucciSansPro-medium] pb-10 pl-[45px]">you may also like</h3>
             <div className="mx-auto px-4 max-w-[1300px]">
                 <Slider {...settings}>
                     {filterProductsByCty.map((product, index) => (
                         <div key={index}>   
-                            <div className="group relative overflow-hidden min-h-[300px]">
+                            <div className="group relative overflow-hidden min-h-[300px] max-w-[230px]">
                                 <img 
-                                    className="w-[230px] h-[300px] cursor-pointer transition-transform duration-500 group-hover:scale-110" 
+                                    className="w-auto h-[300px] cursor-pointer transition-transform duration-500 group-hover:scale-110" 
                                     src={product.imageUrl} 
                                     alt={product.name} 
                                 />
