@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@charset "UTF-8";
+
 @import "tailwindcss";
-@import '../font/font.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
+@import '../font/font.css';
 
 :root {
     --font-primary: 'Montserrat', serif;
