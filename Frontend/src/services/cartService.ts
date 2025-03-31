@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import HttpService from "./HttpService";
-import { AddToCartData, ICartResponse } from "../types/cart-type";
+import { CartData, ICartResponse } from "../types/cart-type";
 
 const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
     const token = localStorage.getItem("token");
@@ -17,8 +17,27 @@ const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
     }
 }
 
-const addToCart = (data: AddToCartData): Promise<AxiosResponse> => {
+const addToCart = (data: CartData): Promise<AxiosResponse> => {
     return HttpService.post("/carts/add", { data });
 }
 
-export { addToCart, getCart };
+const updateCart = async (data: CartData): Promise<AxiosResponse> => {
+    const token = localStorage.getItem("token");
+    try {
+        const response = await HttpService.put(
+            "/carts/update", { data },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )   
+        return response;
+    }
+    catch(error) {
+        console.error('Error updating cart: ', error);
+        throw error;
+    }
+}
+
+export { addToCart, getCart, updateCart };

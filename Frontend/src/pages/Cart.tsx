@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addQuantity, decreaseQuantity } from "../redux/cart/cartSlice";
 import { AppDispatch, RootStore } from "../redux/store";
 import { setCartItems } from "../redux/cart/cartSlice";
+// import { updatedCartAction } from "../redux/cart/cartAction";
 import { useEffect } from "react";
 import { CartItem } from "../redux/cart/cartSlice";
 import { Footer } from '../components/layout/Footer';
@@ -45,6 +46,11 @@ export const Cart: React.FC = () => {
     const handleDecreaseQuantity = (index: number) => {
        dispatch(decreaseQuantity({ index })); 
     }
+
+    // // Handle update cart
+    // const handleUpdateCart = (productId, quantity) => {
+    //     dispatch(updatedCartAction(productId, quantity));
+    // }
 
     return ( 
         <div>
@@ -145,9 +151,9 @@ export const Cart: React.FC = () => {
                                             </div>
                                             <div className="pb-20">
                                                 <div className="mt-20 inline-block border border-[#e6e6e6] rounded-[22px] px-[30px] py-15 bg-[#f3f3f3]">
-                                                    <div className="font-[Poppins-medium] inline-block cursor-pointer uppercase text-[#333]">
-                                                        update totals
-                                                    </div>
+                                                    <button className="font-[Poppins-medium] inline-block cursor-pointer uppercase text-[#333]">
+                                                        update cart
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

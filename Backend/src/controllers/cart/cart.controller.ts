@@ -36,6 +36,53 @@ export const getCart = async (req: Request, res: Response, next: NextFunction): 
     }
 }
 
+export const updateCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+   try {
+    const { quantity } = req.body;
+    const { productId } = req.params;
+    const userId = req.user?.id;
+
+    if(!mongoose.Types.ObjectId.isValid(productId)) {
+        res.status(400).json({ message: "Invalid product ID" });
+        return;
+    }
+
+    const cart = await Cart.findOne({ userId });
+    if(!cart) {
+        res.status(404).json({ message: "Cart not found" });
+        return;
+    }
+
+    if(quantity === undefined || quantity <= 0) {
+        res.status(400).json({ message: "Quantity must be greater than 0" });
+        return;
+    }
+
+    // Update quantity
+    const updatedCart = await Cart.findOneAndUpdate(
+        { userId, "items.productId": productId },
+        { $set: { "items.productId": productId } },
+        { new: true }
+    ).populate("items.productId");
+
+    if(!updatedCart) {
+        res.status(404).json({ message: "Cart or Product not found" });
+        return;
+    }
+
+    // Clear Redis cache
+    try {
+        await RedisService.del(`cart:${userId}`);
+    } catch(error) {
+        console.log('Redis cache deletion failed:', error);
+    }
+
+    res.status(200).json({ message: "Cart updated successfully", cart: updatedCart });
+   } catch(error) {
+    next(error);
+   }
+}
+
 export const addToCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const { productId, quantity } = req.body;
@@ -68,7 +115,6 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
         next(error);
     }
 }
-
 export const removeFromCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         console.log("req.params:", req.params); // Debug

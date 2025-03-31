@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { updatedCartAction } from "./cartAction";
 
 export interface CartItem {
     productId: string;
@@ -7,10 +8,14 @@ export interface CartItem {
 
 interface CartState {
     items: CartItem[];
+    status: string;
+    error: string | null;
 }
 
 const initialState: CartState = {
     items: [],
+    status: 'idle',
+    error: null
 }
 
 const cartSlice = createSlice({
@@ -33,6 +38,23 @@ const cartSlice = createSlice({
         setCartItems(state, action: PayloadAction<CartItem[]>) {
             state.items = action.payload;
         }   
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(updatedCartAction.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(updatedCartAction.fulfilled, (state, action) => {
+                state.status = "Succeeded";
+                state.items = action.payload.items.map(item => ({
+                    productId: item.productId._id,
+                    quantity: item.quantity
+                }));
+            })
+            .addCase(updatedCartAction.rejected, (state, action) => {
+                state.status = "Failed";
+                state.error = action.error.message || "Something went wrong";
+            })
     }
 });
 

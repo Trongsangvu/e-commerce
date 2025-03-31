@@ -9,7 +9,7 @@ export interface ICartItem {
     _id: string;
 }
 
-export interface AddToCartData {
+export interface CartData {
     productId: string;
     quantity: number;
 }
