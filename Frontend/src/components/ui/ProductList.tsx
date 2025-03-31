@@ -38,7 +38,7 @@ export const ProductList: React.FC = () => {
                                         alt={product.name} 
                                     />
                                     <button 
-                                        className='absolute cursor-pointer flex justify-center hover:bg-[#222] hover:text-[white] hover:border-[#222] items-center mb-20 bottom-[-20px] left-1/2 -translate-x-1/2 bg-white rounded-[20px] min-w-[139px] h-[40px] font font-[Poppins-regular] text-[#333] text-[12px] opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-90'
+                                        className='absolute cursor-pointer flex justify-center hover:bg-[#222] hover:text-[white] hover:border-[#222] items-center mb-20 bottom-[-20px] left-1/2 -translate-x-1/2 bg-white rounded-[20px] min-w-[139px] h-[40px] font-[Poppins-regular] text-[#333] text-[12px] opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-90'
                                         onClick={(e) => e.preventDefault()}
                                     >
                                         Quick view
@@ -46,8 +46,8 @@ export const ProductList: React.FC = () => {
                                 </div>
                                 <div className='flex items-start justify-between pt-14 max-w-[270px]'>
                                     <div className='flex flex-col'>
-                                        <span className='text-[#999] pb-6 font font-[Poppins-regular] text-sm'>{product.name}</span>
-                                        <span className='text-[#666] font font-[Poppins-regular] text-sm'>{product.price}</span>
+                                        <span className='text-[#999] pb-6 font-[Poppins-regular] text-sm'>{product.name}</span>
+                                        <span className='text-[#666] font-[Poppins-regular] text-sm'>{product.price}</span>
                                     </div>
                                     <div className='flex'>
                                         <button>

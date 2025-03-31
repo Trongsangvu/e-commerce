@@ -10,6 +10,7 @@ import { Cart } from '../pages/Cart';
 import { Shop } from '../pages/Shop';
 import { About } from '../pages/About';
 import { Blog } from "../pages/Blog";
+import { Contact } from "../pages/Contact";
 
 // Public routes: no need sign in to access
 const publicRoutes = [
@@ -24,6 +25,7 @@ const publicRoutes = [
     { path: config.routes.shop, component: Shop },
     { path: config.routes.about, component: About },
     { path: config.routes.blog, component: Blog },
+    { path: config.routes.contact, component: Contact },
 ];
 
 // Private routes: need sign in to access

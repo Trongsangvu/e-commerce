@@ -46,14 +46,14 @@ const cartSlice = createSlice({
             })
             .addCase(updatedCartAction.fulfilled, (state, action) => {
                 state.status = "Succeeded";
-                state.items = action.payload.items.map(item => ({
+                state.items = action.payload.cart.items.map(item => ({
                     productId: item.productId._id,
                     quantity: item.quantity
                 }));
             })
             .addCase(updatedCartAction.rejected, (state, action) => {
                 state.status = "Failed";
-                state.error = action.error.message || "Something went wrong";
+                state.error = action.payload as string;
             })
     }
 });

@@ -38,46 +38,55 @@ export const getCart = async (req: Request, res: Response, next: NextFunction): 
 
 export const updateCart = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
    try {
-    const { quantity } = req.body;
-    const { productId } = req.params;
-    const userId = req.user?.id;
+        const { productId } = req.params;
+        const { quantity } = req.body;
+        const userId = req.user?.id;
 
-    if(!mongoose.Types.ObjectId.isValid(productId)) {
-        res.status(400).json({ message: "Invalid product ID" });
-        return;
-    }
+        // Check out productId is valid
+        if(!mongoose.Types.ObjectId.isValid(productId)) {
+            res.status(400).json({ message: "Invalid product ID" });
+            return;
+        }
 
-    const cart = await Cart.findOne({ userId });
-    if(!cart) {
-        res.status(404).json({ message: "Cart not found" });
-        return;
-    }
+        // Check out quantity is valid
+        if(quantity === undefined || quantity <= 0) {
+            res.status(400).json({ message: "Quantity must be greater than 0" });
+            return;
+        }
 
-    if(quantity === undefined || quantity <= 0) {
-        res.status(400).json({ message: "Quantity must be greater than 0" });
-        return;
-    }
+        // Check out user's cart
+        const cart = await Cart.findOne({ userId });
+        if(!cart) {
+            res.status(404).json({ message: "Cart not found" });
+            return;
+        }
+        
 
-    // Update quantity
-    const updatedCart = await Cart.findOneAndUpdate(
-        { userId, "items.productId": productId },
-        { $set: { "items.productId": productId } },
-        { new: true }
-    ).populate("items.productId");
+        // Find the item index in the cart - does it exist?
+        const itemIndex = cart.items.findIndex(
+            item => item.productId.toString() === productId
+        );
 
-    if(!updatedCart) {
-        res.status(404).json({ message: "Cart or Product not found" });
-        return;
-    }
+        if (itemIndex === -1) {
+            res.status(404).json({ message: "Product not found in cart" });
+            return;
+        }
 
-    // Clear Redis cache
-    try {
-        await RedisService.del(`cart:${userId}`);
-    } catch(error) {
-        console.log('Redis cache deletion failed:', error);
-    }
+        // Update the quantity directly
+        cart.items[itemIndex].quantity = quantity;
+        await cart.save();
 
-    res.status(200).json({ message: "Cart updated successfully", cart: updatedCart });
+        const updatedCart = await Cart.findOne({ userId }).populate("items.productId");
+
+
+        // Clear Redis cache
+        try {
+            await RedisService.del(`cart:${userId}`);
+        } catch(error) {
+            console.log('Redis cache deletion failed:', error);
+        }
+
+        res.status(200).json({ message: "Cart updated successfully", cart: updatedCart });
    } catch(error) {
     next(error);
    }

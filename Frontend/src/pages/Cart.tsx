@@ -1,16 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCart } from "../services/cartService";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuantity, decreaseQuantity } from "../redux/cart/cartSlice";
 import { AppDispatch, RootStore } from "../redux/store";
+import { updatedCartAction } from "../redux/cart/cartAction";
+import { getCart } from "../services/cartService";
 import { setCartItems } from "../redux/cart/cartSlice";
-// import { updatedCartAction } from "../redux/cart/cartAction";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { CartItem } from "../redux/cart/cartSlice";
 import { Footer } from '../components/layout/Footer';
 import images from "../assets/images/images";
+import config from "../config/config";
 
 export const Cart: React.FC = () => {
+    const [selectedValue, setSelectedValue] = useState('option1');
+
     const dispatch = useDispatch<AppDispatch>();
     const updatedQuantity = useSelector((state: RootStore) => state.cart.items);
 
@@ -37,28 +41,24 @@ export const Cart: React.FC = () => {
     const cartItems = data?.data?.items ?? [];
     console.log("Cart Items:", cartItems);
 
-    // Handle add quantity
-    const handleAddQuantity = (index: number) => {
-        dispatch(addQuantity({ index }));
-    }
+    // Handle update cart
+    const handleUpdateCart = (index: number, type: 'increase' | 'decrease') => {
+        const item = cartItems[index];
+        if(!item) return;
 
-    // Handle decrease quantity
-    const handleDecreaseQuantity = (index: number) => {
-       dispatch(decreaseQuantity({ index })); 
-    }
+        const newQuantity = type === 'increase' ? item.quantity + 1 : item.quantity - 1;
 
-    // // Handle update cart
-    // const handleUpdateCart = (productId, quantity) => {
-    //     dispatch(updatedCartAction(productId, quantity));
-    // }
+        dispatch(type === 'increase' ? addQuantity({ index }) : decreaseQuantity({ index }));
+        dispatch(updatedCartAction({ productId: item.productId._id, quantity: newQuantity }));
+    }
 
     return ( 
         <div>
             <div className="mt-[90px] pb-[85px]">
-                <div className="flex items-center justify-center max-w-[680px] mb-[20px]">
-                    <a className="pl-[173px] font-[Poppins-regular] text-sm text-[#555]" href="">
-                        Home
-                    </a>
+                <div className="flex items-center justify-start max-w-[680px] mb-[20px]">
+                    <Link to={config.routes.home}>
+                        <span className="pl-[150px] font-[Poppins-regular] text-sm text-[#555]">Home</span>
+                    </Link>
                     <span>
                         <img className="w-[20px] h-[30px]" src={images.angleRight} alt="" />
                     </span>
@@ -94,7 +94,7 @@ export const Cart: React.FC = () => {
                                                 <div className="flex">
                                                     <button 
                                                         className="w-[45px] h-[44px] cursor-pointer border border-[#ccc]"
-                                                        onClick={() => handleDecreaseQuantity(index)}
+                                                        onClick={() => handleUpdateCart(index, "decrease")}
                                                     >-</button>
                                                     <input 
                                                         className="bg-[#f7f7f7] w-[50px] h-[44px] text-center pl-10 border-t border-b outline-none border-[#ccc]"
@@ -104,7 +104,7 @@ export const Cart: React.FC = () => {
                                                     />
                                                     <button 
                                                         className="w-[45px] h-[44px] cursor-pointer border border-[#ccc]"
-                                                        onClick={() => handleAddQuantity(index)}
+                                                        onClick={() => handleUpdateCart(index, "increase")}
                                                     >+</button>
                                                 </div>
                                             </td>
@@ -121,7 +121,7 @@ export const Cart: React.FC = () => {
                             <div>
                                 <div className="pb-13 border-b border-dashed border-[#d9d9d9]">
                                     <span className="font-[Poppins-regular] text-[#333]">Total: </span>
-                                    <span className="font-[Poppins-regular]"> 
+                                    <span className="font-[Poppins-regular] ml-[45px]"> 
                                         ${cartItems.reduce((total, item) => {
                                             const price = parseFloat(String(item.productId?.price).replace(/[^0-9.]/g, "")) || 0;
                                             return total + (price * item.quantity);
@@ -139,11 +139,16 @@ export const Cart: React.FC = () => {
                                         <div className="pt-20">
                                             <span className="font-[Poppins-regular] uppercase text-[#555]">calculate shipping</span>
                                             <div className="relative">
-                                                <select name="time" className="mt-20 mb-20 appearance-none font-[Poppins-regular] text-[#555] w-[190px] h-[47px] pl-[20px] py-[10px] border border-gray-300 bg-white rounded-[4px] focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                                    <option className="font-[Poppins-regular] text-[#555]" disabled selected>Select a country...</option>
-                                                    <option className="font-[Poppins-regular] text-[#555]">Vietnam</option>
-                                                    <option className="font-[Poppins-regular] text-[#555]">US</option>
-                                                    <option className="font-[Poppins-regular] text-[#555]">Australia</option>
+                                                <select 
+                                                    value={selectedValue} 
+                                                    onChange={(e) => setSelectedValue(e.target.value)}
+                                                    name="time" 
+                                                    className="mt-20 mb-20 appearance-none font-[Poppins-regular] text-[#555] w-[190px] h-[47px] pl-[20px] py-[10px] border border-gray-300 bg-white rounded-[4px] focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                                >
+                                                    <option value="option1"  className="font-[Poppins-regular] text-[#555]"  disabled>Select a country...</option>
+                                                    <option value="option2"  className="font-[Poppins-regular] text-[#555]">Vietnam</option>
+                                                    <option value="option3"  className="font-[Poppins-regular] text-[#555]">US</option>
+                                                    <option value="option4"  className="font-[Poppins-regular] text-[#555]">Australia</option>
                                                 </select>
                                                 <span className="absolute inset-y-0 right-[90px] flex items-center px-2 pointer-events-none">
                                                     <img className="w-[15px] h-[15px]" src={images.angleDown} alt="angleDown" />
@@ -151,8 +156,11 @@ export const Cart: React.FC = () => {
                                             </div>
                                             <div className="pb-20">
                                                 <div className="mt-20 inline-block border border-[#e6e6e6] rounded-[22px] px-[30px] py-15 bg-[#f3f3f3]">
-                                                    <button className="font-[Poppins-medium] inline-block cursor-pointer uppercase text-[#333]">
-                                                        update cart
+                                                    <button 
+                                                        className="font-[Poppins-medium] inline-block cursor-pointer uppercase text-[#333]"
+
+                                                    >
+                                                        update totals
                                                     </button>
                                                 </div>
                                             </div>

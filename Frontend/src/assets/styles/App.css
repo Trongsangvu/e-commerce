@@ -1,13 +1,19 @@
-@charset "UTF-8";
+/* @charset "UTF-8"; */
 
+/* Correct Tailwind imports */
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* External font imports must follow immediately */
+/* @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'); */
 
+/* Third-party styles */
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
-@import '../font/font.css';
 
+/* Custom font styles */
+@import "../font/font.css";
+
+/* CSS Variables */
 :root {
     --font-primary: 'Montserrat', serif;
     --font-family: 'GucciSansPro', sans-serif;
@@ -17,12 +23,10 @@
     --color-text-hover: #6774d5;
 }
 
-*{
-    /* margin: 0; */
+* {
     box-sizing: border-box;
 }
 
 /* .app {
     height: 1800px;
 } */
-
