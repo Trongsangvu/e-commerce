@@ -32,7 +32,7 @@ const cartSlice = createSlice({
         },
         setCartItems(state, action: PayloadAction<CartItem[]>) {
             state.items = action.payload;
-        }
+        }   
     }
 });
 

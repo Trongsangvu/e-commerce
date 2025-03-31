@@ -59,7 +59,7 @@ export const Cart: React.FC = () => {
                     <span className="font-[Poppins-regular] text-sm text-[#999]">Shopping Cart</span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr]">
-                    <div className="pl-[250px]">
+                    <div className="pl-[150px]">
                         <table className="min-w-[680px]">
                             <thead className="border border-[#ccc]">
                                 <tr>
@@ -109,17 +109,53 @@ export const Cart: React.FC = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div>
-                        <h3 className="uppercase font-[Poppins-bold]">cart totals</h3>
-                        <div>
+                    <div className="border border-[#e6e6e6] mr-[40px] w-[470px]">
+                        <div className="px-[40px] py-[30px] h-auto">
+                            <h3 className="uppercase font-[Poppins-bold] pb-[30px]">cart totals</h3>
                             <div>
-                                <span className="font-[Poppins-regular] text-[#333]">Total: </span>
-                                <span className="font-[Poppins-regular]"> 
-                                    ${cartItems.reduce((total, item) => {
-                                        const price = parseFloat(String(item.productId?.price).replace(/[^0-9.]/g, "")) || 0;
-                                        return total + (price * item.quantity);
-                                    }, 0).toFixed(2)}
-                                </span>
+                                <div className="pb-13 border-b border-dashed border-[#d9d9d9]">
+                                    <span className="font-[Poppins-regular] text-[#333]">Total: </span>
+                                    <span className="font-[Poppins-regular]"> 
+                                        ${cartItems.reduce((total, item) => {
+                                            const price = parseFloat(String(item.productId?.price).replace(/[^0-9.]/g, "")) || 0;
+                                            return total + (price * item.quantity);
+                                        }, 0).toFixed(2)}
+                                    </span>
+                                </div>
+                                <div className="flex flex-row gap-20 pt-15 pb-[30px] border-b border-dashed border-[#d9d9d9]">
+                                    <div className="w-[1/3]">
+                                        <span className="font-[Poppins-regular]">Shipping:</span>
+                                    </div>
+                                    <div className="w-2/3">
+                                        <p className="font-[Poppins-regular] text-[#888]">
+									        There are no shipping methods available. Please double check your address, or contact us if you need any help.
+                                        </p>
+                                        <div className="pt-20">
+                                            <span className="font-[Poppins-regular] uppercase text-[#555]">calculate shipping</span>
+                                            <div className="relative">
+                                                <select name="time" className="mt-20 mb-20 appearance-none font-[Poppins-regular] text-[#555] w-[190px] h-[47px] pl-[20px] py-[10px] border border-gray-300 bg-white rounded-[4px] focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                    <option className="font-[Poppins-regular] text-[#555]" disabled selected>Select a country...</option>
+                                                    <option className="font-[Poppins-regular] text-[#555]">Vietnam</option>
+                                                    <option className="font-[Poppins-regular] text-[#555]">US</option>
+                                                    <option className="font-[Poppins-regular] text-[#555]">Australia</option>
+                                                </select>
+                                                <span className="absolute inset-y-0 right-[90px] flex items-center px-2 pointer-events-none">
+                                                    <img className="w-[15px] h-[15px]" src={images.angleDown} alt="angleDown" />
+                                                </span>
+                                            </div>
+                                            <div className="pb-20">
+                                                <div className="mt-20 inline-block border border-[#e6e6e6] rounded-[22px] px-[30px] py-15 bg-[#f3f3f3]">
+                                                    <div className="font-[Poppins-medium] inline-block cursor-pointer uppercase text-[#333]">
+                                                        update totals
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="text-center mt-20">
+                                    <button className="text-white cursor-pointer bg-[#222] rounded-[22px] py-15 px-[30px] uppercase">proceed to checkout</button>
+                                </div>
                             </div>
                         </div>
                     </div>
