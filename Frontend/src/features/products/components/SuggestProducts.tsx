@@ -34,7 +34,7 @@ export const SuggestProducts: React.FC = () => {
 
     return (
         <div className="mt-[50px] pt-[50px]">
-            <h3 className="uppercase font-[GucciSansPro-medium] pb-10 pl-[45px]">you may also like</h3>
+            <h3 className="uppercase font-[GucciSansPro-medium] pb-10 pl-[12px]">you may also like</h3>
             <div className="mx-auto px-4 max-w-[1300px]">
                 <Slider {...settings}>
                     {filterProductsByCty.map((product, index) => (

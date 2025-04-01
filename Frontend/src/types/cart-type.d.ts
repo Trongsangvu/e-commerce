@@ -9,6 +9,11 @@ export interface ICartItem {
     _id: string;
 }
 
+export interface CartItem {
+    productId: string;
+    quantity: number;
+}
+
 export interface CartData {
     productId: string;
     quantity: number;
@@ -16,8 +21,8 @@ export interface CartData {
 
 export interface ICart {
     items: ICartItem[];
-    totalQuantity: number;
-    totalAmount: number;
+    totalQuantity?: number;
+    totalAmount?: number;
 }
 
 export interface ICartResponse extends ICart {

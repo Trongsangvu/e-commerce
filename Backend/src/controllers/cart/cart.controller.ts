@@ -61,7 +61,6 @@ export const updateCart = async (req: Request, res: Response, next: NextFunction
             return;
         }
 
-
         // Find the item index in the cart - does it exist?
         const itemIndex = cart.items.findIndex(
             item => item.productId.toString() === productId
@@ -96,6 +95,12 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
     try {
         const { productId, quantity } = req.body;
         const userId = req.user?.id;
+
+        // Validate required fields
+        if (!productId || !quantity) {
+            res.status(400).json({ message: "ProductId and quantity are required" });
+            return;
+        }
 
         let cart = await Cart.findOne({ userId });
         if(!cart) {

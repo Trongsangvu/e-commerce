@@ -7,7 +7,6 @@ import { getCart } from "../../../services/cart/cartService";
 import { setCartItems } from "../../../redux/cart/cartSlice";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { CartItem } from "../../../redux/cart/cartSlice";
 import { Footer } from '../../../components/layout/Footer';
 import images from "../../../assets/images/images";
 import config from "../../../config/config";
@@ -20,17 +19,14 @@ export const Cart: React.FC = () => {
     const updatedQuantity = useSelector((state: RootStore) => state.cart.items);
 
     // Query data
-    const { data, isLoading, error } = useQuery({
+    const { data, isLoading, error, refetch } = useQuery({
         queryKey: ['cart'],
         queryFn: getCart,
     });
 
     useEffect(() => {
         if (data?.data?.items) {
-            const formattedItems: CartItem[] = data.data.items.map((item: ICartItem) => ({
-                productId: item.productId._id,
-                quantity: item.quantity,
-            }));
+            const formattedItems: ICartItem[] = data.data.items
             dispatch(setCartItems(formattedItems));
         }
     }, [data, dispatch]);
@@ -43,14 +39,22 @@ export const Cart: React.FC = () => {
     console.log("Cart Items:", cartItems);
 
     // Handle update cart
-    const handleUpdateCart = (index: number, type: 'increase' | 'decrease') => {
+    const handleUpdateCart = async (index: number, type: 'increase' | 'decrease') => {
         const item = cartItems[index];
         if(!item) return;
 
+        if(type === 'decrease' && item.quantity <= 1) return;
+
         const newQuantity = type === 'increase' ? item.quantity + 1 : item.quantity - 1;
 
-        dispatch(type === 'increase' ? addQuantity({ index }) : decreaseQuantity({ index }));
-        dispatch(updatedCartAction({ productId: item.productId._id, quantity: newQuantity }));
+        try {
+            dispatch(type === 'increase' ? addQuantity({ index }) : decreaseQuantity({ index }));
+            await dispatch(updatedCartAction({ productId: item.productId._id, quantity: newQuantity })).unwrap();
+
+            await refetch();
+        } catch (error) {
+            console.error('Error updating cart:', error); 
+        }
     }
 
     return ( 

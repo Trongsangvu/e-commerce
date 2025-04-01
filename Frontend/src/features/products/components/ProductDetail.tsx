@@ -7,17 +7,21 @@ import { Header } from "../../../components/layout/Header";
 import { getProductById } from "../../../services/product/productService";
 import { MENU_SIZE } from '../../../config/menu';
 import { SuggestProducts } from "./SuggestProducts";
-import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlice";
+// import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlice";
 import { AppDispatch, RootStore } from '../../../redux/store';
+import { addToCartAction } from "../../../redux/cart/cartAction";
 
 export const ProductDetail: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [isActive, setIsActive] = useState('');
+    const [quantity, setQuantity] = useState(1);
     const { id } = useParams<{ id: string }>();
 
     const updateQuantity = useSelector((state: RootStore) => {
-        const index = 0;
-        return state.cart.items[index]?.quantity || 0;
+        const cartItem = state.cart.items.find(item => {
+            return item.productId._id === id;
+        })
+        return cartItem?.quantity || 1;
     });
     
     console.log(updateQuantity);
@@ -36,12 +40,31 @@ export const ProductDetail: React.FC = () => {
         setIsActive(size);
     };
 
+    // const handleAddQuantity = () => {
+        //     dispatch(addQuantity({ index: 0 }));
+        // } 
+        // const handleDecreaseQuantity = () => {
+            //     dispatch(decreaseQuantity({ index: 0 }));
+            // }
+            
+    // Handle add quantity
     const handleAddQuantity = () => {
-        dispatch(addQuantity({ index: 0 }));
+        setQuantity(prev => prev + 1);
     } 
-
+    
+    // Handle decrease quantity
     const handleDecreaseQuantity = () => {
-        dispatch(decreaseQuantity({ index: 0 }));
+        if (quantity > 1) {
+            setQuantity(prev => prev - 1);
+        }
+    }
+    // Handle add product to cart
+    const addProductToCart = () => {
+        if(!id) return;
+        dispatch(addToCartAction({ 
+            productId: id!,
+            quantity: updateQuantity
+        }))
     }
 
     return ( 
@@ -89,7 +112,7 @@ export const ProductDetail: React.FC = () => {
                                     <input 
                                         className="pl-10 bg-[#f7f7f7] w-[50px] h-[44px] text-center border-t border-b outline-none border-[#ccc]"
                                         type="number"
-                                        value={updateQuantity}
+                                        value={quantity}
                                         readOnly
                                     />
                                     <button 
@@ -100,6 +123,7 @@ export const ProductDetail: React.FC = () => {
                                 <div>
                                     <button 
                                         className="cursor-pointer uppercase font-[GucciSansPro-bold] bg-[#6774d5] text-white py-10 px-20 rounded-[23px]"
+                                        onClick={addProductToCart}
                                     >Add to cart</button>
                                 </div>
                             </div>

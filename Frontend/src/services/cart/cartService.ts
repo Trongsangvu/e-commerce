@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import HttpService from "../HttpService";
 import { CartData, ICartResponse } from "../../types/cart-type";
 
@@ -12,13 +12,31 @@ const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
         });
         return response;
     } catch(error) {
+        if (error instanceof AxiosError && error?.response?.status === 403) {
+            console.error('Authentication required');
+        }
         console.error('Error fetching cart: ', error);
         throw error;
     }
 }
 
-const addToCart = (data: CartData): Promise<AxiosResponse> => {
-    return HttpService.post("/carts/add", { data });
+const addToCart = async (data: CartData): Promise<AxiosResponse> => {
+    const token = localStorage.getItem("token");
+    try {
+        const response = HttpService.post(
+            "/carts/add", { productId: data.productId, quantity: data.quantity },
+            { 
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        console.log('Sending cart data:', { productId: data.productId, quantity: data.quantity });
+        return response;
+    } catch(error) {
+        console.error("Error add to cart: ", error);
+        throw error;
+    }
 }
 
 const updateCart = async (data: CartData): Promise<AxiosResponse> => {

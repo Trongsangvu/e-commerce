@@ -59,7 +59,13 @@ class HttpService {
 
     // Method POST
     public post<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-        return this.axiosInstance.post<T>(url, data, config);
+        return this.axiosInstance.post<T>(url, data, {
+            ...config,
+            headers: {
+                ...config?.headers,
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     // Method PUt 
