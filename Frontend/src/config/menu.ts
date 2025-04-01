@@ -5,7 +5,7 @@ export interface MenuItems {
     delay?: number,
 }
 
-// Menu Sidebar
+// Menu Sidebar 1
 export const MENU_ITEMS: MenuItems[] = [
     { title: 'Gifts' ,},
     { title: 'New In' },
@@ -19,7 +19,7 @@ export const MENU_ITEMS: MenuItems[] = [
     { title: 'Fragrances & Make-Up' },
 ];
 
-// Menu Sidebar
+// Menu Sidebar 2
 export const MENU_ITEMS_2: MenuItems[] = [
     { title: 'Gucci Services' },
     { title: 'World of Gucci' },

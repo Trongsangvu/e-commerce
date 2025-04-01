@@ -60,7 +60,7 @@ export const updateCart = async (req: Request, res: Response, next: NextFunction
             res.status(404).json({ message: "Cart not found" });
             return;
         }
-        
+
 
         // Find the item index in the cart - does it exist?
         const itemIndex = cart.items.findIndex(

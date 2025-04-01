@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootStore } from '../../redux/store';
-import { productsList } from '../../services/productService';
+import { productsList } from '../../services/product/productService';
 import images from '../../assets/images/images';
-
+import { Product } from '../../types/product-type';
 import config from '../../config/config';
 
 export const ProductList: React.FC = () => {
@@ -14,12 +14,12 @@ export const ProductList: React.FC = () => {
         queryFn: productsList
     });
 
-    const selectedCategory = useSelector((state: RootStore) => state.category.selectedCategory)
+    const selectedCategory = useSelector((state: RootStore) => state.category.selectedCategory);
 
     // Filter products by categories
     const filteredProducts = selectedCategory === "all"
         ? products
-        : products.filter((product) => product.category === selectedCategory);
+        : products.filter((product: Product) => product.category === selectedCategory);
 
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error fetching products</p>;
@@ -28,7 +28,7 @@ export const ProductList: React.FC = () => {
         <>
             <div>
                 <ul className='grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center'>    
-                    {filteredProducts && filteredProducts.map((product) => (
+                    {filteredProducts && filteredProducts.map((product: Product) => (
                         <Link key={product._id} to={config.routes.productDetail.replace(':id', product._id)}>
                             <li className='mb-35 max-w-[270px] w-full mx-auto'>
                                 <div className='max-w-[270px] w-full overflow-hidden relative group'>

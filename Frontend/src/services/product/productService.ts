@@ -1,5 +1,5 @@
-import HttpService from './HttpService';
-import { IProductResponse, Product } from '../types/product-type';
+import HttpService from '../HttpService';
+import { IProductResponse, Product } from '../../types/product-type';
 
 // Get all products
 export const productsList = async (): Promise<IProductResponse> => {

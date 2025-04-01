@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import config from '../../config/config';
-import images from '../../assets/images/images';
+import config from '../../../config/config';
+import images from '../../../assets/images/images';
 
 export const Banner:React.FC = () => {
     return (

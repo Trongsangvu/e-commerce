@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Banner } from '../features/home/Banner';
-import { Container }  from '../features/home/Container';
+import { Banner } from '../features/home/component/Banner';
+import { Container }  from '../features/home/component/Container';
 import { Footer } from '../components/layout/Footer';
 import { ProductList }  from '../components/ui/ProductList';
 import images from '../assets/images/images';

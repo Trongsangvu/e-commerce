@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-import HttpService from "./HttpService";
-import { CartData, ICartResponse } from "../types/cart-type";
+import HttpService from "../HttpService";
+import { CartData, ICartResponse } from "../../types/cart-type";
 
 const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
     const token = localStorage.getItem("token");

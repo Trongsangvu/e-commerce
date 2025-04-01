@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import images from "../../assets/images/images";
-import { categories } from "../../config/menu";
-import { AppDispatch } from '../../redux/store';
-import { RootStore } from '../../redux/store';
-import { setCategory } from '../../redux/filterProducts/filterProductSlice';
+import images from "../../../assets/images/images";
+import { categories } from "../../../config/menu";
+import { AppDispatch } from '../../../redux/store';
+import { RootStore } from '../../../redux/store';
+import { setCategory } from '../../../redux/filterProducts/filterProductSlice';
 
 interface ContainerProps {
     showTitle?: boolean;

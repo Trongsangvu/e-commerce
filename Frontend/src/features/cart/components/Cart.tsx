@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { addQuantity, decreaseQuantity } from "../redux/cart/cartSlice";
-import { AppDispatch, RootStore } from "../redux/store";
-import { updatedCartAction } from "../redux/cart/cartAction";
-import { getCart } from "../services/cartService";
-import { setCartItems } from "../redux/cart/cartSlice";
+import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlice";
+import { AppDispatch, RootStore } from "../../../redux/store";
+import { updatedCartAction } from "../../../redux/cart/cartAction";
+import { getCart } from "../../../services/cart/cartService";
+import { setCartItems } from "../../../redux/cart/cartSlice";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { CartItem } from "../redux/cart/cartSlice";
-import { Footer } from '../components/layout/Footer';
-import images from "../assets/images/images";
-import config from "../config/config";
+import { CartItem } from "../../../redux/cart/cartSlice";
+import { Footer } from '../../../components/layout/Footer';
+import images from "../../../assets/images/images";
+import config from "../../../config/config";
+import { ICartItem } from "../../../types/cart-type";
 
 export const Cart: React.FC = () => {
     const [selectedValue, setSelectedValue] = useState('option1');
@@ -26,7 +27,7 @@ export const Cart: React.FC = () => {
 
     useEffect(() => {
         if (data?.data?.items) {
-            const formattedItems: CartItem[] = data.data.items.map((item) => ({
+            const formattedItems: CartItem[] = data.data.items.map((item: ICartItem) => ({
                 productId: item.productId._id,
                 quantity: item.quantity,
             }));
@@ -77,7 +78,7 @@ export const Cart: React.FC = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {cartItems.map((cart, index) => {
+                                {cartItems.map((cart:ICartItem, index: number) => {
                                     let priceString = String(cart.productId?.price); 
                                     priceString = priceString.replace(/[^0-9.]/g, "");  // Ensure price is a number
                                     const price = parseFloat(priceString) || 0; // Convert to number
@@ -122,7 +123,7 @@ export const Cart: React.FC = () => {
                                 <div className="pb-13 border-b border-dashed border-[#d9d9d9]">
                                     <span className="font-[Poppins-regular] text-[#333]">Total: </span>
                                     <span className="font-[Poppins-regular] ml-[45px]"> 
-                                        ${cartItems.reduce((total, item) => {
+                                        ${cartItems.reduce((total: number, item: ICartItem) => {
                                             const price = parseFloat(String(item.productId?.price).replace(/[^0-9.]/g, "")) || 0;
                                             return total + (price * item.quantity);
                                         }, 0).toFixed(2)}

@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Footer } from "../../../components/layout/Footer";
 import { Header } from "../../../components/layout/Header";
-import { getProductById } from "../../../services/productService";
+import { getProductById } from "../../../services/product/productService";
 import { MENU_SIZE } from '../../../config/menu';
-import { SuggestProducts } from "../../../components/common/SuggestProducts";
+import { SuggestProducts } from "./SuggestProducts";
 import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlice";
 import { AppDispatch, RootStore } from '../../../redux/store';
 
@@ -15,9 +15,12 @@ export const ProductDetail: React.FC = () => {
     const [isActive, setIsActive] = useState('');
     const { id } = useParams<{ id: string }>();
 
-    const upDateQuantity = useSelector((state: RootStore) => state.cart.quantity);
+    const updateQuantity = useSelector((state: RootStore) => {
+        const index = 0;
+        return state.cart.items[index]?.quantity || 0;
+    });
     
-    console.log(upDateQuantity);
+    console.log(updateQuantity);
     // Query data
     const { data: product, isLoading, error } = useQuery({
         queryKey: ['product', id],
@@ -34,11 +37,11 @@ export const ProductDetail: React.FC = () => {
     };
 
     const handleAddQuantity = () => {
-        dispatch(addQuantity());
+        dispatch(addQuantity({ index: 0 }));
     } 
 
     const handleDecreaseQuantity = () => {
-        dispatch(decreaseQuantity());
+        dispatch(decreaseQuantity({ index: 0 }));
     }
 
     return ( 
@@ -86,7 +89,7 @@ export const ProductDetail: React.FC = () => {
                                     <input 
                                         className="pl-10 bg-[#f7f7f7] w-[50px] h-[44px] text-center border-t border-b outline-none border-[#ccc]"
                                         type="number"
-                                        value={upDateQuantity}
+                                        value={updateQuantity}
                                         readOnly
                                     />
                                     <button 

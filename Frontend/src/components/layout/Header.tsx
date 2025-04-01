@@ -7,7 +7,7 @@ import { MenuProfile } from '../common/MenuProfile';
 import images from '../../assets/images/images';
 import { MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
-import { Search } from '../common/Search';
+import { Search } from '../../features/search/components/Search';
 import { AppDispatch } from '../../redux/store';
 import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
 

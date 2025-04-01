@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { debounce } from 'lodash';
-import { ProductItem } from '../ui/ProductItem';
+import { ProductItem } from '../../../components/ui/ProductItem';
 import { useQuery } from '@tanstack/react-query';
-import { searchProducts } from '../../services/searchService';
-import { SearchProductIcon } from '../../assets/images/icons/icons';
+import { searchProducts } from '../../../services/search/searchService';
+import { SearchProductIcon } from '../../../assets/images/icons/icons';
+import { Product } from "../../../types/product-type";
 
 interface SearchProps {
     isSearchVisible: boolean;
@@ -87,7 +88,7 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                     <p className='text-center font font-semibold'>No products found</p>
                 ) : <div className='flex justify-between'>
                         <ul className="list-none p-0 m-0">
-                            {products.map((product) => (
+                            {products.map((product: Product) => (
                                 <li key={product._id} className="cursor-pointer text-sm mb-18 font-medium list-none underline underline-offset-5">
                                     <a href="#" className='flex items-center gap-5'>
                                         <span>
@@ -101,7 +102,7 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                             ))}
                         </ul>
                         <ul className='grid grid-cols-3 gap-10 p-0 m-0 list-none'>
-                            {products.map((product) => (
+                            {products.map((product: Product) => (
                                 <li key={product._id} className='mb-16 ml-16 cursor-pointer'>
                                     <ProductItem product={product} />
                                 </li>

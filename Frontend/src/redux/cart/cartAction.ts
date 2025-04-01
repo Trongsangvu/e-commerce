@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { CartData, ICartResponse } from '../../types/cart-type';
-import { updateCart } from '../../services/cartService';
+import { updateCart } from '../../services/cart/cartService';
 import { AxiosError } from 'axios';
 
 

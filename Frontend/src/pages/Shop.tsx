@@ -1,6 +1,6 @@
 import { Header } from "../components/layout/Header"
 import { Footer } from "../components/layout/Footer";
-import { Container } from "../features/home/Container";
+import { Container } from "../features/home/component/Container";
 import { ProductList } from '../components/ui/ProductList';
 
 export const Shop: React.FC = () => {

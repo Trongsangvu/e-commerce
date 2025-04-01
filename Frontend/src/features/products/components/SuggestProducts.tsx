@@ -1,9 +1,9 @@
-import { productsList } from "../../services/productService";
+import { productsList } from "../../../services/product/productService";
 import { useQuery } from "@tanstack/react-query";
-import { RootStore } from "../../redux/store";
+import { RootStore } from "../../../redux/store";
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
-import { NextArrow, PrevArrow } from "../customArrow/CustomArrow";
+import { NextArrow, PrevArrow } from "../../../components/customArrow/CustomArrow";
 
 export const SuggestProducts: React.FC = () => {
     const settings = {

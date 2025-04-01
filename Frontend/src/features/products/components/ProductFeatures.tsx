@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { RootStore } from "../../../redux/store";
-import { productsList } from "../../../services/productService";
+import { productsList } from "../../../services/product/productService";
 
 export const ProductFeatures: React.FC = () => {
     // Query data
