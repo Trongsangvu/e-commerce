@@ -5,6 +5,7 @@ import { Footer } from '../components/layout/Footer';
 import { ProductList }  from '../components/ui/ProductList';
 import images from '../assets/images/images';
 
+
 export const Home:React.FC = () => {
     const [isFixed, setIsFixed] = useState(true);
     const bannerRef = useRef<HTMLDivElement>(null);
