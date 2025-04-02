@@ -7,7 +7,6 @@ import { Header } from "../../../components/layout/Header";
 import { getProductById } from "../../../services/product/productService";
 import { MENU_SIZE } from '../../../config/menu';
 import { SuggestProducts } from "./SuggestProducts";
-// import { addQuantity, decreaseQuantity } from "../../../redux/cart/cartSlice";
 import { AppDispatch, RootStore } from '../../../redux/store';
 import { addToCartAction } from "../../../redux/cart/cartAction";
 
@@ -21,10 +20,11 @@ export const ProductDetail: React.FC = () => {
         const cartItem = state.cart.items.find(item => {
             return item.productId._id === id;
         })
-        return cartItem?.quantity || 1;
+        return cartItem?.quantity || quantity;
     });
     
-    console.log(updateQuantity);
+    // console.log(updateQuantity);
+
     // Query data
     const { data: product, isLoading, error } = useQuery({
         queryKey: ['product', id],
@@ -40,13 +40,6 @@ export const ProductDetail: React.FC = () => {
         setIsActive(size);
     };
 
-    // const handleAddQuantity = () => {
-        //     dispatch(addQuantity({ index: 0 }));
-        // } 
-        // const handleDecreaseQuantity = () => {
-            //     dispatch(decreaseQuantity({ index: 0 }));
-            // }
-            
     // Handle add quantity
     const handleAddQuantity = () => {
         setQuantity(prev => prev + 1);

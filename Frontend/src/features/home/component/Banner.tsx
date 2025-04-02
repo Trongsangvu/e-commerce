@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import config from '../../../config/config';
 import images from '../../../assets/images/images';
+// import { SkeletonCustom } from '../../../lib/SkeletonCustom';
 
 export const Banner:React.FC = () => {
     return (
@@ -15,6 +16,7 @@ export const Banner:React.FC = () => {
                                     <img className='h-[245.5px]' src={images.banner1} alt="banner1" />
                                 </Link>
                                 <div className='flex flex-col relative py-34 px-38 bottom-[260px]'>
+                                    {/* <SkeletonCustom /> */}
                                     <span className='capitalize text-[28px] text-[#333] group-hover:text-white font-bold font font-[Poppins-bold]'>
                                         women
                                     </span>
