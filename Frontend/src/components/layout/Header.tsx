@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';  
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import config from '../../config/config';
 import { MENU_PROFILE, MENU_HEADER } from '../../config/menu';
@@ -8,7 +8,7 @@ import images from '../../assets/images/images';
 import { MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
 import { Search } from '../../features/search/components/Search';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch, RootStore } from '../../redux/store';
 import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
 
 export const Header: React.FC = () => {
@@ -16,6 +16,8 @@ export const Header: React.FC = () => {
     const location = useLocation();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isShow, setIsShow] = useState(false);
+
+    const isAuthenticated = useSelector((state: RootStore) => state.auth.isAuthenticated);
 
     // Handle show sidebar
     const handleShow = () => {
@@ -78,9 +80,17 @@ export const Header: React.FC = () => {
                             {isShow && (
                                 <div className='absolute right-1/9 rounded-sm bg-white shadow-xl'>
                                     <ul className='px-16 py-32'>
-                                        {MENU_PROFILE.map((item, index) => (
-                                            <MenuProfile item={item} key={index} index={index}/>
-                                        ))}
+                                        {MENU_PROFILE.map((item, index) => {
+                                            if(isAuthenticated && item.id === 'sign in') return null;
+                                            if(!isAuthenticated && item.id === 'my account') return null;
+                                            return (
+                                                <MenuProfile 
+                                                    item={item} 
+                                                    key={index} 
+                                                    index={index}
+                                                />
+                                            )
+                                        })}
                                     </ul>
                                     <div className='border-t mb-2'></div>
                                 </div>

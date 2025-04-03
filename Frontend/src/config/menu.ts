@@ -29,8 +29,8 @@ export const MENU_ITEMS_2: MenuItems[] = [
 
 // Menu Profile
 export const MENU_PROFILE: MenuItems[] = [
-    // { title: 'my account' },
-    { title: 'sign in', path: '/login' },
+    { id: 'my account', title: 'my account', path: '/profile' },
+    { id: 'sign in', title: 'sign in', path: '/login' },
     { title: 'my orders' },
     { title: 'account setting' },
     { title: 'address book' },
