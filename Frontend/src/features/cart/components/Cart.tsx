@@ -120,7 +120,7 @@ export const Cart: React.FC = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="border border-[#e6e6e6] mr-[40px] w-[470px]">
+                    <div className="border border-[#e6e6e6] mr-[40px] w-[470px] h-[620px]">
                         <div className="px-[40px] py-[30px] h-auto">
                             <h3 className="uppercase font-[Poppins-bold] pb-[30px]">cart totals</h3>
                             <div>

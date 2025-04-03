@@ -163,8 +163,10 @@ export const AngleRightIcon:React.FC<IconProps> = ({ className, width='16px', he
     </svg>
 );
 
-export const AddressIcon:React.FC<IconProps> = () => (
+export const AddressIcon:React.FC<IconProps> = ({ width= '', height= '' }) => (
     <svg 
+        width={width}
+        height={height}
         xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 512 512">
         <path 

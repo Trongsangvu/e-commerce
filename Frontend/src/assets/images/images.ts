@@ -17,6 +17,9 @@ import searchIcon from './icon/search-svgrepo-com.svg';
 import heartIcon from './icons/heart-svgrepo-com.svg';
 import pencilIcon from './icons/pencil-edit-svgrepo-com.svg';
 import arrowRight from './icons/right-arrow-svgrepo-com.svg';
+import emailAddress from './icons/reshot-icon-email-UERZ83AW2P.svg';
+import telephone from './icons/telephone.png';
+import location from './icons/reshot-icon-location-marker-ZE5Y87KGQF.svg';
 
 interface Images {
     logo: string,
@@ -37,7 +40,10 @@ interface Images {
     bannerBlog2: string,
     bannerBlog3: string,
     arrowRight: string,
-    angleDown: string
+    angleDown: string,
+    emailAddress: string,
+    telephone: string,
+    location: string,
 }
 
 const images: Images = {
@@ -59,7 +65,10 @@ const images: Images = {
     bannerBlog2,
     bannerBlog3,
     arrowRight,
-    angleDown
+    angleDown,
+    emailAddress,
+    telephone,
+    location
 } as const
 
 export default images;
