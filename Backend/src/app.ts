@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { connectDB } from './config/database';
+import { connectDB } from './config/database/database';
 import productRoutes from './routes/product.routes';
 import userRoutes from './routes/user.routes';
 import cartRoutes from './routes/cart.routes';
@@ -10,6 +10,7 @@ import orderRoutes from './routes/order.routes';
 import authRoutes from './routes/auth.routes';
 import paymentRouters from './routes/payment.routes';
 import webhookRouters from './routes/webhook.routes';
+import sendMessage from './routes/email.routes';
 import errorHandler from './middleware/Errorhandler';
 
 
@@ -39,6 +40,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payment', paymentRouters);
+app.use('/api/email', sendMessage);
 
 // Handler Error
 app.use(errorHandler);
