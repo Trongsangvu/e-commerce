@@ -43,3 +43,20 @@ export interface IRegisterResponse {
         email: string;
     }
 }
+
+export interface IUser {
+    id: string;
+    name: string;
+    email?: string;
+    role?: roles;
+}
+
+export interface IUserResponse {
+    user: {
+        _id: string;
+        name: string;
+        email: string;
+        role: roles;
+    }
+    message?: string;
+}

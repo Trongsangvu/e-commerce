@@ -53,8 +53,8 @@ class HttpService {
     }
     
     // Method GET
-    public get<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-            return this.axiosInstance.get<T>(url, config);
+    public get<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+            return this.axiosInstance.get<T>(url, { params: data, ...config });
     }
 
     // Method POST

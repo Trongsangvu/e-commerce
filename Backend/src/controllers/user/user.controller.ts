@@ -18,7 +18,14 @@ export const getProfileUser = async (req: Request, res: Response, next: NextFunc
             res.status(404).json({ message: "User not found" });
             return;
         }
-        res.status(200).json(user);
+        res.status(200).json({
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        });
     }
     catch(error) {
         next(error);

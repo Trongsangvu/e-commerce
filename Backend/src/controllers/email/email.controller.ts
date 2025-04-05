@@ -5,7 +5,7 @@ export const sendMessageByEmail = async (req: Request, res: Response, next: Next
     try {
         const { to, subject, message } = req.body;
         const result = await sendEmail(to, subject, message);
-        
+
         res.status(200).json({ success: true, data: result });
     }
     catch(error) {
