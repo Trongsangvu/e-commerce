@@ -1,4 +1,4 @@
-import redisClient from "../config/redis";
+import redisClient from "../config/redis/redis";
 
 export class RedisService {
     private static async ensureConnection() {

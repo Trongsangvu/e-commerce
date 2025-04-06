@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Order } from '../../models/Order';
-import redisClient from '../../config/redis';
+import redisClient from '../../config/redis/redis';
 import { sendPushNotification } from '../../services/firebase.service';
 import { sendOrderNotification } from '../../services/twilio.service';
 import { sendOrderToWarehouse } from '../../services/kafka.service';
