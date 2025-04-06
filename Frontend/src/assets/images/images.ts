@@ -21,6 +21,8 @@ import emailAddress from './icons/reshot-icon-email-UERZ83AW2P.svg';
 import telephone from './icons/telephone.png';
 import location from './icons/reshot-icon-location-marker-ZE5Y87KGQF.svg';
 import profileBanner from './banner/HeroShortStandard_Gucci-SS25-Feb25-Gucci-SS25-Shot3-225-SAFE_001_Default.webp';
+import recommendation from './banner/recommendation.avif';
+import recommendation1 from './banner/recommendation1.avif';
 
 interface Images {
     logo: string,
@@ -46,6 +48,8 @@ interface Images {
     telephone: string,
     location: string,
     profileBanner: string,
+    recommendation: string,
+    recommendation1: string
 }
 
 const images: Images = {
@@ -71,7 +75,9 @@ const images: Images = {
     emailAddress,
     telephone,
     location,
-    profileBanner
+    profileBanner,
+    recommendation,
+    recommendation1,
 } as const
 
 export default images;
