@@ -18,7 +18,7 @@ export const sendEmail = async (to: string, message: string) => { // subject: st
             .toString("base64")
             .replace(/\+/g, '-')
             .replace(/\//g, '_')
-            .replace(/=+$/, ''); 
+            .replace(/=+$/, '');
 
         const response = await gmail.users.messages.send({
             userId: "me",

@@ -59,8 +59,16 @@ export const Cart: React.FC = () => {
 
     return ( 
         <div>
-            <div className="mt-[90px] pb-[85px]">
-                <div className="flex items-center justify-start max-w-[680px] mb-[20px]">
+            <div className="mt-[70px] pb-[85px]">
+                <div className="relative">
+                    <div className="">
+                        <img src={images.profileBanner} alt="profile" />
+                    </div>
+                    <div className="flex justify-center absolute top-[70%] left-[38%]">
+                        <span className="uppercase font-[GucciSansPro-light] text-5xl text-white">shopping Bag</span>
+                    </div>
+                </div>
+                <div className="flex items-center justify-start max-w-[680px] mt-[30px] mb-[20px]">
                     <Link to={config.routes.home}>
                         <span className="pl-[150px] font-[Poppins-regular] text-sm text-[#555]">Home</span>
                     </Link>

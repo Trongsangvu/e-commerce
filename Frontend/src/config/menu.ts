@@ -37,6 +37,7 @@ export const MENU_PROFILE: MenuItems[] = [
     { title: 'wallet' },
     { title: 'saved items' },
     { title: 'my appointments' },
+    { id: 'sign out', title:'sign out' },
 ];
 
 // Menu categories

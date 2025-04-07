@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';  
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
 import config from '../../config/config';
 import { MENU_PROFILE, MENU_HEADER } from '../../config/menu';
 import { MenuProfile } from '../common/MenuProfile';
+import { logout } from '../../redux/auth/authSlice';
 import images from '../../assets/images/images';
 import { MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
@@ -16,6 +18,8 @@ export const Header: React.FC = () => {
     const location = useLocation();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isShow, setIsShow] = useState(false);
+
+    const navigate = useNavigate();
 
     const isAuthenticated = useSelector((state: RootStore) => state.auth.isAuthenticated);
 
@@ -32,6 +36,12 @@ export const Header: React.FC = () => {
     // Handle show menu profile
     const handleShowMenuProfile = () => {
         setIsShow(!isShow);
+    }
+
+    // Handle logout
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/');
     }
 
     // Handle hide menu profile when transition page
@@ -82,17 +92,18 @@ export const Header: React.FC = () => {
                                     <ul className='px-16 py-32'>
                                         {MENU_PROFILE.map((item, index) => {
                                             if(isAuthenticated && item.id === 'sign in') return null;
-                                            if(!isAuthenticated && item.id === 'my account') return null;
+                                            if(!isAuthenticated && (item.id === 'my account' || item.id === 'sign out')) return null;
                                             return (
                                                 <MenuProfile 
                                                     item={item} 
                                                     key={index} 
                                                     index={index}
+                                                    onLogout={item.id === 'sign out' ? handleLogout : undefined}
                                                 />
                                             )
                                         })}
                                     </ul>
-                                    <div className='border-t mb-2'></div>
+                                    {/* <div className='border-t mb-2'></div> */}
                                 </div>
                             )}
                         </li>
