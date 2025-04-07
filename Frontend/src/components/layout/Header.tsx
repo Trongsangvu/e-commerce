@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';  
+import { useEffect, useRef, useState } from 'react';  
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,15 +12,19 @@ import { Sidebar } from './Sidebar';
 import { Search } from '../../features/search/components/Search';
 import { AppDispatch, RootStore } from '../../redux/store';
 import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
+import { ShoppingBag } from '../../features/cart/components/ShoppingBag';
 
 export const Header: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const location = useLocation();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
-    const [isShow, setIsShow] = useState(false);
+    const [isShowMenu, setIsShowMenu] = useState(false);
+    const [isShowBag, setIsShowBag] = useState(false);
 
     const navigate = useNavigate();
+    const menuRef = useRef<HTMLDivElement>(null);
 
+    // Authentication when login
     const isAuthenticated = useSelector((state: RootStore) => state.auth.isAuthenticated);
 
     // Handle show sidebar
@@ -35,7 +39,12 @@ export const Header: React.FC = () => {
 
     // Handle show menu profile
     const handleShowMenuProfile = () => {
-        setIsShow(!isShow);
+        setIsShowMenu(!isShowMenu);
+    }
+
+    // Handle show shopping bag
+    const handleShowShoppingBag = () => {
+        setIsShowBag(!isShowBag);
     }
 
     // Handle logout
@@ -46,8 +55,21 @@ export const Header: React.FC = () => {
 
     // Handle hide menu profile when transition page
     useEffect(() => {
-        setIsShow(false);
+        setIsShowMenu(false);
     }, [location.pathname]);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setIsShowMenu(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+    }, []);
 
     return (
         <>
@@ -76,9 +98,17 @@ export const Header: React.FC = () => {
                     </div>
                     <ul className='flex'>
                         <li>
-                            <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'>
+                            <button 
+                                className='hover:opacity-80 hover:cursor-pointer transition-opacity'
+                                onClick={handleShowShoppingBag}
+                            >
                                 <ShoppingCartIcon />    
                             </button>
+                            {isShowBag && (
+                                <div className='absolute'>
+                                    <ShoppingBag />
+                                </div>
+                            )}
                         </li>
                         <li className='pl-15'>
                             <button 
@@ -87,9 +117,12 @@ export const Header: React.FC = () => {
                             >
                                 <UserIcon />
                             </button>
-                            {isShow && (
-                                <div className='absolute right-1/9 rounded-sm bg-white shadow-xl'>
-                                    <ul className='px-16 py-32'>
+                            {isShowMenu && (
+                                <div 
+                                    className='absolute right-1/9 h-auto rounded-sm bg-white shadow-xl'
+                                    ref={menuRef}
+                                >
+                                    <ul className='px-16 pt-32'>
                                         {MENU_PROFILE.map((item, index) => {
                                             if(isAuthenticated && item.id === 'sign in') return null;
                                             if(!isAuthenticated && (item.id === 'my account' || item.id === 'sign out')) return null;

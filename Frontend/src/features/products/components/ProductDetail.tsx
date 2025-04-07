@@ -57,7 +57,8 @@ export const ProductDetail: React.FC = () => {
         dispatch(addToCartAction({ 
             productId: id!,
             quantity: updateQuantity
-        }))
+        }));
+        alert('Add product to cart successfully!');
     }
 
     return ( 
@@ -69,9 +70,6 @@ export const ProductDetail: React.FC = () => {
                 <div className="mx-100 mt-100">
                     <div className="flex flex-row gap-50">
                         <div className="w-[auto] flex flex-row px-[25px] gap-50">
-                            {/* <div className="pt-10 pl-25 pr-10">
-                                <img className="w-[68px] h-[84px] cursor-pointer" src={product?.imageUrl} alt="" />
-                            </div> */}
                             <img className="w-[340px] h-[420px]" src={product?.imageUrl} alt={product?.name} />
                         </div>
                         <div className="w-[470px]">

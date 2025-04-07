@@ -9,7 +9,8 @@ interface MenuProfileProps {
 export const MenuProfile: React.FC<MenuProfileProps> = ({ item, onLogout }) => {
     return (
         <li 
-            className="font-[GucciSansPro-bold] uppercase mb-32 cursor-pointer" 
+            className={`font-[GucciSansPro-bold] uppercase mb-32 cursor-pointer 
+                ${item.id === 'sign out' ? 'border-t pt-20 border-[#ccc]' : ''}`}
             onClick={() => {
                 if(item.id === 'sign out' && onLogout) {
                     onLogout();

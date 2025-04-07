@@ -69,7 +69,7 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
                     className={`relative cursor-pointer font-normal text-lg inline-block underline-offset-4 ml-[11px]
                         ${isHovered ? 'none' : 'underline'}    
                     `}
-                    >
+                >
                     <span>Cancel</span>
                     <span 
                         className={`absolute left-0 bottom-2 h-1.5 bg-black transition-all duration-300
@@ -114,5 +114,3 @@ export const Search: React.FC<SearchProps> = ({ isSearchVisible, setIsSearchVisi
         </div>
     )
 }
-
-// className='w-[106px]'
