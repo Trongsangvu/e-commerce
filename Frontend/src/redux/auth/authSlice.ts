@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { login, register } from './authAction';
+import { login, oauthLogin, register } from './authAction';
 import { AuthUser, ILoginResponse, IRegisterResponse } from '../../model/Auth';
 
 
@@ -72,6 +72,22 @@ const authSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message || "Register failed";
             })
+            // OAuth login
+            .addCase(oauthLogin.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.status = "loading";
+            })
+            .addCase(oauthLogin.fulfilled, (state, action) => {
+                state.user = action.payload.user;
+                state.isAuthenticated = true;
+                state.status ='succeeded';
+                state.error = null;
+            })
+            .addCase(oauthLogin.rejected, (state, action) => {
+                state.error = action.error.message || null;
+                state.isAuthenticated = false;
+            });
 
     }
 });

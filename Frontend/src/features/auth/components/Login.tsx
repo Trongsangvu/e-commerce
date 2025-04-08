@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { OAuthProvider  } from 'appwrite';
 import { Link } from 'react-router-dom';
 import config from '../../../config/config';
-import { login } from '../../../redux/auth/authAction';    
+import { login, oauthLogin } from '../../../redux/auth/authAction';    
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../../../redux/store';
-import { AddressIcon, EyeSlashIcon } from '../../../assets/images/icons/icons';
+import { AddressIcon, EyeSlashIcon, GoogleIcon } from '../../../assets/images/icons/icons';
 import { Footer } from '../../../components/layout/Footer';
 import { account } from '../../../services/OAuth/appWrite';
 
@@ -40,9 +40,12 @@ export const Login:React.FC = () => {
             // Get current session after successful login
             const session = await account.getSession('current');
             if (session) {
-                const User = await account.get();
-                console.log('Logged in with Google: ', User);
-                navigate('/');
+                const user = await account.get();
+
+                const result = await dispatch(oauthLogin(user)).unwrap();
+                console.log('Logged in with Google: ', result);
+
+                navigate('/profile');
             } else {
                 console.log('No session after Google login');}
         }
@@ -56,14 +59,11 @@ export const Login:React.FC = () => {
             <main className='flex-grow min-h-screen'>
                 <div className='flex flex-col items-center justify-center min-h-screen w-full'>
                     <div
-                        className='bg-white w-[328px] mb-5 border border-[#1a1a1a] uppercase flex items-center justify-center h-[56px] text-black cursor-pointer text-center p-[10px] font-[GucciSansPro-medium]'
+                        className='bg-white w-[328px] mt-90 mb-5 border border-[#1a1a1a] uppercase flex items-center justify-center h-[56px] text-black cursor-pointer text-center p-[10px] font-[GucciSansPro-medium]'
                         onClick={handleLoginWithGoogle}
                     >
-                        <button type='button' className='uppercase cursor-pointer flex items-center gap-2'>
-                            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
-                                    alt="Google" 
-                                    className="w-5 h-5 object-contain" 
-                            />
+                        <button type='button' className='uppercase cursor-pointer flex items-center gap-10'>
+                            <GoogleIcon />
                             Continue with Google
                         </button>
                     </div>

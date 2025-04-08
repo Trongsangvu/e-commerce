@@ -26,6 +26,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         const refreshToken = generateRefreshToken({ id: user._id,  email: user.email, role: user.role });
 
         // console.log(jwt.decode(refreshToken));
+        // Set refesh token in cookie
         res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: false, sameSite: "strict" });
 
         // Return token and some basic user info
@@ -70,4 +71,54 @@ export const register = async (req: Request, res: Response, next: NextFunction):
     catch(error) {
         next(error);
     }
+}
+
+export const oauthLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+   try {
+        const { user }= req.body;
+
+        // Check if user exists in DB
+        let existingUser = await User.findOne({ email: user.email });
+
+        if(!existingUser) {
+            // Create new user if doesn't exist
+            existingUser = await User.create({
+                email: user.email,
+                name: user.name,
+                provider: 'google',
+                providerId: user.$id
+            });
+        }
+
+        // Generate tokens
+        const token = generateAccessToken({
+            id: existingUser._id,
+            email: existingUser.email,
+            role: existingUser.role
+        });
+        const refreshToken = generateRefreshToken({
+            id: existingUser._id,
+            email: existingUser.email,
+            role: existingUser.role
+        });
+
+        // Set refesh token in cookie
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict"
+        });
+
+        // Return token and some basic user info
+        res.json({
+            token,
+            user: {
+                id: existingUser._id,
+                name: existingUser.name,
+                email: existingUser.email,
+            }
+        })
+   } catch(error) {
+        next(error);
+   } 
 }

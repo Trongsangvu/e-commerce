@@ -51,6 +51,25 @@ export interface IUser {
     role?: roles;
 }
 
+// OAuth user 
+export interface IOAuthUser {
+   $id: string;
+    name: string;
+    email: string;
+    provider?: string; 
+    providerId?: string;
+}
+
+export interface IOAuthResponse {
+    token: string;
+    user: {
+        $id: string;
+        name: string;
+        email: string;
+        role: roles;
+    }
+}
+
 export interface IUserResponse {
     user: {
         _id: string;

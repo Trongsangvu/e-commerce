@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ILogin, ILoginResponse, IRegister, IRegisterResponse } from "../../model/Auth";
+import { ILogin, ILoginResponse, IRegister, IRegisterResponse, IOAuthUser, IOAuthResponse } from "../../model/Auth";
 import { login as loginService } from '../../services/auth/authService';
 import { register as registerService } from '../../services/auth/authService';
+import { oauthLogin as oauthLoginService } from '../../services/auth/authService';
 
 export const login = createAsyncThunk<ILoginResponse, ILogin>(
     'auth/login',
@@ -57,3 +58,24 @@ export const register = createAsyncThunk<IRegisterResponse, IRegister>(
         }
     }
 );
+
+export const oauthLogin = createAsyncThunk<IOAuthResponse, IOAuthUser>(
+    'auth/oauth/google',
+    async (data, { rejectWithValue }) => {
+        try {
+            const response = await oauthLoginService(data);
+            const userData = response.data;
+
+            
+            if(userData?.token) {
+                localStorage.setItem("token", userData.token);
+                localStorage.setItem("user", JSON.stringify(userData));
+            }
+            return userData;
+        }
+        catch (error) {
+            console.log("Error response: ", error);
+            return rejectWithValue(error);
+        }
+    }
+)

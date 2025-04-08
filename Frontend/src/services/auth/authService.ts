@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { ILogin, IUserResponse, ILoginResponse, IRegister, IRegisterResponse } from "../../model/Auth";
+import { ILogin, IUserResponse, ILoginResponse, IRegister, IRegisterResponse,IOAuthUser, IOAuthResponse } from "../../model/Auth";
 import HttpService from '../HttpService';
 
 const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> => {
@@ -8,6 +8,10 @@ const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> => {
 
 const register = (data: IRegister):  Promise<AxiosResponse<IRegisterResponse>> => {
     return HttpService.post("/auth/register", data);
+}
+
+const oauthLogin = (data: IOAuthUser): Promise<AxiosResponse<IOAuthResponse>> => {
+    return HttpService.post("/auth/oauth/login", data);
 }
 
 const getProfileUser = async (): Promise<IUserResponse> => {
@@ -26,4 +30,4 @@ const getProfileUser = async (): Promise<IUserResponse> => {
     }
 }
 
-export { login, register, getProfileUser }
+export { login, register, getProfileUser, oauthLogin }

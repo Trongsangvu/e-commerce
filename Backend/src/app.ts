@@ -21,7 +21,10 @@ const port = process.env.PORT;
 // Connect to MongoDB
 connectDB();
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true
+}));
 
 // Webhook
 app.use('/api/webhook', express.raw({ type: 'application/json' }), webhookRouters);
