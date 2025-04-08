@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { OAuthProvider  } from 'appwrite';
 import { Link } from 'react-router-dom';
 import config from '../../../config/config';
 import { login } from '../../../redux/auth/authAction';    
@@ -7,14 +8,16 @@ import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../../../redux/store';
 import { AddressIcon, EyeSlashIcon } from '../../../assets/images/icons/icons';
 import { Footer } from '../../../components/layout/Footer';
+import { account } from '../../../services/OAuth/appWrite';
 
 export const Login:React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const { error } = useSelector((state: RootStore) => state.auth);
-    const navigate = useNavigate();
-
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    const navigate = useNavigate();
     
     // Handle Form submit events
     const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -26,10 +29,44 @@ export const Login:React.FC = () => {
         navigate('/');
     };
 
+    // Handle Login with Goolge 
+    const handleLoginWithGoogle = async () =>{
+        try {
+            const success = 'http://localhost:5173/'; // URL to redirect on success
+            const failure = 'http://localhost:5173/login'; // URL to redirect on failure
+  
+            account.createOAuth2Session(OAuthProvider.Google, success, failure);
+
+            // Get current session after successful login
+            const session = await account.getSession('current');
+            if (session) {
+                const User = await account.get();
+                console.log('Logged in with Google: ', User);
+                navigate('/');
+            } else {
+                console.log('No session after Google login');}
+        }
+        catch(error) {
+            console.error('Google login failed: ', error);
+        }
+    }
+
     return (
         <div className='flex flex-col min-h-screen mt-30'>
             <main className='flex-grow min-h-screen'>
                 <div className='flex flex-col items-center justify-center min-h-screen w-full'>
+                    <div
+                        className='bg-white w-[328px] mb-5 border border-[#1a1a1a] uppercase flex items-center justify-center h-[56px] text-black cursor-pointer text-center p-[10px] font-[GucciSansPro-medium]'
+                        onClick={handleLoginWithGoogle}
+                    >
+                        <button type='button' className='uppercase cursor-pointer flex items-center gap-2'>
+                            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
+                                    alt="Google" 
+                                    className="w-5 h-5 object-contain" 
+                            />
+                            Continue with Google
+                        </button>
+                    </div>
                     <form action="" onSubmit={handleFormSubmit} className='flex flex-col items-center p-10 mt-[20px]'>
                         <h3 className='text-black text-center uppercase text-3xl mb-30 font-[GucciSansPro-book]'>
                             Continue with your email address
