@@ -26,7 +26,7 @@ const getProfileUser = async (): Promise<IUserResponse> => {
        return response.data;
     } catch (error) {
         console.error("Error get profile user: ", error);
-        throw error;
+        throw error;    
     }
 }
 

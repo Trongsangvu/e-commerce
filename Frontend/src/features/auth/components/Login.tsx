@@ -42,10 +42,16 @@ export const Login:React.FC = () => {
             if (session) {
                 const user = await account.get();
 
-                const result = await dispatch(oauthLogin(user)).unwrap();
-                console.log('Logged in with Google: ', result);
+                const response = await dispatch(oauthLogin(user)).unwrap();
+                console.log('Logged in with Google: ', response);
 
-                navigate('/profile');
+                // Save the token in LocalStorage
+                if (response && response.token) {
+                    localStorage.setItem('token', response.token);
+                    // Redirect 
+                    navigate('/profile');
+                }
+
             } else {
                 console.log('No session after Google login');}
         }
