@@ -174,7 +174,7 @@ export const AddressIcon:React.FC<IconProps> = ({ width= '', height= '' }) => (
     </svg>
 );
 
-export const EyeSlashIcon = () => (
+export const EyeSlashIcon: React.FC = () => (
     <svg 
         xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 640 512">
@@ -241,35 +241,35 @@ export const CircleExcelIcon: React.FC<IconProps> = ({ width=24, height=24 }) =>
     </svg>
 );
 
-export const GoogleIcon: React.FC = () => (
+export const GoogleIcon: React.FC<IconProps> = ({ width=24, height=24 }) => (
     <svg 
-        width="24" 
-        height="24" 
+        width={width}
+        height={height}
         viewBox="0 0 24 24" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg">
         <g opacity="1">
             <path 
-                fill-rule="evenodd" 
-                clip-rule="evenodd" 
+                fillRule="evenodd" 
+                clipRule="evenodd" 
                 d="M24.0003 12.2724C24.0003 11.4215 23.9223 10.6033 23.7776 9.81787H12.2451V14.4596H18.8351C18.5513 15.9596 17.6886 17.2305 16.3917 18.0814V21.0923H20.349C22.6644 19.0032 24.0003 15.9269 24.0003 12.2724Z" 
                 fill="#4285F4"
             ></path>
             <path 
-                fill-rule="evenodd" 
-                clip-rule="evenodd" 
+                fillRule="evenodd" 
+                clipRule="evenodd" 
                 d="M12.2445 23.9999C15.5507 23.9999 18.3225 22.9254 20.3484 21.0927L16.3911 18.0818C15.2946 18.8018 13.892 19.2272 12.2445 19.2272C9.05527 19.2272 6.35582 17.1164 5.39292 14.28H1.302V17.3891C3.31685 21.3108 7.45787 23.9999 12.2445 23.9999Z" 
                 fill="#34A853"
             ></path>
             <path 
-                fill-rule="evenodd" 
-                clip-rule="evenodd" 
+                fillRule="evenodd" 
+                clipRule="evenodd" 
                 d="M5.39334 14.2796C5.14844 13.5596 5.00929 12.7905 5.00929 11.9996C5.00929 11.2087 5.14844 10.4396 5.39334 9.71965V6.6106H1.30242C0.4731 8.23057 0 10.0633 0 11.9996C0 13.936 0.4731 15.7687 1.30242 17.3886L5.39334 14.2796Z" 
                 fill="#FBBC05"
             ></path>
             <path 
-                fill-rule="evenodd" 
-                clip-rule="evenodd" 
+                fillRule="evenodd" 
+                clipRule="evenodd" 
                 d="M12.2445 4.77267C14.0423 4.77267 15.6564 5.37811 16.9254 6.56719L20.4375 3.12541C18.3169 1.18908 15.5451 0 12.2445 0C7.45787 0 3.31685 2.68906 1.302 6.61082L5.39292 9.71987C6.35582 6.88355 9.05527 4.77267 12.2445 4.77267Z" 
                 fill="#EA4335"
             ></path>

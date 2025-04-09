@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getProfileUser } from "../services/auth/authService";
 import images from "../assets/images/images";
 import { Footer } from '../components/layout/Footer';
+// import { useGoogleLogin } from "../features/home/hooks/useGoogleLogin";
 
 const Profile: React.FC = () => {
+    // const { userName } = useGoogleLogin();
     
     // Query data
     const { data, isLoading, error } = useQuery({

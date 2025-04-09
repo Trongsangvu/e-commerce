@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { OAuthProvider  } from 'appwrite';
 import { Link } from 'react-router-dom';
 import config from '../../../config/config';
-import { login, oauthLogin } from '../../../redux/auth/authAction';    
+import { login } from '../../../redux/auth/authAction';    
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../../../redux/store';
 import { AddressIcon, EyeSlashIcon, GoogleIcon } from '../../../assets/images/icons/icons';
 import { Footer } from '../../../components/layout/Footer';
 import { account } from '../../../services/OAuth/appWrite';
+import { oauthLogin } from '../../../redux/auth/authAction';
 
 export const Login:React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -17,6 +18,8 @@ export const Login:React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
+    // const { handleLoginWithGoogle } = useGoogleLogin();
+
     const navigate = useNavigate();
     
     // Handle Form submit events
@@ -41,6 +44,8 @@ export const Login:React.FC = () => {
             const session = await account.getSession('current');
             if (session) {
                 const user = await account.get();
+
+                console.log('Tên người dùng:', user.name); 
 
                 const response = await dispatch(oauthLogin(user)).unwrap();
                 console.log('Logged in with Google: ', response);

@@ -27,6 +27,7 @@ export const Header: React.FC = () => {
     // Authentication when login
     const isAuthenticated = useSelector((state: RootStore) => state.auth.isAuthenticated);
 
+
     // Handle show sidebar
     const handleShow = () => {
         dispatch(sideBarShow());
@@ -136,7 +137,6 @@ export const Header: React.FC = () => {
                                             )
                                         })}
                                     </ul>
-                                    {/* <div className='border-t mb-2'></div> */}
                                 </div>
                             )}
                         </li>

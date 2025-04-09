@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { login, oauthLogin, register } from './authAction';
-import { AuthUser, ILoginResponse, IRegisterResponse } from '../../model/Auth';
+import { AuthUser, ILoginResponse, IRegisterResponse,IOAuthResponse } from '../../model/Auth';
 
 
 // Implicity authReducer
@@ -78,11 +78,13 @@ const authSlice = createSlice({
                 state.error = null;
                 state.status = "loading";
             })
-            .addCase(oauthLogin.fulfilled, (state, action) => {
-                state.user = action.payload.user;
+            .addCase(oauthLogin.fulfilled, (state, { payload }: PayloadAction<IOAuthResponse>) => {
+                state.user = payload.user;
                 state.isAuthenticated = true;
                 state.status ='succeeded';
                 state.error = null;
+                // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify(state.user));
             })
             .addCase(oauthLogin.rejected, (state, action) => {
                 state.error = action.error.message || null;
