@@ -35,7 +35,7 @@ export const Login:React.FC = () => {
     // Handle Login with Goolge 
     const handleLoginWithGoogle = async () =>{
         try {
-            const success = 'http://localhost:5173/'; // URL to redirect on success
+            const success = 'http://localhost:5173/profile'; // URL to redirect on success
             const failure = 'http://localhost:5173/login'; // URL to redirect on failure
   
             account.createOAuth2Session(OAuthProvider.Google, success, failure);

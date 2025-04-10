@@ -72,6 +72,16 @@ class HttpService {
     public put<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
         return this.axiosInstance.put<T>(url, data, config);
     }
+
+    public patch<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+        return this.axiosInstance.put<T>(url, data, {
+            ...config,
+            headers: {
+                ...config?.headers,
+                'Content-Type': 'application/json'
+            }
+        });
+    }
 }
 
 export default new HttpService();

@@ -5,7 +5,7 @@ import { ISearch, ISearchResponse } from '../../model/Search';
 export const searchProducts = async (data: ISearch): Promise<ISearchResponse> => {
     try {
         const response: AxiosResponse<ISearchResponse> = await HttpService.get(
-            "/products/search", { params: { name: data.name } }
+            "/products/search", { name: data.name }
         );
 
         return response.data ?? []; // return list of products

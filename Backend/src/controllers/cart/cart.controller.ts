@@ -54,29 +54,40 @@ export const updateCart = async (req: Request, res: Response, next: NextFunction
             return;
         }
 
-        // Check out user's cart
-        const cart = await Cart.findOne({ userId });
-        if(!cart) {
-            res.status(404).json({ message: "Cart not found" });
-            return;
-        }
+        // // Check out user's cart
+        // const cart = await Cart.findOne({ userId });
+        // if(!cart) {
+        //     res.status(404).json({ message: "Cart not found" });
+        //     return;
+        // }
 
-        // Find the item index in the cart - does it exist?
-        const itemIndex = cart.items.findIndex(
-            item => item.productId.toString() === productId
+        // // Find the item index in the cart - does it exist?
+        // const itemIndex = cart.items.findIndex(
+        //     item => item.productId.toString() === productId
+        // );
+
+        // if (itemIndex === -1) {
+        //     res.status(404).json({ message: "Product not found in cart" });
+        //     return;
+        // }
+
+        // // Update the quantity directly
+        // cart.items[itemIndex].quantity = quantity;
+        // await cart.save();
+
+
+        // const updatedCart = await Cart.findOne({ userId }).populate("items.productId");
+
+        const updatedCart = await Cart.findOneAndUpdate(
+            { userId, "items.productId": productId },
+            { $set: { "items.$.quantity": quantity }},
+            { new: true }
         );
 
-        if (itemIndex === -1) {
-            res.status(404).json({ message: "Product not found in cart" });
-            return;
+        if (!updatedCart) {
+            res.status(404).json({ message: "Cart or product not found" });
+            return; 
         }
-
-        // Update the quantity directly
-        cart.items[itemIndex].quantity = quantity;
-        await cart.save();
-
-        const updatedCart = await Cart.findOne({ userId }).populate("items.productId");
-
 
         // Clear Redis cache
         try {

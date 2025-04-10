@@ -13,9 +13,6 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
             const response = await loginService(data);
             const userData = response.data;
             
-            // if(response.data) {
-            //     localStorage.setItem('user', JSON.stringify(response.data)); // Convert to string
-            // }
             if(userData?.token) {
                 localStorage.setItem("token", userData.token);
                 localStorage.setItem("user", JSON.stringify(userData));
@@ -32,8 +29,11 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
             return response.data;
         }
         catch (error) {
+            const err = error as AxiosError<{ message: string }>;
+
             console.log("Error response: ", error);
-            return rejectWithValue(error);
+            // return rejectWithValue(error);
+            return rejectWithValue(err.response?.data || { message: err.message });
         }
     }
 );

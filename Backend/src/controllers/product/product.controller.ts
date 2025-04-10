@@ -72,12 +72,28 @@ export const deleteProduct = async (req: Request, res: Response, next: NextFunct
     }
 }
 
-export const searchProduct = async (req: Request, res: Response, next: NextFunction) => {
+export const searchProduct = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const keyword = req.query.name;
 
         if(!keyword) {
-            res.status(400).json({ message: 'Missing search keyword'})
+            res.status(400).json({ message: 'Missing search keyword'});
+            return;
+        }
+
+        let searchKeyWord: string;
+
+        // If keyword is an array, join it into a string
+        if(Array.isArray(keyword)) {
+            searchKeyWord = keyword.join(" ");
+        } else {
+            // convert keyword to string
+            searchKeyWord = String(keyword);
+        }
+
+        if (!searchKeyWord.trim()){
+            res.status(400).json({ message: 'Invalid search keyword' });
+            return;
         }
 
         const products = await Product.find({
