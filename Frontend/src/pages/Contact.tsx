@@ -37,9 +37,9 @@ export const Contact: React.FC = () => {
     return (
         <div>
             <div className="mb-90">
-                <div className="mt-[70px] relative">
+                <div className="relative">
                     <img src={images.bannerAbout} alt="Banner Contact" />
-                    <div className="absolute top-1/2 left-[45%]">
+                    <div className="absolute top-[70%] left-[45%]">
                         <span className="uppercase font-[GucciSansPro-bold] text-white text-4xl">contact</span>
                     </div>
                 </div>

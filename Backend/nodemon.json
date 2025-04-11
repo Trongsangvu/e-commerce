@@ -1,7 +1,7 @@
 {
     "watch": ["dist"],
     "ext": "js,json",
-    "ignore": ["src", "node_modules", "*.log", ".git"],
+    "ignore": ["node_modules/*", "dist/*", ".git/*", "*.test.js"],
     "exec": "node dist/app.js"
 }
   

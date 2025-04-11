@@ -30,7 +30,7 @@ export const Home:React.FC = () => {
             <div className='flex flex-col min-h-screen'>
                 <main className='flex-grow'>
                     <div className='w-full'>
-                        <div ref={bannerRef}  className='relative top-72'> 
+                        <div ref={bannerRef}  className='relative'> 
                             <img src={images.slider} />
                             <div className={`transition-[transform] duration-300 ease-in-out text-center w-full   
                                 ${isFixed ? "fixed top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2" : "absolute bottom-[40px] left-1/2 -translate-x-1/2"}`}

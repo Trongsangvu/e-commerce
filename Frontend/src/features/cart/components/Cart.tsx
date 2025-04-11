@@ -59,7 +59,7 @@ export const Cart: React.FC = () => {
 
     return ( 
         <div>
-            <div className="mt-[70px] pb-[85px]">
+            <div className="pb-[85px]">
                 <div className="relative">
                     <div className="">
                         <img src={images.profileBanner} alt="profile" />

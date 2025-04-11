@@ -59,14 +59,14 @@ const addToCart = async (data: CartData): Promise<AxiosResponse> => {
 // }
 
 const updateCart = async (data: CartData): Promise<AxiosResponse> => {
-    // const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     try {
         const response = await HttpService.put(
             `/carts/update/${data.productId}`, { quantity: data.quantity },
             {
                 headers: {
-                    // Authorization: `Bearer ${token}`,
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`,
+                    // Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             }
         )   

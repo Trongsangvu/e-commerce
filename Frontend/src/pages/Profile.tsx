@@ -21,7 +21,7 @@ const Profile: React.FC = () => {
 
     return ( 
         <div>
-            <div className="mt-70">
+            <div className="">
                 <div className="relative">
                     <div className="">
                         <img src={images.profileBanner} alt="profile" />

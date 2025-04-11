@@ -6,8 +6,26 @@ type IconProps = {
     strokeColor?: string; 
     fillColor?: string;
 }
+// , fillColor='white'
+export const LogoIcon:React.FC<IconProps> = ({ className, width=133, height=17 }) => (
+    <svg 
+        className={className}
+        xmlns="http://www.w3.org/2000/svg" 
+        xmlnsXlink="http://www.w3.org/1999/xlink" 
+        width={width} 
+        height={height} 
+        viewBox="0 0 133 17">
+        <image 
+            xlinkHref="data:image/png;base64,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" 
+            x="0" 
+            y="0" 
+            width={width} 
+            height={height}
+        />
+    </svg> 
+);
 
-export const SearchIcon:React.FC<IconProps> = ({ className, width=24, height=24, fillColor='currentColor' }) => (
+export const SearchIcon:React.FC<IconProps> = ({ className, width=24, height=24, fillColor='white' }) => (
     <svg
         className={className}
         width={width} 
@@ -40,7 +58,7 @@ export const SearchProductIcon:React.FC<IconProps> = ({ className, width=16, hei
 );
 
 
-export const UserIcon:React.FC<IconProps> = ({ className, width=24, height=24, fillColor='white', strokeColor='black' }) => (
+export const UserIcon:React.FC<IconProps> = ({ className, width=24, height=24, fillColor='none', strokeColor='white' }) => (
     <svg 
         className={className}
         width={width}
@@ -51,21 +69,16 @@ export const UserIcon:React.FC<IconProps> = ({ className, width=24, height=24, f
         aria-hidden="true"
     >
         <path 
-            d="M12 14C14.76 14 17 11.76 17 9C17 6.24 14.76 4 12 4C9.24 4 7 6.24 7 9C7 11.76 9.24 14 12 14ZM12 5.5C13.93 5.5 15.5 7.07 15.5 9C15.5 10.93 13.93 12.5 12 12.5C10.07 12.5 8.5 10.93 8.5 9C8.5 7.07 10.07 5.5 12 5.5ZM18.75 18V20H17.25V18C17.25 17.31 16.69 16.75 16 16.75H8C7.31 16.75 6.75 17.31 6.75 18V20H5.25V18C5.25 16.48 6.48 15.25 8 15.25H16C17.52 15.25 18.75 16.48 18.75 18Z" 
-            fill="var(--_g-icon-fill-color)"
-            stroke={strokeColor} 
-        >
-        </path>
-        <path 
             d="M11.75 14C14.51 14 16.75 11.76 16.75 9C16.75 6.24 14.51 4 11.75 4C8.99 4 6.75 6.24 6.75 9C6.75 11.76 8.99 14 11.75 14ZM5 20V18C5 16.48 6.23 15.25 7.75 15.25H15.75C17.27 15.25 18.5 16.48 18.5 18V20H5Z" 
             fill="var(--_g-icon-fill-color)"
             stroke={strokeColor} 
+            strokeWidth={1.3} 
         >
         </path>
     </svg>
 );
 
-export const ShoppingCartIcon:React.FC<IconProps> = ({ className, width=24, height=24, fillColor='currentColor' }) => (
+export const ShoppingCartIcon:React.FC<IconProps> = ({ className, width=24, height=24, fillColor='#fff' }) => (
     <svg 
         className={className}
         width={width}
@@ -107,7 +120,7 @@ export const ContactIcon:React.FC<IconProps> = ({ className, width=16, height=16
     </svg>
 )
 
-export const MenuToggle:React.FC<IconProps> = ({ className, width='24px', height='24px', fillColor='currentColor'}) => (
+export const MenuToggle:React.FC<IconProps> = ({ className, width='24px', height='24px', fillColor='#fff'}) => (
     <svg 
         className={className} 
         width={width}

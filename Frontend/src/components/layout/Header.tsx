@@ -6,20 +6,26 @@ import config from '../../config/config';
 import { MENU_PROFILE, MENU_HEADER } from '../../config/menu';
 import { MenuProfile } from '../common/MenuProfile';
 import { logout } from '../../redux/auth/authSlice';
-import images from '../../assets/images/images';
+// import images from '../../assets/images/images';
 import { MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
 import { Search } from '../../features/search/components/Search';
 import { AppDispatch, RootStore } from '../../redux/store';
 import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
 import { ShoppingBag } from '../../features/cart/components/ShoppingBag';
+import { useScroll } from '../../hooks/Scoll/useScroll';
 
 export const Header: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const location = useLocation();
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [isShowMenu, setIsShowMenu] = useState(false);
     const [isShowBag, setIsShowBag] = useState(false);
+    const [delayedShowBag, setDelayedShowBag] = useState(false);
+    const scroll = useScroll();
+    
+    const location = useLocation();
+    const isLoginPage = location.pathname === config.routes.login;
+    const isRegisterPage = location.pathname === config.routes.register;
 
     const navigate = useNavigate();
     const menuRef = useRef<HTMLDivElement>(null);
@@ -43,11 +49,6 @@ export const Header: React.FC = () => {
         setIsShowMenu(!isShowMenu);
     }
 
-    // Handle show shopping bag
-    const handleShowShoppingBag = () => {
-        setIsShowBag(!isShowBag);
-    }
-
     // Handle logout
     const handleLogout = () => {
         dispatch(logout());
@@ -58,6 +59,21 @@ export const Header: React.FC = () => {
     useEffect(() => {
         setIsShowMenu(false);
     }, [location.pathname]);
+
+    // Handle show shopping bag
+    const handleShowShoppingBag = () => {
+        if (!isShowBag) {
+            setIsShowBag(true);
+            setTimeout(() => {
+               setDelayedShowBag(true); 
+            }, 300);
+        } else {
+            setDelayedShowBag(false);
+            setTimeout(() => {
+                setIsShowBag(false);
+            }, 300);
+        }
+    }
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -74,20 +90,26 @@ export const Header: React.FC = () => {
 
     return (
         <>
-            <header className='relative'>
-                <div className='fixed gap-[100px] mt-0 top-0 right-0 left-0 height-72 z-1 shadow-xs bg-white flex items-center flex-1 justify-around pt-20 pb-20 px-7'>
+            <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out 
+                    ${isLoginPage || isRegisterPage || scroll ? 'bg-white shadow-md' : 'bg-transparent'}`}
+            >
+                <div className='height-72 z-1 shadow-xs flex items-center flex-1 justify-around pt-20 pb-20 px-7'>
                     <div className='flex items-center justify-between'>
                         <div className='flex items-center mr-40'>
                             <Link to={config.routes.home}>
-                                <img src={images.logo} alt='COZASTORE'/>
+                            <h3 className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${
+                                isLoginPage || isRegisterPage || scroll ? 'text-black' : 'text-white'}`}>
+                                    cozastore
+                            </h3>
                             </Link>
                         </div>
                         <ul className='flex gap-4'>
                             {MENU_HEADER.map((item) => (
-                                <li 
-                                    className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-medium] hover:text-[#6774d5]
-                                        ${location.pathname === item.path ? 'text-[#6774d5]' : 'text-[#333]'}`
-                                    } key={item.id}
+                                <li className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-book] hover:text-[#6774d5] transition-colors duration-300 ${
+                                    location.pathname === item.path
+                                      ? 'text-[#6774d5]'
+                                      : isLoginPage || isRegisterPage || scroll ? 'text-black' : 'text-white'
+                                  }`} key={item.id}
                                 >
                                     <Link to={item.path || '#'}>
                                         {item.title}
@@ -100,14 +122,14 @@ export const Header: React.FC = () => {
                     <ul className='flex'>
                         <li>
                             <button 
-                                className='hover:opacity-80 hover:cursor-pointer transition-opacity'
+                                className='hover:opacity-80 hover:cursor-pointer transition-opacity'    
                                 onClick={handleShowShoppingBag}
                             >
-                                <ShoppingCartIcon />    
+                                <ShoppingCartIcon fillColor={`${isLoginPage || isRegisterPage || scroll ? 'black' : 'white'}`} />    
                             </button>
-                            {isShowBag && (
-                                <div className='absolute'>
-                                    <ShoppingBag />
+                            {delayedShowBag && (
+                                <div className='absolute left-[50%]'>
+                                    <ShoppingBag isVisible={delayedShowBag}/>
                                 </div>
                             )}
                         </li>
@@ -116,7 +138,7 @@ export const Header: React.FC = () => {
                                 className='hover:opacity-80 hover:cursor-pointer transition-opacity'
                                 onClick={handleShowMenuProfile}
                             >
-                                <UserIcon />
+                                <UserIcon strokeColor={`${isLoginPage || isRegisterPage || scroll ? 'black' : 'white'}`} />
                             </button>
                             {isShowMenu && (
                                 <div 
@@ -144,7 +166,7 @@ export const Header: React.FC = () => {
                             <button className='hover:opacity-80 hover:cursor-pointer transition-opacity'
                                 onClick={handleSearch}
                             >
-                                <SearchIcon />
+                                <SearchIcon fillColor={`${isLoginPage || isRegisterPage || scroll ? 'black' : 'white'}`} />
                             </button>
                         </li>
                         {isSearchVisible && <Search isSearchVisible={isSearchVisible} setIsSearchVisible={setIsSearchVisible}/>}
@@ -153,8 +175,10 @@ export const Header: React.FC = () => {
                                 className='flex items-center pl-15 gap-2 hover:cursor-pointer relative'
                                 onClick={handleShow}
                             >
-                                <MenuToggle />
-                                <span className='font-montserrat font-bold uppercase text-xs'>menu</span>
+                                <MenuToggle fillColor={`${isLoginPage || isRegisterPage || scroll ? 'black' : 'white'}`} />
+                                <span className={`font-[GucciSansPro-book] uppercase text-xs transition-colors duration-300 
+                                        ${isLoginPage || isRegisterPage || scroll ? 'text-black' : 'text-white'}`}
+                                >menu</span>
                             </nav>
                         </li>
                     </ul>

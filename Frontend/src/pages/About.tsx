@@ -9,9 +9,9 @@ export const About: React.FC = () => {
                 <Header />
             </div>
             <div className="container">
-                <div className="relative mt-70">
+                <div className="relative">
                     <img src={images.bannerAbout} alt="about image" />
-                    <span className="absolute top-[40%] left-[45%] font-[GucciSansPro-bold] text-5xl text-white uppercase">About</span>
+                    <span className="absolute top-[65%] left-[45%] font-[GucciSansPro-bold] text-5xl text-white uppercase">About</span>
                 </div>
                 <div className="mx-58 pt-75 pb-148">
                     <section>

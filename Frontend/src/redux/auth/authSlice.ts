@@ -16,7 +16,7 @@ const storedUser = localStorage.getItem("user") ? JSON.parse(localStorage.getIte
 
 const initialState: AuthState = {
     user: storedUser,
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem("token") ? true : false,
     status: "idle",
     error:  null,
     loading: false,
@@ -31,6 +31,17 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
             localStorage.removeItem('user');
             localStorage.removeItem("token");
+        },
+        checkAuth: (state) => {
+            const token = localStorage.getItem("token");
+            const user = localStorage.getItem('user');
+            if (token && user) {
+                state.isAuthenticated = true;
+                state.user = JSON.parse(user);
+            } else {
+                state.isAuthenticated = false;
+                state.user = null;
+            }
         }
     },
     extraReducers: (builder) => {
@@ -48,6 +59,7 @@ const authSlice = createSlice({
                 state.status = 'succeeded';
                 state.error = null;
                 localStorage.setItem('user', JSON.stringify(payload.user));
+                localStorage.setItem('token', payload.token);
                 
             })
             .addCase(login.rejected, (state, action) => {
@@ -85,6 +97,7 @@ const authSlice = createSlice({
                 state.error = null;
                 // Store user data in localStorage
                 localStorage.setItem('user', JSON.stringify(state.user));
+                localStorage.setItem('token', payload.token); 
             })
             .addCase(oauthLogin.rejected, (state, action) => {
                 state.error = action.error.message || null;
@@ -94,5 +107,5 @@ const authSlice = createSlice({
     }
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, checkAuth } = authSlice.actions;
 export default authSlice.reducer;

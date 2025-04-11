@@ -10,9 +10,9 @@ export const Blog: React.FC = () => {
                 <Header />
             </div>
             <div className="container">
-                <div className="relative mt-[70px]">
+                <div className="relative">
                     <img src={images.bannerBlog} alt="bannerBlog" />
-                    <span className="absolute top-[40%] left-[45%] uppercase font-[GucciSansPro-bold] text-3xl text-white">blog</span>
+                    <span className="absolute top-[65%] left-[45%] uppercase font-[GucciSansPro-bold] text-5xl text-white">blog</span>
                 </div>
                 <div className="grid gird-cols-2 md:grid-cols-[2fr_1fr] gap-8 mx-[100px] pt-[60px]">
                     <div className="pr-[35px]">

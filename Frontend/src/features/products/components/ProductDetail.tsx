@@ -76,9 +76,9 @@ export const ProductDetail: React.FC = () => {
                             <h3 className="font-[GucciSansPro-book] text-4xl">{product?.name}</h3>
                             <p className="font-[GucciSansPro-light] my-10">{product?.description}</p>
                             <span className="font-[GucciSansPro-bold]">{product?.price}</span>
-                            <div className="py-25">
+                            {/* <div className="py-25">
                                 <span className="font-[GucciSansPro-bold]">Color:</span>
-                            </div>
+                            </div> */}
                             <div className="mb-10">
                                 <span className="font-[GucciSansPro-bold]">Size:</span>
                                 <ul className="flex mt-10">

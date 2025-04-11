@@ -2,9 +2,13 @@ import { useQuery } from "@tanstack/react-query"
 import { getCart } from "../../../services/cart/cartService";
 import { CircleExcelIcon } from "../../../assets/images/icons/icons";
 
-export const ShoppingBag: React.FC = () => {
+interface Props {
+    isVisible: boolean;
+}
+
+export const ShoppingBag: React.FC<Props> = ({ isVisible }) => {
     // Query data
-    const { data, isLoading, error } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['shopping-bag'],
         queryFn: getCart
     });
@@ -12,19 +16,24 @@ export const ShoppingBag: React.FC = () => {
     const cartItems = data?.data?.items ?? [];
 
     if(isLoading) return (
-        <div>
+        <div className={`
+            bg-white pl-15 pr-17 pb-15 pt-12 rounded-[4px] w-[300px] shadow-[#ccc]
+            absolute top-0 left-1/2 -translate-x-1/2
+            transition-all duration-500 ease-in-out transform
+            ${isVisible ? 'translate-y-0 opacity-100 visible' : '-translate-y-10 opacity-0 invisible'}
+          `}>
             <div role="alert" className="flex gap-20">
                 <div>
                     <CircleExcelIcon />
                 </div>
                 <div>
-                    <span>Your shopping bag is empty</span>
+                    <span className="font-[GucciSansPro-light] text-[13px] text-[black]">Your shopping bag is empty</span>
                 </div>
             </div>
         </div>
     );
 
-    if(error) return <div>{`Error: ${error}`}</div>
+    // if(error) return <div>{`Error: ${error}`}</div>
 
     return (
         <div className="relative">
