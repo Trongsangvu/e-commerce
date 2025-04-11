@@ -54,30 +54,7 @@ export const updateCart = async (req: Request, res: Response, next: NextFunction
             return;
         }
 
-        // // Check out user's cart
-        // const cart = await Cart.findOne({ userId });
-        // if(!cart) {
-        //     res.status(404).json({ message: "Cart not found" });
-        //     return;
-        // }
-
-        // // Find the item index in the cart - does it exist?
-        // const itemIndex = cart.items.findIndex(
-        //     item => item.productId.toString() === productId
-        // );
-
-        // if (itemIndex === -1) {
-        //     res.status(404).json({ message: "Product not found in cart" });
-        //     return;
-        // }
-
-        // // Update the quantity directly
-        // cart.items[itemIndex].quantity = quantity;
-        // await cart.save();
-
-
-        // const updatedCart = await Cart.findOne({ userId }).populate("items.productId");
-
+        // operator $set update specific item in the array
         const updatedCart = await Cart.findOneAndUpdate(
             { userId, "items.productId": productId },
             { $set: { "items.$.quantity": quantity }},
@@ -86,7 +63,7 @@ export const updateCart = async (req: Request, res: Response, next: NextFunction
 
         if (!updatedCart) {
             res.status(404).json({ message: "Cart or product not found" });
-            return; 
+            return;
         }
 
         // Clear Redis cache
