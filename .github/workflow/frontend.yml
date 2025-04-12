@@ -1,0 +1,35 @@
+name: Frontend CI/CD
+
+on: 
+  push: 
+    paths:
+      - 'frontend/**'
+    branches:
+      - master
+    
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Setup Node.js
+        users: actions/setup-node@v3
+        with:
+          node-version: '22'
+      
+      - name: Install deps
+        run: cd frontend && npm install
+
+      - name: Build 
+        run: cd frontend && npm run build
+
+      - name: Deploy
+        users: amondnet/vercel-action@v29
+        with: 
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./frontend
