@@ -52,7 +52,7 @@ export const Login:React.FC = () => {
 
                 // Save the token in LocalStorage
                 if (response && response.token) {
-                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('authToken', response.token);
                     // Redirect 
                     navigate('/profile');
                 }

@@ -24,6 +24,7 @@ import location from './icons/reshot-icon-location-marker-ZE5Y87KGQF.svg';
 import profileBanner from './banner/HeroShortStandard_Gucci-SS25-Feb25-Gucci-SS25-Shot3-225-SAFE_001_Default.webp';
 import recommendation from './banner/recommendation.avif';
 import recommendation1 from './banner/recommendation1.avif';
+import detailBanner from './logo/HP_Hero-FullBleed-Desktop_Gucci-MDAY-APR25-GUCCI-FESTIVITIES-ADV-KIM-COCO-A-0096_001_Default.jpg';
 
 interface Images {
     logo: string,
@@ -50,7 +51,8 @@ interface Images {
     location: string,
     profileBanner: string,
     recommendation: string,
-    recommendation1: string
+    recommendation1: string,
+    detailBanner: string
 }
 
 const images: Images = {
@@ -79,6 +81,7 @@ const images: Images = {
     profileBanner,
     recommendation,
     recommendation1,
+    detailBanner
 } as const
 
 export default images;

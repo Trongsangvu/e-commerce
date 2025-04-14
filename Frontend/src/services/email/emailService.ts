@@ -1,4 +1,4 @@
-import HttpService from "../HttpService";
+import HttpService from "../../api/HttpService";
 import { EmailData, EmailResponse } from "../../model/Email";
 
 export const sendEmail = async (data: EmailData): Promise<EmailResponse> => {

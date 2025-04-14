@@ -1,4 +1,4 @@
-import HttpService from '../HttpService';
+import HttpService from '../../api/HttpService';
 import { IProductResponse, Product } from '../../types/product-type';
 
 // Get all products

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { ILogin, IUserResponse, ILoginResponse, IRegister, IRegisterResponse,IOAuthUser, IOAuthResponse } from "../../model/Auth";
-import HttpService from '../HttpService';
+import HttpService from '../../api/HttpService';
 
 const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> => {
     return HttpService.post("/auth/login", data);

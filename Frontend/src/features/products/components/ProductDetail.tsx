@@ -9,6 +9,7 @@ import { MENU_SIZE } from '../../../config/menu';
 import { SuggestProducts } from "./SuggestProducts";
 import { AppDispatch, RootStore } from '../../../redux/store';
 import { addToCartAction } from "../../../redux/cart/cartAction";
+import images from '../../../assets/images/images';
 
 export const ProductDetail: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -65,6 +66,9 @@ export const ProductDetail: React.FC = () => {
         <div>
             <div>
                 <Header />
+            </div>
+            <div className="relative">
+                <img src={images.detailBanner} alt="bannerBlog" />
             </div>
             <div className="bg-[#ffffffd9] mb-20">
                 <div className="mx-100 mt-100">
