@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import HttpService from '../../api/HttpService';
+import HttpService from '../HttpService';
 import { ISearch, ISearchResponse } from '../../model/Search';
 
 export const searchProducts = async (data: ISearch): Promise<ISearchResponse> => {

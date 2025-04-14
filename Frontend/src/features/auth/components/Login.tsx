@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { OAuthProvider  } from 'appwrite';
+// import { OAuthProvider  } from 'appwrite';
 import { Link } from 'react-router-dom';
 import config from '../../../config/config';
 import { login } from '../../../redux/auth/authAction';    
@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../../../redux/store';
 import { AddressIcon, EyeSlashIcon, GoogleIcon } from '../../../assets/images/icons/icons';
 import { Footer } from '../../../components/layout/Footer';
-import { account } from '../../../services/OAuth/appWrite';
-import { oauthLogin } from '../../../redux/auth/authAction';
+// import { account } from '../../../services/OAuth/appWrite';
+// import { oauthLogin } from '../../../redux/auth/authAction';
+import { handleLoginGoogle } from '../../../auth/GoogleLoginButton';
 
 export const Login:React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -33,37 +34,37 @@ export const Login:React.FC = () => {
     };
 
     // Handle Login with Goolge 
-    const handleLoginWithGoogle = async () =>{
-        try {
-            const success = 'http://localhost:5173/profile'; // URL to redirect on success
-            const failure = 'http://localhost:5173/login'; // URL to redirect on failure
+    // const handleLoginWithGoogle = async () =>{
+    //     try {
+    //         const success = 'http://localhost:5173/profile'; // URL to redirect on success
+    //         const failure = 'http://localhost:5173/login'; // URL to redirect on failure
   
-            account.createOAuth2Session(OAuthProvider.Google, success, failure);
+    //         account.createOAuth2Session(OAuthProvider.Google, success, failure);
 
-            // Get current session after successful login
-            const session = await account.getSession('current');
-            if (session) {
-                const user = await account.get();
+    //         // Get current session after successful login
+    //         const session = await account.getSession('current');
+    //         if (session) {
+    //             const user = await account.get();
 
-                console.log('Tên người dùng:', user.name); 
+    //             console.log('Tên người dùng:', user.name); 
 
-                const response = await dispatch(oauthLogin(user)).unwrap();
-                console.log('Logged in with Google: ', response);
+    //             const response = await dispatch(oauthLogin(user)).unwrap();
+    //             console.log('Logged in with Google: ', response);
 
-                // Save the token in LocalStorage
-                if (response && response.token) {
-                    localStorage.setItem('authToken', response.token);
-                    // Redirect 
-                    navigate('/profile');
-                }
+    //             // Save the token in LocalStorage
+    //             if (response && response.token) {
+    //                 localStorage.setItem('authToken', response.token);
+    //                 // Redirect 
+    //                 navigate('/profile');
+    //             }
 
-            } else {
-                console.log('No session after Google login');}
-        }
-        catch(error) {
-            console.error('Google login failed: ', error);
-        }
-    }
+    //         } else {
+    //             console.log('No session after Google login');}
+    //     }
+    //     catch(error) {
+    //         console.error('Google login failed: ', error);
+    //     }
+    // }
 
     return (
         <div className='flex flex-col min-h-screen mt-30'>
@@ -71,7 +72,7 @@ export const Login:React.FC = () => {
                 <div className='flex flex-col items-center justify-center min-h-screen w-full'>
                     <div
                         className='bg-white w-[328px] mt-90 mb-5 border border-[#1a1a1a] uppercase flex items-center justify-center h-[56px] text-black cursor-pointer text-center p-[10px] font-[GucciSansPro-medium]'
-                        onClick={handleLoginWithGoogle}
+                        onClick={handleLoginGoogle}
                     >
                         <button type='button' className='uppercase cursor-pointer flex items-center gap-10'>
                             <GoogleIcon />

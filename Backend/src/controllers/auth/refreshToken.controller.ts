@@ -5,6 +5,7 @@ import { generateAccessToken } from '../../utils/token/generateAccessToken';
 export const refreshToken = async (req: Request, res: Response): Promise<void> => {
     try {
         console.log("Received Refresh Token:", req.cookies.refreshToken);
+        // Get refresh token from cookies
         const refreshTokenFromCookie = req.cookies.refreshToken;
         if (!refreshTokenFromCookie) {
             res.status(401).json({ message: "Access denied. No refresh token provided." });
@@ -16,6 +17,7 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
             return;
         }
 
+        // Get refresh token secret from env
         const jwtRefreshSecret = Buffer.from(process.env.JWT_REFRESH_SECRET!, "base64").toString("utf8");
         if (!jwtRefreshSecret) {
             throw new Error("JWT_REFRESH_SECRET is not defined in env");

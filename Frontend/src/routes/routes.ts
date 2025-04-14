@@ -11,6 +11,7 @@ import { Shop } from '../pages/Shop';
 import { About } from '../pages/About';
 import { Blog } from "../pages/Blog";
 import { Contact } from "../pages/Contact";
+import { OAuthSuccess } from "../auth/OAuthSuccess";
 
 // Public routes: no need sign in to access
 const publicRoutes = [
@@ -26,6 +27,7 @@ const publicRoutes = [
     { path: config.routes.about, component: About },
     { path: config.routes.blog, component: Blog },
     { path: config.routes.contact, component: Contact },
+    { path: config.routes.oauthSuccess, component: OAuthSuccess },
 ];
 
 // Private routes: need sign in to access

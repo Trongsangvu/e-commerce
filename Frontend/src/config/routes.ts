@@ -12,6 +12,7 @@ type Routes = {
     blog: string,
     about: string,
     contact: string,
+    oauthSuccess: string;
 }
 
 const routes: Routes = {
@@ -28,6 +29,7 @@ const routes: Routes = {
     blog: '/blog',
     about: '/about',
     contact: '/contact',
+    oauthSuccess: '/oauth-success'
 }
 
 export default routes;

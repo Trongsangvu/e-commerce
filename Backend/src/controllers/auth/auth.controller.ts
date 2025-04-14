@@ -21,9 +21,15 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
             return;
         }
 
+        const payload = {
+            id: user._id.toString(),
+            email: user.email,
+            role: user.role ?? "user"
+        }
+
         // Generate tokens
         const token = generateAccessToken({ id: user._id, email: user.email, role: user.role });
-        const refreshToken = generateRefreshToken({ id: user._id,  email: user.email, role: user.role });
+        const refreshToken = generateRefreshToken(payload);
 
         // console.log(jwt.decode(refreshToken));
         // Set refesh token in cookie
@@ -75,7 +81,7 @@ export const register = async (req: Request, res: Response, next: NextFunction):
 
 export const oauthLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
    try {
-        const { user }= req.body;
+        const user = req.body;
 
         // Check if user exists in DB
         let existingUser = await User.findOne({ email: user.email });
@@ -97,9 +103,9 @@ export const oauthLogin = async (req: Request, res: Response, next: NextFunction
             role: existingUser.role
         });
         const refreshToken = generateRefreshToken({
-            id: existingUser._id,
+            id: existingUser._id.toString(),
             email: existingUser.email,
-            role: existingUser.role
+            role: existingUser.role ?? "user"
         });
 
         // Set refesh token in cookie

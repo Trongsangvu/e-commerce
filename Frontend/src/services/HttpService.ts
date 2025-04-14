@@ -8,6 +8,7 @@
 // };
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { getToken } from "../auth/authToken";
 
 class HttpService {
     private axiosInstance: AxiosInstance;
@@ -25,7 +26,7 @@ class HttpService {
         // Interceptor to add the token to the request 
         this.axiosInstance.interceptors.request.use(
             config => {
-                const token = localStorage.getItem('authToken')?.trim();
+                const token = getToken()?.trim();
                 if(token) {
                     config.headers['Authorization'] = `Bearer ${token}`;
                 } else {

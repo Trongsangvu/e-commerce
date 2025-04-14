@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import HttpService from "../../api/HttpService";
+import HttpService from "../HttpService";
 import { CartData, ICartResponse } from "../../types/cart-type";
 
 const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
