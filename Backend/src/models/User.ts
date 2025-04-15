@@ -3,6 +3,7 @@ import { Users } from "../types/user/user-types";
 
 const userSchema = new Schema<Users>(
     {
+        appwriteId: { type: String, required: true, unique: true},
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },

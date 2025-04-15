@@ -65,16 +65,21 @@ export const register = createAsyncThunk<IRegisterResponse, IRegister>(
 );
 
 export const oauthLogin = createAsyncThunk<IOAuthResponse, IOAuthUser>(
-    'auth/oauth/google',
+    'auth/oauth/appwrite-login',
     async (data, { rejectWithValue }) => {
         try {
             const response = await oauthLoginService(data);
             const userData = response.data;
 
-            
-            if (userData?.token) {
+            // Check and ensure that data is valid
+            if (userData?.token && userData?.user) {
                 localStorage.setItem("token", userData.token);
-                localStorage.setItem("user", JSON.stringify(userData));
+                localStorage.setItem("user", JSON.stringify(userData.user));
+            } else {
+                return rejectWithValue({
+                    message: "Invalid response data",
+                    status: 400
+                });
             }
             return userData;
         }

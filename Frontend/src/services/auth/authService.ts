@@ -17,8 +17,8 @@ const oauthLogin = async (data: IOAuthUser): Promise<AxiosResponse<IOAuthRespons
             throw new Error("Missing required email in OAuth data");
         }
 
-        console.log("Sending OAuth data: ", data);
-        return await HttpService.post("/auth/oauth/google", data);
+        console.log("Sending OAuth data: ", data);  
+        return await HttpService.post("/auth/oauth/appwrite-login", data);
     } catch (error) {
         console.error("Oauth login error: ", error);
         throw error;

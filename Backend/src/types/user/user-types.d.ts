@@ -3,4 +3,5 @@ export interface Users extends Document {
     email: string;
     password: string;
     role?: "admin" | "user";
+    appwriteId?: string;
 }

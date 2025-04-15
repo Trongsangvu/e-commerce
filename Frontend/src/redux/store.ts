@@ -4,6 +4,7 @@ import searchReducer from './search/searchSlice';
 import sideBarReducer from './sideBar/sideBarSlice';
 import categoryReducer from './filterProducts/filterProductSlice';
 import cartReducer from './cart/cartSlice';
+import userReducer from './user/userSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         sideBar: sideBarReducer,
         category: categoryReducer,
         cart: cartReducer,
+        user: userReducer,
     }
 });
 

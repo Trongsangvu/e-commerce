@@ -58,16 +58,18 @@ export interface IOAuthUser {
     email: string;
     provider?: string; 
     providerId?: string;
+    appwriteId?: string; 
 }
 
 export interface IOAuthResponse {
     token: string;
-    user: {
-        $id: string;
-        name: string;
-        email: string;
-        role: roles;
-    }
+    // user: {
+    //     $id: string;
+    //     name: string;
+    //     email: string;
+    //     role: roles;
+    // }
+    user: IOAuthUser & { role: roles };
 }
 
 export interface IUserResponse {

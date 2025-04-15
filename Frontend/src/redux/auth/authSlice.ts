@@ -100,8 +100,9 @@ const authSlice = createSlice({
                 localStorage.setItem('token', payload.token); 
             })
             .addCase(oauthLogin.rejected, (state, action) => {
-                state.error = action.error.message || null;
+                state.error = action.error.message || "Login failed. Please try again.";
                 state.isAuthenticated = false;
+                state.user = null; // Optional, to clear user data
             });
 
     }

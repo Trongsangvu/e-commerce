@@ -81,47 +81,59 @@ export const register = async (req: Request, res: Response, next: NextFunction):
 
 export const oauthLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
    try {
-        const user = req.body;
+        const { name, email, $id: appwriteId } = req.body;
+
+        if (!email || !appwriteId) {
+            res.status(400).json({ message: "Missing info from OAuth provider" });
+            return;
+        }
 
         // Check if user exists in DB
-        let existingUser = await User.findOne({ email: user.email });
+        let user = await User.findOne({ email });
 
-        if(!existingUser) {
-            // Create new user if doesn't exist
-            existingUser = await User.create({
-                email: user.email,
-                name: user.name,
-                provider: 'google',
-                providerId: user.$id
+        if (!user) {
+            // Create new user if not exists
+            user = await User.create({
+                email,
+                name,
+                appwriteId,
+                role: "user"
             });
+        } else if (!user.appwriteId) {
+            // Update appwriteId, if user created manual before
+            user.appwriteId = appwriteId;
+            await user.save();
         }
 
         // Generate tokens
         const token = generateAccessToken({
-            id: existingUser._id,
-            email: existingUser.email,
-            role: existingUser.role
+            id: user._id,
+            email: user.email,
+            role: user.role
         });
         const refreshToken = generateRefreshToken({
-            id: existingUser._id.toString(),
-            email: existingUser.email,
-            role: existingUser.role ?? "user"
+            id: user._id.toString(),
+            email: user.email,
+            role: user.role ?? "user"
         });
 
-        // Set refesh token in cookie
+        // Set refesh token in cookie 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: false,
-            sameSite: "strict"
+            // secure: process.env.NODE_ENV === 'production',
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
         // Return token and some basic user info
         res.json({
             token,
             user: {
-                id: existingUser._id,
-                name: existingUser.name,
-                email: existingUser.email,
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
             }
         })
    } catch(error) {

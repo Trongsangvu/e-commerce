@@ -8,7 +8,7 @@
 // };
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { getToken } from "../auth/authToken";
+import { getToken, removeToken } from "../auth/authToken";
 
 class HttpService {
     private axiosInstance: AxiosInstance;
@@ -44,7 +44,8 @@ class HttpService {
                 // Handle general errors such as 404-authorized, 403-forbidden
                 if(error.response.status === 401) {
                     // Logout the user, redirect to login page
-                    localStorage.removeItem('token');
+                    // localStorage.removeItem('token');
+                    removeToken();
                     // window.location.href = '/login';
                 } 
                 return Promise.reject(error);
@@ -60,12 +61,23 @@ class HttpService {
 
     // Method POST
     public post<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+        const token = getToken()?.trim();
+        if (!token) {
+            // Nếu không có token, throw error hoặc xử lý phù hợp
+            console.log('No auth token found in localStorage!');
+            throw new Error('No auth token found');
+        }
+
         return this.axiosInstance.post<T>(url, data, {
             ...config,
             headers: {
                 ...config?.headers,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
             }
+        }).catch(error => {
+            console.error('API request failed', error);
+            throw error;
         });
     }
 
