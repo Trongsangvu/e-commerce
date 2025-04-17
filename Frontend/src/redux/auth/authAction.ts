@@ -4,7 +4,7 @@ import { login as loginService } from '../../services/auth/authService';
 import { register as registerService } from '../../services/auth/authService';
 import { oauthLogin as oauthLoginService } from '../../services/auth/authService';
 import { AxiosError } from "axios";
-
+import { setToken } from "../../auth/authToken";
 
 const isAxiosError = (err: unknown): err is AxiosError<{ message: string }> => {
     return (err as AxiosError).isAxiosError !== undefined;
@@ -16,9 +16,14 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
         try {
             const response = await loginService(data);
             const userData = response.data;
+
+            if (!userData) {
+                return rejectWithValue({ message: "Invalid response data" });
+            }
             
-            if(userData?.token) {
-                localStorage.setItem("token", userData.token);
+            if(userData.token) {
+                // localStorage.setItem("token", userData.token);
+                setToken(userData.token);
                 localStorage.setItem("user", JSON.stringify(userData));
             } else {
                 console.warn("No token received from API!");
