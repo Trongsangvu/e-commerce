@@ -5,6 +5,7 @@ import { register as registerService } from '../../services/auth/authService';
 import { oauthLogin as oauthLoginService } from '../../services/auth/authService';
 import { AxiosError } from "axios";
 import { setToken } from "../../auth/authToken";
+import Cookies from "js-cookie";
 
 const isAxiosError = (err: unknown): err is AxiosError<{ message: string }> => {
     return (err as AxiosError).isAxiosError !== undefined;
@@ -22,12 +23,12 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
             }
             
             if(userData.token) {
-                // localStorage.setItem("token", userData.token);
                 setToken(userData.token);
                 localStorage.setItem("user", JSON.stringify(userData));
             } else {
                 console.warn("No token received from API!");
             }
+            // console.log("Received token:", userData.token);
             
             console.log("Login successful:", {
                 email: data.email,
@@ -40,7 +41,6 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
             const err = error as AxiosError<{ message: string }>;
 
             console.log("Error response: ", error);
-            // return rejectWithValue(error);
             return rejectWithValue(err.response?.data || { message: err.message });
         }
     }
@@ -78,8 +78,8 @@ export const oauthLogin = createAsyncThunk<IOAuthResponse, IOAuthUser>(
 
             // Check and ensure that data is valid
             if (userData?.token && userData?.user) {
-                localStorage.setItem("token", userData.token);
-                localStorage.setItem("user", JSON.stringify(userData.user));
+                Cookies.set("token", userData.token);
+                Cookies.set("user", JSON.stringify(userData.user));
             } else {
                 return rejectWithValue({
                     message: "Invalid response data",

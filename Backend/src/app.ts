@@ -23,7 +23,7 @@ connectDB();
 
 app.use(cors({
     origin: process.env.CLIENT_URL,
-    credentials: true
+    credentials: true // allow to send cookie cross-origin
 }));
 
 // Webhook

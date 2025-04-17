@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { AppDispatch } from "../redux/store";
 import { useEffect } from "react";
 import { account } from "../services/OAuth/appWrite";
@@ -21,16 +22,12 @@ export const OAuthSuccess = () => {
                     return;
                 } 
                 
-                // const allowedEmails = ["vusangtrong58@gmail.com"];
                 const user = await account.get();
                 console.log("User from Appwrite:", user);
 
-                // if (!allowedEmails.includes(user.email)) {
-                //     await account.deleteSession('current');
-                //     alert("Vui lòng đăng nhập bằng tài khoản được cho phép");
-                //     navigate('/login');
-                //     return;
-                // }
+                if (user.email !== "vusangtrong58@gmail.com") {
+                    console.warn("Logged in with a different email:", user.email);
+                }
 
                 const response = await dispatch(oauthLogin({
                     $id: user.$id,
@@ -38,12 +35,12 @@ export const OAuthSuccess = () => {
                     email: user.email
                 })).unwrap(); // This will automatically extract and type the payload
 
-                    // Access payload here, not `data`
+                // Access payload here, not `data`
                 const { token, user: userData } = response;
                 
                 // Store token and user data in localStorage
-                localStorage.setItem('token', token);
-                localStorage.setItem('user', JSON.stringify(userData));
+                Cookies.set('token', token, { expires: 7 });
+                Cookies.set('user', JSON.stringify(userData), { expires: 7 });
 
                 // Dispatch user data
                 dispatch(setUser(userData));

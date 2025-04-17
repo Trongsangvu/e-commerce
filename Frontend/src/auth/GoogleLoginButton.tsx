@@ -8,9 +8,11 @@ export const handleLoginGoogle = async () => {
 
     try {
         await account.deleteSession('current');
+        console.log("session cũ đã bị xóa, bắt đầu quy trình OAuth");
+
+        await account.createOAuth2Session(OAuthProvider.Google, success, failure);
     } catch (err) {
         console.log("No session to delete before login", err);
     }
 
-    account.createOAuth2Session(OAuthProvider.Google, success, failure);
 }

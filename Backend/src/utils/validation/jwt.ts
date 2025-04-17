@@ -3,7 +3,12 @@ import jwt from 'jsonwebtoken';
 import { JwtPayload } from 'jsonwebtoken';
 
 export const validateToken = (req: Request, res: Response, next: NextFunction): void => {
-    const token = req.header("authorization");
+    const authHeader = req.header("authorization");
+    const cookieToken = req.cookies?.token;
+
+    // const token = req.header("authorization");
+    const token = authHeader?.replace("Bearer ", "") || cookieToken;
+
     if(!token) {
         res.status(401).json({ message: "Access denied. "});
         return;
@@ -15,7 +20,7 @@ export const validateToken = (req: Request, res: Response, next: NextFunction): 
             throw new Error("JWT_SECRET is not defined in environment variables");
         }
 
-        const validated = jwt.verify(token.replace("Bearer ", ""), jwtSecret);
+        const validated = jwt.verify(token, jwtSecret);
         req.user = validated as JwtPayload;
         next();
     }

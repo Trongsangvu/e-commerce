@@ -4,7 +4,7 @@ import HttpService from '../HttpService';
 import { getToken } from '../../auth/authToken';
 
 const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> => {
-    return HttpService.post("/auth/login", data);
+    return HttpService.post("/auth/login", data, { requiresAuth: false });
 }
 
 const register = (data: IRegister):  Promise<AxiosResponse<IRegisterResponse>> => {
@@ -28,16 +28,13 @@ const oauthLogin = async (data: IOAuthUser): Promise<AxiosResponse<IOAuthRespons
 const getProfileUser = async (): Promise<IUserResponse> => {
     const token = getToken();
     if (!token) {
-        console.error("No token found in localStorage");
+        console.error("No token found in cookies");
         throw new Error("No token found");
     }
 
     try {
-        const response = await HttpService.get<IUserResponse>("/users/profile", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const response = await HttpService.get<IUserResponse>("/users/profile");
+        
         console.log('Profile Response:', response);
        return response.data;
     } catch (error) {

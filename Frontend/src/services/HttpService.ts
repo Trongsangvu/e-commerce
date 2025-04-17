@@ -8,7 +8,8 @@
 // };
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { getToken, removeToken } from "../auth/authToken";
+import { removeToken } from "../auth/authToken";
+import Cookies from "js-cookie";
 
 class HttpService {
     private axiosInstance: AxiosInstance;
@@ -18,15 +19,16 @@ class HttpService {
         this.axiosInstance = axios.create({
             baseURL: 'http://localhost:3000/api',
             timeout: 10000,
+            withCredentials: true, // Important for send cookies
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
         });
 
         // Interceptor to add the token to the request 
         this.axiosInstance.interceptors.request.use(
             config => {
-                const token = getToken()?.trim();
+                const token = Cookies.get('token'); // Get token from cookies
                 if(token) {
                     config.headers['Authorization'] = `Bearer ${token}`;
                 } else {
@@ -43,9 +45,8 @@ class HttpService {
             error => {
                 // Handle general errors such as 404-authorized, 403-forbidden
                 if(error.response.status === 401) {
-                    // Logout the user, redirect to login page
-                    // localStorage.removeItem('token');
                     removeToken();
+                    // Logout the user, redirect to login page
                     // window.location.href = '/login';
                 } 
                 return Promise.reject(error);
@@ -60,7 +61,43 @@ class HttpService {
     }
 
     // Method POST
-    // public post<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    public post<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig & { requiresAuth?: boolean }): Promise<AxiosResponse<T>> {
+        const requiresAuth = config?.requiresAuth !== false; // Mặc định là true
+        
+        if(requiresAuth) {
+            const token = Cookies.get('token'); // Get token from cookies
+            if(!token) {
+                console.warn('No auth token found in cookies!');
+                return Promise.reject(new Error('Authentication required'));
+            }
+        }
+
+        return this.axiosInstance.post<T>(url, data, config).catch(error => {
+            console.error('API request failed', error);
+            throw error;
+        })
+    }
+
+    // Method PUt 
+    public put<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+        return this.axiosInstance.put<T>(url, data, config);
+    }
+
+    public patch<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+        return this.axiosInstance.put<T>(url, data, {
+            ...config,
+            headers: {
+                ...config?.headers,
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+}
+
+export default new HttpService();
+
+// Save token in localStorage
+// public post<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     //     const token = getToken()?.trim();
     //     if (!token) {
     //         // Nếu không có token, throw error hoặc xử lý phù hợp
@@ -81,37 +118,3 @@ class HttpService {
     //     });
     // }
     // Sửa phương thức post()
-    public post<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig & { requiresAuth?: boolean }): Promise<AxiosResponse<T>> {
-        const token = localStorage.getItem('token');
-        const requiresAuth = config?.requiresAuth !== false; // Mặc định là true
-        
-        if (requiresAuth && !token) {
-            console.warn('No auth token found in localStorage!');
-            // Thay vì throw error, có thể redirect người dùng đến trang đăng nhập
-            // window.location.href = '/login';
-            return Promise.reject(new Error('Authentication required'));
-        }
-
-        return this.axiosInstance.post<T>(url, data, config).catch(error => {
-            console.error('API request failed', error);
-            throw error;
-        });
-    }
-
-    // Method PUt 
-    public put<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-        return this.axiosInstance.put<T>(url, data, config);
-    }
-
-    public patch<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-        return this.axiosInstance.put<T>(url, data, {
-            ...config,
-            headers: {
-                ...config?.headers,
-                'Content-Type': 'application/json'
-            }
-        });
-    }
-}
-
-export default new HttpService();
