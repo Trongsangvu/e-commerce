@@ -117,7 +117,7 @@ export const oauthLogin = async (req: Request, res: Response, next: NextFunction
             role: user.role ?? "user"
         });
 
-        // Set refesh token in cookie 
+        // Set refesh token in cookie
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: false,

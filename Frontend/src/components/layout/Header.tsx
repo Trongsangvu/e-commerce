@@ -13,6 +13,8 @@ import { AppDispatch, RootStore } from '../../redux/store';
 import { sideBarShow } from '../../redux/sideBar/sideBarSlice';
 import { ShoppingBag } from '../../features/cart/components/ShoppingBag';
 import { useScroll } from '../../hooks/Scoll/useScroll';
+import { useQuery } from '@tanstack/react-query';
+import { getCart } from '../../services/cart/cartService';
 
 export const Header: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -20,6 +22,7 @@ export const Header: React.FC = () => {
     const [isShowMenu, setIsShowMenu] = useState(false);
     const [isShowBag, setIsShowBag] = useState(false);
     const [delayedShowBag, setDelayedShowBag] = useState(false);
+
     const scroll = useScroll();
     
     const location = useLocation();
@@ -49,9 +52,9 @@ export const Header: React.FC = () => {
     }
 
     // Handle logout
-    const handleLogout = () => {
+    const handleLogout = async () => {
         dispatch(logout());
-        navigate('/');
+        navigate('/login');
     }
 
     // Handle hide menu profile when transition page
@@ -73,6 +76,16 @@ export const Header: React.FC = () => {
             }, 300);
         }
     }, [isShowBag]);
+
+    // Get cart items
+    const { data } = useQuery({
+        queryKey: ['shopping-bag'],
+        queryFn: getCart,
+        enabled: isAuthenticated,
+    });
+
+    // count cart items
+    const cartItemsCount = data?.data?.items?.length ?? 0;
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -119,12 +132,17 @@ export const Header: React.FC = () => {
                         </ul>
                     </div>
                     <ul className='flex'>
-                        <li>
+                        <li className=''>
                             <button 
                                 className='hover:opacity-80 hover:cursor-pointer transition-opacity'    
                                 onClick={handleShowShoppingBag}
                             >
                                 <ShoppingCartIcon fillColor={`${isLoginPage || isRegisterPage || scroll ? 'black' : 'white'}`} />    
+                                {cartItemsCount > 0 && (
+                                    <span className='absolute top-26 right-[20.7%] text-[10px] text-[#fff]'>
+                                        {cartItemsCount}
+                                    </span>
+                                )}
                             </button>
                             {delayedShowBag && (
                                 <div className='absolute left-[50%]'>

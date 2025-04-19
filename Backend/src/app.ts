@@ -36,7 +36,7 @@ app.use(cookieParser());
 // Create http server
 // export const server = http.createServer(app);
 
-// Routes 
+// Routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);

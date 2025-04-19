@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { login, oauthLogin, register } from './authAction';
 import { AuthUser, ILoginResponse, IRegisterResponse,IOAuthResponse } from '../../model/Auth';
-
+import { removeToken, getToken, setToken } from '../../auth/authToken';
 
 // Implicity authReducer
 interface AuthState {
@@ -16,7 +16,7 @@ const storedUser = localStorage.getItem("user") ? JSON.parse(localStorage.getIte
 
 const initialState: AuthState = {
     user: storedUser,
-    isAuthenticated: localStorage.getItem("token") ? true : false,
+    isAuthenticated: getToken() ? true : false,
     status: "idle",
     error:  null,
     loading: false,
@@ -30,10 +30,10 @@ const authSlice = createSlice({
             state.user = null;
             state.isAuthenticated = false;
             localStorage.removeItem('user');
-            localStorage.removeItem("token");
+            removeToken();
         },
         checkAuth: (state) => {
-            const token = localStorage.getItem("token");
+            const token = getToken();
             const user = localStorage.getItem('user');
             if (token && user) {
                 state.isAuthenticated = true;
@@ -59,7 +59,7 @@ const authSlice = createSlice({
                 state.status = 'succeeded';
                 state.error = null;
                 localStorage.setItem('user', JSON.stringify(payload.user));
-                localStorage.setItem('token', payload.token);
+                setToken(payload.token);
                 
             })
             .addCase(login.rejected, (state, action) => {
@@ -97,7 +97,7 @@ const authSlice = createSlice({
                 state.error = null;
                 // Store user data in localStorage
                 localStorage.setItem('user', JSON.stringify(state.user));
-                localStorage.setItem('token', payload.token); 
+                setToken(payload.token); 
             })
             .addCase(oauthLogin.rejected, (state, action) => {
                 state.error = action.error.message || "Login failed. Please try again.";
