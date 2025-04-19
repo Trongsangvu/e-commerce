@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';  
+import { useCallback, useEffect, useRef, useState } from 'react';  
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
@@ -6,7 +6,6 @@ import config from '../../config/config';
 import { MENU_PROFILE, MENU_HEADER } from '../../config/menu';
 import { MenuProfile } from '../common/MenuProfile';
 import { logout } from '../../redux/auth/authSlice';
-// import images from '../../assets/images/images';
 import { MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
 import { Search } from '../../features/search/components/Search';
@@ -61,7 +60,7 @@ export const Header: React.FC = () => {
     }, [location.pathname]);
 
     // Handle show shopping bag
-    const handleShowShoppingBag = () => {
+    const handleShowShoppingBag = useCallback(() => {
         if (!isShowBag) {
             setIsShowBag(true);
             setTimeout(() => {
@@ -73,7 +72,7 @@ export const Header: React.FC = () => {
                 setIsShowBag(false);
             }, 300);
         }
-    }
+    }, [isShowBag]);
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -129,7 +128,7 @@ export const Header: React.FC = () => {
                             </button>
                             {delayedShowBag && (
                                 <div className='absolute left-[50%]'>
-                                    <ShoppingBag isVisible={delayedShowBag}/>
+                                    <ShoppingBag handleShowBag={handleShowShoppingBag} isVisible={delayedShowBag}/>
                                 </div>
                             )}
                         </li>

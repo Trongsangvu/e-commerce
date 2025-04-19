@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { OAuthProvider  } from 'appwrite';
 import { Link } from 'react-router-dom';
 import config from '../../../config/config';
 import { login } from '../../../redux/auth/authAction';    
@@ -8,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { RootStore, AppDispatch } from '../../../redux/store';
 import { AddressIcon, EyeSlashIcon, GoogleIcon } from '../../../assets/images/icons/icons';
 import { Footer } from '../../../components/layout/Footer';
-// import { account } from '../../../services/OAuth/appWrite';
-// import { oauthLogin } from '../../../redux/auth/authAction';
 import { handleLoginGoogle } from '../../../auth/GoogleLoginButton';
 
 export const Login:React.FC = () => {
@@ -19,8 +16,6 @@ export const Login:React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-    // const { handleLoginWithGoogle } = useGoogleLogin();
-
     const navigate = useNavigate();
     
     // Handle Form submit events
@@ -32,39 +27,6 @@ export const Login:React.FC = () => {
 
         navigate('/');
     };
-
-    // Handle Login with Goolge 
-    // const handleLoginWithGoogle = async () =>{
-    //     try {
-    //         const success = 'http://localhost:5173/profile'; // URL to redirect on success
-    //         const failure = 'http://localhost:5173/login'; // URL to redirect on failure
-  
-    //         account.createOAuth2Session(OAuthProvider.Google, success, failure);
-
-    //         // Get current session after successful login
-    //         const session = await account.getSession('current');
-    //         if (session) {
-    //             const user = await account.get();
-
-    //             console.log('Tên người dùng:', user.name); 
-
-    //             const response = await dispatch(oauthLogin(user)).unwrap();
-    //             console.log('Logged in with Google: ', response);
-
-    //             // Save the token in LocalStorage
-    //             if (response && response.token) {
-    //                 localStorage.setItem('authToken', response.token);
-    //                 // Redirect 
-    //                 navigate('/profile');
-    //             }
-
-    //         } else {
-    //             console.log('No session after Google login');}
-    //     }
-    //     catch(error) {
-    //         console.error('Google login failed: ', error);
-    //     }
-    // }
 
     return (
         <div className='flex flex-col min-h-screen mt-30'>
