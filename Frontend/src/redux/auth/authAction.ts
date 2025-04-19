@@ -4,7 +4,7 @@ import { login as loginService } from '../../services/auth/authService';
 import { register as registerService } from '../../services/auth/authService';
 import { oauthLogin as oauthLoginService } from '../../services/auth/authService';
 import { AxiosError } from "axios";
-import { setToken } from "../../auth/authToken";
+import { setToken } from '../../auth/authToken';
 import Cookies from "js-cookie";
 
 const isAxiosError = (err: unknown): err is AxiosError<{ message: string }> => {
@@ -78,7 +78,7 @@ export const oauthLogin = createAsyncThunk<IOAuthResponse, IOAuthUser>(
 
             // Check and ensure that data is valid
             if (userData?.token && userData?.user) {
-                Cookies.set("token", userData.token);
+                setToken(userData.token);
                 Cookies.set("user", JSON.stringify(userData.user));
             } else {
                 return rejectWithValue({

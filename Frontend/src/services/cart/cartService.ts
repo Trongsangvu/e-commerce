@@ -3,13 +3,8 @@ import HttpService from "../HttpService";
 import { CartData, ICartResponse } from "../../types/cart-type";
 
 const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
-    const token = localStorage.getItem("token");
     try {
-        const response = await HttpService.get<ICartResponse>("/carts", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const response = await HttpService.get<ICartResponse>("/carts", { withCredentials: true });
         return response;
     } catch(error) {
         if (error instanceof AxiosError && error?.response?.status === 403) {
@@ -21,15 +16,10 @@ const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
 }
 
 const addToCart = async (data: CartData): Promise<AxiosResponse> => {
-    const token = localStorage.getItem("token");
     try {
         const response = HttpService.post(
             "/carts/add", { productId: data.productId, quantity: data.quantity },
-            { 
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }
+            { withCredentials: true }
         );
         console.log('Sending cart data:', { productId: data.productId, quantity: data.quantity });
         return response;
@@ -39,42 +29,17 @@ const addToCart = async (data: CartData): Promise<AxiosResponse> => {
     }
 }
 
-// const updateCart = async (data: CartData): Promise<AxiosResponse> => {
-//     const token = localStorage.getItem("token");
-//     try {
-//         const response = await HttpService.put(
-//             `/carts/update/${data.productId}`, { quantity: data.quantity },
-//             {
-//                 headers: {
-//                     Authorization: `Bearer ${token}`,
-//                 }
-//             }
-//         )   
-//         return response;
-//     }
-//     catch(error) {
-//         console.error('Error updating cart: ', error);
-//         throw error;
-//     }
-// }
-
 const updateCart = async (data: CartData): Promise<AxiosResponse> => {
-    const token = localStorage.getItem("token");
     try {
         const response = await HttpService.put(
             `/carts/update/${data.productId}`, { quantity: data.quantity },
             {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    // Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
+                withCredentials: true
             }
         )   
         return response;
     }
     catch(error) {
-        // console.error('Error updating cart: ', error);
-        // throw error;
         if (error instanceof AxiosError) {
             console.error('Error updating cart:', {
                 status: error.response?.status,
