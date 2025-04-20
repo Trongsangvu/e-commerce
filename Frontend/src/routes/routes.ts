@@ -12,25 +12,29 @@ import { About } from '../pages/About';
 import { Blog } from "../pages/Blog";
 import { Contact } from "../pages/Contact";
 import { OAuthSuccess } from "../auth/OAuthSuccess";
+import { DefaultLayout } from "../components/layout/DefaultLayout";
 
 // Public routes: no need sign in to access
 const publicRoutes = [
-    { path: config.routes.home, component: Home },
-    { path: config.routes.login, component: Login },
-    { path: config.routes.register, component: Register },
-    { path: config.routes.checkout, component: Checkout },
-    { path: config.routes.profile, component: Profile },
-    { path: config.routes.products, component: ProductsList },
-    { path: config.routes.productDetail, component: ProductDetail },
-    { path: config.routes.cart, component: Cart },
-    { path: config.routes.shop, component: Shop },
-    { path: config.routes.about, component: About },
-    { path: config.routes.blog, component: Blog },
-    { path: config.routes.contact, component: Contact },
+    { path: config.routes.home, component: Home, layout: DefaultLayout },
+    { path: config.routes.login, component: Login, layout: DefaultLayout },
+    { path: config.routes.register, component: Register, layout: DefaultLayout },
+    { path: config.routes.profile, component: Profile, layout: DefaultLayout },
+    { path: config.routes.products, component: ProductsList, layout: DefaultLayout },
+    { path: config.routes.productDetail, component: ProductDetail, layout: DefaultLayout },
+    { path: config.routes.cart, component: Cart, layout: DefaultLayout },
+    { path: config.routes.shop, component: Shop, layout: DefaultLayout },
+    { path: config.routes.about, component: About, layout: DefaultLayout },
+    { path: config.routes.blog, component: Blog, layout: DefaultLayout },
+    { path: config.routes.contact, component: Contact, layout: DefaultLayout },
     { path: config.routes.oauthSuccess, component: OAuthSuccess },
+    
+    { path: config.routes.checkout, component: Checkout, layout: null },
 ];
+
+const standaloneRoutes = []
 
 // Private routes: need sign in to access
 const privateRoutes = [];
 
-export { publicRoutes, privateRoutes };
+export { publicRoutes, privateRoutes, standaloneRoutes };

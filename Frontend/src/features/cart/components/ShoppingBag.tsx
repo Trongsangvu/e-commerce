@@ -12,7 +12,14 @@ interface Props {
 const ShoppingBagComponent: React.FC<Props> = ({ isVisible, handleShowBag }) => {
     const navigate = useNavigate();
 
+    // Handle direct to checkout 
     const handleCheckout = () => {
+        handleShowBag();
+        navigate('/checkout');
+    }
+
+    // Handle direct to cart
+    const handleCheckBag = () => {
         handleShowBag();
         navigate('/cart');
     }
@@ -45,7 +52,7 @@ const ShoppingBagComponent: React.FC<Props> = ({ isVisible, handleShowBag }) => 
 
     return (
         <div className="relative">
-            <div className={`absolute left-[120px] w-[488px] h-[490px] bg-white
+            <div className={`absolute left-[120px] w-[488px] h-[550px] bg-white
             `}>
                 <div className="flex border-b-1 border-[#ccc] px-30 items-center">
                     <h2 className="uppercase font-[GucciSansPro-bold] text-[#000] tracking-[-0.03rem] py-20 w-[400px] text-center">adding to Shopping Bag</h2>
@@ -56,16 +63,16 @@ const ShoppingBagComponent: React.FC<Props> = ({ isVisible, handleShowBag }) => 
                         >x</button>
                     </div>
                 </div>
-                <div className="px-10 pt-20  border-b-1 border-[#ccc]">
+                <div className="px-10 pt-20  border-b-1 border-[#ccc] max-h-[340px] overflow-y-auto">
                     <ul>
                         {cartItems.map((item, index) => {
-                            if (index < 2) {
+                            // if (index < 2) {
                                 return (
                                         <li className="flex mb-20" key={index}>
                                             <div>
                                                 <img className="w-[120px] h-[140px] cursor-pointer" src={item.productId.imageUrl} alt={item.productId.name} />
                                             </div>
-                                            <div className="ml-15">
+                                            <div className="ml-15"> 
                                                 <div>
                                                     <strong className="font-[GucciSansPro-medium-bold] text-[12px] text-[#000] uppercase tracking-[-0.05rem]">
                                                         {item.productId.name}
@@ -76,19 +83,19 @@ const ShoppingBagComponent: React.FC<Props> = ({ isVisible, handleShowBag }) => 
                                             </div>
                                         </li>
                                     )
-                                }
+                                // }
                             })}
                     </ul>
                 </div>
                 <div className="my-16 mx-24">
                     <div className="flex justify-center items-center w-[440px] h-[48px] bg-[#000] rounded-[2px] cursor-pointer">
                         <button className="cursor-pointer uppercase font-[GucciSansPro-bold] text-[#fff] tracking-[-0.03rem] text-[12px]"
-                            // onClick={handleCheckout}
+                            onClick={handleCheckout}
                         >checkout</button>
                     </div>
-                    <div className="flex justify-center items-center w-[440px] h-[48px] bg-[#fff] rounded-[2px] cursor-pointer mt-20 border-1">
+                    <div className="flex justify-center items-center w-[440px] h-[48px] bg-[#fff] rounded-[2px] cursor-pointer mt-15 border-1">
                         <button className="cursor-pointer uppercase font-[GucciSansPro-bold] text-[#000] tracking-[-0.03rem] text-[12px]"
-                            onClick={handleCheckout}
+                            onClick={handleCheckBag}
                         >view shopping bag</button>
                     </div>
                 </div>
