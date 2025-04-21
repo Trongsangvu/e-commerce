@@ -8,6 +8,11 @@ const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> => {
     return HttpService.post("/auth/login", data, { requiresAuth: false });
 }
 
+// Logout service
+const logout = (): Promise<AxiosResponse> => {
+    return HttpService.post("/auth/logout", {}, { requiresAuth: true });
+}
+
 // Register service
 const register = (data: IRegister):  Promise<AxiosResponse<IRegisterResponse>> => {
     return HttpService.post("/auth/register", data);
@@ -47,4 +52,4 @@ const getProfileUser = async (): Promise<IUserResponse> => {
     }
 }
 
-export { login, register, getProfileUser, oauthLogin }
+export { login, logout, register, getProfileUser, oauthLogin }

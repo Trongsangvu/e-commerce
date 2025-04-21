@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ILogin, ILoginResponse, IRegister, IRegisterResponse, IOAuthUser, IOAuthResponse } from "../../model/Auth";
 import { login as loginService } from '../../services/auth/authService';
+import { logout as logoutService } from '../../services/auth/authService';
 import { register as registerService } from '../../services/auth/authService';
 import { oauthLogin as oauthLoginService } from '../../services/auth/authService';
 import { AxiosError } from "axios";
-import { setToken } from '../../auth/authToken';
+import { removeToken, setToken, removeRefreshToken } from '../../auth/authToken';
 import Cookies from "js-cookie";
 
 const isAxiosError = (err: unknown): err is AxiosError<{ message: string }> => {
@@ -45,6 +46,32 @@ export const login = createAsyncThunk<ILoginResponse, ILogin>(
         }
     }
 );
+
+export const logout = createAsyncThunk(
+   'auth/logout',
+   async (_, { rejectWithValue }) => {
+        try {
+            await logoutService();
+
+            // Clear cookies
+            localStorage.clear();
+            removeToken();
+            removeRefreshToken();
+            return true;
+        } catch (error) {
+            if (isAxiosError(error)) {
+                return rejectWithValue({
+                    message: error.response?.data?.message || "Logout failed",
+                    status: error.response?.status || 500
+                });
+            }
+            return rejectWithValue({
+                message: "Unknown error occurred during logout",
+                status: 500
+            });
+        }
+   } 
+)
 
 export const register = createAsyncThunk<IRegisterResponse, IRegister>(
     'auth/register',

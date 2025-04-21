@@ -33,7 +33,11 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
 
         // console.log(jwt.decode(refreshToken));
         // Set refesh token in cookie
-        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: false, sameSite: "strict" });
+        res.cookie('refreshToken', refreshToken, { 
+            httpOnly: true, 
+            secure: false, 
+            sameSite: "strict" 
+        });
 
         // Return token and some basic user info
         res.json({
@@ -48,6 +52,29 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
     }
     catch(error) {
         console.error("Error logging in user", error);
+        next(error);
+    }
+}
+
+// Logout user
+export const logout = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        // Clear both tokens from cookies
+        res.clearCookie('token', { 
+            path: "/",
+            sameSite: "strict"
+        });
+        
+        res.clearCookie('refreshToken', {
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict",
+            path: "/",
+        });
+
+        res.status(200).json({ message: "Logged out successfully" });
+    } catch (error) {
+        console.error("Logout error:", error);
         next(error);
     }
 }

@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import config from '../../config/config';
 import { MENU_PROFILE, MENU_HEADER } from '../../config/menu';
 import { MenuProfile } from '../common/MenuProfile';
-import { logout } from '../../redux/auth/authSlice';
+import { logout } from '../../redux/auth/authAction';
 import { MenuToggle, SearchIcon, ShoppingCartIcon, UserIcon } from '../../assets/images/icons/icons';
 import { Sidebar } from './Sidebar';
 import { Search } from '../../features/search/components/Search';
@@ -52,9 +52,15 @@ export const Header: React.FC = () => {
     }
 
     // Handle logout
-    const handleLogout = useCallback(() => {
-        dispatch(logout());
-        navigate('/login');
+    const handleLogout = useCallback(async () => {
+        try {
+            dispatch(logout());
+            setIsShowBag(false);
+            setIsShowMenu(false);
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout failed: ', error);
+        }
     }, [dispatch, navigate]);
 
     // Handle hide menu profile when transition page

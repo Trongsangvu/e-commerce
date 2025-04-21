@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { login, oauthLogin, register } from './authAction';
+import { login, logout, oauthLogin, register } from './authAction';
 import { AuthUser, ILoginResponse, IRegisterResponse,IOAuthResponse } from '../../model/Auth';
-import { removeToken, getToken, setToken } from '../../auth/authToken';
+import { removeToken, getToken, setToken, removeRefreshToken } from '../../auth/authToken';
 
 // Implicity authReducer
 interface AuthState {
@@ -26,21 +26,18 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        logout: (state) => {
-            state.user = null;
-            state.isAuthenticated = false;
-            localStorage.removeItem('user');
-            removeToken();
-        },
         checkAuth: (state) => {
             const token = getToken();
             const user = localStorage.getItem('user');
-            if (token && user) {
-                state.isAuthenticated = true;
-                state.user = JSON.parse(user);
-            } else {
+            if (!token && !user) {
                 state.isAuthenticated = false;
                 state.user = null;
+                localStorage.removeItem('user');
+                removeToken()
+                removeRefreshToken();
+            } else {
+                state.isAuthenticated = true;
+                state.user = user ? JSON.parse(user) : null;
             }
         }
     },
@@ -67,6 +64,26 @@ const authSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message || 'Login failed';
             })
+
+            // Logout reducers
+            .addCase(logout.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(logout.fulfilled, (state) => { 
+                state.user = null;
+                state.isAuthenticated = false;
+                state.status = 'succeeded';
+                state.error = null;
+                localStorage.clear();
+                removeToken();
+                removeRefreshToken();
+            })
+            .addCase(logout.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "Logout failed";
+            })
+
             // Register reducers
             .addCase(register.pending, (state) => {
                 state.loading = true;
@@ -108,5 +125,5 @@ const authSlice = createSlice({
     }
 });
 
-export const { logout, checkAuth } = authSlice.actions;
+export const { checkAuth } = authSlice.actions;
 export default authSlice.reducer;
