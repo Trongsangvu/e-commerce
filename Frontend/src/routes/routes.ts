@@ -4,7 +4,6 @@ import { Login } from '../features/auth/components/Login';
 import { Register } from '../features/auth/components/Register';
 import Checkout from '../pages/Checkout';
 import Profile from '../pages/Profile';
-import { ProductsList } from '../pages/ProductsList';
 import { ProductDetail } from '../features/products/components/ProductDetail';
 import { Cart } from '../features/cart/components/Cart';
 import { Shop } from '../pages/Shop';
@@ -20,7 +19,6 @@ const publicRoutes = [
     { path: config.routes.login, component: Login, layout: DefaultLayout },
     { path: config.routes.register, component: Register, layout: DefaultLayout },
     { path: config.routes.profile, component: Profile, layout: DefaultLayout },
-    { path: config.routes.products, component: ProductsList, layout: DefaultLayout },
     { path: config.routes.productDetail, component: ProductDetail, layout: DefaultLayout },
     { path: config.routes.cart, component: Cart, layout: DefaultLayout },
     { path: config.routes.shop, component: Shop, layout: DefaultLayout },

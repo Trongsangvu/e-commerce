@@ -52,10 +52,10 @@ export const Header: React.FC = () => {
     }
 
     // Handle logout
-    const handleLogout = async () => {
+    const handleLogout = useCallback(() => {
         dispatch(logout());
         navigate('/login');
-    }
+    }, [dispatch, navigate]);
 
     // Handle hide menu profile when transition page
     useEffect(() => {

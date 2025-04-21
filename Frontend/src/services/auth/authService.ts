@@ -3,14 +3,17 @@ import { ILogin, IUserResponse, ILoginResponse, IRegister, IRegisterResponse,IOA
 import HttpService from '../HttpService';
 import { getToken } from '../../auth/authToken';
 
+// Login service
 const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> => {
     return HttpService.post("/auth/login", data, { requiresAuth: false });
 }
 
+// Register service
 const register = (data: IRegister):  Promise<AxiosResponse<IRegisterResponse>> => {
     return HttpService.post("/auth/register", data);
 }
 
+// Oauth Login service
 const oauthLogin = async (data: IOAuthUser): Promise<AxiosResponse<IOAuthResponse>> => {
     try {
         if (!data || !data.email) {
@@ -25,6 +28,7 @@ const oauthLogin = async (data: IOAuthUser): Promise<AxiosResponse<IOAuthRespons
     }   
 }
 
+// Get profile user
 const getProfileUser = async (): Promise<IUserResponse> => {
     const token = getToken();
     if (!token) {

@@ -23,10 +23,6 @@ export const Blog: React.FC = () => {
                                         <img className="w-auto h-[413px] transition-transform duration-500 group-hover:scale-110" src={images.bannerBlog1} alt="banner blog" />
                                     </a>
                                 </div>
-                                {/* <div className="flex flex-col items-center absolute top-1/2 left-1/2 bg-white opacity-80 p-10">
-                                    <span className="font-[GucciSansPro-bold] text-2xl">{new Date().getDate()}</span>
-                                    <span className="font-[Poppins-regular] text-sm text-[#666]">{new Date().toLocaleString('en-US', { month: 'short' })} {new Date().getFullYear()}</span>
-                                </div> */}
                                 <div className="mb-[30px] pb-[30px]">
                                     <h4 className="font-[GucciSansPro-bold] text-3xl py-20">8 Inspiring Ways to Wear Dresses in the Winter</h4>
                                     <p className="font-[GucciSansPro-book] text-[#555]">
@@ -48,10 +44,6 @@ export const Blog: React.FC = () => {
                                         <img className="w-auto h-[413px] transition-transform duration-500 group-hover:scale-110" src={images.bannerBlog2} alt="banner blog" />
                                     </a>
                                 </div>
-                                {/* <div className="flex flex-col items-center absolute top-[500px] left-1/2 bg-white opacity-80 p-10">
-                                    <span className="font-[GucciSansPro-bold] text-2xl">18</span>
-                                    <span className="font-[Poppins-regular] text-sm text-[#666]">{new Date().toLocaleString('en-US', { month: 'short' })} {new Date().getFullYear()}</span>
-                                </div> */}
                                 <div className="mb-[30px] pb-[30px]">
                                     <h4 className="font-[GucciSansPro-bold] text-3xl py-20">
                                         The Great Big List of Men’s Gifts for the Holidays 
@@ -75,10 +67,6 @@ export const Blog: React.FC = () => {
                                         <img className="w-auto h-[413px] transition-transform duration-500 group-hover:scale-110" src={images.bannerBlog3} alt="banner blog" />
                                     </a>
                                 </div>
-                                {/* <div className="flex flex-col items-center absolute top-1/2 left-1/2 bg-white opacity-80 p-10">
-                                    <span className="font-[GucciSansPro-bold] text-2xl">22</span>
-                                    <span className="font-[Poppins-regular] text-sm text-[#666]">{new Date().toLocaleString('en-US', { month: 'short' })} {new Date().getFullYear()}</span>
-                                </div> */}
                                 <div className="mb-[30px] pb-[30px]">
                                     <h4 className="font-[GucciSansPro-bold] text-3xl py-20">
                                         5 Winter-to-Spring Fashion Trends to Try Now
