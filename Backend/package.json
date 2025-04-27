@@ -4,12 +4,13 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "prebuild": "eslint . --ext .ts --fix",
     "build": "tsc",
     "watch": "tsc -w",
     "dev": "concurrently --kill-others \"npm run watch\" \"nodemon --max-old-space-size=4096\"",
     "start": "node dist/app.js",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "lint": "eslint . --ext .ts"
   },
   "author": "",
   "license": "ISC",
@@ -47,7 +48,10 @@
     "@types/node": "^22.14.1",
     "@types/paypal__checkout-server-sdk": "^1.0.8",
     "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
     "concurrently": "^9.1.2",
+    "eslint": "^8.56.0",
     "jest": "^29.7.0",
     "mongodb-memory-server": "^10.1.4",
     "nodemon": "^3.1.9",
