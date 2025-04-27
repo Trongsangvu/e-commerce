@@ -1,0 +1,70 @@
+name: Backend CI/CD
+
+on:
+  push:
+    paths:
+      - 'Backend/**'
+    branches:
+      - master
+      # - develop
+  pull_request:
+    paths:
+      - 'Backend/**'
+    branches:
+      - master
+      # - develop
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Backend
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+        env:
+          REDIS_URL: redis://localhost:6379
+
+      - name: Build application
+        run: npm run build
+
+  deploy:
+    needs: test-and-build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+        run: |
+          curl -X POST https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys \
+          -H "accept: application/json" \
+          -H "authorization: Bearer $RENDER_API_KEY" \
+          -H "content-type: application/json" \
+          -d '{"rootDirectory": "Backend"}'
