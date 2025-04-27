@@ -7,5 +7,7 @@
             "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
         }
     },
-    "jsRules": {}
+    "jsRules": {
+        "no-console": false
+    }
 }

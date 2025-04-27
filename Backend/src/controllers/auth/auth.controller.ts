@@ -33,10 +33,10 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
 
         // console.log(jwt.decode(refreshToken));
         // Set refesh token in cookie
-        res.cookie('refreshToken', refreshToken, { 
-            httpOnly: true, 
-            secure: false, 
-            sameSite: "strict" 
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict"
         });
 
         // Return token and some basic user info
@@ -60,11 +60,11 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
 export const logout = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         // Clear both tokens from cookies
-        res.clearCookie('token', { 
+        res.clearCookie('token', {
             path: "/",
             sameSite: "strict"
         });
-        
+
         res.clearCookie('refreshToken', {
             httpOnly: true,
             secure: false,
