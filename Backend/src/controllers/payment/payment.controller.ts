@@ -4,7 +4,7 @@ import paypalClient from '../../config/payment/paypal';
 import checkoutNodeJssdk from '@paypal/checkout-server-sdk';
 import { Order } from '../../models/Order';
 
-export const checkoutPayment = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const checkoutPayment = async (req: Request, res: Response): Promise<void> => {
     try {
         const { orderId, method } = req.body;
         let response;
