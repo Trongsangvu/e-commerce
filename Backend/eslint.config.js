@@ -1,15 +1,15 @@
-// eslint.config.js
-const tseslint = require('@typescript-eslint/eslint-plugin');
-const tsparser = require('@typescript-eslint/parser');
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsparser from '@typescript-eslint/parser';
 
-module.exports = [
+export default [
   {
     files: ['**/*.ts'],
+    ignores: ['**/*.d.ts', 'dist/**/*'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: 'commonjs',
+        ecmaVersion: 2022,
+        sourceType: 'module',
         project: './tsconfig.json'
       }
     },
@@ -17,13 +17,8 @@ module.exports = [
       '@typescript-eslint': tseslint
     },
     rules: {
-      // Tắt các quy tắc gây ra vấn đề với TypeScript
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
-
-      // Giảm độ nghiêm ngặt để tránh lỗi khi build
       'no-undef': 'off'
     }
   }

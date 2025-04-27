@@ -4,13 +4,13 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "prebuild": "npx eslint . --ext .ts --fix",
+    "prebuild": "eslint . --ext .ts --fix",
     "build": "tsc",
     "watch": "tsc -w",
     "dev": "concurrently --kill-others \"npm run watch\" \"nodemon --max-old-space-size=4096\"",
     "start": "node dist/app.js",
     "test": "jest --runInBand",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts --fix"
   },
   "author": "",
   "license": "ISC",
