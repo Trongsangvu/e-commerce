@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Order } from '../../models/Order';
 import redisClient from '../../config/redis/redis';
 import { sendPushNotification } from '../../services/firebase.service';
-import { sendOrderNotification } from '../../services/twilio.service';
+// import { sendOrderNotification } from '../../services/twilio.service';
 import { sendOrderToWarehouse } from '../../services/kafka.service';
 import { RedisService } from '../../services/redis.service';
 import { calculateTotalAmount } from '../../utils/calculateTotal';
@@ -34,7 +34,8 @@ export const getOrders = async (req: Request, res: Response, next: NextFunction)
 
 export const createOrders = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { products, paymentMethod, userFcmToken, userPhone } = req.body;
+        const { products, paymentMethod } = req.body;
+        // const { products, paymentMethod, userFcmToken, userPhone } = req.body;
         const userId = req.user?.id;
 
         if (!products || products.length === 0) {
