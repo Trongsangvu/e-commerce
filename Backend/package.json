@@ -1,6 +1,7 @@
 {
   "name": "ai-ecommerce-be",
   "version": "1.0.0",
+  "type": "commonjs",
   "description": "",
   "main": "dist/app.js",
   "scripts": {
@@ -10,7 +11,7 @@
     "dev": "concurrently --kill-others \"npm run watch\" \"nodemon --max-old-space-size=4096\"",
     "start": "node dist/app.js",
     "test": "jest --runInBand",
-    "lint": "eslint . --ext .ts --fix"
+    "lint": "eslint . --ext .ts --fix --ignore-pattern '**/*.d.ts'"
   },
   "author": "",
   "license": "ISC",
