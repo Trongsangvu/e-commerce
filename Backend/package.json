@@ -69,6 +69,7 @@
     "concurrently": "^9.1.2",
     "eslint": "^9.25.1",
     "jest": "^29.7.0",
+    "jiti": "^2.5.1",
     "mongodb-memory-server": "^10.1.4",
     "nodemon": "^3.1.9",
     "supertest": "^7.0.0",
