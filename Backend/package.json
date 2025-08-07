@@ -11,7 +11,7 @@
     "dev": "concurrently --kill-others \"npm run watch\" \"nodemon --max-old-space-size=4096\"",
     "start": "node dist/app.js",
     "test": "jest --runInBand",
-    "lint": "eslint . --ext .ts --fix --ignore-pattern '**/*.d.ts'"
+    "lint": "eslint . --ext .ts --fix"
   },
   "author": "",
   "license": "ISC",
