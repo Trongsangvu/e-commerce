@@ -25,6 +25,7 @@ export const validateToken = (req: Request, res: Response, next: NextFunction): 
         next();
     }
     catch(error) {
+        console.error("jwt error:", error);
         res.status(403).json({ message: "Invalid Token" });
     }
 }

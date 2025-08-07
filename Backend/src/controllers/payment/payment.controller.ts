@@ -62,6 +62,7 @@ export const checkoutPayment = async (req: Request, res: Response): Promise<void
         res.json(response);
     }
     catch(error) {
+        console.error("Payment error:", error);
         res.status(500).json({ message: "Payment processing failed" });
     }
 }
