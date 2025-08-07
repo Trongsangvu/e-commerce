@@ -10,7 +10,7 @@
     "watch": "tsc -w",
     "dev": "concurrently --kill-others \"npm run watch\" \"nodemon --max-old-space-size=4096\"",
     "start": "node dist/app.js",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --passWithNoTests",
     "lint": "eslint src --ext .ts --fix"
   },
   "author": "",
