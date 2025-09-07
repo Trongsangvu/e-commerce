@@ -1,2 +1,1 @@
-export { isAdmin } from './isRole';
-
+export { isAdmin } from "./isRole";

@@ -26,36 +26,7 @@ import recommendation from './banner/recommendation.avif';
 import recommendation1 from './banner/recommendation1.avif';
 import detailBanner from './logo/HP_Hero-FullBleed-Desktop_Gucci-MDAY-APR25-GUCCI-FESTIVITIES-ADV-KIM-COCO-A-0096_001_Default.jpg';
 
-interface Images {
-    logo: string,
-    slider: string,
-    angleRight: string,
-    banner1: string,
-    banner2: string,
-    banner3: string,
-    filterIcon: string,
-    searchIcon: string,
-    heartIcon: string,
-    pencilIcon: string,
-    bannerAbout: string,
-    bannerAboutStory: string,
-    bannerAboutStory1: string,
-    bannerBlog: string,
-    bannerBlog1: string,
-    bannerBlog2: string,
-    bannerBlog3: string,
-    arrowRight: string,
-    angleDown: string,
-    emailAddress: string,
-    telephone: string,
-    location: string,
-    profileBanner: string,
-    recommendation: string,
-    recommendation1: string,
-    detailBanner: string
-}
-
-const images: Images = {
+const images = {
     logo,
     slider,
     angleRight,
@@ -82,6 +53,6 @@ const images: Images = {
     recommendation,
     recommendation1,
     detailBanner
-} as const
+} as const satisfies Record<string, string>;
 
 export default images;

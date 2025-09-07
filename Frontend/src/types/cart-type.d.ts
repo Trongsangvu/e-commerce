@@ -1,30 +1,30 @@
 export interface ICartItem {
-    productId: {
-        _id: string;
-        name: string;
-        price: number;
-        imageUrl: string;
-    };
-    quantity: number;
+  productId: {
     _id: string;
+    name: string;
+    price: number;
+    imageUrl: string;
+  };
+  quantity: number;
+  _id: string;
 }
 
 export interface CartItem {
-    productId: string;
-    quantity: number;
+  productId: string;
+  quantity: number;
 }
 
 export interface CartData {
-    productId: string;
-    quantity: number;
+  productId: string;
+  quantity: number;
 }
 
 export interface ICart {
-    items: ICartItem[];
-    totalQuantity?: number;
-    totalAmount?: number;
+  items: ICartItem[];
+  totalQuantity?: number;
+  totalAmount?: number;
 }
 
 export interface ICartResponse extends ICart {
-    cart: ICart;
+  cart: ICart;
 }

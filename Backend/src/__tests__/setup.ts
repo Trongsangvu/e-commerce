@@ -1,11 +1,9 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
-dotenv.config({ path: '.env.test' });
+dotenv.config({ path: ".env.test" });
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = "test";
 
-beforeAll(() => {
-});
+beforeAll(() => {});
 
-afterAll(() => {
-});
+afterAll(() => {});
