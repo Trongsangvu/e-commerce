@@ -38,8 +38,14 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: Backend/yarn.lock
 
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Use correct Yarn version
+        run: corepack prepare yarn@4.13.0 --activate
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run linting
         run: yarn lint
