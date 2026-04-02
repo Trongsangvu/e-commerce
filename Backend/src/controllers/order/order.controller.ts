@@ -11,7 +11,7 @@ import { calculateTotalAmount } from "../../utils/calculateTotal";
 export const getOrders = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const userId = req.user?.id;
@@ -41,7 +41,7 @@ export const getOrders = async (
 export const createOrders = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { products, paymentMethod } = req.body;
@@ -90,13 +90,16 @@ export const createOrders = async (
 export const updateOrders = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
     const userId = req.user?.id;
 
-    const order = await orderService.updateById(id, req.body);
+    const order = await orderService.updateById(
+      Array.isArray(id) ? id[0] : id,
+      req.body,
+    );
     if (!order) {
       res.status(404).json({ message: "Order not found" });
       return;
@@ -119,14 +122,17 @@ export const updateOrders = async (
 export const updateOrderStatus = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
     const userId = req.user?.id;
     const { status } = req.body;
 
-    const order = await orderService.updateStatus(id, status);
+    const order = await orderService.updateStatus(
+      Array.isArray(id) ? id[0] : id,
+      status,
+    );
 
     if (!order) {
       res.status(404).json({ message: "Order not found" });
@@ -141,7 +147,7 @@ export const updateOrderStatus = async (
       await sendPushNotification(
         req.body.userFcmToken,
         "Update order status",
-        `Your order status ${status}`
+        `Your order status ${status}`,
       ),
     ]);
 

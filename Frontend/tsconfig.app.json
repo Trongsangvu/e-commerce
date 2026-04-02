@@ -21,8 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": ["jest", "@testing-library/jest-dom"]
-
   },
-  "include": ["src", "jest-dom.d.ts"]
+  "include": ["src"]
 }

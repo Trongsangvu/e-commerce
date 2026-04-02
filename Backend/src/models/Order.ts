@@ -43,9 +43,9 @@ const orderSchema = new Schema<Orders>(
         const symbol = currencySybl[ret.currency] || "";
 
         if (typeof ret.totalAmount !== "number") {
-          ret.totalAmount = "Invalid Amount";
+          (ret.totalAmount as any) = "Invalid Amount";
         } else {
-          ret.totalAmount = `${symbol}${ret.totalAmount.toFixed(2)}`;
+          (ret.totalAmount as any) = `${symbol}${ret.totalAmount.toFixed(2)}`;
         }
 
         return ret;

@@ -43,6 +43,7 @@ export const stripeWebhook = async (
 
     res.json({ received: true });
   } catch (error) {
-    res.status(400).send(`Webhook Error: ${error.message}`);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    res.status(400).send(`Webhook Error: ${errorMessage}`);
   }
 };

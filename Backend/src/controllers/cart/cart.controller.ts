@@ -50,7 +50,7 @@ export const updateCart = async (
     const userId = req.user?.id;
 
     // Check out productId is valid
-    if (!mongoose.Types.ObjectId.isValid(productId)) {
+    if (typeof productId !== "string" || !mongoose.Types.ObjectId.isValid(productId)) {
       res.status(400).json({ message: "Invalid product ID" });
       return;
     }
@@ -138,7 +138,7 @@ export const removeFromCart = async (
     const userId = req.user?.id;
     const { productId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(productId)) {
+    if (typeof productId !== "string" || !mongoose.Types.ObjectId.isValid(productId)) {
       res.status(400).json({ message: "Invalid product ID" });
       return;
     }

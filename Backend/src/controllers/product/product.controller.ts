@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { Product } from "../../models/Product";
 import productService from "../../services/product.service";
 
 export const getProducts = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const product = await productService.find();
@@ -17,11 +16,11 @@ export const getProducts = async (
 export const getProductById = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
-    const product = await productService.findById(id);
+    const product = await productService.findById(String(id));
 
     res.status(200).json(product);
   } catch (err) {
@@ -32,7 +31,7 @@ export const getProductById = async (
 export const createProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const product = await productService.create(req.body);
@@ -45,7 +44,7 @@ export const createProduct = async (
 export const updateProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
@@ -57,7 +56,7 @@ export const updateProduct = async (
       delete updateData.category;
     }
 
-    const updatedProduct = await productService.update(id, updateData);
+    const updatedProduct = await productService.update(String(id), updateData);
 
     if (!updatedProduct) {
       res.status(404).json({ message: "Product not found" });
@@ -72,11 +71,11 @@ export const updateProduct = async (
 export const deleteProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
-    const product = await productService.remove(id);
+    const product = await productService.remove(String(id));
     if (!product) {
       res.status(404).json({ message: "Product not found" });
       return;
@@ -90,7 +89,7 @@ export const deleteProduct = async (
 export const searchProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const keyword = req.query.name;

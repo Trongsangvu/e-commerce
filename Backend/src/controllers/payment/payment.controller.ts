@@ -7,7 +7,7 @@ import orderService from "../../services/order.service";
 
 export const checkoutPayment = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { orderId, method } = req.body;
@@ -39,7 +39,7 @@ export const checkoutPayment = async (
         await Order.findByIdAndUpdate(
           orderId,
           { $set: { stripePaymentId: paymentIntent.id } },
-          { new: true }
+          { new: true },
         );
 
         response = { clientSecret: paymentIntent.client_secret };
@@ -74,11 +74,13 @@ export const checkoutPayment = async (
 export const getStatus = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { orderId } = req.params;
-    const order = await orderService.findById(orderId);
+    const order = await orderService.findById(
+      Array.isArray(orderId) ? orderId[0] : orderId,
+    );
 
     if (!order) {
       res.status(404).json({ error: "Order not found" });

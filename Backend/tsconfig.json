@@ -1,20 +1,26 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "target": "es6",
-    "noImplicitAny": false,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
+    "target": "ES2022",
+
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "rootDir": "./src",
     "outDir": "./dist",
-    "baseUrl": "./",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
+
+    "strict": true,
+    "noImplicitAny": false,
+
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "sourceMap": true,
+
+    "types": ["node"]
   },
-  "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

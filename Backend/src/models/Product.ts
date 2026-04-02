@@ -19,11 +19,11 @@ const productSchema = new Schema<Products>(
           USD: "$",
         };
         const symbol = currencySybl[ret.currency];
-        ret.price = `${symbol}${ret.price.toFixed(2)}`;
+        (ret.price as any) = `${symbol}${ret.price.toFixed(2)}`;
         return ret;
       },
     },
-  }
+  },
 );
 
 const Product = model<Products>("Product", productSchema);
