@@ -9,9 +9,7 @@ export const MenuList: React.FC<MenuListProps> = ({ isOpen }) => {
   return (
     <ul
       className={`transition-all duration-500 delay-200 
-            ${
-              isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-            }`}
+        ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
     >
       {MENU_ITEMS.map((item, index) => (
         <MenuItem

@@ -13,7 +13,7 @@ import {
   removeRefreshToken,
 } from "../../auth/authToken";
 
-// Implicity authReducer
+// Implicit authReducer
 interface AuthState {
   user: AuthUser | null;
   isAuthenticated: boolean;

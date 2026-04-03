@@ -17,7 +17,7 @@ import { Search } from "../search/Search";
 import { AppDispatch, RootStore } from "../../redux/store";
 import { sideBarShow } from "../../redux/sideBar/sideBarSlice";
 import { ShoppingBag } from "../../pages/Cart/ShoppingBag";
-import { useScroll } from "../../hooks/Scoll/useScroll";
+import { useScroll } from "../../hooks/Scroll/useScroll";
 import { useQuery } from "@tanstack/react-query";
 import { getCart } from "../../services/cart/cartService";
 
@@ -112,11 +112,11 @@ export const Header: React.FC = () => {
     <>
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out 
-                    ${
-                      isLoginPage || isRegisterPage || scroll
-                        ? "bg-white shadow-md"
-                        : "bg-transparent"
-                    }`}
+          ${
+            isLoginPage || isRegisterPage || scroll
+              ? "bg-white shadow-md"
+              : "bg-transparent"
+          }`}
       >
         <div className="height-72 z-1 shadow-xs flex items-center flex-1 justify-around pt-20 pb-20 px-7">
           <div className="flex items-center justify-between">
@@ -140,8 +140,8 @@ export const Header: React.FC = () => {
                     location.pathname === item.path
                       ? "text-[#6774d5]"
                       : isLoginPage || isRegisterPage || scroll
-                      ? "text-black"
-                      : "text-white"
+                        ? "text-black"
+                        : "text-white"
                   }`}
                   key={item.id}
                 >
@@ -162,7 +162,7 @@ export const Header: React.FC = () => {
                   }`}
                 />
                 {cartItemsCount > 0 && (
-                  <span className="absolute top-26 right-[20.7%] text-[10px] text-[#fff]">
+                  <span className="absolute top-26 right-[20.7%] text-[10px] text-white">
                     {cartItemsCount}
                   </span>
                 )}
@@ -245,13 +245,11 @@ export const Header: React.FC = () => {
                 />
                 <span
                   className={`font-[GucciSansPro-book] uppercase text-xs transition-colors duration-300 
-                                        ${
-                                          isLoginPage ||
-                                          isRegisterPage ||
-                                          scroll
-                                            ? "text-black"
-                                            : "text-white"
-                                        }`}
+                    ${
+                      isLoginPage || isRegisterPage || scroll
+                        ? "text-black"
+                        : "text-white"
+                    }`}
                 >
                   menu
                 </span>

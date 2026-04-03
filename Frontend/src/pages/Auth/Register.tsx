@@ -32,25 +32,25 @@ export const Register: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen mt-30">
-      <main className="flex-grow min-h-screen">
+      <main className="grow min-h-screen">
         <div className="flex flex-col items-center justify-center min-h-screen w-full">
           <form
             action=""
             onSubmit={handleFormSubmit}
-            className="flex flex-col items-center p-10 mt-[20px]"
+            className="flex flex-col items-center p-10 mt-5"
           >
             <h3 className="text-black text-center uppercase text-3xl mb-30 font-[GucciSansPro-book]">
               Continue with your email address
             </h3>
-            <div className="relative flex flex-col mb-[50px] max-w-[450px]">
+            <div className="relative flex flex-col mb-12.5 max-w-112.5">
               <label
                 htmlFor="name"
-                className="mb-[10px] text-[#838383] text-xs font-[GucciSansPro-light]"
+                className="mb-2.5 text-[#838383] text-xs font-[GucciSansPro-light]"
               >
                 *Required field
               </label>
               <input
-                className="peer font-[GucciSansPro-light] text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]"
+                className="peer font-[GucciSansPro-light] text-sm text-[#666] bg-white h-14 w-82 p-2.5 border border-solid border-[#1b1b1b]"
                 type="text"
                 placeholder=" "
                 id="name"
@@ -59,22 +59,22 @@ export const Register: React.FC = () => {
               />
               <label
                 htmlFor="name"
-                className="absolute left-[10px] font-[GucciSansPro-light] uppercase top-[5%] -translate-y-[5%] text-sm text-[#666] transition-all
+                className="absolute left-2.5 font-[GucciSansPro-light] uppercase top-[5%] -translate-y-[5%] text-sm text-[#666] transition-all
                                     peer-placeholder-shown:top-1/2
                                     peer-placeholder-shown:text-sm 
                                     peer-placeholder-shown:text-[#666] 
-                                    peer-focus:top-[32px] peer-focus:text-xs peer-focus:text-[#666]
-                                    peer-not-placeholder-shown:top-[32px] peer-not-placeholder-shown:text-xs"
+                                    peer-focus:top-8 peer-focus:text-xs peer-focus:text-[#666]
+                                    peer-not-placeholder-shown:top-8 peer-not-placeholder-shown:text-xs"
               >
                 username*
               </label>
-              <span className="w-[15px] absolute top-[59%] right-[20px]">
+              <span className="w-3.75 absolute top-[59%] right-5">
                 <img src={images.pencilIcon} alt="pencilIcon" />
               </span>
             </div>
-            <div className="relative flex flex-col mb-[50px] max-w-[450px]">
+            <div className="relative flex flex-col mb-12.5 max-w-112.5">
               <input
-                className="peer font-[GucciSansPro-light] text-sm text-[#666] bg-white h-[56px] w-[328px] p-[10px] border border-solid border-[#1b1b1b]"
+                className="peer font-[GucciSansPro-light] text-sm text-[#666] bg-white h-14 w-82 p-2.5 border border-solid border-[#1b1b1b]"
                 type="text"
                 placeholder=" "
                 id="email"
@@ -83,23 +83,23 @@ export const Register: React.FC = () => {
               />
               <label
                 htmlFor="email"
-                className="absolute left-[10px] font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
+                className="absolute left-2.5 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
                                         peer-placeholder-shown:top-1/2 
                                         peer-placeholder-shown:text-sm 
                                         peer-placeholder-shown:text-[#666] 
-                                        peer-focus:top-[13px] peer-focus:text-xs peer-focus:text-[#666]
-                                        peer-not-placeholder-shown:top-[13px] peer-not-placeholder-shown:text-xs"
+                                        peer-focus:top-3.25 peer-focus:text-xs peer-focus:text-[#666]
+                                        peer-not-placeholder-shown:top-3.25 peer-not-placeholder-shown:text-xs"
               >
                 email*
               </label>
-              <span className="w-[15px] absolute top-[39%] right-[20px]">
+              <span className="w-3.75 absolute top-[39%] right-5">
                 <AddressIcon />
               </span>
             </div>
 
-            <div className="relative flex flex-col mb-[50px] max-w-[450px]">
+            <div className="relative flex flex-col mb-12.5 max-w-112.5">
               <input
-                className="peer font-[GucciSansPro-light] flex items-center text-sm text-[#666] h-[56px] w-[328px] bg-white p-[10px] border border-solid border-[#1b1b1b]"
+                className="peer font-[GucciSansPro-light] flex items-center text-sm text-[#666] h-14 w-82 bg-white p-2.5 border border-solid border-[#1b1b1b]"
                 type="text"
                 placeholder=" "
                 id="password"
@@ -108,40 +108,40 @@ export const Register: React.FC = () => {
               />
               <label
                 htmlFor="password"
-                className="absolute left-[10px] font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
+                className="absolute left-2.5 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
                                     peer-placeholder-shown:top-1/2 
                                     peer-placeholder-shown:text-sm 
                                     peer-placeholder-shown:text-[#666] 
-                                    peer-focus:top-[14px] peer-focus:text-xs peer-focus:text-[#666]
-                                    peer-not-placeholder-shown:top-[14px] peer-not-placeholder-shown:text-xs"
+                                    peer-focus:top-3.5 peer-focus:text-xs peer-focus:text-[#666]
+                                    peer-not-placeholder-shown:top-3.5 peer-not-placeholder-shown:text-xs"
               >
                 create password*
               </label>
-              <span className="w-[15px] absolute bottom-[35%] right-[20px]">
+              <span className="w-3.75 absolute bottom-[35%] right-5">
                 <EyeSlashIcon />
               </span>
             </div>
-            <div className="w-[328px] flex flex-col items-center p-10 mb-[20px]">
+            <div className="w-82 flex flex-col items-center p-10 mb-5">
               <p className="text-justify font-[GucciSansPro-light] text-[#666] text-sm">
                 By choosing "Create my profile", you confirm that you agree to
                 our
                 <a
                   href="#"
-                  className="text-[#000] underline underline-offset-1 pl-2 font-[GucciSansPro-medium]"
+                  className="text-black underline underline-offset-1 pl-2 font-[GucciSansPro-medium]"
                 >
                   Terms of use
                 </a>{" "}
                 , that you have acknowledged our
                 <a
                   href="#"
-                  className="text-[#000] underline underline-offset-1 pl-2 font-[GucciSansPro-medium]"
+                  className="text-black underline underline-offset-1 pl-2 font-[GucciSansPro-medium]"
                 >
                   privacy policy
                 </a>{" "}
                 , and that you want to create your GUCCI profile.
               </p>
             </div>
-            <div className="bg-[#1a1a1a] w-[328px] uppercase flex items-center justify-center h-[56px] text-white cursor-pointer text-center p-[10px] font-[GucciSansPro-medium]">
+            <div className="bg-[#1a1a1a] w-82 uppercase flex items-center justify-center h-14 text-white cursor-pointer text-center p-2.5 font-[GucciSansPro-medium]">
               <button type="submit" className="uppercase cursor-pointer">
                 create my profile
               </button>
@@ -150,30 +150,30 @@ export const Register: React.FC = () => {
             {error && <p className="text-red-500">{error}</p>}
           </form>
         </div>
-        <div className="pb-[70px] text-center flex flex-col items-center">
-          <h2 className="font-[GucciSansPro-book] text-[30px] text-[#000] mb-[32px]">
+        <div className="pb-17.5 text-center flex flex-col items-center">
+          <h2 className="font-[GucciSansPro-book] text-[30px] text-black mb-8">
             JOIN MY COZASTORE
           </h2>
           <div>
             <div className="grid grid-cols-3 gap-6">
-              <div className="max-w-[380px] px-[36px]">
-                <h3 className="font-[GucciSansPro-bold] mb-12 text-[#000]">
+              <div className="max-w-95 px-9">
+                <h3 className="font-[GucciSansPro-bold] mb-12 text-black">
                   TRACK YOUR ORDERS
                 </h3>
                 <p className="font-[GucciSansPro-light]">
                   Follow your orders every step of the way.
                 </p>
               </div>
-              <div className="max-w-[380px] px-[36px]">
-                <h3 className="font-[GucciSansPro-bold] mb-12 text-[#000]">
+              <div className="max-w-95 px-9">
+                <h3 className="font-[GucciSansPro-bold] mb-12 text-black">
                   STREAMLINE CHECKOUT
                 </h3>
                 <p className="font-[GucciSansPro-light]">
                   Check out faster with saved addresses and payment methods.
                 </p>
               </div>
-              <div className="max-w-[380px] px-[36px]">
-                <h3 className="font-[GucciSansPro-bold] mb-12 text-[#000]">
+              <div className="max-w-95 px-9">
+                <h3 className="font-[GucciSansPro-bold] mb-12 text-black">
                   BOOK AN APPOINTMENT
                 </h3>
                 <p className="font-[GucciSansPro-light]">

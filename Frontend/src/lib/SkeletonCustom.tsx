@@ -20,7 +20,7 @@ export const SkeletonCustom: React.FC<SkeletonProps> = ({
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center">
       {[...Array(count)].map((_, index) => (
-        <div key={index} className="max-w-[270px] w-full">
+        <div key={index} className="max-w-67.5 w-full">
           <Skeleton height={335} className="rounded-md" />
           <Skeleton width="60%" height={20} className="rounded-md" />
           <Skeleton width="40%" height={20} className="rounded-md" />

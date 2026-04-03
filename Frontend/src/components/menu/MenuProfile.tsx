@@ -12,9 +12,7 @@ const MenuProfileUser: React.FC<MenuProfileProps> = ({ item, onLogout }) => {
   return (
     <li
       className={`font-[GucciSansPro-bold] uppercase mb-32 cursor-pointer 
-                ${
-                  item.id === "sign out" ? "border-t pt-20 border-[#ccc]" : ""
-                }`}
+        ${item.id === "sign out" ? "border-t pt-20 border-[#ccc]" : ""}`}
       onClick={() => {
         if (item.id === "sign out" && onLogout) {
           onLogout();

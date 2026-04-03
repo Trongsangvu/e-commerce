@@ -30,26 +30,20 @@ export const Container: React.FC<ContainerProps> = ({ showTitle = true }) => {
             {categories.map((item, index) => (
               <div key={item.id} className="relative">
                 <button
-                  className={`pb-5 ${
-                    index === 0 ? "mr-[17px]" : "mx-[17px]"
-                  } text-base leading-[1.2] cursor-pointer font-[Poppins-regular] capitalize
-                                        ${
-                                          selectCategory === item.id
-                                            ? "text-[#333]"
-                                            : "text-[#888]"
-                                        }
-                                    `}
+                  className={`pb-5 ${index === 0 ? "mr-4.25" : "mx-4.25"} text-base leading-[1.2] cursor-pointer font-[Poppins-regular] capitalize
+                      ${
+                        selectCategory === item.id
+                          ? "text-[#333]"
+                          : "text-[#888]"
+                      }
+                  `}
                   onClick={() => dispatch(setCategory(item.id))}
                 >
                   <span className="relative inline-block font-[Poppins-regular] pb-3">
                     {item.label}
                     <span
                       className={`absolute -bottom-1 left-0 h-1 bg-[#797979] transition-all duration-300 ease-in-out
-                                            ${
-                                              selectCategory === item.id
-                                                ? "w-full"
-                                                : "w-0"
-                                            }`}
+                        ${selectCategory === item.id ? "w-full" : "w-0"}`}
                     ></span>
                   </span>
                 </button>
@@ -59,7 +53,7 @@ export const Container: React.FC<ContainerProps> = ({ showTitle = true }) => {
 
           <div>
             <div className="flex gap-8">
-              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] transition-colors duration-300 cursor-pointer rounded-sm py-7 px-[15px] border border-[#e6e6e6]">
+              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] transition-colors duration-300 cursor-pointer rounded-sm py-7 px-3.75 border border-[#e6e6e6]">
                 <img
                   className="w-12 h-15 transition-colors filter group-hover:brightness-0 group-hover:invert"
                   src={images.filterIcon}
@@ -68,7 +62,7 @@ export const Container: React.FC<ContainerProps> = ({ showTitle = true }) => {
                   filter
                 </p>
               </div>
-              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] cursor-pointer rounded-sm py-7 px-[15px] border border-[#e6e6e6]">
+              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] cursor-pointer rounded-sm py-7 px-3.75 border border-[#e6e6e6]">
                 <img
                   className="w-17 h-20 transition-colors filter group-hover:brightness-0 group-hover:invert"
                   src={images.searchIcon}

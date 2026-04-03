@@ -53,9 +53,9 @@ export const About: React.FC = () => {
                   St, New York, NY 10018 or call us on (+1) 96 716 6879
                 </p>
               </div>
-              <div className="relative group overflow-hidden w-[370px]">
+              <div className="relative group overflow-hidden w-92.5">
                 <img
-                  className="w-[370px] h-[370px] cursor-pointer transition-transform duration-500 group-hover:scale-110"
+                  className="w-92.5 h-92.5 cursor-pointer transition-transform duration-500 group-hover:scale-110"
                   src={images.bannerAboutStory}
                   alt="bannerAboutStory1"
                 />
@@ -66,9 +66,9 @@ export const About: React.FC = () => {
         <div className="mx-58 pt-75 pb-148">
           <section>
             <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-[1fr_2fr] gap-8 items-center">
-              <div className="relative group overflow-hidden w-[370px]">
+              <div className="relative group overflow-hidden w-92.5">
                 <img
-                  className="w-[370px] h-[370px] cursor-pointer transition-transform duration-500 group-hover:scale-110"
+                  className="w-92.5 h-92.5 cursor-pointer transition-transform duration-500 group-hover:scale-110"
                   src={images.bannerAboutStory1}
                   alt="bannerAboutStory1"
                 />
