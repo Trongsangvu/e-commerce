@@ -5,7 +5,6 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "prebuild": "eslint . --ext .ts --fix",
     "build": "tsc",
     "watch": "tsc -w",
     "dev": "concurrently --kill-others \"npm run watch\" \"nodemon --max-old-space-size=4096\"",
