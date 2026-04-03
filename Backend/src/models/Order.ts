@@ -51,7 +51,7 @@ const orderSchema = new Schema<Orders>(
         return ret;
       },
     },
-  }
+  },
 );
 
 export const Order = model<Orders>("Order", orderSchema);

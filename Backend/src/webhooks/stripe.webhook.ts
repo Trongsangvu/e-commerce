@@ -5,7 +5,7 @@ import { RedisService } from "../services/redis.service";
 
 export const stripeWebhook = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   const sig = req.headers["stripe-signature"];
 
@@ -16,9 +16,9 @@ export const stripeWebhook = async (
     return;
   }
 
-  const webhookSeret = process.env.STRIPE_WEBHOOK_SECRET!;
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
   try {
-    const event = stripe.webhooks.constructEvent(req.body, sig, webhookSeret);
+    const event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
 
     if (event.type === "payment_intent.succeeded") {
       const paymentIntent = event.data.object;
@@ -34,7 +34,7 @@ export const stripeWebhook = async (
       await Order.findByIdAndUpdate(
         orderId,
         { $set: { status: "paid", stripePaymentId: paymentIntent.id } },
-        { new: true }
+        { new: true },
       );
 
       const cacheKey = `order:${order.userId}`;
@@ -43,7 +43,8 @@ export const stripeWebhook = async (
 
     res.json({ received: true });
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
     res.status(400).send(`Webhook Error: ${errorMessage}`);
   }
 };

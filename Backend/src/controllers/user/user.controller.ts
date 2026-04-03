@@ -4,7 +4,7 @@ import userService from "../../services/user.service";
 export const getUsers = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const users = await userService.getUser();
@@ -17,7 +17,7 @@ export const getUsers = async (
 export const getProfileUser = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const user = await userService.findById(req.user?.id);

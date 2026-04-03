@@ -141,9 +141,9 @@ export const updateOrderStatus = async (
 
     // io.emit('orderUpdated', order);
 
-    const cachekey = `orders:${userId}`;
+    const cacheKey = `orders:${userId}`;
     await Promise.all([
-      await RedisService.del(cachekey),
+      await RedisService.del(cacheKey),
       await sendPushNotification(
         req.body.userFcmToken,
         "Update order status",

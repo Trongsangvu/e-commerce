@@ -24,14 +24,14 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL || "https://e-commerce-cozastore.vercel.app",
     credentials: true, // allow to send cookie cross-origin
-  })
+  }),
 );
 
 // Webhook
 app.use(
   "/api/webhook",
   express.raw({ type: "application/json" }),
-  webhookRouters
+  webhookRouters,
 );
 
 app.use(express.json());

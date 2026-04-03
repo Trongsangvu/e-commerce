@@ -15,10 +15,10 @@ const refreshTokenSchema = new Schema<RefreshToken>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const RefreshTokenModel = model<RefreshToken>(
   "RefreshToken",
-  refreshTokenSchema
+  refreshTokenSchema,
 );

@@ -22,7 +22,7 @@ const createUser = async (name: string, email: string, password: string) => {
 const createOAuthUser = async (
   name: string,
   email: string,
-  appwriteId: string
+  appwriteId: string,
 ) => {
   const newUser = new User({ name, email, appwriteId, role: "user" });
   return await newUser.save();

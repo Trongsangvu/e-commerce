@@ -41,7 +41,7 @@ export const login = async (
     const refreshToken = generateRefreshToken(payload);
 
     // console.log(jwt.decode(refreshToken));
-    // Set refesh token in cookie
+    // Set refresh token in cookie
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: false,
@@ -162,7 +162,7 @@ export const oauthLogin = async (
       role: user.role ?? "user",
     });
 
-    // Set refesh token in cookie
+    // Set refresh token in cookie
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: false,

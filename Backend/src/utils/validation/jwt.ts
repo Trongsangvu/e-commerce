@@ -5,7 +5,7 @@ import { JwtPayload } from "jsonwebtoken";
 export const validateToken = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void => {
   const authHeader = req.header("authorization");
   const cookieToken = req.cookies?.token;

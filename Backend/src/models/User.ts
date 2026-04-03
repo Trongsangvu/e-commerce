@@ -11,7 +11,7 @@ const userSchema = new Schema<Users>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const User = model<Users>("User", userSchema);

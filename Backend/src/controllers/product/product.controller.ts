@@ -50,7 +50,7 @@ export const updateProduct = async (
     const { id } = req.params;
     const updateData = req.body;
 
-    // if category is null, use $unset toremove it
+    // if category is null, use $unset to remove it
     if (updateData.category === null) {
       updateData.$unset = { category: "" };
       delete updateData.category;

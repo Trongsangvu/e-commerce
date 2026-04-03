@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 export const sendMessageByEmail = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { to, message } = req.body; // subject

@@ -3,14 +3,14 @@ import { Order } from "../models/Order";
 
 export const paypalWebhook = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const event = req.body;
 
     if (event.type === "CHECKOUT .ORDER.APPROVED") {
       const orderId = event.resource.id;
-      await Order.findOneAndUpdate({ paymentId: orderId }, { stauts: "paid" });
+      await Order.findOneAndUpdate({ paymentId: orderId }, { status: "paid" });
     }
 
     res.status(200).json({ message: "Webhook received" });

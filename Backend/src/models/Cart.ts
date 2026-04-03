@@ -17,7 +17,7 @@ const cartSchema = new Schema<Carts>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const Cart = model<Carts>("Cart", cartSchema);

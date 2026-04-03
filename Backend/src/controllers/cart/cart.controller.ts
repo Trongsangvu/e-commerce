@@ -7,7 +7,7 @@ import cartService from "../../services/cart.service";
 export const getCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const userId = req.user?.id;
@@ -42,7 +42,7 @@ export const getCart = async (
 export const updateCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { productId } = req.params;
@@ -50,7 +50,10 @@ export const updateCart = async (
     const userId = req.user?.id;
 
     // Check out productId is valid
-    if (typeof productId !== "string" || !mongoose.Types.ObjectId.isValid(productId)) {
+    if (
+      typeof productId !== "string" ||
+      !mongoose.Types.ObjectId.isValid(productId)
+    ) {
       res.status(400).json({ message: "Invalid product ID" });
       return;
     }
@@ -87,7 +90,7 @@ export const updateCart = async (
 export const addToCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { productId, quantity } = req.body;
@@ -105,7 +108,7 @@ export const addToCart = async (
     }
 
     const itemIndex = cart.items.findIndex(
-      (item) => item.productId.toString() === productId
+      (item) => item.productId.toString() === productId,
     );
 
     if (itemIndex > -1) {
@@ -119,7 +122,7 @@ export const addToCart = async (
     try {
       await RedisService.del(`cart:${userId}`);
     } catch (error) {
-      console.log("Redis cache deletion falied:", error);
+      console.log("Redis cache deletion failed:", error);
     }
 
     res
@@ -132,13 +135,16 @@ export const addToCart = async (
 export const removeFromCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const userId = req.user?.id;
     const { productId } = req.params;
 
-    if (typeof productId !== "string" || !mongoose.Types.ObjectId.isValid(productId)) {
+    if (
+      typeof productId !== "string" ||
+      !mongoose.Types.ObjectId.isValid(productId)
+    ) {
       res.status(400).json({ message: "Invalid product ID" });
       return;
     }
