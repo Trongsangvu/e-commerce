@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
-import { RefreshToken } from "../types/token/refreshToken-types";
+import { RefreshToken } from "../types/refreshToken-types";
 
 const refreshTokenSchema = new Schema<RefreshToken>(
   {

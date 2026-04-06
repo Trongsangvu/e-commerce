@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import stripe from "../config/payment/stripe";
+import stripe from "../config/stripe";
 import { Order } from "../models/Order";
 import { RedisService } from "../services/redis.service";
 

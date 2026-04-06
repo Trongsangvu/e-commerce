@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { generateAccessToken } from "../../utils/token/generateAccessToken";
+import { generateAccessToken } from "../utils/generate-access-token.util";
 
 export const refreshToken = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     console.log("Received Refresh Token:", req.cookies.refreshToken);
@@ -25,7 +25,7 @@ export const refreshToken = async (
     // Get refresh token secret from env
     const jwtRefreshSecret = Buffer.from(
       process.env.JWT_REFRESH_SECRET!,
-      "base64"
+      "base64",
     ).toString("utf8");
     if (!jwtRefreshSecret) {
       throw new Error("JWT_REFRESH_SECRET is not defined in env");
@@ -37,7 +37,7 @@ export const refreshToken = async (
     try {
       decoded = jwt.verify(
         refreshTokenFromCookie,
-        jwtRefreshSecret
+        jwtRefreshSecret,
       ) as jwt.JwtPayload;
     } catch (error) {
       console.error("Error verifying refresh token:", error);

@@ -4,9 +4,9 @@ import {
   logout,
   oauthLogin,
   register,
-} from "../controllers/auth/auth.controller";
-import { refreshToken } from "../controllers/auth/refreshToken.controller";
-import { protectedRoute } from "../controllers/auth/protect.controller";
+} from "../controllers/auth.controller";
+import { protectedRoute } from "../controllers/protect.controller";
+import { refreshToken } from "../controllers/refreshToken.controller";
 
 const router = express.Router();
 

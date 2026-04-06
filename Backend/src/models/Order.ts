@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
-import { Orders } from "../types/order/order-types";
+import { PaymentMethod, PaymentStatus } from "../config/enum";
+import { Orders } from "../types/order-types";
 
 const orderSchema = new Schema<Orders>(
   {
@@ -22,12 +23,12 @@ const orderSchema = new Schema<Orders>(
     currency: { type: String, default: "USD" },
     status: {
       type: String,
-      enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
+      enum: PaymentStatus,
       default: "pending",
     },
     paymentMethod: {
       type: String,
-      enum: ["cash", "card", "paypal", "stripe"],
+      enum: PaymentMethod,
       required: true,
     },
     userFcmToken: { type: String },

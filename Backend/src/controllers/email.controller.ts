@@ -1,4 +1,4 @@
-import { sendEmail } from "../../utils/email/sendEmail";
+import { sendEmail } from "../../utils/email.util";
 import { Request, Response, NextFunction } from "express";
 
 export const sendMessageByEmail = async (

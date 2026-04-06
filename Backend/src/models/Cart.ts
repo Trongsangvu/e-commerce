@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
-import { Carts } from "../types/cart/cart-types";
+import { Carts } from "../types/cart-types";
 
 const cartSchema = new Schema<Carts>(
   {

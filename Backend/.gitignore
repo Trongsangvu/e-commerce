@@ -3,6 +3,7 @@ dist
 logs
 *.logs
 *.env
+.env.development
 Note.md
 env.md
 .yarn

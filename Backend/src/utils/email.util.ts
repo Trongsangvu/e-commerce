@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { oauth2Client } from "../../config/OAuth/OAuth2";
+import { oauth2Client } from "../config/oauth2";
 
 export const sendEmail = async (to: string, message: string) => {
   // subject: string

@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcryptjs";
-import { User } from "../../models/User";
-import { generateAccessToken } from "../../utils/token/generateAccessToken";
-import { generateRefreshToken } from "../../utils/token/generateRefreshToken";
-import userService from "../../services/user.service";
+import { User } from "../models/User";
+import { generateAccessToken } from "../utils/generate-access-token.util";
+import { generateRefreshToken } from "../utils/generate-refresh-token.util";
+import userService from "../services/user.service";
 
 // Login user
 export const login = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { email, password } = req.body;
@@ -68,7 +68,7 @@ export const login = async (
 export const logout = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     // Clear both tokens from cookies
@@ -95,7 +95,7 @@ export const logout = async (
 export const register = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { name, email, password, role } = req.body;
@@ -123,7 +123,7 @@ export const register = async (
 export const oauthLogin = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> => {
   try {
     const { name, email, $id: appwriteId } = req.body;

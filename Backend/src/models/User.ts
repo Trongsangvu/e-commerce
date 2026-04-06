@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
-import { Users } from "../types/user/user-types";
+import { Users } from "../types/user-types";
+import { UserRole } from "../config/enum";
 
 const userSchema = new Schema<Users>(
   {
@@ -7,7 +8,7 @@ const userSchema = new Schema<Users>(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    role: { type: String, enum: ["admin", "user"], default: "user" },
+    role: { type: String, enum: UserRole, default: "user" },
   },
   {
     timestamps: true,

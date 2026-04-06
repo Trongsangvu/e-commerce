@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import stripe from "../../config/payment/stripe";
-import paypalClient from "../../config/payment/paypal";
+import stripe from "../../config/stripe";
+import paypalClient from "../../config/paypal";
 import checkoutNodeJssdk from "@paypal/checkout-server-sdk";
 import { Order } from "../../models/Order";
 import orderService from "../../services/order.service";

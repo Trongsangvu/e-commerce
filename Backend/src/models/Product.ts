@@ -1,12 +1,13 @@
 import { Schema, model } from "mongoose";
-import { Products } from "../types/product/product-types";
+import { ProductCategory } from "../config/enum";
+import { Products } from "../types/product-types";
 
 const productSchema = new Schema<Products>(
   {
     name: { type: String, required: true },
     price: { type: Number, required: true, min: 0 },
     currency: { type: String, default: "USD" },
-    category: { type: String, enum: ["men", "women"] },
+    category: { type: String, enum: ProductCategory },
     description: { type: String },
     imageUrl: { type: String, required: true },
     tags: { type: String },
@@ -28,3 +29,4 @@ const productSchema = new Schema<Products>(
 
 const Product = model<Products>("Product", productSchema);
 export { Product };
+
