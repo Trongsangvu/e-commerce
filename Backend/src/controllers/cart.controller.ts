@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
-import { Cart } from "../../models/Cart";
-import { RedisService } from "../../services/redis.service";
-import cartService from "../../services/cart.service";
+import { Cart } from "../models/Cart";
+import { RedisService } from "../services/redis.service";
+import cartService from "../services/cart.service";
 
 export const getCart = async (
   req: Request,

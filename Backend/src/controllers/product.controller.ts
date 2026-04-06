@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import productService from "../../services/product.service";
+import productService from "../services/product.service";
 
 export const getProducts = async (
   req: Request,
