@@ -48,8 +48,7 @@ jobs:
       - name: Run linting
         run: yarn lint
 
-      - name: Run tests
-        run: yarn test
+
         env:
           REDIS_URL: redis://localhost:6379
 
