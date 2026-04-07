@@ -15,10 +15,9 @@ export const generateRandomSalt = (bytes: number = 32): string => {
  * @param password - The raw password from the user
  * @returns A promise that resolves to the hashed password string
  */
-export const hashPassword = async (password: string, salt: string): Promise<string> => {
+export const hashPassword = async (password: string): Promise<string> => {
   const saltRounds = 10;
-  const combined = salt + password;
-  return await bcrypt.hash(combined, saltRounds);
+  return await bcrypt.hash(password, saltRounds);
 };
 
 /**
@@ -30,8 +29,6 @@ export const hashPassword = async (password: string, salt: string): Promise<stri
 export const verifyPassword = async (
   password: string,
   hash: string,
-  salt: string,
 ): Promise<boolean> => {
-  const combined = salt + password;
   return await bcrypt.compare(password, hash);
 };

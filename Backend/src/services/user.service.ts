@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import { User } from "../models/user.model";
 
 const findOneByEmail = async (email: string) => {
@@ -21,9 +20,8 @@ const getUser = async () => {
   return await User.find().select("-password");
 };
 
-const createUser = async (name: string, email: string, password: string) => {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = new User({ name, email, password: hashedPassword });
+const create = async (name: string, email: string, password: string) => {
+  const newUser = new User({ name, email, password });
   return await newUser.save();
 };
 
@@ -42,6 +40,6 @@ export default {
   findByIdForAuth,
   findByEmailForAuth,
   getUser,
-  createUser,
+  create,
   createOAuthUser,
 };

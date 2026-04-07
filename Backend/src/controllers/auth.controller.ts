@@ -1,11 +1,10 @@
-import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import { CONSTANTS } from "../configs/constants";
 import { messageExisted, messageUser } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
 import { User } from "../models/user.model";
 import userService from "../services/user.service";
-import { verifyPassword } from "../utils/hash.util";
+import { hashPassword, verifyPassword } from "../utils/hash.util";
 import {
   createJwtCookie,
   createRefreshToken,
@@ -23,7 +22,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     // Check password
-    const isMatch = await verifyPassword(password, user.password, user.salt);
+    const isMatch = await verifyPassword(password, user.password);
     if (!isMatch) {
       ApiResponse.BadRequest(res, messageUser.USER_LOGIN_FAILED);
       return;
@@ -91,7 +90,7 @@ export const logout = async (_req: Request, res: Response): Promise<void> => {
 // Register user
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
 
     // Check email has been existed yet
     const existingUser = await userService.findOneByEmail(email);
@@ -101,13 +100,15 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     }
 
     // hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hashPassword(password);
 
     // Create new user
-    const user = new User({ name, email, password: hashedPassword, role });
-    await user.save();
+    const userResult = await userService.create(name, email, hashedPassword);
 
-    ApiResponse.Created(res, messageUser.USER_REGISTER_SUCCESS);
+    ApiResponse.Created(res, {
+      user: userResult,
+      message: messageUser.USER_REGISTER_SUCCESS,
+    });
   } catch (error) {
     ApiResponse.InternalServerError(res, error);
   }
