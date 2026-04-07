@@ -93,11 +93,11 @@ export const updateCart = async (
 
 export const addToCart = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { productId, quantity } = req.body;
+    const { product, quantity } = req.body;
     const userId = req.user?.id;
 
     // Validate required fields
-    if (!productId || !quantity) {
+    if (!product || !quantity) {
       ApiResponse.BadRequest(res, messageRequired("Product ID and Quantity"));
       return;
     }
@@ -108,13 +108,13 @@ export const addToCart = async (req: Request, res: Response): Promise<void> => {
     }
 
     const itemIndex = cart.items.findIndex(
-      (item) => item.productId.toString() === productId,
+      (item) => item.product.toString() === product,
     );
 
     if (itemIndex > -1) {
       cart.items[itemIndex].quantity += quantity;
     } else {
-      cart.items.push({ productId, quantity });
+      cart.items.push({ product, quantity });
     }
 
     await cart.save();
