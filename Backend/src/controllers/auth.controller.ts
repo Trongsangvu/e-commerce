@@ -1,11 +1,16 @@
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
+import { CONSTANTS } from "../configs/constants";
 import { messageExisted, messageUser } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
 import { User } from "../models/user.model";
 import userService from "../services/user.service";
-import { generateAccessToken } from "../utils/generate-access-token.util";
-import { generateRefreshToken } from "../utils/generate-refresh-token.util";
+import { verifyPassword } from "../utils/hash.util";
+import {
+  createJwtCookie,
+  createRefreshToken,
+  jwtEncode,
+} from "../utils/jwt.util";
 
 // Login user
 export const login = async (req: Request, res: Response): Promise<void> => {
@@ -18,42 +23,43 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await verifyPassword(password, user.password, user.salt);
     if (!isMatch) {
       ApiResponse.BadRequest(res, messageUser.USER_LOGIN_FAILED);
       return;
     }
 
+    user.password = undefined as any;
+    user.salt = undefined as any;
+
     const payload = {
-      id: user._id.toString(),
+      sub: user._id.toString(),
       email: user.email,
-      role: user.role ?? "user",
+      role: user.role,
+      iat: Math.floor(Date.now() / 1000),
     };
 
     // Generate tokens
-    const token = generateAccessToken({
-      id: user._id,
-      email: user.email,
-      role: user.role,
-    });
-    const refreshToken = generateRefreshToken(payload);
+    const token = jwtEncode(
+      payload,
+      CONSTANTS.JWT_SECRET_KEY as string,
+      CONSTANTS.JWT_EXPIRES_SIGNIN as any,
+    );
+
+    const refreshToken = createRefreshToken(payload);
 
     // Set refresh token in cookie
-    res.cookie("refreshToken", refreshToken, {
+    const cookieConfig = createJwtCookie(refreshToken, {
       httpOnly: true,
       secure: false,
       sameSite: "strict",
     });
 
-    // Return token and some basic user info
-    res.json({
+    res.cookie(cookieConfig.name, cookieConfig.value, cookieConfig.options);
+
+    ApiResponse.OK(res, {
+      user,
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
     });
   } catch (error) {
     ApiResponse.InternalServerError(res, error);
@@ -137,35 +143,32 @@ export const oauthLogin = async (
     }
 
     // Generate tokens
-    const token = generateAccessToken({
-      id: user._id,
+    const payload = {
+      sub: user._id.toString(),
       email: user.email,
       role: user.role,
-    });
-    const refreshToken = generateRefreshToken({
-      id: user._id.toString(),
-      email: user.email,
-      role: user.role ?? "user",
-    });
+      iat: Math.floor(Date.now() / 1000),
+    };
+
+    const token = jwtEncode(
+      payload,
+      process.env.JWT_SECRET as string,
+      CONSTANTS.JWT_EXPIRES_SIGNIN as any,
+    );
+
+    const refreshToken = createRefreshToken(payload);
 
     // Set refresh token in cookie
-    res.cookie("refreshToken", refreshToken, {
+    const cookieConfig = createJwtCookie(refreshToken, {
       httpOnly: true,
       secure: false,
-      // secure: process.env.NODE_ENV === 'production',
       sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+    res.cookie(cookieConfig.name, cookieConfig.value, cookieConfig.options);
 
-    // Return token and some basic user info
-    res.json({
+    ApiResponse.OK(res, {
+      user,
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
     });
   } catch (error) {
     ApiResponse.InternalServerError(res, error);

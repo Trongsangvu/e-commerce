@@ -1,18 +1,21 @@
-import mongoose, { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { PaymentMethod, PaymentStatus } from "../configs/enum";
 import { Orders } from "../types/order-types";
+import formatCurrency from "../utils/currency.util";
+import { baseSchema } from "./base.model";
 
-const orderSchema = new Schema<Orders>(
+const orderSchema = baseSchema<Orders>(
   {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
+      index: true,
     },
     products: [
       {
-        productId: {
-          type: mongoose.Schema.Types.ObjectId,
+        product: {
+          type: Schema.Types.ObjectId,
           ref: "Product",
           required: true,
         },
@@ -23,32 +26,21 @@ const orderSchema = new Schema<Orders>(
     currency: { type: String, default: "USD" },
     status: {
       type: String,
-      enum: PaymentStatus,
-      default: "pending",
+      enum: Object.values(PaymentStatus),
+      default: PaymentStatus.PENDING,
     },
     paymentMethod: {
       type: String,
-      enum: PaymentMethod,
+      enum: Object.values(PaymentMethod),
       required: true,
     },
     userFcmToken: { type: String },
     userPhone: { type: String },
   },
   {
-    timestamps: true,
     toJSON: {
-      transform: (_doc, ret) => {
-        const currencySybl: Record<string, string> = {
-          USD: "$",
-        };
-        const symbol = currencySybl[ret.currency] || "";
-
-        if (typeof ret.totalAmount !== "number") {
-          (ret.totalAmount as any) = "Invalid Amount";
-        } else {
-          (ret.totalAmount as any) = `${symbol}${ret.totalAmount.toFixed(2)}`;
-        }
-
+      transform: (_doc, ret: any) => {
+        ret.formattedTotalAmount = formatCurrency(ret.totalAmount, ret.currency);
         return ret;
       },
     },

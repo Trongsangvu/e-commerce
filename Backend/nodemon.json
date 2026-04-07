@@ -1,7 +1,6 @@
 {
-    "watch": ["dist"],
-    "ext": "js,json",
-    "ignore": ["node_modules/*", "dist/*", ".git/*", "*.test.js"],
-    "exec": "node dist/app.js"
+  "watch": ["src"],
+  "ext": "ts,json",
+  "ignore": ["dist"],
+  "exec": "ts-node src/index.ts"
 }
-  

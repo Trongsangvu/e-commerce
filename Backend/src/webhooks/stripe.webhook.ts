@@ -39,7 +39,7 @@ export const stripeWebhook = async (
         { new: true },
       );
 
-      const cacheKey = `order:${order.userId}`;
+      const cacheKey = `order:${order.user.toString()}`;
       await RedisService.del(cacheKey);
     }
 

@@ -1,8 +1,10 @@
-import { Schema, model } from "mongoose";
+import { model } from "mongoose";
 import { ProductCategory } from "../configs/enum";
 import { Products } from "../types/product-types";
+import { baseSchema } from "./base.model";
+import formatCurrency from "../utils/currency.util";
 
-const productSchema = new Schema<Products>(
+const productSchema = baseSchema<Products>(
   {
     name: { type: String, required: true },
     price: { type: Number, required: true, min: 0 },
@@ -13,19 +15,13 @@ const productSchema = new Schema<Products>(
     tags: { type: String },
   },
   {
-    timestamps: true,
     toJSON: {
-      transform: (_doc, ret) => {
-        const currencySybl: Record<string, string> = {
-          USD: "$",
-        };
-        const symbol = currencySybl[ret.currency];
-        (ret.price as any) = `${symbol}${ret.price.toFixed(2)}`;
+      transform(_doc, ret: any) {
+        ret.formattedPrice = formatCurrency(ret.price, ret.currency);
         return ret;
       },
     },
   },
 );
 
-const Product = model<Products>("Product", productSchema);
-export { Product };
+export const Product = model<Products>("Product", productSchema);

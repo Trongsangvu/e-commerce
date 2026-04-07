@@ -2,9 +2,10 @@ import ms from "ms";
 import jwt from "jsonwebtoken";
 
 interface TokenPayload {
-  id: string;
+  sub: string;
   email: string;
   role: string;
+  iat: number;
 }
 
 const refreshTokenExpire =

@@ -1,23 +1,24 @@
-import mongoose, { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { Carts } from "../types/cart-types";
+import { baseSchema } from "./base.model";
 
-const cartSchema = new Schema<Carts>(
-  {
-    userId: { type: mongoose.Schema.Types.ObjectId },
-    items: [
-      {
-        productId: {
-          type: Schema.Types.ObjectId,
-          ref: "Product",
-          required: true,
-        },
-        quantity: { type: Number, required: true, min: 1 },
+const cartSchema = baseSchema<Carts>({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+    index: true,
+  },
+  items: [
+    {
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
       },
-    ],
-  },
-  {
-    timestamps: true,
-  },
-);
+      quantity: { type: Number, required: true, min: 1 },
+    },
+  ],
+});
 
 export const Cart = model<Carts>("Cart", cartSchema);

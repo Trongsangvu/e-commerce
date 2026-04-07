@@ -1,6 +1,21 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { SignOptions, Secret } from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
+import { CONSTANTS } from "../configs/constants";
+
+interface TokenPayload {
+  sub: string;
+  email: string;
+  role: string;
+  iat: number;
+}
+
+type CookieOptions = {
+  httpOnly?: boolean;
+  secure?: boolean;
+  sameSite?: "strict" | "lax" | "none";
+  maxAge?: number;
+};
 
 export const validateToken = (
   req: Request,
@@ -90,4 +105,30 @@ export const jwtDecode = (
   } catch {
     return null;
   }
+};
+
+// Utility function to create a cookie object for JWT
+export const createJwtCookie = (
+  token: string,
+  options: CookieOptions = {},
+): { name: string; value: string; options: CookieOptions } => {
+  return {
+    name: "token",
+    value: token,
+    options: {
+      httpOnly: options.httpOnly ?? true,
+      secure: options.secure ?? process.env.NODE_ENV === "production",
+      sameSite: options.sameSite ?? "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // Default to 7 days
+    },
+  };
+};
+
+// Utility function to create a refresh token
+export const createRefreshToken = (payload: TokenPayload): string => {
+  return jwtEncode(
+    payload,
+    CONSTANTS.JWT_REFRESH_SECRET_KEY as Secret,
+    CONSTANTS.AUTH_REFRESH_TOKEN_EXPIRY as SignOptions["expiresIn"],
+  );
 };
