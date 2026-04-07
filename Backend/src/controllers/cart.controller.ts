@@ -6,9 +6,9 @@ import {
   messageInvalid,
   messageNotFound,
   messageRequired,
-} from "../config/messages";
-import { ApiResponse } from "../config/response";
-import { Cart } from "../models/Cart";
+} from "../configs/messages";
+import { ApiResponse } from "../configs/response";
+import { Cart } from "../models/cart.model";
 import cartService from "../services/cart.service";
 import { RedisService } from "../services/redis.service";
 

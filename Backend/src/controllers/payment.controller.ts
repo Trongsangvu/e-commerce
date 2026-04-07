@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import stripe from "../config/stripe";
-import paypalClient from "../config/paypal";
+import stripe from "../configs/stripe";
+import paypalClient from "../configs/paypal";
 import checkoutNodeJssdk from "@paypal/checkout-server-sdk";
-import { Order } from "../models/Order";
+import { Order } from "../models/order.model";
 import orderService from "../services/order.service";
 
 export const checkoutPayment = async (

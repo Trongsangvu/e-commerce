@@ -1,4 +1,4 @@
-import { client } from "../config/twilio";
+import { client } from "../configs/twilio";
 
 export const sendOrderNotification = async (phone: string, message: string) => {
   try {

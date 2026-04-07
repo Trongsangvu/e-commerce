@@ -1,4 +1,4 @@
-import { Cart } from "../models/Cart";
+import { Cart } from "../models/cart.model";
 
 const findOne = async (userId: string) => {
   return await Cart.findOne({ userId }).populate("items.productId");

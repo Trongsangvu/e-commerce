@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { ProductCategory } from "../config/enum";
+import { ProductCategory } from "../configs/enum";
 import { Products } from "../types/product-types";
 
 const productSchema = new Schema<Products>(
@@ -29,4 +29,3 @@ const productSchema = new Schema<Products>(
 
 const Product = model<Products>("Product", productSchema);
 export { Product };
-

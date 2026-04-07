@@ -7,7 +7,7 @@ import {
   deleteProduct,
 } from "../controllers/product.controller";
 import { searchProduct } from "../controllers/product.controller";
-import { isAdmin } from "../middleware/index";
+import { isAdmin } from "../middlewares/index";
 import { validateToken } from "../utils/jwt.util";
 const router = express.Router();
 

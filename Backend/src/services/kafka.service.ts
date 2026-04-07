@@ -1,4 +1,4 @@
-import { producer } from "../config/kafka";
+import { producer } from "../configs/kafka";
 
 export const sendOrderToWarehouse = async (order: any) => {
   // Producing

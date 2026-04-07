@@ -1,4 +1,4 @@
-import { Order } from "../models/Order";
+import { Order } from "../models/order.model";
 
 const findById = async (id: string) => {
   return await Order.findById(id)

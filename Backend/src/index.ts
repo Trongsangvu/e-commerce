@@ -1,8 +1,8 @@
-import logger from "./config/logger";
+import logger from "./configs/logger";
 import app from "./app";
-import { CONSTANTS } from "./config/constants";
+import { CONSTANTS } from "./configs/constants";
 import { createServer, Server } from "http";
-import MongoDBConnectionManager from "./config/mongodb";
+import MongoDBConnectionManager from "./configs/mongodb";
 
 // configuration
 const config = {

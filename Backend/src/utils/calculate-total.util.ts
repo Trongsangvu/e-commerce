@@ -1,4 +1,4 @@
-import { Product } from "../models/Product";
+import { Product } from "../models/product.model";
 
 export const calculateTotalAmount = async (
   products: { productId: string; quantity: number }[],

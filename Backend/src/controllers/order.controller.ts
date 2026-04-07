@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import redisClient from "../config/redis";
-import { Order } from "../models/Order";
+import redisClient from "../configs/redis";
+import { Order } from "../models/order.model";
 import { sendPushNotification } from "../services/firebase.service";
 // import { sendOrderNotification } from '../services/twilio.service';
 import {
   messageInvalid,
   messageNotFound,
   messageOrder,
-} from "../config/messages";
-import { ApiResponse } from "../config/response";
+} from "../configs/messages";
+import { ApiResponse } from "../configs/response";
 import { sendOrderToWarehouse } from "../services/kafka.service";
 import orderService from "../services/order.service";
 import { RedisService } from "../services/redis.service";

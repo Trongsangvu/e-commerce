@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { CONSTANTS } from "../config/constants.js";
-import { ApiResponse } from "../config/response.js";
+import { CONSTANTS } from "../configs/constants.js";
+import { ApiResponse } from "../configs/response.js";
 import userService from "../services/user.service.js";
 import { jwtDecode } from "../utils/jwt.util.js";
 

@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
-import { Order } from "../models/Order";
+import { Order } from "../models/order.model";
+import { ApiResponse } from "../configs/response";
+import { messagePayment } from "../configs/messages";
 
 export const paypalWebhook = async (
   req: Request,
@@ -13,9 +15,8 @@ export const paypalWebhook = async (
       await Order.findOneAndUpdate({ paymentId: orderId }, { status: "paid" });
     }
 
-    res.status(200).json({ message: "Webhook received" });
-  } catch (error) {
-    console.error("error:", error);
-    res.status(400).json({ message: "Webhook processing failed" });
+    ApiResponse.OK(res, { received: true });
+  } catch {
+    ApiResponse.BadRequest(res, messagePayment.WEBHOOK_FAILED);
   }
 };

@@ -50,3 +50,11 @@ export const messageOrder = {
   NO_PRODUCTS: "No products in order",
   PLACED_SUCCESS: "Order placed successfully",
 };
+
+export const messagePayment = {
+  PAYMENT_SUCCESS: "Payment successful",
+  PAYMENT_FAILED: "Payment failed",
+  INVALID_PAYMENT_METHOD: "Invalid payment method",
+  NO_MATCHING_ORDER: "No matching order found",
+  WEBHOOK_FAILED: "Webhook processing failed",
+};

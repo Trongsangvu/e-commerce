@@ -6,7 +6,7 @@ import {
   register,
 } from "../controllers/auth.controller";
 import { protectedRoute } from "../controllers/protect.controller";
-import { refreshToken } from "../controllers/refreshToken.controller";
+import { refreshToken } from "../controllers/refresh-token.controller";
 
 const router = express.Router();
 

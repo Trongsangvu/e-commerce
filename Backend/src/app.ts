@@ -4,10 +4,10 @@ import cookieSession from "cookie-session";
 import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import helmet from "helmet";
-import { CONSTANTS } from "./config/constants";
-import logger from "./config/logger";
-import { ApiResponse } from "./config/response";
-import { errorHandler, notFoundHandler } from "./middleware/error.middleware";
+import { CONSTANTS } from "./configs/constants";
+import logger from "./configs/logger";
+import { ApiResponse } from "./configs/response";
+import { errorHandler, notFoundHandler } from "./middlewares/error.middleware";
 import router from "./routes";
 
 const app: Application = express();

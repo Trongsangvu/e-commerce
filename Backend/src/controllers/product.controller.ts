@@ -4,8 +4,8 @@ import {
   messageInvalid,
   messageNotFound,
   messageProduct,
-} from "../config/messages";
-import { ApiResponse } from "../config/response";
+} from "../configs/messages";
+import { ApiResponse } from "../configs/response";
 import productService from "../services/product.service";
 
 export const getProducts = async (

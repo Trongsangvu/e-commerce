@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ApiResponse } from "../config/response";
-import logger from "../config/logger";
+import { ApiResponse } from "../configs/response";
+import logger from "../configs/logger";
 
 export const errorHandler = (
   err: Error,

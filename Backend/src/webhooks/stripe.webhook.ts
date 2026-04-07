@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
-import stripe from "../config/stripe";
-import { Order } from "../models/Order";
+import { messagePayment } from "../configs/messages";
+import { ApiResponse } from "../configs/response";
+import stripe from "../configs/stripe";
+import { Order } from "../models/order.model";
 import { RedisService } from "../services/redis.service";
 
 export const stripeWebhook = async (
@@ -25,7 +27,7 @@ export const stripeWebhook = async (
 
       const order = await Order.findOne({ stripePaymentId: paymentIntent.id });
       if (!order) {
-        res.status(400).json({ error: "No matching order found" });
+        ApiResponse.BadRequest(res, messagePayment.NO_MATCHING_ORDER);
         return;
       }
 

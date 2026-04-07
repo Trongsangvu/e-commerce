@@ -1,4 +1,4 @@
-import admin from "../config/firebase";
+import admin from "../configs/firebase";
 
 export const sendPushNotification = async (
   token: string,

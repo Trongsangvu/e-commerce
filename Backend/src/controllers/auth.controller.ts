@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
-import { messageExisted, messageUser } from "../config/messages";
-import { ApiResponse } from "../config/response";
-import { User } from "../models/User";
+import { messageExisted, messageUser } from "../configs/messages";
+import { ApiResponse } from "../configs/response";
+import { User } from "../models/user.model";
 import userService from "../services/user.service";
 import { generateAccessToken } from "../utils/generate-access-token.util";
 import { generateRefreshToken } from "../utils/generate-refresh-token.util";

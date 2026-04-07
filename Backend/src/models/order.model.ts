@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
-import { PaymentMethod, PaymentStatus } from "../config/enum";
+import { PaymentMethod, PaymentStatus } from "../configs/enum";
 import { Orders } from "../types/order-types";
 
 const orderSchema = new Schema<Orders>(
