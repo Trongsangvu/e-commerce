@@ -11,7 +11,7 @@ export const checkoutPayment = async (
 ): Promise<void> => {
   try {
     const { orderId, method } = req.body;
-    let response;
+    let response: object;
 
     const order = await orderService.findById(orderId);
     if (!order) {

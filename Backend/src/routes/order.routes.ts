@@ -1,5 +1,5 @@
 import express from "express";
-import { validateToken } from "../utils/jwt";
+import { validateToken } from "../utils/jwt.util";
 import {
   createOrders,
   getOrders,

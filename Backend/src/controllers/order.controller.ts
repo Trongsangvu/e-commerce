@@ -1,47 +1,51 @@
-import { Request, Response, NextFunction } from "express";
-import { Order } from "../models/Order";
+import { Request, Response } from "express";
 import redisClient from "../config/redis";
+import { Order } from "../models/Order";
 import { sendPushNotification } from "../services/firebase.service";
 // import { sendOrderNotification } from '../services/twilio.service';
+import {
+  messageInvalid,
+  messageNotFound,
+  messageOrder,
+} from "../config/messages";
+import { ApiResponse } from "../config/response";
 import { sendOrderToWarehouse } from "../services/kafka.service";
 import orderService from "../services/order.service";
 import { RedisService } from "../services/redis.service";
 import { calculateTotalAmount } from "../utils/calculate-total.util";
 
-export const getOrders = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
+export const getOrders = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.user?.id;
     const cacheKey = `orders:${userId}`;
     const cachedOrders = await redisClient.get(cacheKey);
 
     if (cachedOrders) {
-      res.status(200).json(JSON.parse(cachedOrders));
+      ApiResponse.OK(res, {
+        message: messageOrder.ORDER_RETRIEVED,
+        orders: JSON.parse(cachedOrders),
+      });
       return;
     }
 
     // If not have cache, query from DB
     const orders = await orderService.findById(userId!);
     if (!orders) {
-      res.status(404).json({ message: "Orders not found" });
+      ApiResponse.NotFound(res, messageNotFound("Orders"));
       return;
     }
 
     redisClient.setEx(cacheKey, 3600, JSON.stringify(orders));
 
-    res.status(200).json(orders);
+    ApiResponse.OK(res, { orders });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const createOrders = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const { products, paymentMethod } = req.body;
@@ -49,14 +53,14 @@ export const createOrders = async (
     const userId = req.user?.id;
 
     if (!products || products.length === 0) {
-      res.status(400).json({ message: "No Products in order" });
+      ApiResponse.BadRequest(res, messageOrder.NO_PRODUCTS);
       return;
     }
 
     const totalAmount = await calculateTotalAmount(products);
 
     if (isNaN(totalAmount) || totalAmount <= 0) {
-      res.status(400).json({ message: "Invalid total amount" });
+      ApiResponse.BadRequest(res, messageInvalid("Total amount"));
       return;
     }
 
@@ -79,18 +83,18 @@ export const createOrders = async (
       sendOrderToWarehouse(newOrder), // Send order to warehouse system via Kafka
     ]);
 
-    res
-      .status(201)
-      .json({ message: "Order placed successfully", order: newOrder });
+    ApiResponse.Created(res, {
+      message: messageOrder.PLACED_SUCCESS,
+      order: newOrder,
+    });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const updateOrders = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
@@ -101,28 +105,30 @@ export const updateOrders = async (
       req.body,
     );
     if (!order) {
-      res.status(404).json({ message: "Order not found" });
+      ApiResponse.NotFound(res, messageNotFound("Order"));
       return;
     }
 
-    const cachekey = `orders:${userId}`;
+    const cacheKey = `orders:${userId}`;
 
     await Promise.all([
-      await RedisService.del(cachekey),
+      await RedisService.del(cacheKey),
       // await sendPushNotification(req.body.userFcmToken, "update order", `Your order status ${req.body.status}`),
       // await sendOrderNotification(req.body.userPhone, "Your order has been placed successfully!")
     ]);
 
-    res.status(200).json({ message: "Order updated successfully", order });
+    ApiResponse.OK(res, {
+      message: messageOrder.ORDER_UPDATED,
+      order,
+    });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const updateOrderStatus = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
@@ -135,7 +141,7 @@ export const updateOrderStatus = async (
     );
 
     if (!order) {
-      res.status(404).json({ message: "Order not found" });
+      ApiResponse.NotFound(res, messageNotFound("Order"));
       return;
     }
 
@@ -151,10 +157,11 @@ export const updateOrderStatus = async (
       ),
     ]);
 
-    res
-      .status(200)
-      .json({ message: "Order status updated successfully", order });
+    ApiResponse.OK(res, {
+      message: messageOrder.ORDER_UPDATED,
+      order,
+    });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };

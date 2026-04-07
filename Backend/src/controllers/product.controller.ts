@@ -1,50 +1,53 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
+import {
+  messageDeleted,
+  messageInvalid,
+  messageNotFound,
+  messageProduct,
+} from "../config/messages";
+import { ApiResponse } from "../config/response";
 import productService from "../services/product.service";
 
 export const getProducts = async (
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const product = await productService.find();
-    res.status(200).json(product);
-  } catch (err) {
-    next(err);
+    ApiResponse.OK(res, { products: product });
+  } catch (error) {
+    ApiResponse.InternalServerError(res, error);
   }
 };
 export const getProductById = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
     const product = await productService.findById(String(id));
 
-    res.status(200).json(product);
-  } catch (err) {
-    next(err);
+    ApiResponse.OK(res, { products: product });
+  } catch (error) {
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const createProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const product = await productService.create(req.body);
-    res.status(201).json(product);
-  } catch (err) {
-    next(err);
+    ApiResponse.Created(res, { products: product });
+  } catch (error) {
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const updateProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
@@ -59,43 +62,47 @@ export const updateProduct = async (
     const updatedProduct = await productService.update(String(id), updateData);
 
     if (!updatedProduct) {
-      res.status(404).json({ message: "Product not found" });
+      ApiResponse.NotFound(res, messageNotFound("Product"));
       return;
     }
-    res.status(200).json(updatedProduct);
-  } catch (err) {
-    next(err);
+
+    ApiResponse.OK(res, { products: updatedProduct });
+  } catch (error) {
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const deleteProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const { id } = req.params;
+
     const product = await productService.remove(String(id));
     if (!product) {
-      res.status(404).json({ message: "Product not found" });
+      ApiResponse.NotFound(res, messageNotFound("Product"));
       return;
     }
-    res.status(200).json({ message: "Product deleted successfully" });
-  } catch (err) {
-    next(err);
+
+    ApiResponse.OK(res, {
+      message: messageDeleted("Product"),
+      products: product,
+    });
+  } catch (error) {
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const searchProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const keyword = req.query.name;
 
     if (!keyword) {
-      res.status(400).json({ message: "Missing search keyword" });
+      ApiResponse.BadRequest(res, messageProduct.MISSING_SEARCH_KEYWORD);
       return;
     }
 
@@ -110,14 +117,14 @@ export const searchProduct = async (
     }
 
     if (!searchKeyWord.trim()) {
-      res.status(400).json({ message: "Invalid search keyword" });
+      ApiResponse.BadRequest(res, messageInvalid("Search keyword"));
       return;
     }
 
     const products = await productService.search(searchKeyWord);
 
     res.json(products);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    ApiResponse.InternalServerError(res, error);
   }
 };

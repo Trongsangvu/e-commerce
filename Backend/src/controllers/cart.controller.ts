@@ -1,19 +1,23 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import mongoose from "mongoose";
+import {
+  messageCart,
+  messageDeleted,
+  messageInvalid,
+  messageNotFound,
+  messageRequired,
+} from "../config/messages";
+import { ApiResponse } from "../config/response";
 import { Cart } from "../models/Cart";
-import { RedisService } from "../services/redis.service";
 import cartService from "../services/cart.service";
+import { RedisService } from "../services/redis.service";
 
-export const getCart = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
+export const getCart = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.user?.id;
 
     const cacheKey = `cart:${userId}`;
-    let cachedCart;
+    let cachedCart: string | null = null;
 
     try {
       cachedCart = await RedisService.get(cacheKey);
@@ -35,14 +39,13 @@ export const getCart = async (
     await RedisService.set(`cart:${userId}`, JSON.stringify(cart), 3600);
     res.status(200).json(cart);
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const updateCart = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const { productId } = req.params;
@@ -54,13 +57,13 @@ export const updateCart = async (
       typeof productId !== "string" ||
       !mongoose.Types.ObjectId.isValid(productId)
     ) {
-      res.status(400).json({ message: "Invalid product ID" });
+      ApiResponse.BadRequest(res, messageInvalid("Product ID"));
       return;
     }
 
     // Check out quantity is valid
     if (quantity === undefined || quantity <= 0) {
-      res.status(400).json({ message: "Quantity must be greater than 0" });
+      ApiResponse.BadRequest(res, messageInvalid("Quantity"));
       return;
     }
 
@@ -68,7 +71,7 @@ export const updateCart = async (
     const updatedCart = await cartService.update(userId, productId, quantity);
 
     if (!updatedCart) {
-      res.status(404).json({ message: "Cart or product not found" });
+      ApiResponse.NotFound(res, messageNotFound("Cart"));
       return;
     }
 
@@ -79,26 +82,23 @@ export const updateCart = async (
       console.log("Redis cache deletion failed:", error);
     }
 
-    res
-      .status(200)
-      .json({ message: "Cart updated successfully", cart: updatedCart });
+    ApiResponse.OK(res, {
+      message: messageCart.CART_UPDATED,
+      cart: updatedCart,
+    });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
-export const addToCart = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
+export const addToCart = async (req: Request, res: Response): Promise<void> => {
   try {
     const { productId, quantity } = req.body;
     const userId = req.user?.id;
 
     // Validate required fields
     if (!productId || !quantity) {
-      res.status(400).json({ message: "ProductId and quantity are required" });
+      ApiResponse.BadRequest(res, messageRequired("Product ID and Quantity"));
       return;
     }
 
@@ -125,17 +125,17 @@ export const addToCart = async (
       console.log("Redis cache deletion failed:", error);
     }
 
-    res
-      .status(200)
-      .json({ message: "Product added to cart successfully", cart });
+    ApiResponse.OK(res, {
+      message: messageCart.CART_ADD_SUCCESS,
+      cart,
+    });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 export const removeFromCart = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
     const userId = req.user?.id;
@@ -145,14 +145,14 @@ export const removeFromCart = async (
       typeof productId !== "string" ||
       !mongoose.Types.ObjectId.isValid(productId)
     ) {
-      res.status(400).json({ message: "Invalid product ID" });
+      ApiResponse.BadRequest(res, messageInvalid("Product ID"));
       return;
     }
 
     const cart = await cartService.remove(userId, productId);
 
     if (!cart) {
-      res.status(404).json({ message: "Cart not found" });
+      ApiResponse.NotFound(res, messageNotFound("Cart"));
       return;
     }
 
@@ -162,10 +162,11 @@ export const removeFromCart = async (
       console.log("Redis cache delete failed", error);
     }
 
-    res
-      .status(200)
-      .json({ message: "Product removed from cart successfully", cart });
+    ApiResponse.OK(res, {
+      message: messageDeleted("Product"),
+      cart,
+    });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };

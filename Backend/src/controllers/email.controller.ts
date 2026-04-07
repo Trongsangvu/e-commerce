@@ -1,10 +1,10 @@
+import { Request, Response } from "express";
+import { ApiResponse } from "../config/response";
 import { sendEmail } from "../utils/email.util";
-import { Request, Response, NextFunction } from "express";
 
 export const sendMessageByEmail = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ) => {
   try {
     const { to, message } = req.body; // subject
@@ -12,6 +12,6 @@ export const sendMessageByEmail = async (
 
     res.status(200).json({ success: true, data: result });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };

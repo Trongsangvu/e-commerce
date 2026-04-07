@@ -5,6 +5,7 @@ dotenvConfig({ path: `.env.${process.env.NODE_ENV}` });
 export const CONSTANTS = {
   LOG_LEVEL: process.env.LOG_LEVEL || "info",
   ROLE: ["admin", "user"],
+  ROLE_RESET_PASSWORD_TOKEN: "RESET_PASSWORD_TOKEN",
 
   // Database
   MONGODB_URI: process.env.MONGODB_URI,

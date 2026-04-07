@@ -8,7 +8,7 @@ import {
 } from "../controllers/product.controller";
 import { searchProduct } from "../controllers/product.controller";
 import { isAdmin } from "../middleware/index";
-import { validateToken } from "../utils/jwt";
+import { validateToken } from "../utils/jwt.util";
 const router = express.Router();
 
 router.post("/", validateToken, isAdmin, createProduct);

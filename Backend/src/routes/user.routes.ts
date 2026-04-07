@@ -1,6 +1,6 @@
 import express from "express";
 import { getUsers, getProfileUser } from "../controllers/user.controller";
-import { validateToken } from "../utils/jwt";
+import { validateToken } from "../utils/jwt.util";
 
 const router = express.Router();
 

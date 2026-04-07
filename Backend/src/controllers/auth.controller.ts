@@ -1,28 +1,26 @@
-import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcryptjs";
+import { Request, Response } from "express";
+import { messageExisted, messageUser } from "../config/messages";
+import { ApiResponse } from "../config/response";
 import { User } from "../models/User";
+import userService from "../services/user.service";
 import { generateAccessToken } from "../utils/generate-access-token.util";
 import { generateRefreshToken } from "../utils/generate-refresh-token.util";
-import userService from "../services/user.service";
 
 // Login user
-export const login = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
+export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
-    const user = await userService.findOneByEmail(email);
+    const user = await userService.findByEmailForAuth(email);
     if (!user) {
-      res.status(400).json({ message: "Invalid email or password" });
+      ApiResponse.NotFound(res, messageUser.USER_LOGIN_FAILED);
       return;
     }
 
     // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      res.status(400).json({ message: "Invalid email or password" });
+      ApiResponse.BadRequest(res, messageUser.USER_LOGIN_FAILED);
       return;
     }
 
@@ -40,7 +38,6 @@ export const login = async (
     });
     const refreshToken = generateRefreshToken(payload);
 
-    // console.log(jwt.decode(refreshToken));
     // Set refresh token in cookie
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
@@ -57,19 +54,14 @@ export const login = async (
         email: user.email,
         role: user.role,
       },
-    }); // role: user.role
+    });
   } catch (error) {
-    console.error("Error logging in user", error);
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 // Logout user
-export const logout = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
+export const logout = async (_req: Request, res: Response): Promise<void> => {
   try {
     // Clear both tokens from cookies
     res.clearCookie("token", {
@@ -84,26 +76,21 @@ export const logout = async (
       path: "/",
     });
 
-    res.status(200).json({ message: "Logged out successfully" });
+    ApiResponse.OK(res, messageUser.USER_LOGOUT_SUCCESS);
   } catch (error) {
-    console.error("Logout error:", error);
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 // Register user
-export const register = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
+export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, password, role } = req.body;
 
     // Check email has been existed yet
     const existingUser = await userService.findOneByEmail(email);
     if (existingUser) {
-      res.status(400).json({ message: "Email has been existed" });
+      ApiResponse.BadRequest(res, messageExisted("Email"));
       return;
     }
 
@@ -114,22 +101,21 @@ export const register = async (
     const user = new User({ name, email, password: hashedPassword, role });
     await user.save();
 
-    res.status(201).json({ message: "User registered successfully" });
+    ApiResponse.Created(res, messageUser.USER_REGISTER_SUCCESS);
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };
 
 export const oauthLogin = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
   try {
-    const { name, email, $id: appwriteId } = req.body;
+    const { name, email, $id: appWriteId } = req.body;
 
-    if (!email || !appwriteId) {
-      res.status(400).json({ message: "Missing info from OAuth provider" });
+    if (!email || !appWriteId) {
+      ApiResponse.BadRequest(res, messageUser.OAUTH_MISSING_DATA);
       return;
     }
 
@@ -141,12 +127,12 @@ export const oauthLogin = async (
       user = await User.create({
         email,
         name,
-        appwriteId,
+        appWriteId,
         role: "user",
       });
-    } else if (!user.appwriteId) {
-      // Update appwriteId, if user created manual before
-      user.appwriteId = appwriteId;
+    } else if (!user.appWriteId) {
+      // Update appWriteId, if user created manual before
+      user.appWriteId = appWriteId;
       await user.save();
     }
 
@@ -182,6 +168,6 @@ export const oauthLogin = async (
       },
     });
   } catch (error) {
-    next(error);
+    ApiResponse.InternalServerError(res, error);
   }
 };

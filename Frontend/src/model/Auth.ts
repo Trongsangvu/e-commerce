@@ -58,7 +58,7 @@ export interface IOAuthUser {
   email: string;
   provider?: string;
   providerId?: string;
-  appwriteId?: string;
+  appWriteId?: string;
 }
 
 export interface IOAuthResponse {

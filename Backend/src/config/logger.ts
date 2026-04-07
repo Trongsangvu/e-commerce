@@ -5,7 +5,7 @@ import path from "path";
 const logFormat = winston.format.printf(
   ({ level, message, timestamp, stack }) => {
     // If there's an error stack trace, include it; otherwise just the message
-    return `${timestamp} [${level.toUpperCase()}${stack || message}`;
+    return `${timestamp} ${level.toUpperCase()}${stack || message}`;
   },
 );
 
