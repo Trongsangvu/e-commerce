@@ -16,20 +16,20 @@ export const Blog: React.FC = () => {
             blog
           </span>
         </div>
-        <div className="grid gird-cols-2 md:grid-cols-[2fr_1fr] gap-8 mx-[100px] pt-[60px]">
-          <div className="pr-[35px]">
-            <div className="w-[825px]">
+        <div className="grid gird-cols-2 md:grid-cols-[2fr_1fr] gap-8 mx-100 pt-60">
+          <div className="pr-35">
+            <div className="w-825">
               <div className="w-auto">
                 <div className="relative group overflow-hidden">
                   <a href="#">
                     <img
-                      className="w-auto h-[413px] transition-transform duration-500 group-hover:scale-110"
+                      className="w-auto h-413 transition-transform duration-500 group-hover:scale-110"
                       src={images.bannerBlog1}
                       alt="banner blog"
                     />
                   </a>
                 </div>
-                <div className="mb-[30px] pb-[30px]">
+                <div className="mb-30 pb-30">
                   <h4 className="font-[GucciSansPro-bold] text-3xl py-20">
                     8 Inspiring Ways to Wear Dresses in the Winter
                   </h4>
@@ -53,18 +53,18 @@ export const Blog: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[825px]">
+            <div className="w-825">
               <div className="w-auto">
                 <div className="relative group overflow-hidden">
                   <a href="#">
                     <img
-                      className="w-auto h-[413px] transition-transform duration-500 group-hover:scale-110"
+                      className="w-auto h-413 transition-transform duration-500 group-hover:scale-110"
                       src={images.bannerBlog2}
                       alt="banner blog"
                     />
                   </a>
                 </div>
-                <div className="mb-[30px] pb-[30px]">
+                <div className="mb-30 pb-30">
                   <h4 className="font-[GucciSansPro-bold] text-3xl py-20">
                     The Great Big List of Men’s Gifts for the Holidays
                   </h4>
@@ -88,18 +88,18 @@ export const Blog: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[825px]">
+            <div className="w-825">
               <div className="w-auto">
                 <div className="relative group overflow-hidden">
                   <a href="#">
                     <img
-                      className="w-auto h-[413px] transition-transform duration-500 group-hover:scale-110"
+                      className="w-auto h-413 transition-transform duration-500 group-hover:scale-110"
                       src={images.bannerBlog3}
                       alt="banner blog"
                     />
                   </a>
                 </div>
-                <div className="mb-[30px] pb-[30px]">
+                <div className="mb-30 pb-30">
                   <h4 className="font-[GucciSansPro-bold] text-3xl py-20">
                     5 Winter-to-Spring Fashion Trends to Try Now
                   </h4>
@@ -124,9 +124,9 @@ export const Blog: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="px-15 w-[325px]">
+          <div className="px-15 w-325">
             <div>
-              <h4 className="font-[Poppins-bold] text-[#333] text-3xl pb-[30px]">
+              <h4 className="font-[Poppins-bold] text-[#333] text-3xl pb-30">
                 Categories
               </h4>
               <ul>
@@ -210,19 +210,19 @@ export const Blog: React.FC = () => {
             <div>
               <h4 className="font-[Poppins-bold] text-3xl my-20">Tags</h4>
               <ul>
-                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">
+                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-30 font-[Poppins-regular] leading-[1.923] text-[#888] px-15 mr-5 mb-5 rounded-15">
                   Fashion
                 </li>
-                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">
+                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-30 font-[Poppins-regular] leading-[1.923] text-[#888] px-15 mr-5 mb-5 rounded-15">
                   Lifestyle
                 </li>
-                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">
+                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-30 font-[Poppins-regular] leading-[1.923] text-[#888] px-15 mr-5 mb-5 rounded-15">
                   Denim
                 </li>
-                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">
+                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-30 font-[Poppins-regular] leading-[1.923] text-[#888] px-15 mr-5 mb-5 rounded-15">
                   Streetstyle
                 </li>
-                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-[30px] font-[Poppins-regular] leading-[1.923] text-[#888] px-[15px] mr-5 mb-5 rounded-[15px]">
+                <li className="inline-block cursor-pointer hover:border-[#717fe0] hover:text-[#717fe0] border-1 border-solid border-[#ccc] min-h-30 font-[Poppins-regular] leading-[1.923] text-[#888] px-15 mr-5 mb-5 rounded-15">
                   Crafts
                 </li>
               </ul>
