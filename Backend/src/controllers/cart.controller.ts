@@ -8,9 +8,9 @@ import {
   messageRequired,
 } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
+import { RedisService } from "../integrations/redis.service";
 import { Cart } from "../models/cart.model";
 import cartService from "../services/cart.service";
-import { RedisService } from "../services/redis.service";
 
 export const getCart = async (req: Request, res: Response): Promise<void> => {
   try {
