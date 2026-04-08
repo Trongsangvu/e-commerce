@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { UserRole } from "../configs/enum";
 import { messageExisted, messageNotFound } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
 import userService from "../services/user.service";
@@ -29,22 +30,19 @@ const create = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getUsers = async (_req: Request, res: Response): Promise<void> => {
-  try {
-    const users = await userService.getUser();
-    ApiResponse.OK(res, users);
-  } catch (error) {
-    ApiResponse.InternalServerError(res, error);
-  }
-};
-
 const list = async (req: Request, res: Response): Promise<void> => {
   try {
-    // const user = req.user;
-    let query = {};
+    const user = req.user;
+    let query: any = {};
 
-    const page = parseInt((req.query.page as string) || "1", 10);
-    const limit = parseInt((req.query.limit as string) || "10", 10);
+    if (user.role === UserRole.ADMIN) {
+      query.created_by = user.id;
+    } else {
+      query._id = user.id;
+    }
+
+    const page = parseInt(req.query.page as string, 10);
+    const limit = parseInt(req.query.limit as string, 10);
     const skip = (page - 1) * limit;
 
     const { users, count } = await userService.list(query, skip, limit);
@@ -55,7 +53,7 @@ const list = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getProfileUser = async (req: Request, res: Response): Promise<void> => {
+const getProfile = async (req: Request, res: Response): Promise<void> => {
   try {
     const user = await userService.findById(req.user?.id);
     if (!user) {
@@ -93,8 +91,7 @@ const update = async (req: Request, res: Response): Promise<void> => {
 
 export default {
   create,
-  getUsers,
-  getProfileUser,
+  getProfile,
   update,
   list,
 };

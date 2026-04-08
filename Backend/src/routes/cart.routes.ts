@@ -1,5 +1,4 @@
 import express from "express";
-import { validateToken } from "../utils/jwt.util";
 import {
   getCart,
   addToCart,
@@ -9,10 +8,10 @@ import {
 
 const router = express.Router();
 
-router.get("/", validateToken, getCart);
-router.post("/add", validateToken, addToCart);
-router.put("/update/:id", validateToken, updateCart);
-router.patch("/update/:id", validateToken, updateCart);
-router.delete("/:id", validateToken, removeFromCart);
+router.get("/", getCart);
+router.post("/add", addToCart);
+router.put("/update/:id", updateCart);
+router.patch("/update/:id", updateCart);
+router.delete("/:id", removeFromCart);
 
 export default router;

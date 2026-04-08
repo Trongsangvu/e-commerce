@@ -16,8 +16,16 @@ router.post(
   userController.create,
 );
 
-router.get("/", allTokenRequired, userController.getUsers);
+router.get(
+  "/",
+  adminTokenRequired,
+  userController.list
+);
 
-router.get("/profile", allTokenRequired, userController.getProfileUser);
+router.get(
+  "/profile",
+  allTokenRequired,
+  userController.getProfile
+);
 
 export default router;

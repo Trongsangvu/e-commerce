@@ -1,10 +1,9 @@
 import express from "express";
 import { checkoutPayment, getStatus } from "../controllers/payment.controller";
-import { validateToken } from "../utils/jwt.util";
 
 const router = express.Router();
 
-router.post("/checkout", validateToken, checkoutPayment);
-router.get("/:id/status", validateToken, getStatus);
+router.post("/checkout", checkoutPayment);
+router.get("/:id/status", getStatus);
 
 export default router;
