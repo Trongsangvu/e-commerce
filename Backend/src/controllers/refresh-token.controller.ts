@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { generateAccessToken } from "../utils/generate-access-token.util";
+import { ApiResponse } from "../configs/response";
+import { messageInvalid } from "../configs/messages";
 
 export const refreshToken = async (
   req: Request,
@@ -18,7 +20,7 @@ export const refreshToken = async (
     }
 
     if (typeof refreshTokenFromCookie !== "string") {
-      res.status(400).json({ message: "Invalid refresh token format" });
+      ApiResponse.BadRequest(res, messageInvalid("refresh token"));
       return;
     }
 
@@ -39,9 +41,8 @@ export const refreshToken = async (
         refreshTokenFromCookie,
         jwtRefreshSecret,
       ) as jwt.JwtPayload;
-    } catch (error) {
-      console.error("Error verifying refresh token:", error);
-      res.status(403).json({ message: "Invalid refresh token" });
+    } catch {
+      ApiResponse.Forbidden(res, messageInvalid("refresh token"));
       return;
     }
 
@@ -53,8 +54,7 @@ export const refreshToken = async (
     });
 
     res.json({ accessToken });
-  } catch (error) {
-    console.error("Error refreshing token:", error);
-    res.status(403).json({ message: "Invalid refresh token" });
+  } catch {
+    ApiResponse.Forbidden(res, messageInvalid("refresh token"));
   }
 };

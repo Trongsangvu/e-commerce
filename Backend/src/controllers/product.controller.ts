@@ -8,7 +8,7 @@ import {
 import { ApiResponse } from "../configs/response";
 import productService from "../services/product.service";
 
-export const getProducts = async (
+const getProducts = async (
   _req: Request,
   res: Response,
 ): Promise<void> => {
@@ -19,7 +19,8 @@ export const getProducts = async (
     ApiResponse.InternalServerError(res, error);
   }
 };
-export const getProductById = async (
+
+const getProductById = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
@@ -33,7 +34,7 @@ export const getProductById = async (
   }
 };
 
-export const createProduct = async (
+const createProduct = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
@@ -45,7 +46,7 @@ export const createProduct = async (
   }
 };
 
-export const updateProduct = async (
+const updateProduct = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
@@ -72,7 +73,7 @@ export const updateProduct = async (
   }
 };
 
-export const deleteProduct = async (
+const deleteProduct = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
@@ -94,7 +95,7 @@ export const deleteProduct = async (
   }
 };
 
-export const searchProduct = async (
+const searchProduct = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
@@ -123,8 +124,17 @@ export const searchProduct = async (
 
     const products = await productService.search(searchKeyWord);
 
-    res.json(products);
+    ApiResponse.OK(res, { products });
   } catch (error) {
     ApiResponse.InternalServerError(res, error);
   }
+};
+
+export default {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  searchProduct,
 };

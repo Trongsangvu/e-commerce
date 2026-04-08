@@ -1,21 +1,46 @@
 import express from "express";
-import {
-  createProduct,
-  deleteProduct,
-  getProductById,
-  getProducts,
-  searchProduct,
-  updateProduct,
-} from "../controllers/product.controller";
-import { adminTokenRequired } from "../middlewares/auth.middleware";
+import productController from "../controllers/product.controller";
+import { adminTokenRequired, allTokenRequired } from "../middlewares/auth.middleware";
+import { validateRequest } from "../middlewares/validate.middleware";
+import { createProductRequest, updateProductRequest } from "../requests/product.request";
 const router = express.Router();
 
-router.post("/", adminTokenRequired, createProduct);
-router.get("/", getProducts);
-router.get("/search", searchProduct);
+router.post(
+  "/",
+  adminTokenRequired,
+  validateRequest(createProductRequest),
+  productController.createProduct,
+);
 
-router.get("/:id", getProductById);
-router.put("/:id", adminTokenRequired, updateProduct);
-router.delete("/:id", adminTokenRequired, deleteProduct);
+router.get(
+  "/",
+  allTokenRequired,
+  productController.getProducts,
+);
+
+router.get(
+  "/search",
+  allTokenRequired,
+  productController.searchProduct,
+);
+
+router.get(
+  "/:id",
+  allTokenRequired,
+  productController.getProductById,
+);
+
+router.put(
+  "/:id",
+  adminTokenRequired,
+  validateRequest(updateProductRequest),
+  productController.updateProduct,
+);
+
+router.delete(
+  "/:id",
+  adminTokenRequired,
+  productController.deleteProduct,
+);
 
 export default router;
