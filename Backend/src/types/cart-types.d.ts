@@ -5,7 +5,7 @@ interface CartItem {
   quantity: number;
 }
 
-export interface Carts extends Document {
+export interface ICart {
   user: Schema.Types.ObjectId;
   items: CartItem[];
 }

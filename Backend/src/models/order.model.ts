@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, HydratedDocument } from "mongoose";
 import { PaymentMethod, PaymentStatus } from "../configs/enum";
-import { Orders } from "../types/order-types";
+import { IOrder } from "../types/order-types";
 import formatCurrency from "../utils/currency.util";
 import { baseSchema } from "./base.model";
 
-const orderSchema = baseSchema<Orders>(
+const orderSchema = baseSchema<IOrder>(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -19,11 +19,20 @@ const orderSchema = baseSchema<Orders>(
           ref: "Product",
           required: true,
         },
-        quantity: { type: Number, required: true },
+        quantity: {
+          type: Number,
+          required: true,
+        },
       },
     ],
-    totalAmount: { type: Number, required: true },
-    currency: { type: String, default: "USD" },
+    totalAmount: {
+      type: Number,
+      required: true,
+    },
+    currency: {
+      type: String,
+      default: "USD",
+    },
     status: {
       type: String,
       enum: Object.values(PaymentStatus),
@@ -34,17 +43,27 @@ const orderSchema = baseSchema<Orders>(
       enum: Object.values(PaymentMethod),
       required: true,
     },
-    userFcmToken: { type: String },
-    userPhone: { type: String },
+    userFcmToken: {
+      type: String,
+      required: false,
+    },
+    userPhone: {
+      type: String,
+      required: false,
+    },
   },
   {
     toJSON: {
-      transform: (_doc, ret: any) => {
-        ret.formattedTotalAmount = formatCurrency(ret.totalAmount, ret.currency);
+      transform: (_doc, ret: Partial<IOrder> & any) => {
+        ret.formattedTotalAmount = formatCurrency(
+          ret.totalAmount,
+          ret.currency,
+        );
         return ret;
       },
     },
   },
 );
 
-export const Order = model<Orders>("Order", orderSchema);
+export const Order = model<IOrder>("Order", orderSchema);
+export type OrderDocument = HydratedDocument<IOrder>;

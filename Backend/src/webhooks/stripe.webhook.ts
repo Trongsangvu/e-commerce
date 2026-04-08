@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { messagePayment } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
-import stripe from "../configs/stripe";
+import { RedisService } from "../integrations/redis.service";
+import stripe from "../integrations/stripe.service";
 import { Order } from "../models/order.model";
-import { RedisService } from "../services/redis.service";
 
 export const stripeWebhook = async (
   req: Request,
@@ -47,6 +47,6 @@ export const stripeWebhook = async (
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error occurred";
-    res.status(400).send(`Webhook Error: ${errorMessage}`);
+    ApiResponse.BadRequest(res, `Webhook Error: ${errorMessage}`);
   }
 };

@@ -10,6 +10,8 @@ declare global {
     interface Request {
       user?: UserPayload | any;
       rawBody?: Buffer;
+      validatedBody?: any;
+      targetUser?: any;
     }
   }
 }

@@ -7,7 +7,6 @@ interface JsonResponse {
   success: boolean;
   message?: string;
   data?: any;
-  timestamp: string;
 }
 
 export class ApiResponse {
@@ -20,7 +19,6 @@ export class ApiResponse {
   ): Response {
     const responseBody: JsonResponse = {
       success,
-      timestamp: new Date().toISOString(),
     };
 
     // If payload is a string, treat it as a message. Otherwise, treat it as data.

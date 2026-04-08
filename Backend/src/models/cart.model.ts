@@ -1,8 +1,8 @@
-import { Schema, model } from "mongoose";
-import { Carts } from "../types/cart-types";
+import { Schema, model, HydratedDocument } from "mongoose";
+import { ICart } from "../types/cart-types";
 import { baseSchema } from "./base.model";
 
-const cartSchema = baseSchema<Carts>({
+const cartSchema = baseSchema<ICart>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -16,9 +16,14 @@ const cartSchema = baseSchema<Carts>({
         ref: "Product",
         required: true,
       },
-      quantity: { type: Number, required: true, min: 1 },
+      quantity: {
+        type: Number,
+        required: true,
+        min: 1,
+      },
     },
   ],
 });
 
-export const Cart = model<Carts>("Cart", cartSchema);
+export const Cart = model<ICart>("Cart", cartSchema);
+export type CartDocument = HydratedDocument<ICart>;

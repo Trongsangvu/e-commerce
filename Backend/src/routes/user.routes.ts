@@ -1,10 +1,23 @@
 import express from "express";
-import { getUsers, getProfileUser } from "../controllers/user.controller";
-import { validateToken } from "../utils/jwt.util";
+import userController from "../controllers/user.controller";
+import {
+  adminTokenRequired,
+  allTokenRequired,
+} from "../middlewares/auth.middleware";
+import { validateRequest } from "../middlewares/validate.middleware";
+import { userCreateRequest } from "../requests/user.request";
 
 const router = express.Router();
 
-router.get("/", getUsers);
-router.get("/profile", validateToken, getProfileUser);
+router.post(
+  "/",
+  adminTokenRequired,
+  validateRequest(userCreateRequest),
+  userController.create,
+);
+
+router.get("/", allTokenRequired, userController.getUsers);
+
+router.get("/profile", allTokenRequired, userController.getProfileUser);
 
 export default router;

@@ -1,4 +1,4 @@
-export interface Products extends Document {
+export interface IProduct {
   name: string;
   price: number;
   category: "men" | "women";

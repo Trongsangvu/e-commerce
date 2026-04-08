@@ -1,18 +1,42 @@
-import { model } from "mongoose";
+import { model, HydratedDocument } from "mongoose";
 import { ProductCategory } from "../configs/enum";
-import { Products } from "../types/product-types";
+import { IProduct } from "../types/product-types";
 import { baseSchema } from "./base.model";
 import formatCurrency from "../utils/currency.util";
 
-const productSchema = baseSchema<Products>(
+const productSchema = baseSchema<IProduct>(
   {
-    name: { type: String, required: true },
-    price: { type: Number, required: true, min: 0 },
-    currency: { type: String, default: "USD" },
-    category: { type: String, enum: ProductCategory },
-    description: { type: String },
-    imageUrl: { type: String, required: true },
-    tags: { type: String },
+    name: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    currency: {
+      type: String,
+      default: "USD",
+      required: false,
+    },
+    category: {
+      type: String,
+      enum: Object.values(ProductCategory),
+      required: false,
+    },
+    description: {
+      type: String,
+      required: false,
+    },
+    imageUrl: {
+      type: String,
+      required: false,
+    },
+    tags: {
+      type: String,
+      required: false,
+    },
   },
   {
     toJSON: {
@@ -24,4 +48,5 @@ const productSchema = baseSchema<Products>(
   },
 );
 
-export const Product = model<Products>("Product", productSchema);
+export const Product = model<IProduct>("Product", productSchema);
+export type ProductDocument = HydratedDocument<IProduct>;

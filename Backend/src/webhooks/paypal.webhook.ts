@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Order } from "../models/order.model";
 import { ApiResponse } from "../configs/response";
 import { messagePayment } from "../configs/messages";
+import { PaymentStatus } from "../configs/enum";
 
 export const paypalWebhook = async (
   req: Request,
@@ -10,9 +11,16 @@ export const paypalWebhook = async (
   try {
     const event = req.body;
 
-    if (event.type === "CHECKOUT .ORDER.APPROVED") {
+    if (event.type === "CHECKOUT.ORDER.APPROVED") {
       const orderId = event.resource.id;
-      await Order.findOneAndUpdate({ paymentId: orderId }, { status: "paid" });
+      const order = await Order.findOneAndUpdate(
+        { paymentId: orderId },
+        { status: PaymentStatus.PAID },
+      );
+
+      if (!order) {
+        console.log("Order not found:", orderId);
+      }
     }
 
     ApiResponse.OK(res, { received: true });

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CONSTANTS } from "../configs/constants";
 import { messageExisted, messageUser } from "../configs/messages";
+import { UserRole } from "../configs/enum";
 import { ApiResponse } from "../configs/response";
 import { User } from "../models/user.model";
 import userService from "../services/user.service";
@@ -12,7 +13,7 @@ import {
 } from "../utils/jwt.util";
 
 // Login user
-export const login = async (req: Request, res: Response): Promise<void> => {
+const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
     const user = await userService.findByEmailForAuth(email);
@@ -32,7 +33,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     user.salt = undefined as any;
 
     const payload = {
-      sub: user._id.toString(),
+      sub: user.id,
       email: user.email,
       role: user.role,
       iat: Math.floor(Date.now() / 1000),
@@ -66,7 +67,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 // Logout user
-export const logout = async (_req: Request, res: Response): Promise<void> => {
+const logout = async (_req: Request, res: Response): Promise<void> => {
   try {
     // Clear both tokens from cookies
     res.clearCookie("token", {
@@ -88,7 +89,7 @@ export const logout = async (_req: Request, res: Response): Promise<void> => {
 };
 
 // Register user
-export const register = async (req: Request, res: Response): Promise<void> => {
+const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, password } = req.body;
 
@@ -103,7 +104,16 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     const hashedPassword = await hashPassword(password);
 
     // Create new user
-    const userResult = await userService.create(name, email, hashedPassword);
+    const userResult = await userService.create({
+      name,
+      email,
+      password: hashedPassword,
+      role: UserRole.USER,
+    } as any);
+
+    // remove sensitive fields
+    userResult.password = undefined as any;
+    userResult.salt = undefined as any;
 
     ApiResponse.Created(res, {
       user: userResult,
@@ -114,10 +124,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const oauthLogin = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+const oauthLogin = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, $id: appWriteId } = req.body;
 
@@ -145,7 +152,7 @@ export const oauthLogin = async (
 
     // Generate tokens
     const payload = {
-      sub: user._id.toString(),
+      sub: user.id,
       email: user.email,
       role: user.role,
       iat: Math.floor(Date.now() / 1000),
@@ -174,4 +181,11 @@ export const oauthLogin = async (
   } catch (error) {
     ApiResponse.InternalServerError(res, error);
   }
+};
+
+export default {
+  login,
+  logout,
+  register,
+  oauthLogin,
 };

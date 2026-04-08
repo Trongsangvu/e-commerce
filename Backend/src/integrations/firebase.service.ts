@@ -1,4 +1,14 @@
-import admin from "../configs/firebase";
+import admin from "firebase-admin";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG as string);
+const serviceAccountTyped = serviceAccount as admin.ServiceAccount;
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccountTyped),
+});
 
 export const sendPushNotification = async (
   token: string,

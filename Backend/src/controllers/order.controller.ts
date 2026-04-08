@@ -1,17 +1,16 @@
 import { Request, Response } from "express";
-import redisClient from "../configs/redis";
 import { Order } from "../models/order.model";
-import { sendPushNotification } from "../services/firebase.service";
-// import { sendOrderNotification } from '../services/twilio.service';
+// import { sendOrderNotification } from '../integrations/twilio.service';
 import {
   messageInvalid,
   messageNotFound,
   messageOrder,
 } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
-import { sendOrderToWarehouse } from "../services/kafka.service";
+import { sendPushNotification } from "../integrations/firebase.service";
+import { sendOrderToWarehouse } from "../integrations/kafka.service";
+import { redisClient, RedisService } from "../integrations/redis.service";
 import orderService from "../services/order.service";
-import { RedisService } from "../services/redis.service";
 import { calculateTotalAmount } from "../utils/calculate-total.util";
 
 export const getOrders = async (req: Request, res: Response): Promise<void> => {

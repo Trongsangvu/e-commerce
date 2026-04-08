@@ -1,13 +1,13 @@
 import { Schema } from "mongoose";
 
-interface Order {
+interface OrderItem {
   product: Schema.Types.ObjectId;
   quantity: number;
 }
 
-export interface Orders extends Document {
+export interface IOrder {
   user: Schema.Types.ObjectId;
-  products: Order[];
+  products: OrderItem[];
   totalAmount: number;
   currency: "USD";
   status: string;

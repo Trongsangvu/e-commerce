@@ -1,22 +1,21 @@
 import express from "express";
 import {
-  getProducts,
-  getProductById,
   createProduct,
-  updateProduct,
   deleteProduct,
+  getProductById,
+  getProducts,
+  searchProduct,
+  updateProduct,
 } from "../controllers/product.controller";
-import { searchProduct } from "../controllers/product.controller";
-import { isAdmin } from "../middlewares/index";
-import { validateToken } from "../utils/jwt.util";
+import { adminTokenRequired } from "../middlewares/auth.middleware";
 const router = express.Router();
 
-router.post("/", validateToken, isAdmin, createProduct);
+router.post("/", adminTokenRequired, createProduct);
 router.get("/", getProducts);
 router.get("/search", searchProduct);
 
 router.get("/:id", getProductById);
-router.put("/:id", validateToken, isAdmin, updateProduct);
-router.delete("/:id", validateToken, isAdmin, deleteProduct);
+router.put("/:id", adminTokenRequired, updateProduct);
+router.delete("/:id", adminTokenRequired, deleteProduct);
 
 export default router;
