@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { CONSTANTS } from "../configs/constants";
+import { PaymentStatus } from "../configs/enum";
 import { messagePayment } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
 import { RedisService } from "../integrations/redis.service";
@@ -18,7 +20,7 @@ export const stripeWebhook = async (
     return;
   }
 
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+  const webhookSecret = CONSTANTS.STRIPE_WEBHOOK_SECRET!;
   try {
     const event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
 
@@ -35,7 +37,7 @@ export const stripeWebhook = async (
 
       await Order.findByIdAndUpdate(
         orderId,
-        { $set: { status: "paid", stripePaymentId: paymentIntent.id } },
+        { $set: { status: PaymentStatus.PAID, stripePaymentId: paymentIntent.id } },
         { new: true },
       );
 

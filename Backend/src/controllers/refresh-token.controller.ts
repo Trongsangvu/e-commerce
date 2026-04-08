@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { generateAccessToken } from "../utils/generate-access-token.util";
-import { ApiResponse } from "../configs/response";
+import { CONSTANTS } from "../configs/constants";
 import { messageInvalid } from "../configs/messages";
+import { ApiResponse } from "../configs/response";
+import { generateAccessToken } from "../utils/generate-access-token.util";
 
 export const refreshToken = async (
   req: Request,
@@ -26,7 +27,7 @@ export const refreshToken = async (
 
     // Get refresh token secret from env
     const jwtRefreshSecret = Buffer.from(
-      process.env.JWT_REFRESH_SECRET!,
+      CONSTANTS.JWT_REFRESH_SECRET_KEY!,
       "base64",
     ).toString("utf8");
     if (!jwtRefreshSecret) {

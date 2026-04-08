@@ -160,7 +160,7 @@ const oauthLogin = async (req: Request, res: Response): Promise<void> => {
 
     const token = jwtEncode(
       payload,
-      process.env.JWT_SECRET as string,
+      CONSTANTS.JWT_SECRET_KEY as string,
       CONSTANTS.JWT_EXPIRES_SIGNIN as any,
     );
 

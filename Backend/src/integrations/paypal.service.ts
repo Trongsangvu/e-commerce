@@ -1,8 +1,9 @@
 import checkoutNodeJssdk from "@paypal/checkout-server-sdk";
+import { CONSTANTS } from "../configs/constants";
 
 const environment = new checkoutNodeJssdk.core.SandboxEnvironment(
-  process.env.PAYPAL_CLIENT_ID!,
-  process.env.PAYPAL_CLIENT_SECRET!,
+  CONSTANTS.PAYPAL_CLIENT_ID!,
+  CONSTANTS.PAYPAL_CLIENT_SECRET_KEY!,
 );
 
 const paypalClient = new checkoutNodeJssdk.core.PayPalHttpClient(environment);
