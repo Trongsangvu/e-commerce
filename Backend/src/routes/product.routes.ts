@@ -9,13 +9,13 @@ router.post(
   "/",
   adminTokenRequired,
   validateRequest(createProductRequest),
-  productController.createProduct,
+  productController.create,
 );
 
 router.get(
   "/",
   allTokenRequired,
-  productController.getProducts,
+  productController.list,
 );
 
 router.get(
@@ -27,14 +27,14 @@ router.get(
 router.get(
   "/:id",
   allTokenRequired,
-  productController.getProductById,
+  productController.getById,
 );
 
 router.put(
   "/:id",
   adminTokenRequired,
   validateRequest(updateProductRequest),
-  productController.updateProduct,
+  productController.update,
 );
 
 router.delete(

@@ -8,10 +8,7 @@ import {
 import { ApiResponse } from "../configs/response";
 import productService from "../services/product.service";
 
-const getProducts = async (
-  _req: Request,
-  res: Response,
-): Promise<void> => {
+const getProducts = async (_req: Request, res: Response): Promise<void> => {
   try {
     const product = await productService.find();
     ApiResponse.OK(res, { products: product });
@@ -20,10 +17,7 @@ const getProducts = async (
   }
 };
 
-const getProductById = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+const getById = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
     const product = await productService.findById(String(id));
@@ -34,10 +28,7 @@ const getProductById = async (
   }
 };
 
-const createProduct = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+const create = async (req: Request, res: Response): Promise<void> => {
   try {
     const product = await productService.create(req.body);
     ApiResponse.Created(res, { products: product });
@@ -46,10 +37,19 @@ const createProduct = async (
   }
 };
 
-const updateProduct = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+const list = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const page = parseInt(req.query.page as string, 10);
+    const limit = parseInt(req.query.limit as string, 10);
+    const skip = (page - 1) * limit;
+    const { products, count } = await productService.list({}, skip, limit);
+    ApiResponse.OK(res, { products, count });
+  } catch (error) {
+    ApiResponse.InternalServerError(res, error);
+  }
+};
+
+const update = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
     const updateData = req.body;
@@ -73,10 +73,7 @@ const updateProduct = async (
   }
 };
 
-const deleteProduct = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
 
@@ -95,10 +92,7 @@ const deleteProduct = async (
   }
 };
 
-const searchProduct = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+const searchProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const keyword = req.query.name;
 
@@ -132,9 +126,10 @@ const searchProduct = async (
 
 export default {
   getProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
+  getById,
+  create,
+  update,
   deleteProduct,
   searchProduct,
+  list,
 };
