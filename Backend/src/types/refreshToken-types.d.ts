@@ -1,8 +1,8 @@
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
 export interface IRefreshToken {
   token: string;
-  user: Schema.Types.ObjectId;
+  user: Types.ObjectId;
   expiresAt: Date;
   isRevoked: boolean;
   family: string;

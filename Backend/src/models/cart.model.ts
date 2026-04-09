@@ -8,21 +8,25 @@ const cartSchema = baseSchema<ICart>({
     ref: "User",
     required: true,
     index: true,
+    unique: true,
   },
-  items: [
-    {
-      product: {
-        type: Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
+  items: {
+    type: [
+      {
+        product: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
       },
-      quantity: {
-        type: Number,
-        required: true,
-        min: 1,
-      },
-    },
-  ],
+    ],
+    default: [],
+  },
 });
 
 export const Cart = model<ICart>("Cart", cartSchema);

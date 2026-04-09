@@ -1,12 +1,12 @@
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
 interface OrderItem {
-  product: Schema.Types.ObjectId;
+  product: Types.ObjectId;
   quantity: number;
 }
 
 export interface IOrder {
-  user: Schema.Types.ObjectId;
+  user: Types.ObjectId;
   products: OrderItem[];
   totalAmount: number;
   currency: "USD";

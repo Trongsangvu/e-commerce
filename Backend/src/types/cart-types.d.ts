@@ -1,11 +1,11 @@
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
-interface CartItem {
-  product: Schema.Types.ObjectId;
+interface CartItem<T = Types.ObjectId> {
+  product: T;
   quantity: number;
 }
 
 export interface ICart {
-  user: Schema.Types.ObjectId;
-  items: CartItem[];
+  user: Types.ObjectId;
+  items: CartItem<T>[];
 }
