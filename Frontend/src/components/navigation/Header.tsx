@@ -92,7 +92,7 @@ export const Header: React.FC = () => {
   });
 
   // count cart items
-  const cartItemsCount = data?.data?.items?.length ?? 0;
+  const cartItemsCount = data?.items?.length ?? 0;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
