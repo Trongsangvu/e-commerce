@@ -73,6 +73,7 @@ export interface IOAuthResponse {
 }
 
 export interface IUserResponse {
+  token: string;
   user: {
     _id: string;
     name: string;

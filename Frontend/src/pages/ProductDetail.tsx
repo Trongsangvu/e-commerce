@@ -8,8 +8,8 @@ import { Header } from "../components/navigation/Header";
 import { MENU_SIZE } from "../config/menu";
 import { addToCartAction } from "../redux/actions/cart-action";
 import { AppDispatch, RootStore } from "../redux/store";
-import { getProductById } from "../services/product-service";
 import { SuggestProducts } from "./SuggestProducts";
+import { byId } from "../services/product-service";
 
 export const ProductDetail: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -33,7 +33,7 @@ export const ProductDetail: React.FC = () => {
     error,
   } = useQuery({
     queryKey: ["product", id],
-    queryFn: () => getProductById(id!),
+    queryFn: () => byId(id!),
     enabled: !!id,
   });
 
@@ -82,7 +82,7 @@ export const ProductDetail: React.FC = () => {
             <div className="w-auto flex flex-row px-25 gap-50">
               <img
                 className="w-340 h-420"
-                src={product?.imageUrl}
+                src={product?.image_url}
                 alt={product?.name}
               />
             </div>

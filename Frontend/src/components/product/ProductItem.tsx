@@ -1,8 +1,8 @@
 import React from "react";
-import { Product } from "../../model/Search";
+import { IProduct } from "../../model/Search";
 
 interface ProductItemProps {
-  product: Product;
+  product: IProduct;
 }
 
 export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {

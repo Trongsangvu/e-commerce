@@ -33,7 +33,7 @@ const ShoppingBagComponent: React.FC<Props> = ({
     queryFn: getCart,
   });
 
-  const cartItems = data?.data?.items ?? [];
+  const cartItems = data?.items ?? [];
 
   if (isLoading)
     return (

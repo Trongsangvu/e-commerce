@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
 import config from "../../config/config";
-import { SkeletonCustom } from "../../lib/SkeletonCustom";
 import { RootStore } from "../../redux/store";
-import { productsList } from "../../services/product-service";
-import { Product } from "../../types/product-type";
+import { list } from "../../services/product-service";
+import { IProduct } from "../../types/product-type";
+import { SkeletonCustom } from "../common/SkeletonCustom";
 
 export const ProductList: React.FC = () => {
   // Query data
@@ -16,7 +16,7 @@ export const ProductList: React.FC = () => {
     error,
   } = useQuery({
     queryKey: ["products"],
-    queryFn: productsList,
+    queryFn: list,
   });
 
   const selectedCategory = useSelector(
@@ -28,7 +28,7 @@ export const ProductList: React.FC = () => {
     selectedCategory === "all"
       ? products
       : products.filter(
-          (product: Product) => product.category === selectedCategory,
+          (product: IProduct) => product.category === selectedCategory,
         );
 
   if (error) return <p>Error fetching products</p>;
@@ -41,7 +41,7 @@ export const ProductList: React.FC = () => {
         ) : (
           <ul className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center">
             {filteredProducts &&
-              filteredProducts.map((product: Product) => (
+              filteredProducts.map((product: IProduct) => (
                 <Link
                   key={product._id}
                   to={config.routes.productDetail.replace(":id", product._id)}
@@ -50,7 +50,7 @@ export const ProductList: React.FC = () => {
                     <div className="max-w-270 w-full overflow-hidden relative group">
                       <img
                         className="max-w-270 w-full h-335 cursor-pointer transition-transform duration-500 group-hover:scale-110"
-                        src={product.imageUrl}
+                        src={product.image_url}
                         alt={product.name}
                         loading="lazy"
                       />

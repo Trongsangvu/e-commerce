@@ -1,60 +1,29 @@
-import { AxiosError, AxiosResponse } from "axios";
+import cartEndpoints from "../api/cart.api";
 import { CartData, ICartResponse } from "../types/cart-type";
 import httpService from "./http-service";
 
-const getCart = async (): Promise<AxiosResponse<ICartResponse>> => {
-  try {
-    const response = await httpService.get<ICartResponse>("/carts", {
-      withCredentials: true,
-    });
-    return response;
-  } catch (error) {
-    if (error instanceof AxiosError && error?.response?.status === 403) {
-      console.error("Authentication required");
-    }
-    console.error("Error fetching cart: ", error);
-    throw error;
-  }
+export const getCart = async (): Promise<ICartResponse> => {
+  const res = await httpService.get<ICartResponse>(cartEndpoints.getCart);
+  return res.data;
 };
 
-const addToCart = async (data: CartData): Promise<AxiosResponse> => {
-  try {
-    const response = httpService.post(
-      "/carts/add",
-      { productId: data.productId, quantity: data.quantity },
-      { withCredentials: true },
-    );
-    console.log("Sending cart data:", {
+export const addToCart = async (data: CartData): Promise<ICartResponse> => {
+  const res = await httpService.post<ICartResponse, CartData>(
+    cartEndpoints.addToCart,
+    {
       productId: data.productId,
       quantity: data.quantity,
-    });
-    return response;
-  } catch (error) {
-    console.error("Error add to cart: ", error);
-    throw error;
-  }
+    },
+  );
+
+  return res.data;
 };
 
-const updateCart = async (data: CartData): Promise<AxiosResponse> => {
-  try {
-    const response = await httpService.put(
-      `/carts/update/${data.productId}`,
-      { quantity: data.quantity },
-      {
-        withCredentials: true,
-      },
-    );
-    return response;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      console.error("Error updating cart:", {
-        status: error.response?.status,
-        url: error.config?.url,
-        data: error.response?.data,
-      });
-    }
-    throw error;
-  }
-};
+export const updateCart = async (data: CartData): Promise<ICartResponse> => {
+  const res = await httpService.put<ICartResponse, { quantity: number }>(
+    cartEndpoints.byId(data.productId),
+    data,
+  );
 
-export { addToCart, getCart, updateCart };
+  return res.data;
+};

@@ -1,5 +1,5 @@
 import { OAuthProvider } from "appwrite";
-import { account } from "../services/app-write";
+import { account } from "../services/appwrite-service";
 
 export const handleLoginGoogle = async () => {
   // const success = 'http://localhost:5173/';

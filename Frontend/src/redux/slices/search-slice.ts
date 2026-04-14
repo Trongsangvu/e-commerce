@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "../../model/Search";
+import { IProduct } from "../../model/Search";
 
 interface SearchState {
-  products: Product[];
+  products: IProduct[];
   loading: boolean;
   searchQuery: string;
   error: string | null;

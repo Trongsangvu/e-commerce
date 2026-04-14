@@ -2,7 +2,7 @@ export interface ISearch {
   name: string;
 }
 
-export interface Product {
+export interface IProduct {
   _id: string;
   name: string;
   price: string;
@@ -12,4 +12,4 @@ export interface Product {
   category: string;
 }
 
-export type ISearchResponse = Product[];
+export type ISearchResponse = IProduct[];

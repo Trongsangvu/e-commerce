@@ -1,14 +1,35 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { removeToken, removeRefreshToken } from "../auth/auth-token";
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 import Cookies from "js-cookie";
+import authEndpoints from "../api/auth.api";
+
+const BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+
+const getToken = () => Cookies.get("token");
+const getRefreshToken = () => Cookies.get("refreshToken");
+const setToken = (token: string) => Cookies.set("token", token);
+const removeTokens = () => {
+  Cookies.remove("token");
+  Cookies.remove("refreshToken");
+};
+
+type Configs<D = unknown> = AxiosRequestConfig<D> & {
+  requiresAuth?: boolean;
+  _retry?: boolean;
+};
 
 class HttpService {
-  private axiosInstance: AxiosInstance;
+  private instance: AxiosInstance;
 
   constructor() {
     // Create an instance with default configuration
-    this.axiosInstance = axios.create({
-      baseURL: "http://localhost:3000/api",
+    this.instance = axios.create({
+      baseURL: BASE_URL,
       timeout: 10000,
       withCredentials: true, // Important for send cookies
       headers: {
@@ -16,92 +37,98 @@ class HttpService {
       },
     });
 
-    // Interceptor to add the token to the request
-    this.axiosInstance.interceptors.request.use(
-      (config) => {
-        const token = Cookies.get("token"); // Get token from cookies
+    this.setupInterceptors();
+  }
+
+  private setupInterceptors() {
+    // Request interceptor
+    this.instance.interceptors.request.use(
+      (config: InternalAxiosRequestConfig) => {
+        const token = getToken();
         if (token) {
-          config.headers["Authorization"] = `Bearer ${token}`;
-        } else {
-          console.warn("No auth token found in localStorage!");
+          config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
       },
       (error) => Promise.reject(error),
     );
 
-    // Interceptor to handle global errors
-    this.axiosInstance.interceptors.response.use(
+    // Response interceptor
+    this.instance.interceptors.response.use(
       (response) => response,
-      (error) => {
-        // Handle general errors such as 404-authorized, 403-forbidden
-        if (error.response.status === 401) {
-          removeToken();
-          removeRefreshToken();
-          // Logout the user, redirect to login page
-          // window.location.href = '/login';
+      async (err) => {
+        const originalRequest = err.config as Configs;
+
+        if (
+          err.response?.status === 401 &&
+          !originalRequest._retry &&
+          getRefreshToken()
+        ) {
+          originalRequest._retry = true;
+          try {
+            const res = await this.refreshToken();
+            const newToken = res.data.accessToken;
+
+            setToken(newToken);
+
+            // retry original request
+            return this.instance(originalRequest);
+          } catch (refreshError) {
+            removeTokens();
+            return Promise.reject(refreshError);
+          }
         }
-        return Promise.reject(error);
+
+        return Promise.reject(err);
       },
     );
   }
 
-  // Method GET
-  public get<T, D = unknown>(
-    url: string,
-    data?: D,
-    config?: AxiosRequestConfig,
-  ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.get<T>(url, { params: data, ...config });
-  }
-
-  // Method POST
-  public post<T, D = unknown>(
-    url: string,
-    data?: D,
-    config?: AxiosRequestConfig & { requiresAuth?: boolean },
-  ): Promise<AxiosResponse<T>> {
-    const requiresAuth = config?.requiresAuth !== false; // Mặc định là true
-
-    if (requiresAuth) {
-      const token = Cookies.get("token"); // Get token from cookies
-      if (!token) {
-        console.warn("No auth token found in cookies!");
-        return Promise.reject(new Error("Authentication required"));
-      }
-    }
-
-    return this.axiosInstance.post<T>(url, data, config).catch((error) => {
-      if (error.response?.status === 404) {
-        console.error(`Endpoint not found: ${url}`);
-        console.error("Full URL:", this.axiosInstance.defaults.baseURL + url);
-      }
-      console.error("API request failed:", error);
-      throw error;
-    });
-  }
-
-  // Method PUT
-  public put<T, D = unknown>(
-    url: string,
-    data?: D,
-    config?: AxiosRequestConfig,
-  ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.put<T>(url, data, config);
-  }
-
-  public patch<T, D = unknown>(
-    url: string,
-    data?: D,
-    config?: AxiosRequestConfig,
-  ): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.put<T>(url, data, {
-      ...config,
-      headers: {
-        ...config?.headers,
-        "Content-Type": "application/json",
+  // Refresh token
+  private refreshToken() {
+    return this.instance.post<{ accessToken: string }>(
+      authEndpoints.refreshToken,
+      {
+        refreshToken: getRefreshToken(),
       },
-    });
+      {
+        requiresAuth: false,
+      } as Configs,
+    );
+  }
+
+  // Generic request method
+  request<T, D = unknown>(
+    config: AxiosRequestConfig<D>,
+  ): Promise<AxiosResponse<T>> {
+    return this.instance.request<T>(config);
+  }
+
+  // GET
+  get<T, P = Record<string, unknown>>(
+    url: string,
+    params?: P,
+    config?: Configs,
+  ): Promise<AxiosResponse<T>> {
+    return this.request<T>({ method: "GET", url, params, ...config });
+  }
+
+  // POST
+  post<T, P = Record<string, unknown>>(
+    url: string,
+    data?: P,
+    config?: Configs,
+  ): Promise<AxiosResponse<T>> {
+    return this.request<T>({ method: "POST", url, data, ...config });
+  }
+
+  // PUT
+  put<T, P = Record<string, unknown>>(
+    url: string,
+    data?: P,
+    config?: Configs,
+  ): Promise<AxiosResponse<T>> {
+    return this.request<T>({ method: "PUT", url, data, ...config });
   }
 }
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { RootStore } from "../redux/store";
-import { productsList } from "../services/product-service";
+import { list } from "../services/product-service";
 
 export const ProductFeatures: React.FC = () => {
   // Query data
@@ -11,7 +11,7 @@ export const ProductFeatures: React.FC = () => {
     error,
   } = useQuery({
     queryKey: ["products"],
-    queryFn: productsList,
+    queryFn: list,
   });
 
   const productByCategory = useSelector(
@@ -36,15 +36,15 @@ export const ProductFeatures: React.FC = () => {
           <li key={index} className="flex gap-5 mt-30 mb-30 items-center">
             <div className="w-90 h-110">
               <a href="#">
-                <img src={product.imageUrl} alt="" />
+                <img src={product?.image_url} alt="" />
               </a>
             </div>
             <div className="flex flex-col pl-20">
               <span className="font-[Poppins-regular] text-sm text-[#555] pb-20">
-                {product.name}
+                {product?.name}
               </span>
               <span className="font-[Poppins-regular] text-[#888]">
-                {product.price}
+                {product?.price}
               </span>
             </div>
           </li>

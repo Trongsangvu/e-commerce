@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICart, ICartItem } from "../../types/cart-type";
-import { addToCartAction, updatedCartAction } from "../actions/cart-action";
+import { addToCartAction, updateCartAction } from "../actions/cart-action";
 
 interface CartState extends Omit<ICart, "items"> {
   items: ICartItem[];
@@ -63,14 +63,14 @@ const cartSlice = createSlice({
         state.error = action.payload as string;
       })
       // update cart
-      .addCase(updatedCartAction.pending, (state) => {
+      .addCase(updateCartAction.pending, (state) => {
         state.status = "Loading";
       })
-      .addCase(updatedCartAction.fulfilled, (state, action) => {
+      .addCase(updateCartAction.fulfilled, (state, action) => {
         state.status = "Succeeded";
         state.items = action.payload.cart.items;
       })
-      .addCase(updatedCartAction.rejected, (state, action) => {
+      .addCase(updateCartAction.rejected, (state, action) => {
         state.status = "Failed";
         state.error = action.payload as string;
       });

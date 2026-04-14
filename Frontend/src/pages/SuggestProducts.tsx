@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../components/common/CustomArrow";
 import config from "../config/config";
 import { RootStore } from "../redux/store";
-import { productsList } from "../services/product-service";
+import { list } from "../services/product-service";
 
 export const SuggestProducts: React.FC = () => {
   const settings = {
@@ -27,7 +27,7 @@ export const SuggestProducts: React.FC = () => {
     error,
   } = useQuery({
     queryKey: ["products"],
-    queryFn: productsList,
+    queryFn: list,
   });
 
   const productByCategory = useSelector(
@@ -58,7 +58,7 @@ export const SuggestProducts: React.FC = () => {
                 <div className="group relative overflow-hidden min-h-300 max-w-230">
                   <img
                     className="w-auto h-300 cursor-pointer transition-transform duration-500 group-hover:scale-110"
-                    src={product.imageUrl}
+                    src={product.image_url}
                     alt={product.name}
                   />
                 </div>

@@ -1,60 +1,57 @@
 import { AxiosResponse } from "axios";
-import { getToken } from "../auth/auth-token";
-import { ILogin, ILoginResponse, IOAuthResponse, IOAuthUser, IRegister, IRegisterResponse, IUserResponse } from "../model/Auth";
+import {
+  ILogin,
+  ILoginResponse,
+  IOAuthResponse,
+  IOAuthUser,
+  IRegister,
+  IRegisterResponse,
+  IUserResponse,
+} from "../model/Auth";
 import httpService from "./http-service";
+import authEndpoints from "../api/auth.api";
+import userEndpoints from "../api/user.api";
 
 // Login service
-const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> => {
-  return httpService.post("/auth/login", data, { requiresAuth: false });
+export const login = async (data: ILogin): Promise<ILoginResponse> => {
+  const res = await httpService.post<ILoginResponse, ILogin>(
+    authEndpoints.login,
+    data,
+    {
+      requiresAuth: false,
+    },
+  );
+
+  return res.data;
 };
 
 // Logout service
-const logout = (): Promise<AxiosResponse> => {
-  return httpService.post("/auth/logout", {}, { requiresAuth: true });
+export const logout = (): Promise<AxiosResponse> => {
+  return httpService.post(authEndpoints.logout, {}, { requiresAuth: true });
 };
 
 // Register service
-const register = (
-  data: IRegister,
-): Promise<AxiosResponse<IRegisterResponse>> => {
-  return httpService.post("/auth/register", data);
+export const register = async (data: IRegister): Promise<IRegisterResponse> => {
+  const res = await httpService.post<IRegisterResponse, IRegister>(
+    authEndpoints.register,
+    data,
+  );
+
+  return res.data;
 };
 
 // Oauth Login service
-const oauthLogin = async (
-  data: IOAuthUser,
-): Promise<AxiosResponse<IOAuthResponse>> => {
-  try {
-    if (!data || !data.email) {
-      throw new Error("Missing required email in OAuth data");
-    }
+export const oauthLogin = async (data: IOAuthUser): Promise<IOAuthResponse> => {
+  const res = await httpService.post<IOAuthResponse, IOAuthUser>(
+    authEndpoints.oauthLogin,
+    data,
+  );
 
-    console.log("Sending OAuth data: ", data);
-    return await httpService.post("/auth/oauth/appwrite-login", data);
-  } catch (error) {
-    console.error("Oauth login error: ", error);
-    throw error;
-  }
+  return res.data;
 };
 
 // Get profile user
-const getProfileUser = async (): Promise<IUserResponse> => {
-  const token = getToken();
-  if (!token) {
-    console.error("No token found in cookies");
-    throw new Error("No token found");
-  }
-
-  try {
-    const response = await httpService.get<IUserResponse>("/users/profile");
-
-    console.log("Profile Response:", response);
-    return response.data;
-  } catch (error) {
-    console.error("Error get profile user: ", error);
-    throw error;
-  }
+export const getProfileUser = async (): Promise<IUserResponse> => {
+  const res = await httpService.get<IUserResponse>(userEndpoints.profile);
+  return res.data;
 };
-
-export { getProfileUser, login, logout, oauthLogin, register };
-

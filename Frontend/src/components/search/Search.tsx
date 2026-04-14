@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { SearchProductIcon } from "../../assets/images/icons/icons";
+import { IProduct } from "../../model/Search";
 import { searchProducts } from "../../services/search-service";
-import { Product } from "../../types/product-type";
 import { ProductItem } from "../product/ProductItem";
 
 interface SearchProps {
@@ -96,7 +96,7 @@ export const Search: React.FC<SearchProps> = ({
         ) : (
           <div className="flex justify-between">
             <ul className="list-none p-0 m-0">
-              {products.map((product: Product) => (
+              {products.map((product: IProduct) => (
                 <li
                   key={product._id}
                   className="cursor-pointer text-sm mb-18 font-medium list-none underline underline-offset-5"
@@ -111,7 +111,7 @@ export const Search: React.FC<SearchProps> = ({
               ))}
             </ul>
             <ul className="grid grid-cols-3 gap-10 p-0 m-0 list-none">
-              {products.map((product: Product) => (
+              {products.map((product: IProduct) => (
                 <li key={product._id} className="mb-16 ml-16 cursor-pointer">
                   <ProductItem product={product} />
                 </li>

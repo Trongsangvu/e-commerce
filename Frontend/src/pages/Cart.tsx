@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import images from "../assets/images/images";
 import { Footer } from "../components/navigation/Footer";
 import config from "../config/config";
-import { updatedCartAction } from "../redux/actions/cart-action";
+import { updateCartAction } from "../redux/actions/cart-action";
 import {
   addQuantity,
   decreaseQuantity,
@@ -27,8 +27,8 @@ export const Cart: React.FC = () => {
   });
 
   useEffect(() => {
-    if (data?.data?.items) {
-      const formattedItems: ICartItem[] = data.data.items;
+    if (data?.items) {
+      const formattedItems: ICartItem[] = data.items;
       dispatch(setCartItems(formattedItems));
     }
   }, [data, dispatch]);
@@ -37,7 +37,7 @@ export const Cart: React.FC = () => {
   if (error) return <h3>Error: {error.message}</h3>;
 
   // Cart items
-  const cartItems = data?.data?.items ?? [];
+  const cartItems = data?.items ?? [];
   console.log("Cart Items:", cartItems);
 
   // Handle update cart
@@ -60,7 +60,7 @@ export const Cart: React.FC = () => {
           : decreaseQuantity({ index }),
       );
       await dispatch(
-        updatedCartAction({
+        updateCartAction({
           productId: item.productId._id,
           quantity: newQuantity,
         }),

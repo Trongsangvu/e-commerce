@@ -40,4 +40,3 @@ const standaloneRoutes = [];
 const privateRoutes = [];
 
 export { privateRoutes, publicRoutes, standaloneRoutes };
-

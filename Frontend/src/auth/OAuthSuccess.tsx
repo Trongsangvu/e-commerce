@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { AppDispatch } from "../redux/store";
 import { useEffect } from "react";
-import { account } from "../services/app-write";
+import { account } from "../services/appwrite-service";
 import { oauthLogin } from "../redux/actions/auth-action";
-// import { getToken } from "./authToken";
 import { setUser } from "../redux/slices/user-slice";
 import config from "../config/config";
 

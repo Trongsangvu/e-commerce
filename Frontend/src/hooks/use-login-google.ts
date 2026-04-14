@@ -1,5 +1,5 @@
 // import { useEffect, useState } from "react";
-import { account } from "../services/app-write";
+import { account } from "../services/appwrite-service";
 import { OAuthProvider, Models } from "appwrite";
 // import { useDispatch } from "react-redux";
 import { oauthLogin } from "../redux/actions/auth-action";

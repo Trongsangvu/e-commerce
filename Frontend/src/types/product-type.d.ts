@@ -4,14 +4,15 @@ export interface IProducts {
   currency: "USD";
 }
 
-export interface Product {
+export interface IProduct {
   _id: string;
   name: string;
   price: string;
   currency: string;
   description: string;
-  imageUrl: string;
+  image_url: string;
   category: string;
 }
 
-export type IProductResponse = Product[];
+export type IProductListResponse = IProduct[];
+export type IProductDetailResponse = IProduct;
