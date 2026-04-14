@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CloseIcon } from "../../assets/images/icons/icons";
-import { usePreventScroll } from "../../hooks/usePreventScroll";
-import { MenuList } from "../menu/MenuList";
+import { usePreventScroll } from "../../hooks/use-prevent-scroll";
+import { sideBarHide } from "../../redux/slices/sidebar-slice";
+import { AppDispatch, RootStore } from "../../redux/store";
 import { Overlay } from "../common/Overlay";
-import { AppDispatch } from "../../redux/store";
-import { RootStore } from "../../redux/store";
-import { sideBarHide } from "../../redux/sideBar/sideBarSlice";
+import { MenuList } from "../menu/MenuList";
 
 export const Sidebar: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,7 +20,7 @@ export const Sidebar: React.FC = () => {
     <>
       <Overlay isOpen={isOpen} handleClose={handleClose} />
       <div
-        className={`fixed z-[70] top-0 right-0 bg-white w-[596px] h-screen
+        className={`fixed z-70 top-0 right-0 bg-white w-596 h-screen
                 transform transition-transform duration-500 ease-out will-change-transform overflow-hidden
                 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >

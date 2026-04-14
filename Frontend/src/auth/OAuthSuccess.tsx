@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { AppDispatch } from "../redux/store";
 import { useEffect } from "react";
-import { account } from "../services/OAuth/appWrite";
-import { oauthLogin } from "../redux/auth/authAction";
+import { account } from "../services/app-write";
+import { oauthLogin } from "../redux/actions/auth-action";
 // import { getToken } from "./authToken";
-import { setUser } from "../redux/user/userSlice";
+import { setUser } from "../redux/slices/user-slice";
 import config from "../config/config";
 
 export const OAuthSuccess = () => {

@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { publicRoutes } from "./routes/routes";
+import { useEffect } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { useDispatch } from "react-redux";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./assets/styles/App.css";
-import { useEffect } from "react";
-import { checkAuth } from "./redux/auth/authSlice";
+import { checkAuth } from "./redux/slices/auth-slice";
+import { publicRoutes } from "./routes/routes";
 
 function App() {
   const dispatch = useDispatch();

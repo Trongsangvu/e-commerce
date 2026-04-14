@@ -1,10 +1,10 @@
-import { useRef, useState, useEffect } from "react";
-import { debounce } from "lodash";
-import { ProductItem } from "../product/ProductItem";
 import { useQuery } from "@tanstack/react-query";
-import { searchProducts } from "../../services/search/searchService";
+import { debounce } from "lodash";
+import { useEffect, useRef, useState } from "react";
 import { SearchProductIcon } from "../../assets/images/icons/icons";
+import { searchProducts } from "../../services/search-service";
 import { Product } from "../../types/product-type";
+import { ProductItem } from "../product/ProductItem";
 
 interface SearchProps {
   isSearchVisible: boolean;
@@ -56,8 +56,8 @@ export const Search: React.FC<SearchProps> = ({
   };
 
   return (
-    <div className="fixed w-[745px] h-[430px] top-[9%] left-[40%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
-      <div className="flex justify-between mx-auto mb-15 px-[16px] pt-[16px] pb-18">
+    <div className="fixed w-745 h-430 top-[9%] left-[40%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
+      <div className="flex justify-between mx-auto mb-15 px-16 pt-16 pb-18">
         <form action="">
           <div className="border-0 border-b-2 border-b-amber-400">
             <input
@@ -65,7 +65,7 @@ export const Search: React.FC<SearchProps> = ({
               value={inputValue}
               type="text"
               placeholder="Search..."
-              className="w-[645px]  p-2 outline-none"
+              className="w-645  p-2 outline-none"
             />
           </div>
         </form>
@@ -73,7 +73,7 @@ export const Search: React.FC<SearchProps> = ({
           onClick={toggleSearchVisible}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className={`relative cursor-pointer font-normal text-lg inline-block underline-offset-4 ml-[11px]
+          className={`relative cursor-pointer font-normal text-lg inline-block underline-offset-4 ml-11
                         ${isHovered ? "none" : "underline"}    
                     `}
         >

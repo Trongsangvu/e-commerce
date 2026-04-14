@@ -1,25 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Link, useLocation } from "react-router-dom";
-import config from "../../config/config";
-import { MENU_PROFILE, MENU_HEADER } from "../../config/menu";
-import { MenuProfile } from "../menu/MenuProfile";
-import { logout } from "../../redux/auth/authAction";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   MenuToggle,
   SearchIcon,
   ShoppingCartIcon,
   UserIcon,
 } from "../../assets/images/icons/icons";
-import { Sidebar } from "./Sidebar";
-import { Search } from "../search/Search";
+import config from "../../config/config";
+import { MENU_HEADER, MENU_PROFILE } from "../../config/menu";
+import { useScroll } from "../../hooks/use-scroll";
+import { ShoppingBag } from "../../pages/ShoppingBag";
+import { logout } from "../../redux/actions/auth-action";
+import { sideBarShow } from "../../redux/slices/sidebar-slice";
 import { AppDispatch, RootStore } from "../../redux/store";
-import { sideBarShow } from "../../redux/sideBar/sideBarSlice";
-import { ShoppingBag } from "../../pages/Cart/ShoppingBag";
-import { useScroll } from "../../hooks/Scroll/useScroll";
-import { useQuery } from "@tanstack/react-query";
-import { getCart } from "../../services/cart/cartService";
+import { getCart } from "../../services/cart-service";
+import { MenuProfile } from "../menu/MenuProfile";
+import { Search } from "../search/Search";
+import { Sidebar } from "./Sidebar";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

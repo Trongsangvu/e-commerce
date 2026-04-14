@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./auth/authSlice";
-import searchReducer from "./search/searchSlice";
-import sideBarReducer from "./sideBar/sideBarSlice";
-import categoryReducer from "./filterProducts/filterProductSlice";
-import cartReducer from "./cart/cartSlice";
-import userReducer from "./user/userSlice";
+import authReducer from "./slices/auth-slice";
+import cartReducer from "./slices/cart-slice";
+import categoryReducer from "./slices/filter-product-slice";
+import searchReducer from "./slices/search-slice";
+import sideBarReducer from "./slices/sidebar-slice";
+import userReducer from "./slices/user-slice";
 
 export const store = configureStore({
   reducer: {

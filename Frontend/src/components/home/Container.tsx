@@ -3,7 +3,7 @@ import images from "../../assets/images/images";
 import { categories } from "../../config/menu";
 import { AppDispatch } from "../../redux/store";
 import { RootStore } from "../../redux/store";
-import { setCategory } from "../../redux/filterProducts/filterProductSlice";
+import { setCategory } from "../../redux/slices/filter-product-slice";
 
 interface ContainerProps {
   showTitle?: boolean;

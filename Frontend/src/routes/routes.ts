@@ -1,17 +1,17 @@
-import config from "../config/config";
-import { Home } from "../pages/Home";
-import { Login } from "../pages/Auth/Login";
-import { Register } from "../pages/Auth/Register";
-import Checkout from "../pages/Checkout";
-import Profile from "../pages/Profile/Profile";
-import { ProductDetail } from "../pages/Product/ProductDetail";
-import { Cart } from "../pages/Cart/Cart";
-import { Shop } from "../pages/Shop/Shop";
-import { About } from "../pages/About/About";
-import { Blog } from "../pages/Blog/Blog";
-import { Contact } from "../pages/Contact/Contact";
 import { OAuthSuccess } from "../auth/OAuthSuccess";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
+import config from "../config/config";
+import { About } from "../pages/About";
+import { Blog } from "../pages/Blog";
+import { Cart } from "../pages/Cart";
+import Checkout from "../pages/Checkout";
+import { Contact } from "../pages/Contact";
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { ProductDetail } from "../pages/ProductDetail";
+import Profile from "../pages/Profile";
+import { Register } from "../pages/Register";
+import { Shop } from "../pages/Shop";
 
 // Public routes: no need sign in to access
 const publicRoutes = [
@@ -39,4 +39,5 @@ const standaloneRoutes = [];
 // Private routes: need sign in to access
 const privateRoutes = [];
 
-export { publicRoutes, privateRoutes, standaloneRoutes };
+export { privateRoutes, publicRoutes, standaloneRoutes };
+

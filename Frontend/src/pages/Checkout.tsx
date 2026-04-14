@@ -1,23 +1,23 @@
 export const Checkout: React.FC = () => {
   return (
     <>
-      <header className="h-[120px]">
-        <div className="bg-[#1b1b1b] h-[120px] flex justify-between items-center px-27">
+      <header className="h-120">
+        <div className="bg-[#1b1b1b] h-120 flex justify-between items-center px-27">
           <div>
             <a
-              className="text-[#fff] font-[GucciSansPro-light] tracking-[-0.03rem] text-[13px]"
+              className="text-white font-[GucciSansPro-light] tracking-[-0.03rem] text-13"
               href=""
             >
               Back to Shopping Bag
             </a>
           </div>
           <div>
-            <h3 className="text-[#fff] font-[GucciSansPro-medium uppercase text-[30px] tracking-[2px]">
+            <h3 className="text-white font-[GucciSansPro-medium uppercase text-30 tracking-2">
               cozastore
             </h3>
           </div>
           <div>
-            <span className="text-[#fff] font-[GucciSansPro-light] text-[13px]">
+            <span className="text-white font-[GucciSansPro-light] text-13">
               +84.393.400.682
             </span>
           </div>
@@ -28,10 +28,10 @@ export const Checkout: React.FC = () => {
           <div>
             <div>
               <div>
-                <span className="font-[GucciSansPro-book] tracking-[-0.03rem] uppercase text-[12px] text-[#000]">
+                <span className="font-[GucciSansPro-book] tracking-[-0.03rem] uppercase text-12 text-black">
                   you are checking out as:
                 </span>
-                <span className="text-[12px] text-[#000] font-[GucciSansPro-book]"></span>
+                <span className="text-12 text-black font-[GucciSansPro-book]"></span>
               </div>
             </div>
             <section></section>

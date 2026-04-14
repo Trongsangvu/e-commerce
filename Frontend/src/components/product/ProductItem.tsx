@@ -10,7 +10,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     <>
       <a href="#">
         <img
-          className="h-[150px] w-[130px] "
+          className="h-150 w-130 "
           src={product.imageUrl}
           alt={product.name}
         />
