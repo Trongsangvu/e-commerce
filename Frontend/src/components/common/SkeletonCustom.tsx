@@ -1,6 +1,6 @@
 // import Skeleton from "react-loading-skeleton";
 import Skeleton from "react-loading-skeleton";
-import "../assets/styles/skeleton.css";
+import "../../assets/styles/skeleton.css";
 
 interface SkeletonProps {
   count?: number;
