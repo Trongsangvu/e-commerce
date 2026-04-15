@@ -9,6 +9,7 @@ import { MenuList } from "../menu/MenuList";
 const Sidebar = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector((state: RootStore) => state.sideBar.isOpen);
+
   usePreventScroll(isOpen);
 
   const handleClose = () => {
