@@ -9,7 +9,7 @@ import config from "../config/config";
 import { register } from "../redux/actions/auth-action";
 import { AppDispatch, RootStore } from "../redux/store";
 
-export const Register: React.FC = () => {
+const Register = () => {
   const dispatch: AppDispatch = useDispatch();
   const { error } = useSelector((state: RootStore) => state.auth);
   const navigate = useNavigate();
@@ -189,3 +189,5 @@ export const Register: React.FC = () => {
     </div>
   );
 };
+
+export default Register;

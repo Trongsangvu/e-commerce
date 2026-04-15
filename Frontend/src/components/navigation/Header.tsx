@@ -16,11 +16,12 @@ import { logout } from "../../redux/actions/auth-action";
 import { sideBarShow } from "../../redux/slices/sidebar-slice";
 import { AppDispatch, RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
+import LANGUAGE from "../../utils/language.util";
 import { MenuProfile } from "../menu/MenuProfile";
-import { Search } from "../search/Search";
-import { Sidebar } from "./Sidebar";
+import Search from "../search/Search";
+import Sidebar from "./Sidebar";
 
-export const Header: React.FC = () => {
+ const Header = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -107,6 +108,24 @@ export const Header: React.FC = () => {
     };
   }, []);
 
+  const filteredMenu = MENU_PROFILE.filter((item) => {
+    if (isAuthenticated) {
+      return item.id !== "sign in";
+    }
+
+    return item.id !== "my account" && item.id !== "sign out";
+  });
+
+  const renderMenuProfile = () => {
+    return filteredMenu.map((item) => (
+      <MenuProfile
+        key={item.id}
+        item={item}
+        onLogout={item.id === "sign out" ? handleLogout : undefined}
+      />
+    ));
+  };
+
   return (
     <>
       <header
@@ -128,7 +147,7 @@ export const Header: React.FC = () => {
                       : "text-white"
                   }`}
                 >
-                  cozastore
+                  {LANGUAGE.GENERAL.NAME}
                 </h3>
               </Link>
             </div>
@@ -191,26 +210,7 @@ export const Header: React.FC = () => {
                   className="absolute right-1/9 h-auto rounded-sm bg-white shadow-xl"
                   ref={menuRef}
                 >
-                  <ul className="px-16 pt-32">
-                    {MENU_PROFILE.map((item, index) => {
-                      if (isAuthenticated && item.id === "sign in") return null;
-                      if (
-                        !isAuthenticated &&
-                        (item.id === "my account" || item.id === "sign out")
-                      )
-                        return null;
-                      return (
-                        <MenuProfile
-                          item={item}
-                          key={index}
-                          index={index}
-                          onLogout={
-                            item.id === "sign out" ? handleLogout : undefined
-                          }
-                        />
-                      );
-                    })}
-                  </ul>
+                  <ul className="px-16 pt-32">{renderMenuProfile()}</ul>
                 </div>
               )}
             </li>
@@ -250,7 +250,7 @@ export const Header: React.FC = () => {
                         : "text-white"
                     }`}
                 >
-                  menu
+                  {LANGUAGE.GENERAL.MENU}
                 </span>
               </nav>
             </li>
@@ -261,3 +261,5 @@ export const Header: React.FC = () => {
     </>
   );
 };
+
+export default Header;

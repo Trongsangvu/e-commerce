@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootStore } from "../redux/store";
 import { list } from "../services/product-service";
 
-export const ProductFeatures: React.FC = () => {
+const ProductFeatures = () => {
   // Query data
   const {
     data: products = [],
@@ -53,3 +53,5 @@ export const ProductFeatures: React.FC = () => {
     </div>
   );
 };
+
+export default ProductFeatures;

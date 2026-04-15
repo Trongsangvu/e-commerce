@@ -4,7 +4,7 @@ import { Footer } from "../components/navigation/Footer";
 import { getProfileUser } from "../services/auth-service";
 // import { useGoogleLogin } from "../features/home/hooks/useGoogleLogin";
 
-const Profile: React.FC = () => {
+const Profile = () => {
   // const { userName } = useGoogleLogin();
 
   // Query data

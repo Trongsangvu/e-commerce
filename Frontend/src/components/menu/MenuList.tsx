@@ -5,7 +5,7 @@ interface MenuListProps {
   isOpen: boolean;
 }
 
-export const MenuList: React.FC<MenuListProps> = ({ isOpen }) => {
+export const MenuList = ({ isOpen }: MenuListProps) => {
   return (
     <ul
       className={`transition-all duration-500 delay-200 

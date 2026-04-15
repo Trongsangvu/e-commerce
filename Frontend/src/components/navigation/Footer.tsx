@@ -4,15 +4,16 @@ import {
   WhatsAppIcon,
 } from "../../assets/images/icons/icons";
 import images from "../../assets/images/images";
+import LANGUAGE from "../../utils/language.util";
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   return (
     <footer className="mt-auto">
       <div className="bg-[#222222] px-41 pt-18.75 pb-8">
         <div className="grid grid-cols-4 gap-10">
           <div>
             <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              categories
+              {LANGUAGE.GENERAL.CATEGORIES}
             </h4>
             <ul>
               <li className="pb-10">
@@ -20,7 +21,7 @@ export const Footer: React.FC = () => {
                   href="#"
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  Women
+                  {LANGUAGE.GENERAL.WOMEN}
                 </a>
               </li>
               <li className="pb-10">
@@ -28,7 +29,7 @@ export const Footer: React.FC = () => {
                   href="#"
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  Men
+                  {LANGUAGE.GENERAL.MEN}
                 </a>
               </li>
               <li className="pb-10">
@@ -36,7 +37,7 @@ export const Footer: React.FC = () => {
                   href="#"
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  Shoes
+                  {LANGUAGE.GENERAL.SHOES}
                 </a>
               </li>
               <li className="pb-10">
@@ -44,14 +45,14 @@ export const Footer: React.FC = () => {
                   href="#"
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  Watches
+                  {LANGUAGE.GENERAL.WATCHES}
                 </a>
               </li>
             </ul>
           </div>
           <div>
             <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              help
+              {LANGUAGE.GENERAL.HELP}
             </h4>
             <ul>
               <li className="pb-10">
@@ -59,7 +60,7 @@ export const Footer: React.FC = () => {
                   href=""
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  Track Order
+                  {LANGUAGE.GENERAL.TRACK_ORDER}
                 </a>
               </li>
               <li className="pb-10">
@@ -67,7 +68,7 @@ export const Footer: React.FC = () => {
                   href=""
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  Returns
+                  {LANGUAGE.GENERAL.RETURNS}
                 </a>
               </li>
               <li className="pb-10">
@@ -75,7 +76,7 @@ export const Footer: React.FC = () => {
                   href=""
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  Shipping
+                  {LANGUAGE.GENERAL.SHIPPING}
                 </a>
               </li>
               <li className="pb-10">
@@ -83,18 +84,17 @@ export const Footer: React.FC = () => {
                   href=""
                   className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
                 >
-                  FAQs
+                  {LANGUAGE.GENERAL.FAQS}
                 </a>
               </li>
             </ul>
           </div>
           <div>
             <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              get in touch
+              {LANGUAGE.GENERAL.GET_IN_TOUCH}
             </h4>
             <p className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]">
-              Any questions? Let us know in store at 8th floor, 379 Hudson St,
-              New York, NY 10018 or call us on (+1) 96 716 6879
+              {LANGUAGE.GENERAL.QUESTION}
             </p>
             <div className="flex items-center gap-10 pt-30">
               <a href="#">
@@ -110,7 +110,7 @@ export const Footer: React.FC = () => {
           </div>
           <div>
             <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              newsletter
+              {LANGUAGE.GENERAL.NEWS_LETTER}
             </h4>
             <form action="">
               <div>
@@ -125,7 +125,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="pt-18">
                 <button className="cursor-pointer uppercase transition-all duration-500 hover:bg-white hover:text-[#6774d5] bg-[#6774d5] font-[Poppins-medium] rounded-3xl h-11.5 min-w-44.75 text-white">
-                  subscribe
+                  {LANGUAGE.GENERAL.SUBSCRIBE}
                 </button>
               </div>
             </form>

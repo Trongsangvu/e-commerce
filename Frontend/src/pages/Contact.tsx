@@ -4,7 +4,7 @@ import { GoogleMapComponent } from "../components/google/GoolgeMap";
 import { Footer } from "../components/navigation/Footer";
 import { sendEmail } from "../services/email-service";
 
-export const Contact: React.FC = () => {
+const Contact = () => {
   const [recipient, setRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -20,12 +20,15 @@ export const Contact: React.FC = () => {
         to: recipient,
         html: message,
       });
+
       setResult({ success: true, message: "Email send successfully" });
-      if (response.success) {
-        console.log("Email send successfully");
-      } else {
+      if (!response.success) {
         console.log("Error sending email");
+        return;
       }
+
+      console.log("Email sent successfully");
+
       return response;
     } catch (error) {
       console.error("Error sending email:", error);
@@ -172,3 +175,5 @@ export const Contact: React.FC = () => {
     </div>
   );
 };
+
+export default Contact;

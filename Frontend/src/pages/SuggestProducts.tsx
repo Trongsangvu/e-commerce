@@ -7,7 +7,7 @@ import config from "../config/config";
 import { RootStore } from "../redux/store";
 import { list } from "../services/product-service";
 
-export const SuggestProducts: React.FC = () => {
+const SuggestProducts = () => {
   const settings = {
     dots: false,
     infinite: true,
@@ -74,3 +74,5 @@ export const SuggestProducts: React.FC = () => {
     </div>
   );
 };
+
+export default SuggestProducts;

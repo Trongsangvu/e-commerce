@@ -10,13 +10,13 @@ interface SkeletonProps {
   className?: string;
 }
 
-export const SkeletonCustom: React.FC<SkeletonProps> = ({
+export const SkeletonCustom = ({
   count = 6,
   // width = "100%",
   // height = "20px",
   // circle = false,
   // className = "",
-}) => {
+}: SkeletonProps) => {
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center">
       {[...Array(count)].map((_, index) => (

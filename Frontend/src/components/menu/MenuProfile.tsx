@@ -1,14 +1,13 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { MenuItems } from "../../config/menu";
-import { memo } from "react";
 
 interface MenuProfileProps {
   item: MenuItems;
-  index: number;
   onLogout?: () => void;
 }
 
-const MenuProfileUser: React.FC<MenuProfileProps> = ({ item, onLogout }) => {
+const MenuProfileUser = ({ item, onLogout }: MenuProfileProps) => {
   return (
     <li
       className={`font-[GucciSansPro-bold] uppercase mb-32 cursor-pointer 

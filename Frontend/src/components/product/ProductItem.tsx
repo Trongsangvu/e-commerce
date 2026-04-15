@@ -1,11 +1,10 @@
-import React from "react";
 import { IProduct } from "../../model/Search";
 
 interface ProductItemProps {
   product: IProduct;
 }
 
-export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+const ProductItem = ({ product }: ProductItemProps) => {
   return (
     <>
       <a href="#">
@@ -18,3 +17,5 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     </>
   );
 };
+
+export default ProductItem;

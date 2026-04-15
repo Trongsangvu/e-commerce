@@ -1,10 +1,10 @@
 import images from "../assets/images/images";
 import { Container } from "../components/home/Container";
 import { Footer } from "../components/navigation/Footer";
-import { Header } from "../components/navigation/Header";
-import { ProductList } from "../components/product/ProductList";
+import Header from "../components/navigation/Header";
+import ProductList from "../components/product/ProductList";
 
-export const Shop: React.FC = () => {
+const Shop = () => {
   return (
     <div>
       <div>
@@ -26,3 +26,5 @@ export const Shop: React.FC = () => {
     </div>
   );
 };
+
+export default Shop;

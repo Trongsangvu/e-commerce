@@ -3,9 +3,9 @@ import images from "../assets/images/images";
 import { Banner } from "../components/home/Banner";
 import { Container } from "../components/home/Container";
 import { Footer } from "../components/navigation/Footer";
-import { ProductList } from "../components/product/ProductList";
+import ProductList from "../components/product/ProductList";
 
-export const Home: React.FC = () => {
+const Home = () => {
   const [isFixed, setIsFixed] = useState(true);
   const bannerRef = useRef<HTMLDivElement>(null);
 
@@ -77,3 +77,5 @@ export const Home: React.FC = () => {
     </div>
   );
 };
+
+export default Home;

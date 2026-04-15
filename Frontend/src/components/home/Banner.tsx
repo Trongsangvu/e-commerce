@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import config from "../../config/config";
 import images from "../../assets/images/images";
+import LANGUAGE from "../../utils/language.util";
 
-export const Banner: React.FC = () => {
+export const Banner = () => {
   return (
     <nav>
       <div className="pt-150 pb-50">
@@ -21,14 +22,14 @@ export const Banner: React.FC = () => {
                 <div className="flex flex-col relative py-34 px-38 bottom-260">
                   {/* <SkeletonCustom /> */}
                   <span className="capitalize text-[28px] text-[#333] group-hover:text-white font-bold font font-[Poppins-bold]">
-                    women
+                    {LANGUAGE.GENERAL.WOMEN}
                   </span>
                   <span className="group-hover:text-white font-normal font font-[Poppins-regular] text-sm text-[#555]">
-                    Spring {new Date().getFullYear()}
+                    {LANGUAGE.GENERAL.SPRING} {new Date().getFullYear()}
                   </span>
                 </div>
                 <span className="absolute -bottom-20 left-[25%] -translate-x-1/2 top-[70%] text-xs font-[Poppins-medium] text-white uppercase opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-100">
-                  Shop now
+                  {LANGUAGE.GENERAL.SHOP_NOW}
                 </span>
 
                 <span className="absolute bottom-0 left-[25%] -translate-x-1/2 top-[80%] h-1 w-100 bg-white origin-center scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
@@ -46,14 +47,14 @@ export const Banner: React.FC = () => {
                 </Link>
                 <div className="flex flex-col relative py-34 px-38 bottom-260">
                   <span className="capitalize group-hover:text-white text-[28px] text-[#333] font-bold font font-[Poppins-bold]">
-                    men
+                    {LANGUAGE.GENERAL.MEN}
                   </span>
                   <span className="group-hover:text-white font-normal font font-[Poppins-regular] text-sm text-[#555]">
-                    Spring {new Date().getFullYear()}
+                    {LANGUAGE.GENERAL.SPRING} {new Date().getFullYear()}
                   </span>
                 </div>
                 <span className="absolute -bottom-20 left-[25%] -translate-x-1/2 top-[70%] text-xs font-[Poppins-medium] text-white uppercase opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-100">
-                  Shop now
+                  {LANGUAGE.GENERAL.SHOP_NOW}
                 </span>
 
                 <span className="absolute bottom-0 left-[25%] -translate-x-1/2 top-[80%] h-1 w-100 bg-white origin-center scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
@@ -71,14 +72,14 @@ export const Banner: React.FC = () => {
                 </Link>
                 <div className="flex flex-col relative py-34 px-38 bottom-260">
                   <span className="group-hover:text-white capitalize text-[28px] text-[#333] font-bold font font-[Poppins-bold]">
-                    Accessories
+                    {LANGUAGE.GENERAL.ACCESSORIES}
                   </span>
                   <span className="group-hover:text-white font-normal font font-[Poppins-regular] text-sm text-[#555]">
-                    Spring {new Date().getFullYear()}
+                    {LANGUAGE.GENERAL.SPRING} {new Date().getFullYear()}
                   </span>
                 </div>
                 <span className="absolute -bottom-20 left-[25%] -translate-x-1/2 top-[70%] text-xs font-[Poppins-medium] text-white uppercase opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-100">
-                  Shop now
+                  {LANGUAGE.GENERAL.SHOP_NOW}
                 </span>
 
                 <span className="absolute bottom-0 left-[25%] -translate-x-1/2 top-[80%] h-1 w-100 bg-white origin-center scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>

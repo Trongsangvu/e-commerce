@@ -12,7 +12,7 @@ import config from "../config/config";
 import { login } from "../redux/actions/auth-action";
 import { AppDispatch, RootStore } from "../redux/store";
 
-export const Login: React.FC = () => {
+const Login = () => {
   const dispatch: AppDispatch = useDispatch();
   const { error } = useSelector((state: RootStore) => state.auth);
 
@@ -67,11 +67,11 @@ export const Login: React.FC = () => {
               <label
                 htmlFor="email"
                 className="absolute left-2.5 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
-                                        peer-placeholder-shown:top-1/2 
-                                        peer-placeholder-shown:text-sm 
-                                        peer-placeholder-shown:text-[#666] 
-                                        peer-focus:top-3.25 peer-focus:text-xs peer-focus:text-[#666]
-                                        peer-not-placeholder-shown:top-3.25 peer-not-placeholder-shown:text-xs"
+                            peer-placeholder-shown:top-1/2 
+                            peer-placeholder-shown:text-sm 
+                            peer-placeholder-shown:text-[#666] 
+                            peer-focus:top-3.25 peer-focus:text-xs peer-focus:text-[#666]
+                            peer-not-placeholder-shown:top-3.25 peer-not-placeholder-shown:text-xs"
               >
                 email*
               </label>
@@ -92,11 +92,11 @@ export const Login: React.FC = () => {
               <label
                 htmlFor="password"
                 className="absolute left-2.5 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
-                                    peer-placeholder-shown:top-1/2 
-                                    peer-placeholder-shown:text-sm 
-                                    peer-placeholder-shown:text-[#666] 
-                                    peer-focus:top-3.5 peer-focus:text-xs peer-focus:text-[#666]
-                                    peer-not-placeholder-shown:top-3.5 peer-not-placeholder-shown:text-xs"
+                            peer-placeholder-shown:top-1/2 
+                            peer-placeholder-shown:text-sm 
+                            peer-placeholder-shown:text-[#666] 
+                            peer-focus:top-3.5 peer-focus:text-xs peer-focus:text-[#666]
+                            peer-not-placeholder-shown:top-3.5 peer-not-placeholder-shown:text-xs"
               >
                 password*
               </label>
@@ -180,3 +180,5 @@ export const Login: React.FC = () => {
     </div>
   );
 };
+
+export default Login;

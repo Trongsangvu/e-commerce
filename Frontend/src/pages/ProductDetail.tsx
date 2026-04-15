@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import images from "../assets/images/images";
 import { Footer } from "../components/navigation/Footer";
-import { Header } from "../components/navigation/Header";
+import Header from "../components/navigation/Header";
 import { MENU_SIZE } from "../config/menu";
 import { addToCartAction } from "../redux/actions/cart-action";
 import { AppDispatch, RootStore } from "../redux/store";
-import { SuggestProducts } from "./SuggestProducts";
 import { byId } from "../services/product-service";
+import SuggestProducts from "./SuggestProducts";
 
-export const ProductDetail: React.FC = () => {
+const ProductDetail = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [isActive, setIsActive] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -23,8 +23,6 @@ export const ProductDetail: React.FC = () => {
     });
     return cartItem?.quantity || quantity;
   });
-
-  // console.log(updateQuantity);
 
   // Query data
   const {
@@ -94,20 +92,17 @@ export const ProductDetail: React.FC = () => {
                 {product?.description}
               </p>
               <span className="font-[GucciSansPro-bold]">{product?.price}</span>
-              {/* <div className="py-25">
-                                <span className="font-[GucciSansPro-bold]">Color:</span>
-                            </div> */}
               <div className="mb-10">
                 <span className="font-[GucciSansPro-bold]">Size:</span>
                 <ul className="flex mt-10">
                   {MENU_SIZE.map((item) => (
                     <li
                       className={`border border-[#ccc] font-[GucciSansPro-light] text-sm w-80 text-center py-10 px-10 cursor-pointer mr-10 rounded-sm
-                                                ${
-                                                  isActive === item.size
-                                                    ? "text-[#6774d5] border-[#6774d5]"
-                                                    : "text-[#ccc] border-[#ccc]"
-                                                }`}
+                                  ${
+                                    isActive === item.size
+                                      ? "text-[#6774d5] border-[#6774d5]"
+                                      : "text-[#ccc] border-[#ccc]"
+                                  }`}
                       onClick={() => handleActive(item.size)}
                       key={item.id}
                     >
@@ -157,3 +152,5 @@ export const ProductDetail: React.FC = () => {
     </div>
   );
 };
+
+export default ProductDetail;

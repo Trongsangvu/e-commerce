@@ -4,17 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { SearchProductIcon } from "../../assets/images/icons/icons";
 import { IProduct } from "../../model/Search";
 import { searchProducts } from "../../services/search-service";
-import { ProductItem } from "../product/ProductItem";
+import ProductItem from "../product/ProductItem";
+import Button from "../common/Button";
 
 interface SearchProps {
   isSearchVisible: boolean;
   setIsSearchVisible: (value: boolean) => void;
 }
 
-export const Search: React.FC<SearchProps> = ({
-  isSearchVisible,
-  setIsSearchVisible,
-}) => {
+const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [debounceTerm, setDebounceTerm] = useState("");
@@ -69,21 +67,17 @@ export const Search: React.FC<SearchProps> = ({
             />
           </div>
         </form>
-        <button
+        <Button
           onClick={toggleSearchVisible}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className={`relative cursor-pointer font-normal text-lg inline-block underline-offset-4 ml-11
-                        ${isHovered ? "none" : "underline"}    
-                    `}
+          className={`relative cursor-pointer font-normal text-lg inline-block underline-offset-4 ml-11 ${isHovered ? "none" : "underline"}`}
         >
           <span>Cancel</span>
           <span
-            className={`absolute left-0 bottom-2 h-1.5 bg-black transition-all duration-300
-                            ${isHovered ? "w-full" : "w-0"}    
-                        `}
+            className={`absolute left-0 bottom-2 h-1.5 bg-black transition-all duration-300 ${isHovered ? "w-full" : "w-0"}`}
           ></span>
-        </button>
+        </Button>
       </div>
 
       <div className="px-16 pb-16">
@@ -123,3 +117,5 @@ export const Search: React.FC<SearchProps> = ({
     </div>
   );
 };
+
+export default Search;

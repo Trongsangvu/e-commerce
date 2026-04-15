@@ -1,8 +1,8 @@
 import images from "../assets/images/images";
 import { Footer } from "../components/navigation/Footer";
-import { Header } from "../components/navigation/Header";
+import Header from "../components/navigation/Header";
 
-export const About: React.FC = () => {
+const About = () => {
   return (
     <div>
       <div>
@@ -112,3 +112,5 @@ export const About: React.FC = () => {
     </div>
   );
 };
+
+export default About;

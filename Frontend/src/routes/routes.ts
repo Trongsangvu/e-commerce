@@ -1,17 +1,17 @@
 import { OAuthSuccess } from "../auth/OAuthSuccess";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
 import config from "../config/config";
-import { About } from "../pages/About";
-import { Blog } from "../pages/Blog";
-import { Cart } from "../pages/Cart";
+import About from "../pages/About";
+import Blog from "../pages/Blog";
+import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
-import { Contact } from "../pages/Contact";
-import { Home } from "../pages/Home";
-import { Login } from "../pages/Login";
-import { ProductDetail } from "../pages/ProductDetail";
+import Contact from "../pages/Contact";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import ProductDetail from "../pages/ProductDetail";
 import Profile from "../pages/Profile";
-import { Register } from "../pages/Register";
-import { Shop } from "../pages/Shop";
+import Register from "../pages/Register";
+import Shop from "../pages/Shop";
 
 // Public routes: no need sign in to access
 const publicRoutes = [
@@ -40,3 +40,4 @@ const standaloneRoutes = [];
 const privateRoutes = [];
 
 export { privateRoutes, publicRoutes, standaloneRoutes };
+

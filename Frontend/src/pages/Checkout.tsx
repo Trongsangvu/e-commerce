@@ -1,4 +1,4 @@
-export const Checkout: React.FC = () => {
+const Checkout = () => {
   return (
     <>
       <header className="h-120">

@@ -9,10 +9,7 @@ interface Props {
   handleShowBag: () => void;
 }
 
-const ShoppingBagComponent: React.FC<Props> = ({
-  isVisible,
-  handleShowBag,
-}) => {
+const ShoppingBagComponent = ({ isVisible, handleShowBag }: Props) => {
   const navigate = useNavigate();
 
   // Handle direct to checkout
@@ -81,7 +78,6 @@ const ShoppingBagComponent: React.FC<Props> = ({
         <div className="px-10 pt-20  border-b border-[#ccc] max-h-340 overflow-y-auto">
           <ul>
             {cartItems.map((item, index) => {
-              // if (index < 2) {
               return (
                 <li className="flex mb-20" key={index}>
                   <div>
@@ -106,7 +102,6 @@ const ShoppingBagComponent: React.FC<Props> = ({
                   </div>
                 </li>
               );
-              // }
             })}
           </ul>
         </div>

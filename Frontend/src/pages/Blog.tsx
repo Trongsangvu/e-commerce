@@ -1,9 +1,10 @@
 import images from "../assets/images/images";
 import { Footer } from "../components/navigation/Footer";
-import { Header } from "../components/navigation/Header";
-import { ProductFeatures } from "./ProductFeatures";
+import Header from "../components/navigation/Header";
+import LANGUAGE from "../utils/language.util";
+import ProductFeatures from "./ProductFeatures";
 
-export const Blog: React.FC = () => {
+const Blog = () => {
   return (
     <div>
       <div>
@@ -13,7 +14,7 @@ export const Blog: React.FC = () => {
         <div className="relative">
           <img src={images.bannerBlog} alt="bannerBlog" />
           <span className="absolute top-[65%] left-[45%] uppercase font-[GucciSansPro-bold] text-5xl text-white">
-            blog
+            {LANGUAGE.BLOG.NAME}
           </span>
         </div>
         <div className="grid gird-cols-2 md:grid-cols-[2fr_1fr] gap-8 mx-100 pt-60">
@@ -234,3 +235,5 @@ export const Blog: React.FC = () => {
     </div>
   );
 };
+
+export default Blog;

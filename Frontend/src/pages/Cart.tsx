@@ -14,8 +14,10 @@ import {
 import { AppDispatch } from "../redux/store";
 import { getCart } from "../services/cart-service";
 import { ICartItem } from "../types/cart-type";
+import LANGUAGE from "../utils/language.util";
+import Button from "../components/common/Button";
 
-export const Cart: React.FC = () => {
+const Cart = () => {
   const [selectedValue, setSelectedValue] = useState("option1");
 
   const dispatch = useDispatch<AppDispatch>();
@@ -81,21 +83,21 @@ export const Cart: React.FC = () => {
           </div>
           <div className="flex justify-center absolute top-[70%] left-[38%]">
             <span className="uppercase font-[GucciSansPro-light] text-5xl text-white">
-              shopping Bag
+              {LANGUAGE.CART.SHOPPING_BAG}
             </span>
           </div>
         </div>
         <div className="flex items-center justify-start max-w-680 mt-30 mb-20">
           <Link to={config.routes.home}>
             <span className="pl-150 font-[Poppins-regular] text-sm text-[#555]">
-              Home
+              {LANGUAGE.GENERAL.HOME}
             </span>
           </Link>
           <span>
             <img className="w-20 h-30" src={images.angleRight} alt="" />
           </span>
           <span className="font-[Poppins-regular] text-sm text-[#999]">
-            Shopping Cart
+            {LANGUAGE.CART.SHOPPING_CART}
           </span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr]">
@@ -104,17 +106,17 @@ export const Cart: React.FC = () => {
               <thead className="border border-[#ccc]">
                 <tr>
                   <th className="py-15 pl-50 font-[Poppins-bold] text-start uppercase text-sm text-[#555]">
-                    product
+                    {LANGUAGE.PRODUCT.PRODUCT}
                   </th>
                   <th className="py-15 w-173"></th>
                   <th className="py-15 font-[Poppins-bold] text-start uppercase text-sm text-[#555]">
-                    price
+                    {LANGUAGE.PRODUCT.PRICE}
                   </th>
                   <th className="py-15 font-[Poppins-bold] text-center uppercase text-sm text-[#555]">
-                    quantity
+                    {LANGUAGE.PRODUCT.QUANTITY}
                   </th>
                   <th className="py-15 pl-50 pr-50 text-center font-[Poppins-bold] uppercase text-sm text-[#555]">
-                    total
+                    {LANGUAGE.PRODUCT.TOTAL}
                   </th>
                 </tr>
               </thead>
@@ -142,24 +144,24 @@ export const Cart: React.FC = () => {
                       </td>
                       <td className="font-[Poppins-regular] text-[#555] w-120">
                         <div className="flex">
-                          <button
+                          <Button
                             className="w-45 h-44 cursor-pointer border border-[#ccc]"
                             onClick={() => handleUpdateCart(index, "decrease")}
                           >
                             -
-                          </button>
+                          </Button>
                           <input
                             className="bg-[#f7f7f7] w-50 h-44 text-center pl-10 border-t border-b outline-none border-[#ccc]"
                             type="number"
                             value={quantity}
                             readOnly
                           />
-                          <button
+                          <Button
                             className="w-45 h-44 cursor-pointer border border-[#ccc]"
                             onClick={() => handleUpdateCart(index, "increase")}
                           >
                             +
-                          </button>
+                          </Button>
                         </div>
                       </td>
                       <td className="font-[Poppins-regular] text-center text-[#555] w-172">
@@ -275,3 +277,5 @@ export const Cart: React.FC = () => {
     </div>
   );
 };
+
+export default Cart;
