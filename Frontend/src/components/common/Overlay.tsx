@@ -6,13 +6,13 @@ interface OverlayProps {
 export const Overlay: React.FC<OverlayProps> = ({ isOpen, handleClose }) => {
   return (
     <div
+      onClick={handleClose}
       className={`fixed z-60 inset-0 bg-black/50 transition-all duration-500 ease-in-out 
           ${
             isOpen
               ? "opacity-100 visible pointer-events-auto"
               : "opacity-0 invisible pointer-events-none"
           }`}
-      onClick={handleClose}
     ></div>
   );
 };
