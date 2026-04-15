@@ -29,5 +29,4 @@ dist-ssr
 Note.md 
 Tech.md
 Install-features.md
-.vercel
 .env*.local
