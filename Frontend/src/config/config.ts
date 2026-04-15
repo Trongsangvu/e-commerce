@@ -1,7 +1,7 @@
-import routes from "./routes";
+import ROUTES from "./routes";
 
-const config: { routes: typeof routes } = {
-  routes,
+const config: { ROUTES: typeof ROUTES } = {
+  ROUTES,
 };
 
 export default config;

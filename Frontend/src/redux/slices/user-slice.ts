@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { User } from "../../types/user-type";
 
 interface UserState {
-  user: null;
+  user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
+  isLoadingUser: boolean;
 }
 
 const initialState: UserState = {
@@ -12,6 +14,7 @@ const initialState: UserState = {
   isAuthenticated: false,
   loading: false,
   error: null,
+  isLoadingUser: true,
 };
 
 const userSlice = createSlice({
@@ -23,6 +26,7 @@ const userSlice = createSlice({
       state.isAuthenticated = true;
       state.loading = false;
       state.error = null;
+      state.isLoadingUser = false;
     },
     clearUser: (state) => {
       state.user = null;

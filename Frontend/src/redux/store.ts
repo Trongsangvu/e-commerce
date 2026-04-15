@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import appReducer from "./slices/app-slice";
 import authReducer from "./slices/auth-slice";
 import cartReducer from "./slices/cart-slice";
 import categoryReducer from "./slices/filter-product-slice";
@@ -8,6 +9,7 @@ import userReducer from "./slices/user-slice";
 
 export const store = configureStore({
   reducer: {
+    app: appReducer,
     auth: authReducer,
     search: searchReducer,
     sideBar: sideBarReducer,

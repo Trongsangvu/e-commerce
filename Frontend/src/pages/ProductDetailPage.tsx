@@ -9,7 +9,7 @@ import { MENU_SIZE } from "../config/menu";
 import { addToCartAction } from "../redux/actions/cart-action";
 import { AppDispatch, RootStore } from "../redux/store";
 import { byId } from "../services/product-service";
-import SuggestProducts from "./SuggestProducts";
+import SuggestProducts from "./SuggestProductsPage";
 
 const ProductDetail = () => {
   const dispatch = useDispatch<AppDispatch>();

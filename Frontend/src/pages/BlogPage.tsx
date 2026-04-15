@@ -2,7 +2,7 @@ import images from "../assets/images/images";
 import { Footer } from "../components/navigation/Footer";
 import Header from "../components/navigation/Header";
 import LANGUAGE from "../utils/language.util";
-import ProductFeatures from "./ProductFeatures";
+import ProductFeatures from "./ProductFeaturesPage";
 
 const Blog = () => {
   return (

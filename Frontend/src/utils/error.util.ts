@@ -1,9 +1,9 @@
 import { AxiosError } from "axios";
 
-export type RejectType = {
+export interface RejectType {
   message?: string;
   status?: number;
-};
+}
 
 export const handleAxiosError = (error: unknown): RejectType => {
   const err = error as AxiosError<{ message: string }>;
