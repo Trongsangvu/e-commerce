@@ -88,7 +88,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="flex items-center justify-start max-w-680 mt-30 mb-20">
-          <Link to={config.routes.home}>
+          <Link to={config.ROUTES.home}>
             <span className="pl-150 font-[Poppins-regular] text-sm text-[#555]">
               {LANGUAGE.GENERAL.HOME}
             </span>

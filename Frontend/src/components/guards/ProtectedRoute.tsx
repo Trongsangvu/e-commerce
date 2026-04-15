@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import routes from "../../config/routes";
+import ROUTES from "../../config/routes";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 
@@ -13,7 +13,7 @@ const ProtectedRoute = ({ roles }: Props) => {
   if (isLoadingUser) return null;
 
   if (!user) {
-    return <Navigate to={routes.login} />;
+    return <Navigate to={ROUTES.login} />;
   }
 
   if (roles && !roles.includes(user.role)) {

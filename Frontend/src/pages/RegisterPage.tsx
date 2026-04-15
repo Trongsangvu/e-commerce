@@ -27,7 +27,7 @@ const Register = () => {
         console.log("Error dispatching register action: ", error),
       );
 
-    navigate(config.routes.login);
+    navigate(config.ROUTES.login);
   };
 
   return (

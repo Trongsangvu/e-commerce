@@ -44,7 +44,7 @@ const ProductList = () => {
             filteredProducts.map((product: IProduct) => (
               <Link
                 key={product._id}
-                to={config.routes.productDetail.replace(":id", product._id)}
+                to={config.ROUTES.productDetail.replace(":id", product._id)}
               >
                 <li className="mb-35 max-w-270 w-full mx-auto">
                   <div className="max-w-270 w-full overflow-hidden relative group">

@@ -28,7 +28,7 @@ const Login = () => {
       .then(() => console.log("Login action dispatched"))
       .catch((error) => console.log("Error dispatching login action: ", error));
 
-    navigate(config.routes.home);
+    navigate(config.ROUTES.home);
   };
 
   return (
@@ -133,7 +133,7 @@ const Login = () => {
               or
             </span>
             <div className="bg-[#1a1a1a] w-82 uppercase flex items-center justify-center h-14 text-white cursor-pointer text-center p-2.5 font-[GucciSansPro-medium]">
-              <Link to={config.routes.register}>
+              <Link to={config.ROUTES.register}>
                 <button className="uppercase cursor-pointer">sign up</button>
               </Link>
             </div>

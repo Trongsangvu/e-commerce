@@ -52,7 +52,7 @@ const SuggestProducts = () => {
           {filterProductsByCty.map((product, index) => (
             <Link
               key={index}
-              to={config.routes.productDetail.replace(":id", product._id)}
+              to={config.ROUTES.productDetail.replace(":id", product._id)}
             >
               <div key={index}>
                 <div className="group relative overflow-hidden min-h-300 max-w-230">

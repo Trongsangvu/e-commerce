@@ -31,8 +31,8 @@ import Sidebar from "./Sidebar";
   const scroll = useScroll();
 
   const location = useLocation();
-  const isLoginPage = location.pathname === config.routes.login;
-  const isRegisterPage = location.pathname === config.routes.register;
+  const isLoginPage = location.pathname === config.ROUTES.login;
+  const isRegisterPage = location.pathname === config.ROUTES.register;
 
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -62,7 +62,7 @@ import Sidebar from "./Sidebar";
     dispatch(logout());
     setIsShowBag(false);
     setIsShowMenu(false);
-    navigate(config.routes.login);
+    navigate(config.ROUTES.login);
   };
 
   // Handle hide menu profile when transition page
@@ -139,7 +139,7 @@ import Sidebar from "./Sidebar";
         <div className="height-72 z-1 shadow-xs flex items-center flex-1 justify-around pt-20 pb-20 px-7">
           <div className="flex items-center justify-between">
             <div className="flex items-center mr-40">
-              <Link to={config.routes.home}>
+              <Link to={config.ROUTES.home}>
                 <h3
                   className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${
                     isLoginPage || isRegisterPage || scroll

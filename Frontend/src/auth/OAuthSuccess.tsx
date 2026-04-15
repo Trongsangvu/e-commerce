@@ -18,7 +18,7 @@ export const OAuthSuccess = () => {
         const session = await account.getSession("current");
         if (!session) {
           console.warn("No session found");
-          navigate(config.routes.login);
+          navigate(config.ROUTES.login);
           return;
         }
 
@@ -46,7 +46,7 @@ export const OAuthSuccess = () => {
         dispatch(setUser(userData));
 
         // Navigate to profile page
-        navigate(config.routes.profile);
+        navigate(config.ROUTES.profile);
       } catch (error) {
         console.error("Error during Google login: ", error);
         // navigate('/login');

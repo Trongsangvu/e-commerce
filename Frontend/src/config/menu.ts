@@ -30,8 +30,8 @@ export const MENU_ITEMS_2: MenuItems[] = [
 
 // Menu Profile
 export const MENU_PROFILE: MenuItems[] = [
-  { id: "my account", title: "my account", path: config.routes.profile },
-  { id: "sign in", title: "sign in", path: config.routes.login },
+  { id: "my account", title: "my account", path: config.ROUTES.profile },
+  { id: "sign in", title: "sign in", path: config.ROUTES.login },
   { title: "my orders" },
   { title: "account setting" },
   { title: "address book" },
@@ -53,12 +53,12 @@ export const categories = [
 
 // Menu header
 export const MENU_HEADER: MenuItems[] = [
-  { id: "home", title: "Home", path: config.routes.home },
-  { id: "shop", title: "Shop", path: config.routes.shop },
-  { id: "features", title: "Features", path: config.routes.features },
-  { id: "blog", title: "Blog", path: config.routes.blog },
-  { id: "about", title: "About", path: config.routes.about },
-  { id: "contact", title: "Contact", path: config.routes.contact },
+  { id: "home", title: "Home", path: config.ROUTES.home },
+  { id: "shop", title: "Shop", path: config.ROUTES.shop },
+  { id: "features", title: "Features", path: config.ROUTES.features },
+  { id: "blog", title: "Blog", path: config.ROUTES.blog },
+  { id: "about", title: "About", path: config.ROUTES.about },
+  { id: "contact", title: "Contact", path: config.ROUTES.contact },
 ];
 
 // Menu size
