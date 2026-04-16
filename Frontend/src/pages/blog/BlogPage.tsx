@@ -1,15 +1,10 @@
-import images from "../assets/images/images";
-import { Footer } from "../components/navigation/Footer";
-import Header from "../components/navigation/Header";
-import LANGUAGE from "../utils/language.util";
-import ProductFeatures from "./ProductFeaturesPage";
+import images from "../../assets/images/images";
+import LANGUAGE from "../../utils/language.util";
+import ProductFeatures from "../product/ProductListPage";
 
-const Blog = () => {
+const BlogPage = () => {
   return (
     <div>
-      <div>
-        <Header />
-      </div>
       <div className="container">
         <div className="relative">
           <img src={images.bannerBlog} alt="bannerBlog" />
@@ -231,9 +226,8 @@ const Blog = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default Blog;
+export default BlogPage;

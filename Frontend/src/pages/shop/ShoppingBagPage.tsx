@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import { CircleExcelIcon } from "../assets/images/icons/icons";
-import { getCart } from "../services/cart-service";
+import { CircleExcelIcon } from "../../assets/images/icons/icons";
+import { getCart } from "../../services/cart-service";
 
 interface Props {
   isVisible: boolean;
   handleShowBag: () => void;
 }
 
-const ShoppingBagComponent = ({ isVisible, handleShowBag }: Props) => {
+const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
   const navigate = useNavigate();
 
   // Handle direct to checkout
@@ -128,4 +128,4 @@ const ShoppingBagComponent = ({ isVisible, handleShowBag }: Props) => {
   );
 };
 
-export const ShoppingBag = memo(ShoppingBagComponent);
+export const ShoppingBag = memo(ShoppingBagPage);

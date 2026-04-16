@@ -1,13 +1,8 @@
-import images from "../assets/images/images";
-import { Footer } from "../components/navigation/Footer";
-import Header from "../components/navigation/Header";
+import images from "../../assets/images/images";
 
-const About = () => {
+const AboutPage = () => {
   return (
     <div>
-      <div>
-        <Header />
-      </div>
       <div className="container">
         <div className="relative">
           <img src={images.bannerAbout} alt="about image" />
@@ -108,9 +103,8 @@ const About = () => {
           </section>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default About;
+export default AboutPage;

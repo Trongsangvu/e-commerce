@@ -5,14 +5,13 @@ import {
   AddressIcon,
   EyeSlashIcon,
   GoogleIcon,
-} from "../assets/images/icons/icons";
-import { handleLoginGoogle } from "../auth/GoogleLoginButton";
-import { Footer } from "../components/navigation/Footer";
-import config from "../config/config";
-import { login } from "../redux/actions/auth-action";
-import { AppDispatch, RootStore } from "../redux/store";
+} from "../../assets/images/icons/icons";
+import { handleLoginGoogle } from "../../auth/GoogleLoginButton";
+import config from "../../config/config";
+import { login } from "../../redux/actions/auth-action";
+import { AppDispatch, RootStore } from "../../redux/store";
 
-const Login = () => {
+const LoginPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const { error } = useSelector((state: RootStore) => state.auth);
 
@@ -176,9 +175,8 @@ const Login = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -1,19 +1,15 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
+import { Footer } from "../navigation/Footer";
 import Header from "../navigation/Header";
-// import { Outlet } from "react-router-dom";
-// import { Footer } from "../navigation/Footer";
 
-export const DefaultLayout = ({ children }: React.PropsWithChildren) => {
+const DefaultLayout = () => {
   return (
-    <div>
+    <>
       <Header />
-      {children}
-    </div>
-
-    // <>
-    //   <Header />
-    //   <Outlet />
-    //   <Footer />
-    // </>
+      <Outlet />
+      <Footer />
+    </>
   );
 };
+
+export default DefaultLayout;

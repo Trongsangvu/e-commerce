@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import { RootStore } from "../redux/store";
-import { list } from "../services/product-service";
+import { RootStore } from "../../redux/store";
+import { list } from "../../services/product-service";
 
-const ProductFeatures = () => {
+const ProductListPage = () => {
   // Query data
   const {
     data: products = [],
@@ -54,4 +54,4 @@ const ProductFeatures = () => {
   );
 };
 
-export default ProductFeatures;
+export default ProductListPage;

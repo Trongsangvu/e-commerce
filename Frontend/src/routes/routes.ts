@@ -1,37 +1,49 @@
 import { OAuthSuccess } from "../auth/OAuthSuccess";
-import { DefaultLayout } from "../components/layout/DefaultLayout";
+import DefaultLayout from "../components/layout/DefaultLayout";
 import config from "../config/config";
-import About from "../pages/AboutPage";
-import Blog from "../pages/BlogPage";
-import Cart from "../pages/CartPage";
-import Checkout from "../pages/CheckoutPage";
-import Contact from "../pages/ContactPage";
-import Home from "../pages/HomePage";
-import Login from "../pages/LoginPage";
-import ProductDetail from "../pages/ProductDetailPage";
-import Profile from "../pages/ProfilePage";
-import Register from "../pages/RegisterPage";
-import Shop from "../pages/ShopPage";
+import AboutPage from "../pages/about/AboutPage";
+import AccountPage from "../pages/account/AccountPage";
+import LoginPage from "../pages/auth/LoginPage";
+import RegisterPage from "../pages/auth/RegisterPage";
+import BlogPage from "../pages/blog/BlogPage";
+import CartPage from "../pages/cart/CartPage";
+import CheckoutPage from "../pages/checkout/CheckoutPage";
+import ContactPage from "../pages/contact/ContactPage";
+import HomePage from "../pages/HomePage";
+import ProductDetailPage from "../pages/product/ProductDetailPage";
+import ShopPage from "../pages/shop/ShopPage";
 
 // Public routes: no need sign in to access
 const publicRoutes = [
-  { path: config.ROUTES.home, component: Home, layout: DefaultLayout },
-  { path: config.ROUTES.login, component: Login, layout: DefaultLayout },
-  { path: config.ROUTES.register, component: Register, layout: DefaultLayout },
-  { path: config.ROUTES.profile, component: Profile, layout: DefaultLayout },
+  { path: config.ROUTES.home, component: HomePage, layout: DefaultLayout },
+  { path: config.ROUTES.login, component: LoginPage, layout: DefaultLayout },
   {
-    path: config.ROUTES.productDetail,
-    component: ProductDetail,
+    path: config.ROUTES.register,
+    component: RegisterPage,
     layout: DefaultLayout,
   },
-  { path: config.ROUTES.cart, component: Cart, layout: DefaultLayout },
-  { path: config.ROUTES.shop, component: Shop, layout: DefaultLayout },
-  { path: config.ROUTES.about, component: About, layout: DefaultLayout },
-  { path: config.ROUTES.blog, component: Blog, layout: DefaultLayout },
-  { path: config.ROUTES.contact, component: Contact, layout: DefaultLayout },
+  {
+    path: config.ROUTES.account,
+    component: AccountPage,
+    layout: DefaultLayout,
+  },
+  {
+    path: config.ROUTES.productDetail,
+    component: ProductDetailPage,
+    layout: DefaultLayout,
+  },
+  { path: config.ROUTES.cart, component: CartPage, layout: DefaultLayout },
+  { path: config.ROUTES.shop, component: ShopPage, layout: DefaultLayout },
+  { path: config.ROUTES.about, component: AboutPage, layout: DefaultLayout },
+  { path: config.ROUTES.blog, component: BlogPage, layout: DefaultLayout },
+  {
+    path: config.ROUTES.contact,
+    component: ContactPage,
+    layout: DefaultLayout,
+  },
   { path: config.ROUTES.oauthSuccess, component: OAuthSuccess },
 
-  { path: config.ROUTES.checkout, component: Checkout, layout: null },
+  { path: config.ROUTES.checkout, component: CheckoutPage, layout: null },
 ];
 
 const standaloneRoutes = [];

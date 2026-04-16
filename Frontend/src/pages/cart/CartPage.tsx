@@ -2,22 +2,21 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import images from "../assets/images/images";
-import { Footer } from "../components/navigation/Footer";
-import config from "../config/config";
-import { updateCartAction } from "../redux/actions/cart-action";
+import images from "../../assets/images/images";
+import Button from "../../components/common/Button";
+import config from "../../config/config";
+import { updateCartAction } from "../../redux/actions/cart-action";
 import {
   addQuantity,
   decreaseQuantity,
   setCartItems,
-} from "../redux/slices/cart-slice";
-import { AppDispatch } from "../redux/store";
-import { getCart } from "../services/cart-service";
-import { ICartItem } from "../types/cart-type";
-import LANGUAGE from "../utils/language.util";
-import Button from "../components/common/Button";
+} from "../../redux/slices/cart-slice";
+import { AppDispatch } from "../../redux/store";
+import { getCart } from "../../services/cart-service";
+import { ICartItem } from "../../types/cart-type";
+import LANGUAGE from "../../utils/language.util";
 
-const Cart = () => {
+const CartPage = () => {
   const [selectedValue, setSelectedValue] = useState("option1");
 
   const dispatch = useDispatch<AppDispatch>();
@@ -273,9 +272,8 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default Cart;
+export default CartPage;

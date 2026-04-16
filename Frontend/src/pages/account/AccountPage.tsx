@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import images from "../assets/images/images";
-import { Footer } from "../components/navigation/Footer";
-import { getProfileUser } from "../services/auth-service";
+import images from "../../assets/images/images";
+import { getProfileUser } from "../../services/auth-service";
 // import { useGoogleLogin } from "../features/home/hooks/useGoogleLogin";
 
-const Profile = () => {
+const AccountPage = () => {
   // const { userName } = useGoogleLogin();
 
   // Query data
@@ -123,9 +122,8 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default Profile;
+export default AccountPage;

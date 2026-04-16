@@ -11,7 +11,7 @@ import {
 import config from "../../config/config";
 import { MENU_HEADER, MENU_PROFILE } from "../../config/menu";
 import { useScroll } from "../../hooks/use-scroll";
-import { ShoppingBag } from "../../pages/ShoppingBagPage";
+import { ShoppingBag } from "../../pages/shop/ShoppingBagPage";
 import { logout } from "../../redux/actions/auth-action";
 import { sideBarShow } from "../../redux/slices/sidebar-slice";
 import { AppDispatch, RootStore } from "../../redux/store";
@@ -21,7 +21,7 @@ import { MenuProfile } from "../menu/MenuProfile";
 import Search from "../search/Search";
 import Sidebar from "./Sidebar";
 
- const Header = () => {
+const Header = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);

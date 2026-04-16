@@ -1,11 +1,11 @@
-const ROUTES = {
+export const ROUTES = {
   home: "/",
   cart: "/cart",
   login: "/login",
   register: "/register",
   products: "/products",
   productDetail: "/products/:id",
-  profile: "/profile",
+  account: "/account",
   checkout: "/checkout",
   shop: "/shop",
   features: "/features",
@@ -16,4 +16,3 @@ const ROUTES = {
 };
 
 export type Routes = typeof ROUTES;
-export default ROUTES;

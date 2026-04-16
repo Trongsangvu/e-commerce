@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import ROUTES from "../../config/routes";
+import { ROUTES } from "../../config/routes";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 
@@ -8,7 +8,9 @@ interface Props {
 }
 
 const ProtectedRoute = ({ roles }: Props) => {
-  const { user, isLoadingUser } = useAppSelector((state: RootStore) => state.user);
+  const { user, isLoadingUser } = useAppSelector(
+    (state: RootStore) => state.user,
+  );
 
   if (isLoadingUser) return null;
 

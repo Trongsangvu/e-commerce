@@ -2,10 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import images from "../assets/images/images";
 import { Banner } from "../components/home/Banner";
 import { Container } from "../components/home/Container";
-import { Footer } from "../components/navigation/Footer";
 import ProductList from "../components/product/ProductList";
 
-const Home = () => {
+const HomePage = () => {
   const [isFixed, setIsFixed] = useState(true);
   const bannerRef = useRef<HTMLDivElement>(null);
 
@@ -73,9 +72,8 @@ const Home = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

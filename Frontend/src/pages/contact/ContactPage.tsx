@@ -1,10 +1,9 @@
 import { useState } from "react";
-import images from "../assets/images/images";
-import { GoogleMapComponent } from "../components/google/GoolgeMap";
-import { Footer } from "../components/navigation/Footer";
-import { sendEmail } from "../services/email-service";
+import images from "../../assets/images/images";
+import { GoogleMapComponent } from "../../components/google/GoolgeMap";
+import { sendEmail } from "../../services/email-service";
 
-const Contact = () => {
+const ContactPage = () => {
   const [recipient, setRecipient] = useState("");
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -171,9 +170,8 @@ const Contact = () => {
       <div>
         <GoogleMapComponent />
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default Contact;
+export default ContactPage;

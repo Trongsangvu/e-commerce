@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { NextArrow, PrevArrow } from "../components/common/CustomArrow";
-import config from "../config/config";
-import { RootStore } from "../redux/store";
-import { list } from "../services/product-service";
+import { NextArrow, PrevArrow } from "../../components/common/CustomArrow";
+import config from "../../config/config";
+import { RootStore } from "../../redux/store";
+import { list } from "../../services/product-service";
 
-const SuggestProducts = () => {
+const ProductSuggestPage = () => {
   const settings = {
     dots: false,
     infinite: true,
@@ -75,4 +75,4 @@ const SuggestProducts = () => {
   );
 };
 
-export default SuggestProducts;
+export default ProductSuggestPage;
