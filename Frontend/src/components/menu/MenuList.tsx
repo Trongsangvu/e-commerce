@@ -1,11 +1,11 @@
 import { MENU_ITEMS, MENU_ITEMS_2 } from "../../config/menu";
-import { MenuItem } from "./MenuItem";
+import MenuItem from "./MenuItem";
 
 interface MenuListProps {
   isOpen: boolean;
 }
 
-export const MenuList = ({ isOpen }: MenuListProps) => {
+const MenuList = ({ isOpen }: MenuListProps) => {
   return (
     <ul
       className={`transition-all duration-500 delay-200 
@@ -28,3 +28,5 @@ export const MenuList = ({ isOpen }: MenuListProps) => {
     </ul>
   );
 };
+
+export default MenuList;

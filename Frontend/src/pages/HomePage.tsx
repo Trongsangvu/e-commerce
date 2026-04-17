@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import images from "../assets/images/images";
 import { Banner } from "../components/home/Banner";
-import { Container } from "../components/home/Container";
+import Container from "../components/home/Container";
 import ProductList from "../components/product/ProductList";
 
 const HomePage = () => {

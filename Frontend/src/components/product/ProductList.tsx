@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
+import { ROUTES } from "../../config/routes";
+import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 import { IProduct } from "../../types/product-type";
 import LANGUAGE from "../../utils/language.util";
 import { SkeletonCustom } from "../common/SkeletonCustom";
-import { ROUTES } from "../../config/routes";
 
 const ProductList = () => {
   // Query data
@@ -20,7 +20,7 @@ const ProductList = () => {
     queryFn: list,
   });
 
-  const selectedCategory = useSelector(
+  const selectedCategory = useAppSelector(
     (state: RootStore) => state.category.selectedCategory,
   );
 

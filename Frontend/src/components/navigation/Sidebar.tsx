@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
 import { CloseIcon } from "../../assets/images/icons/icons";
 import { usePreventScroll } from "../../hooks/use-prevent-scroll";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { sideBarHide } from "../../redux/slices/sidebar-slice";
-import { AppDispatch, RootStore } from "../../redux/store";
+import { RootStore } from "../../redux/store";
 import { Overlay } from "../common/Overlay";
-import { MenuList } from "../menu/MenuList";
+import MenuList from "../menu/MenuList";
 
 const Sidebar = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const isOpen = useSelector((state: RootStore) => state.sideBar.isOpen);
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state: RootStore) => state.sideBar.isOpen);
 
   usePreventScroll(isOpen);
 

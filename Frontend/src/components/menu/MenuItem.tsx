@@ -1,6 +1,6 @@
 import { MenuItems } from "../../config/menu";
 
-export const MenuItem = ({ title, delay }: MenuItems) => (
+const MenuItem = ({ title, delay }: MenuItems) => (
   <li
     className="flex items-center hover:cursor-pointer font-montserrat pb-24 transform transition-all duration-500 hover:translate-x-2"
     style={{ transitionDelay: `${delay}ms` }}
@@ -8,3 +8,5 @@ export const MenuItem = ({ title, delay }: MenuItems) => (
     {title}
   </li>
 );
+
+export default MenuItem;

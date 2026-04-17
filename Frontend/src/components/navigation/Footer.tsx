@@ -6,7 +6,7 @@ import {
 import images from "../../assets/images/images";
 import LANGUAGE from "../../utils/language.util";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className="mt-auto">
       <div className="bg-[#222222] px-41 pt-18.75 pb-8">
@@ -157,3 +157,5 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;

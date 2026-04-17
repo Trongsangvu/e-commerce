@@ -1,17 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import images from "../../assets/images/images";
 import { categories } from "../../config/menu";
-import { AppDispatch } from "../../redux/store";
-import { RootStore } from "../../redux/store";
+import { useAppDispatch } from "../../hooks/use-redux";
 import { setCategory } from "../../redux/slices/filter-product-slice";
+import { RootStore } from "../../redux/store";
 import LANGUAGE from "../../utils/language.util";
 
 interface ContainerProps {
   showTitle?: boolean;
 }
 
-export const Container = ({ showTitle = true }: ContainerProps) => {
-  const dispatch = useDispatch<AppDispatch>();
+const Container = ({ showTitle = true }: ContainerProps) => {
+  const dispatch = useAppDispatch();
   const selectCategory = useSelector(
     (state: RootStore) => state.category.selectedCategory,
   );
@@ -77,3 +77,5 @@ export const Container = ({ showTitle = true }: ContainerProps) => {
     </main>
   );
 };
+
+export default Container;

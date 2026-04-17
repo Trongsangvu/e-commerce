@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   MenuToggle,
@@ -10,11 +9,12 @@ import {
 } from "../../assets/images/icons/icons";
 import { MENU_HEADER, MENU_PROFILE } from "../../config/menu";
 import { ROUTES } from "../../config/routes";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { useScroll } from "../../hooks/use-scroll";
 import { ShoppingBag } from "../../pages/shop/ShoppingBagPage";
 import { logout } from "../../redux/actions/auth-action";
 import { sideBarShow } from "../../redux/slices/sidebar-slice";
-import { AppDispatch, RootStore } from "../../redux/store";
+import { RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
 import LANGUAGE from "../../utils/language.util";
 import { MenuProfile } from "../menu/MenuProfile";
@@ -22,7 +22,7 @@ import Search from "../search/Search";
 import Sidebar from "./Sidebar";
 
 const Header = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowBag, setIsShowBag] = useState(false);
@@ -37,8 +37,7 @@ const Header = () => {
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Authentication when login
-  const isAuthenticated = useSelector(
+  const isAuthenticated = useAppSelector(
     (state: RootStore) => state.auth.isAuthenticated,
   );
 
