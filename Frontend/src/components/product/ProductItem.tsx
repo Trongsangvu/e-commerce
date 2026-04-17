@@ -7,7 +7,7 @@ interface ProductItemProps {
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
     <a href="#">
-      <img className="h-150 w-130 " src={product.imageUrl} alt={product.name} />
+      <img className="h-150 w-130 " src={product.image_url} alt={product.name} />
     </a>
   );
 };

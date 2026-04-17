@@ -50,7 +50,7 @@ const ProductList = () => {
                   <div className="max-w-270 w-full overflow-hidden relative group">
                     <img
                       className="max-w-270 w-full h-335 cursor-pointer transition-transform duration-500 group-hover:scale-110"
-                      src={product.imageUrl}
+                      src={product.image_url}
                       alt={product.name}
                       loading="lazy"
                     />

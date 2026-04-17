@@ -4,7 +4,7 @@ export interface IProduct {
   category: "men" | "women";
   currency: "USD";
   description?: string;
-  imageUrl?: string;
+  image_url?: string;
   tags?: string[];
   brand: string;
 }

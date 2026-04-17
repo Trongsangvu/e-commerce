@@ -29,7 +29,7 @@ const productSchema = baseSchema<IProduct>(
       type: String,
       required: false,
     },
-    imageUrl: {
+    image_url: {
       type: String,
       required: false,
     },

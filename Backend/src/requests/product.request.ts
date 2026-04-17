@@ -7,7 +7,7 @@ export const createProductRequest = z.object({
   currency: z.string().optional(),
   category: z.enum(Object.values(ProductCategory)).optional(),
   description: z.string().optional(),
-  imageUrl: z.string().optional(),
+  image_url: z.string().optional(),
   tags: z.string().optional(),
 });
 
@@ -17,7 +17,7 @@ export const updateProductRequest = z.object({
   currency: z.string().optional(),
   category: z.string().optional().nullable(),
   description: z.string().optional(),
-  imageUrl: z.string().optional(),
+  image_url: z.string().optional(),
   tags: z.string().optional(),
 });
 

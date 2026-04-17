@@ -36,7 +36,7 @@ const ProductListPage = () => {
           <li key={index} className="flex gap-5 mt-30 mb-30 items-center">
             <div className="w-90 h-110">
               <a href="#">
-                <img src={product?.imageUrl} alt="" />
+                <img src={product?.image_url} alt="" />
               </a>
             </div>
             <div className="flex flex-col pl-20">

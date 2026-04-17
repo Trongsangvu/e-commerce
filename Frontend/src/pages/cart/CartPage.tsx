@@ -130,7 +130,7 @@ const CartPage = () => {
                       <td className="pl-50 w-133">
                         <img
                           className="w-80 h-100 cursor-pointer"
-                          src={cart.productId.imageUrl}
+                          src={cart.productId.image_url}
                           alt={cart.productId.name}
                         />
                       </td>

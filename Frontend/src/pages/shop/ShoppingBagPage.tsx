@@ -83,7 +83,7 @@ const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
                   <div>
                     <img
                       className="w-120 h-140 cursor-pointer"
-                      src={item.productId.imageUrl}
+                      src={item.productId.image_url}
                       alt={item.productId.name}
                     />
                   </div>

@@ -75,7 +75,7 @@ const ProductDetailPage = () => {
             <div className="w-auto flex flex-row px-25 gap-50">
               <img
                 className="w-340 h-420"
-                src={product?.imageUrl}
+                src={product?.image_url}
                 alt={product?.name}
               />
             </div>
