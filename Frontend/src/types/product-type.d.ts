@@ -10,7 +10,7 @@ export interface IProduct {
   price: string;
   currency: string;
   description: string;
-  image_url: string;
+  imageUrl: string;
   category: string;
 }
 

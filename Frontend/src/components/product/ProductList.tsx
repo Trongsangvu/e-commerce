@@ -41,7 +41,7 @@ const ProductList = () => {
       ) : (
         <ul className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center">
           {filteredProducts &&
-            filteredProducts.map((product: IProduct) => (
+            filteredProducts?.map((product: IProduct) => (
               <Link
                 key={product._id}
                 to={ROUTES.productDetail.replace(":id", product._id)}
@@ -50,7 +50,7 @@ const ProductList = () => {
                   <div className="max-w-270 w-full overflow-hidden relative group">
                     <img
                       className="max-w-270 w-full h-335 cursor-pointer transition-transform duration-500 group-hover:scale-110"
-                      src={product.image_url}
+                      src={product.imageUrl}
                       alt={product.name}
                       loading="lazy"
                     />

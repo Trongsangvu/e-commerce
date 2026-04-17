@@ -58,7 +58,7 @@ const ProductSuggestPage = () => {
                 <div className="group relative overflow-hidden min-h-300 max-w-230">
                   <img
                     className="w-auto h-300 cursor-pointer transition-transform duration-500 group-hover:scale-110"
-                    src={product.image_url}
+                    src={product.imageUrl}
                     alt={product.name}
                   />
                 </div>

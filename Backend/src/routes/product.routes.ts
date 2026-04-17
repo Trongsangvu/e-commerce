@@ -14,7 +14,7 @@ router.post(
 
 router.get(
   "/",
-  allTokenRequired,
+  // allTokenRequired,
   productController.list,
 );
 
