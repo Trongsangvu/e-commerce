@@ -1,12 +1,12 @@
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { AppDispatch } from "../redux/store";
-import { useEffect } from "react";
-import { account } from "../services/appwrite-service";
+import { ROUTES } from "../config/routes";
 import { oauthLogin } from "../redux/actions/auth-action";
 import { setUser } from "../redux/slices/user-slice";
-import config from "../config/config";
+import { AppDispatch } from "../redux/store";
+import { account } from "../services/appwrite-service";
 
 export const OAuthSuccess = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const OAuthSuccess = () => {
         const session = await account.getSession("current");
         if (!session) {
           console.warn("No session found");
-          navigate(config.ROUTES.login);
+          navigate(ROUTES.login);
           return;
         }
 
@@ -46,7 +46,7 @@ export const OAuthSuccess = () => {
         dispatch(setUser(userData));
 
         // Navigate to profile page
-        navigate(config.ROUTES.account);
+        navigate(ROUTES.account);
       } catch (error) {
         console.error("Error during Google login: ", error);
         // navigate('/login');

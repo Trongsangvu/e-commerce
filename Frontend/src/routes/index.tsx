@@ -4,12 +4,16 @@ import AuthLayout from "../components/layout/AuthLayout";
 import DefaultLayout from "../components/layout/DefaultLayout";
 import { ROLES } from "../config/constants";
 import { ROUTES } from "../config/routes";
+import AboutPage from "../pages/about/AboutPage";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
+import BlogPage from "../pages/blog/BlogPage";
+import CartPage from "../pages/cart/CartPage";
+import ContactPage from "../pages/contact/ContactPage";
 import HomePage from "../pages/HomePage";
 import ProductDetailPage from "../pages/product/ProductDetailPage";
 import ProductListPage from "../pages/product/ProductListPage";
-import CartPage from "../pages/cart/CartPage";
+import ShopPage from "../pages/shop/ShopPage";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +47,22 @@ const router = createBrowserRouter([
       {
         path: ROUTES.cart,
         element: <CartPage />,
+      },
+      {
+        path: ROUTES.about,
+        element: <AboutPage />,
+      },
+      {
+        path: ROUTES.blog,
+        element: <BlogPage />,
+      },
+      {
+        path: ROUTES.contact,
+        element: <ContactPage />,
+      },
+      {
+        path: ROUTES.shop,
+        element: <ShopPage />,
       },
     ],
   },

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../../components/common/CustomArrow";
-import config from "../../config/config";
+import { ROUTES } from "../../config/routes";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 
@@ -52,7 +52,7 @@ const ProductSuggestPage = () => {
           {filterProductsByCty.map((product, index) => (
             <Link
               key={index}
-              to={config.ROUTES.productDetail.replace(":id", product._id)}
+              to={ROUTES.productDetail.replace(":id", product._id)}
             >
               <div key={index}>
                 <div className="group relative overflow-hidden min-h-300 max-w-230">

@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
-import config from "../../config/config";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 import { IProduct } from "../../types/product-type";
 import LANGUAGE from "../../utils/language.util";
 import { SkeletonCustom } from "../common/SkeletonCustom";
+import { ROUTES } from "../../config/routes";
 
 const ProductList = () => {
   // Query data
@@ -44,7 +44,7 @@ const ProductList = () => {
             filteredProducts.map((product: IProduct) => (
               <Link
                 key={product._id}
-                to={config.ROUTES.productDetail.replace(":id", product._id)}
+                to={ROUTES.productDetail.replace(":id", product._id)}
               >
                 <li className="mb-35 max-w-270 w-full mx-auto">
                   <div className="max-w-270 w-full overflow-hidden relative group">

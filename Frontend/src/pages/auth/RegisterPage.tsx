@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { AddressIcon, EyeSlashIcon } from "../../assets/images/icons/icons";
 import images from "../../assets/images/images";
-import config from "../../config/config";
+import { ROUTES } from "../../config/routes";
 import { register } from "../../redux/actions/auth-action";
 import { AppDispatch, RootStore } from "../../redux/store";
 
@@ -26,7 +26,7 @@ const RegisterPage = () => {
         console.log("Error dispatching register action: ", error),
       );
 
-    navigate(config.ROUTES.login);
+    navigate(ROUTES.login);
   };
 
   return (

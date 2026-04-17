@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
 import Button from "../../components/common/Button";
-import config from "../../config/config";
+import { ROUTES } from "../../config/routes";
 import { updateCartAction } from "../../redux/actions/cart-action";
 import {
   addQuantity,
@@ -87,7 +87,7 @@ const CartPage = () => {
           </div>
         </div>
         <div className="flex items-center justify-start max-w-680 mt-30 mb-20">
-          <Link to={config.ROUTES.home}>
+          <Link to={ROUTES.home}>
             <span className="pl-150 font-[Poppins-regular] text-sm text-[#555]">
               {LANGUAGE.GENERAL.HOME}
             </span>

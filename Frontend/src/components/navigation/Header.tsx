@@ -8,8 +8,8 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from "../../assets/images/icons/icons";
-import config from "../../config/config";
 import { MENU_HEADER, MENU_PROFILE } from "../../config/menu";
+import { ROUTES } from "../../config/routes";
 import { useScroll } from "../../hooks/use-scroll";
 import { ShoppingBag } from "../../pages/shop/ShoppingBagPage";
 import { logout } from "../../redux/actions/auth-action";
@@ -31,8 +31,8 @@ const Header = () => {
   const scroll = useScroll();
 
   const location = useLocation();
-  const isLoginPage = location.pathname === config.ROUTES.login;
-  const isRegisterPage = location.pathname === config.ROUTES.register;
+  const isLoginPage = location.pathname === ROUTES.login;
+  const isRegisterPage = location.pathname === ROUTES.register;
 
   const navigate = useNavigate();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -62,7 +62,7 @@ const Header = () => {
     dispatch(logout());
     setIsShowBag(false);
     setIsShowMenu(false);
-    navigate(config.ROUTES.login);
+    navigate(ROUTES.login);
   };
 
   // Handle hide menu profile when transition page
@@ -139,7 +139,7 @@ const Header = () => {
         <div className="height-72 z-1 shadow-xs flex items-center flex-1 justify-around pt-20 pb-20 px-7">
           <div className="flex items-center justify-between">
             <div className="flex items-center mr-40">
-              <Link to={config.ROUTES.home}>
+              <Link to={ROUTES.home}>
                 <h3
                   className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${
                     isLoginPage || isRegisterPage || scroll

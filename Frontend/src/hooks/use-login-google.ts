@@ -1,11 +1,11 @@
 // import { useEffect, useState } from "react";
+import { Models, OAuthProvider } from "appwrite";
 import { account } from "../services/appwrite-service";
-import { OAuthProvider, Models } from "appwrite";
 // import { useDispatch } from "react-redux";
 import { oauthLogin } from "../redux/actions/auth-action";
 // import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../config/routes";
 import { AppDispatch } from "../redux/store";
-import config from "../config/config";
 
 // export const useGoogleLogin = () => {
 //     const dispatch: AppDispatch = useDispatch();
@@ -100,7 +100,7 @@ const handleLoginSuccess = async (
 
     if (response && response.token) {
       localStorage.setItem("token", response.token);
-      navigate(config.ROUTES.account);
+      navigate(ROUTES.account);
       return true;
     }
     return false;
