@@ -88,10 +88,10 @@ const processOAuthSession = async () => {
   }
 };
 
-type AppwriteUser = Models.User<Models.Preferences>;
+type AppWriteUser = Models.User<Models.Preferences>;
 // Handle successful login by dispatching Redux action and storing token
 const handleLoginSuccess = async (
-  user: AppwriteUser,
+  user: AppWriteUser,
   dispatch: AppDispatch,
   navigate: (path: string) => void,
 ) => {
