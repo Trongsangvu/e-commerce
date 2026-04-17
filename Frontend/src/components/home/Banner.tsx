@@ -6,7 +6,7 @@ import LANGUAGE from "../../utils/language.util";
 export const Banner = () => {
   return (
     <nav>
-      <div className="pt-150 pb-50">
+      <div className="pt-150 pb-150">
         <div className="container max-w[1200px] mx-auto px-4">
           <div className="flex flex-wrap justify-center">
             <div className="px-15 pb-30">
@@ -20,7 +20,6 @@ export const Banner = () => {
                   />
                 </Link>
                 <div className="flex flex-col relative py-34 px-38 bottom-260">
-                  {/* <SkeletonCustom /> */}
                   <span className="capitalize text-[28px] text-[#333] group-hover:text-white font-bold font font-[Poppins-bold]">
                     {LANGUAGE.GENERAL.WOMEN}
                   </span>

@@ -58,7 +58,7 @@ const HomePage = () => {
               <Banner />
             </div>
           </div>
-          <div className="container px-173 max-w-1600 h-auto">
+          <div className="container max-w-1600 h-auto flex flex-col mx-auto">
             <Container />
             <ProductList />
             <div className="flex justify-center mb-89">

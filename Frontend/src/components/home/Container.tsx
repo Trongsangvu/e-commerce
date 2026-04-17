@@ -22,7 +22,7 @@ const Container = ({ showTitle = true }: ContainerProps) => {
         <button
           onClick={() => dispatch(setCategory(item.id))}
           className={`pb-5
-             ${index === 0 ? "mr-4.25" : "mx-4.25"} text-base leading-[1.2] cursor-pointer font-[Poppins-regular] capitalize
+             ${index === 0 ? "mr-4.25" : "mx-10"} text-base leading-[1.2] cursor-pointer font-[Poppins-regular] capitalize
              ${selectCategory === item.id ? "text-[#333]" : "text-[#888]"}`}
         >
           <span className="relative inline-block font-[Poppins-regular] pb-3">
@@ -52,7 +52,7 @@ const Container = ({ showTitle = true }: ContainerProps) => {
 
           <div>
             <div className="flex gap-8">
-              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] transition-colors duration-300 cursor-pointer rounded-sm py-7 px-3.75 border border-[#e6e6e6]">
+              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] transition-colors duration-300 cursor-pointer rounded-sm py-7 px-10 border border-[#e6e6e6]">
                 <img
                   className="w-12 h-15 transition-colors filter group-hover:brightness-0 group-hover:invert"
                   src={images.filterIcon}
@@ -61,7 +61,7 @@ const Container = ({ showTitle = true }: ContainerProps) => {
                   {LANGUAGE.PRODUCT.FILTER}
                 </p>
               </div>
-              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] cursor-pointer rounded-sm py-7 px-3.75 border border-[#e6e6e6]">
+              <div className="group flex items-center hover:bg-[#717fe0] hover:border-[#717fe0] cursor-pointer rounded-sm py-7 px-10 border border-[#e6e6e6]">
                 <img
                   className="w-17 h-20 transition-colors filter group-hover:brightness-0 group-hover:invert"
                   src={images.searchIcon}

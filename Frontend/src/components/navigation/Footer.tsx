@@ -9,7 +9,7 @@ import LANGUAGE from "../../utils/language.util";
 const Footer = () => {
   return (
     <footer className="mt-auto">
-      <div className="bg-[#222222] px-41 pt-18.75 pb-8">
+      <div className="bg-[#222222] px-41 py-40">
         <div className="grid grid-cols-4 gap-10">
           <div>
             <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
@@ -114,9 +114,9 @@ const Footer = () => {
             </h4>
             <form action="">
               <div>
-                <div className="w-77.5 relative group">
+                <div className="relative group inline-block">
                   <input
-                    className="pb-5 w-full text-[13px] font-[Poppins-regular] border-none outline-none text-[white]"
+                    className="pb-5 text-[13px] font-[Poppins-regular] border-none outline-none text-[white] w-auto min-w-[15ch] max-w-full"
                     type="text"
                     placeholder="email@gmail.com"
                   />
@@ -124,7 +124,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="pt-18">
-                <button className="cursor-pointer uppercase transition-all duration-500 hover:bg-white hover:text-[#6774d5] bg-[#6774d5] font-[Poppins-medium] rounded-3xl h-11.5 min-w-44.75 text-white">
+                <button className="cursor-pointer px-20 uppercase transition-all duration-500 hover:bg-white hover:text-[#6774d5] bg-[#6774d5] font-[Poppins-medium] rounded-3xl h-42 min-w-44.75 text-white">
                   {LANGUAGE.GENERAL.SUBSCRIBE}
                 </button>
               </div>
