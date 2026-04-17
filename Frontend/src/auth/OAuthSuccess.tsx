@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../config/routes";
-import { oauthLogin } from "../redux/actions/auth-action";
-import { setUser } from "../redux/user/user-slice";
+import { oauthLogin } from "../redux/auth/auth.thunk";
 import { AppDispatch } from "../redux/store";
+import { setUser } from "../redux/user/user-slice";
 import { account } from "../services/appwrite-service";
 
 export const OAuthSuccess = () => {

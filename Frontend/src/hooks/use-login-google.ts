@@ -1,11 +1,8 @@
-// import { useEffect, useState } from "react";
 import { Models, OAuthProvider } from "appwrite";
-import { account } from "../services/appwrite-service";
-// import { useDispatch } from "react-redux";
-import { oauthLogin } from "../redux/actions/auth-action";
-// import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../config/routes";
+import { oauthLogin } from "../redux/auth/auth.thunk";
 import { AppDispatch } from "../redux/store";
+import { account } from "../services/appwrite-service";
 
 // export const useGoogleLogin = () => {
 //     const dispatch: AppDispatch = useDispatch();
