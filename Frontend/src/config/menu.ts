@@ -30,7 +30,7 @@ export const MENU_ITEMS_2: MenuItems[] = [
 
 // Menu Profile
 export const MENU_PROFILE: MenuItems[] = [
-  { id: "my account", title: "my account", path: config.ROUTES.profile },
+  { id: "my account", title: "my account", path: config.ROUTES.account },
   { id: "sign in", title: "sign in", path: config.ROUTES.login },
   { title: "my orders" },
   { title: "account setting" },

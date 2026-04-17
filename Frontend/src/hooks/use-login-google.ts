@@ -100,7 +100,7 @@ const handleLoginSuccess = async (
 
     if (response && response.token) {
       localStorage.setItem("token", response.token);
-      navigate(config.ROUTES.profile);
+      navigate(config.ROUTES.account);
       return true;
     }
     return false;

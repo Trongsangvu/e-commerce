@@ -46,7 +46,7 @@ export const OAuthSuccess = () => {
         dispatch(setUser(userData));
 
         // Navigate to profile page
-        navigate(config.ROUTES.profile);
+        navigate(config.ROUTES.account);
       } catch (error) {
         console.error("Error during Google login: ", error);
         // navigate('/login');
