@@ -6,7 +6,7 @@ import { MENU_SIZE } from "../../config/menu";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
-import SuggestProducts from "../product/SuggestProductsPage";
+import SuggestProducts from "./ProductSuggestPage";
 import { addToCartAction } from "../../redux/cart/cart.thunk";
 
 const ProductDetailPage = () => {
