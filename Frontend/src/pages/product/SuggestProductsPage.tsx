@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../../components/common/CustomArrow";
 import { ROUTES } from "../../config/routes";
+import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 
@@ -30,7 +30,7 @@ const ProductSuggestPage = () => {
     queryFn: list,
   });
 
-  const productByCategory = useSelector(
+  const productByCategory = useAppSelector(
     (state: RootStore) => state.category.featureProductByWomen,
   );
 

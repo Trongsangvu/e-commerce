@@ -1,6 +1,6 @@
-import { ISearch, ISearchResponse } from "../model/Search";
-import httpService from "./http-service";
 import productEndpoints from "../api/product.api";
+import { ISearch, ISearchResponse } from "../types/search-type";
+import httpService from "./http-service";
 
 export const searchProducts = async (
   data: ISearch,

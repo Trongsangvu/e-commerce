@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { SearchProductIcon } from "../../assets/images/icons/icons";
-import { IProduct } from "../../model/Search";
 import { searchProducts } from "../../services/search-service";
-import ProductItem from "../product/ProductItem";
+import { IProduct } from "../../types/search-type";
 import Button from "../common/Button";
+import ProductItem from "../product/ProductItem";
 
 interface SearchProps {
   isSearchVisible: boolean;

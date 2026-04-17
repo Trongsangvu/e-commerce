@@ -128,8 +128,6 @@ export const handleLoginWithGoogle = async (
     await handleLoginSuccess(user, dispatch, navigate);
   } catch (error) {
     console.error("Google login process failed:", error);
-    // You could implement additional error handling here
-    // For example, showing an error message to the user
   }
 };
 

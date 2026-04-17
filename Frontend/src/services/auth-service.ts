@@ -1,16 +1,9 @@
 import { AxiosResponse } from "axios";
-import {
-  ILogin,
-  ILoginResponse,
-  IOAuthResponse,
-  IOAuthUser,
-  IRegister,
-  IRegisterResponse,
-  IUserResponse,
-} from "../model/Auth";
-import httpService from "./http-service";
+
 import authEndpoints from "../api/auth.api";
 import userEndpoints from "../api/user.api";
+import { ILogin, ILoginResponse, IOAuthResponse, IOAuthUser, IRegister, IRegisterResponse, IUserResponse } from "../types/auth-type";
+import httpService from "./http-service";
 
 // Login service
 export const login = async (data: ILogin): Promise<ILoginResponse> => {

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AddressIcon,
@@ -8,12 +7,13 @@ import {
 } from "../../assets/images/icons/icons";
 import { handleLoginGoogle } from "../../auth/GoogleLoginButton";
 import { ROUTES } from "../../config/routes";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { login } from "../../redux/actions/auth-action";
-import { AppDispatch, RootStore } from "../../redux/store";
+import { RootStore } from "../../redux/store";
 
 const LoginPage = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { error } = useSelector((state: RootStore) => state.auth);
+  const dispatch = useAppDispatch();
+  const { error } = useAppSelector((state: RootStore) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

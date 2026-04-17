@@ -1,21 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import images from "../../assets/images/images";
 import { MENU_SIZE } from "../../config/menu";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { addToCartAction } from "../../redux/actions/cart-action";
-import { AppDispatch, RootStore } from "../../redux/store";
+import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
 import SuggestProducts from "../product/SuggestProductsPage";
 
 const ProductDetailPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [isActive, setIsActive] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams<{ id: string }>();
 
-  const updateQuantity = useSelector((state: RootStore) => {
+  const updateQuantity = useAppSelector((state: RootStore) => {
     const cartItem = state.cart.items.find((item) => {
       return item.productId._id === id;
     });

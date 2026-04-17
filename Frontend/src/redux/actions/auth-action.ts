@@ -6,6 +6,13 @@ import {
   removeToken,
   setToken,
 } from "../../auth/auth-token";
+
+import {
+  login as loginService,
+  logout as logoutService,
+  oauthLogin as oauthLoginService,
+  register as registerService,
+} from "../../services/auth-service";
 import {
   ILogin,
   ILoginResponse,
@@ -13,13 +20,7 @@ import {
   IOAuthUser,
   IRegister,
   IRegisterResponse,
-} from "../../model/Auth";
-import {
-  login as loginService,
-  logout as logoutService,
-  oauthLogin as oauthLoginService,
-  register as registerService,
-} from "../../services/auth-service";
+} from "../../types/auth-type";
 import { handleAxiosError, RejectType } from "../../utils/error.util";
 
 export const login = createAsyncThunk<

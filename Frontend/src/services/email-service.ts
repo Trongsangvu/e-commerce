@@ -1,5 +1,5 @@
 import emailEndpoints from "../api/email.api";
-import { EmailData, EmailResponse } from "../model/Email";
+import { EmailData, EmailResponse } from "../types/email-type";
 import httpService from "./http-service";
 
 export const sendEmail = async (data: EmailData): Promise<EmailResponse> => {

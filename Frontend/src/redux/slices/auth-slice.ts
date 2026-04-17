@@ -5,12 +5,7 @@ import {
   removeToken,
   setToken,
 } from "../../auth/auth-token";
-import {
-  AuthUser,
-  ILoginResponse,
-  IOAuthResponse,
-  IRegisterResponse,
-} from "../../model/Auth";
+import { AuthUser, ILoginResponse, IOAuthResponse, IRegisterResponse } from "../../types/auth-type";
 import { login, logout, oauthLogin, register } from "../actions/auth-action";
 
 // Implicit authReducer

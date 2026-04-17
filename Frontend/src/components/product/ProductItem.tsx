@@ -1,4 +1,4 @@
-import { IProduct } from "../../model/Search";
+import { IProduct } from "../../types/search-type";
 
 interface ProductItemProps {
   product: IProduct;

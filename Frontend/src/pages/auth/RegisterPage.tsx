@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { AddressIcon, EyeSlashIcon } from "../../assets/images/icons/icons";
 import images from "../../assets/images/images";
 import { ROUTES } from "../../config/routes";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { register } from "../../redux/actions/auth-action";
-import { AppDispatch, RootStore } from "../../redux/store";
+import { RootStore } from "../../redux/store";
 
 const RegisterPage = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { error } = useSelector((state: RootStore) => state.auth);
+  const dispatch = useAppDispatch();
+  const { error } = useAppSelector((state: RootStore) => state.auth);
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
