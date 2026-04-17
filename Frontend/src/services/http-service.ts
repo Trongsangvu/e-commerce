@@ -130,6 +130,15 @@ class HttpService {
   ): Promise<AxiosResponse<T>> {
     return this.request<T>({ method: "PUT", url, data, ...config });
   }
+
+  // DELETE
+  delete<T, P = Record<string, unknown>>(
+    url: string,
+    params?: P,
+    config?: Configs,
+  ): Promise<AxiosResponse<T>> {
+    return this.request<T>({ method: "DELETE", url, params, ...config });
+  }
 }
 
 export default new HttpService();
