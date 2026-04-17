@@ -5,7 +5,7 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@apimatic/authentication-adapters@npm:^0.5.4":
+"@apimatic/authentication-adapters@npm:^0.5.14":
   version: 0.5.14
   resolution: "@apimatic/authentication-adapters@npm:0.5.14"
   dependencies:
@@ -17,7 +17,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apimatic/axios-client-adapter@npm:^0.3.4":
+"@apimatic/axios-client-adapter@npm:^0.3.20":
   version: 0.3.21
   resolution: "@apimatic/axios-client-adapter@npm:0.3.21"
   dependencies:
@@ -59,7 +59,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apimatic/core@npm:^0.10.14":
+"@apimatic/core@npm:^0.10.28":
   version: 0.10.29
   resolution: "@apimatic/core@npm:0.10.29"
   dependencies:
@@ -117,7 +117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apimatic/oauth-adapters@npm:^0.4.6":
+"@apimatic/oauth-adapters@npm:^0.4.18":
   version: 0.4.18
   resolution: "@apimatic/oauth-adapters@npm:0.4.18"
   dependencies:
@@ -139,7 +139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apimatic/schema@npm:^0.7.12, @apimatic/schema@npm:^0.7.21":
+"@apimatic/schema@npm:^0.7.21":
   version: 0.7.21
   resolution: "@apimatic/schema@npm:0.7.21"
   dependencies:
@@ -2039,32 +2039,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paypal/checkout-server-sdk@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@paypal/checkout-server-sdk@npm:1.0.3"
+"@paypal/paypal-server-sdk@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "@paypal/paypal-server-sdk@npm:2.3.0"
   dependencies:
-    "@paypal/paypalhttp": "npm:^1.0.1"
-  checksum: 10c0/b77273ee8ee7a6c9354b09cf12f36ecfe4a65009f2be508e2206f0ac83319f49300fc0a03d71ca8cb1a10065732c142615f6427b48dc392bffcefa57e7883c35
-  languageName: node
-  linkType: hard
-
-"@paypal/paypal-server-sdk@npm:^0.6.0":
-  version: 0.6.1
-  resolution: "@paypal/paypal-server-sdk@npm:0.6.1"
-  dependencies:
-    "@apimatic/authentication-adapters": "npm:^0.5.4"
-    "@apimatic/axios-client-adapter": "npm:^0.3.4"
-    "@apimatic/core": "npm:^0.10.14"
-    "@apimatic/oauth-adapters": "npm:^0.4.6"
-    "@apimatic/schema": "npm:^0.7.12"
-  checksum: 10c0/62fb4a2f2474586140bdcd4654ad9a943ef4a19136c0e07d75b9a1d5c729eaf7e5d2647af1b98bd99bb2174e6607196bc381ed1ffd1992669099714d9531405c
-  languageName: node
-  linkType: hard
-
-"@paypal/paypalhttp@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@paypal/paypalhttp@npm:1.0.1"
-  checksum: 10c0/1ce08dc24c5eb69d2e0fd5d8a847b61cac494343c24325194c288cb5a5c3c815164e28253f804693acb7dccc56cdca5ad11be398784e359d439d0deeb059a04a
+    "@apimatic/authentication-adapters": "npm:^0.5.14"
+    "@apimatic/axios-client-adapter": "npm:^0.3.20"
+    "@apimatic/core": "npm:^0.10.28"
+    "@apimatic/oauth-adapters": "npm:^0.4.18"
+    "@apimatic/schema": "npm:^0.7.21"
+  checksum: 10c0/61313c73e66d685100b6845a9508bcc84fcf15823ea1e57fc530ca4cbf753b99b3936a5e9daa7bb0a7dece86f67080132484769ee8dac4f404cef6fc0b8e9032
   languageName: node
   linkType: hard
 
@@ -2554,24 +2538,6 @@ __metadata:
   dependencies:
     undici-types: "npm:~6.21.0"
   checksum: 10c0/f17eaf3d0d1da5e93ad9e287efb78201f8a5282973c004c5f70d91675c5c6b926a23acaa7b158a42b3d7e27e36b349d65a531710c91c308fca53dd7fa280ef98
-  languageName: node
-  linkType: hard
-
-"@types/paypal__checkout-server-sdk@npm:^1.0.8":
-  version: 1.0.8
-  resolution: "@types/paypal__checkout-server-sdk@npm:1.0.8"
-  dependencies:
-    "@types/paypal__paypalhttp": "npm:*"
-  checksum: 10c0/498cf561f30cda0c784ff9b8ec74a1129da104c1b3798c1f3f953fb399fa377e61b993e607461a5ed11c40f76abf0bd66883246416a3cb73d8ba7f9feb599c16
-  languageName: node
-  linkType: hard
-
-"@types/paypal__paypalhttp@npm:*":
-  version: 1.0.3
-  resolution: "@types/paypal__paypalhttp@npm:1.0.3"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10c0/1ddb5dfaa4f68a57d5042961cb99ffe1ff775053d41d69780b9b7150478cd453ad0899e0b668a7f6002bb6c2a525780e765179d1db6de7df5a338775a354cb63
   languageName: node
   linkType: hard
 
@@ -3065,8 +3031,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ai-ecommerce-be@workspace:."
   dependencies:
-    "@paypal/checkout-server-sdk": "npm:^1.0.3"
-    "@paypal/paypal-server-sdk": "npm:^0.6.0"
+    "@paypal/paypal-server-sdk": "npm:^2.3.0"
     "@types/babel__core": "npm:^7.20.5"
     "@types/bcrypt": "npm:^6"
     "@types/body-parser": "npm:^1.19.6"
@@ -3082,7 +3047,6 @@ __metadata:
     "@types/mime": "npm:^3.0.4"
     "@types/ms": "npm:^2.1.0"
     "@types/node": "npm:^22.17.0"
-    "@types/paypal__checkout-server-sdk": "npm:^1.0.8"
     "@types/qs": "npm:^6.14.0"
     "@types/range-parser": "npm:^1.2.7"
     "@types/request": "npm:^2.48.13"

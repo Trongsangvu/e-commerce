@@ -1,6 +1,6 @@
-import checkoutNodeJssdk from "@paypal/checkout-server-sdk";
+import { CheckoutPaymentIntent } from "@paypal/paypal-server-sdk";
 import { NextFunction, Request, Response } from "express";
-import paypalClient from "../integrations/paypal.service";
+import { ordersController } from "../integrations/paypal.service";
 import stripe from "../integrations/stripe.service";
 import { Order } from "../models/order.model";
 import orderService from "../services/order.service";
@@ -44,20 +44,34 @@ export const checkoutPayment = async (
 
         response = { clientSecret: paymentIntent.client_secret };
         break;
-
       case "paypal":
-        const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
-        request.requestBody({
-          intent: "CAPTURE",
-          purchase_units: [
-            { amount: { currency_code: currency, value: amount.toFixed(2) } },
-          ],
+        const paypalOrder = await ordersController.createOrder({
+          body: {
+            intent: CheckoutPaymentIntent.Capture,
+            purchaseUnits: [
+              {
+                amount: {
+                  currencyCode: "USD",
+                  value: order.totalAmount.toFixed(2),
+                },
+              },
+            ],
+          },
         });
-        const paypalOrder = await paypalClient.execute(request);
+
+        const approveLink = paypalOrder.result.links?.find(
+          (link: any) => link.rel === "approve",
+        )?.href;
+
+        await Order.findByIdAndUpdate(orderId, {
+          $set: { paypalOrderId: paypalOrder.result.id },
+        });
+
         response = {
           orderId: paypalOrder.result.id,
-          approvalUrl: paypalOrder.result.links[1].href,
+          approvalUrl: approveLink,
         };
+
         break;
       default:
         res.status(400).json({ error: "Invalid payment method" });

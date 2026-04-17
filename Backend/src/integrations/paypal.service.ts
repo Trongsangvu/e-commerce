@@ -1,11 +1,15 @@
-import checkoutNodeJssdk from "@paypal/checkout-server-sdk";
+import paypal, { OrdersController } from "@paypal/paypal-server-sdk";
 import { CONSTANTS } from "../configs/constants";
 
-const environment = new checkoutNodeJssdk.core.SandboxEnvironment(
-  CONSTANTS.PAYPAL_CLIENT_ID!,
-  CONSTANTS.PAYPAL_CLIENT_SECRET_KEY!,
-);
+const { Client, Environment } = paypal;
 
-const paypalClient = new checkoutNodeJssdk.core.PayPalHttpClient(environment);
+const paypalClient = new Client({
+  clientCredentialsAuthCredentials: {
+    oAuthClientId: CONSTANTS.PAYPAL_CLIENT_ID!,
+    oAuthClientSecret: CONSTANTS.PAYPAL_CLIENT_SECRET_KEY!,
+  },
+  environment: Environment.Sandbox, // or "live"
+});
 
 export default paypalClient;
+export const ordersController = new OrdersController(paypalClient);
