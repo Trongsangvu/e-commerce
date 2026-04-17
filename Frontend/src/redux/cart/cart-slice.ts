@@ -73,7 +73,7 @@ const cartSlice = createSlice({
         state.items = action.payload.cart.items;
         updateTotals(state);
       })
-      .addCase(addToCartAction.rejected, rejected);
+      .addCase(updateCartAction.rejected, rejected);
   },
 });
 

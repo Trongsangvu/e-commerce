@@ -12,7 +12,6 @@ import { ROUTES } from "../../config/routes";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { useScroll } from "../../hooks/use-scroll";
 import { ShoppingBag } from "../../pages/shop/ShoppingBagPage";
-import { logout } from "../../redux/actions/auth-action";
 import { sideBarShow } from "../../redux/app/sidebar-slice";
 import { RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
@@ -20,6 +19,7 @@ import LANGUAGE from "../../utils/language.util";
 import { MenuProfile } from "../menu/MenuProfile";
 import Search from "../search/Search";
 import Sidebar from "./Sidebar";
+import { logout } from "../../redux/auth/auth.thunk";
 
 const Header = () => {
   const dispatch = useAppDispatch();

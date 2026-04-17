@@ -62,7 +62,7 @@ const authSlice = createSlice({
           state.status = "succeeded";
         },
       )
-      .addCase(register.rejected, rejected)
+      .addCase(login.rejected, rejected)
 
       // Logout reducers
       .addCase(logout.pending, pending)
@@ -71,10 +71,10 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.status = "succeeded";
       })
-      .addCase(register.rejected, rejected)
+      .addCase(logout.rejected, rejected)
 
       // Register reducers
-      .addCase(logout.pending, pending)
+      .addCase(register.pending, pending)
       .addCase(
         register.fulfilled,
         (state, { payload }: PayloadAction<IRegisterResponse>) => {
