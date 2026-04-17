@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../config/routes";
 import { oauthLogin } from "../redux/actions/auth-action";
-import { setUser } from "../redux/slices/user-slice";
+import { setUser } from "../redux/user/user-slice";
 import { AppDispatch } from "../redux/store";
 import { account } from "../services/appwrite-service";
 

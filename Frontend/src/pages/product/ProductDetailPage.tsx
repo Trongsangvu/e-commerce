@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import images from "../../assets/images/images";
 import { MENU_SIZE } from "../../config/menu";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
-import { addToCartAction } from "../../redux/actions/cart-action";
 import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
 import SuggestProducts from "../product/SuggestProductsPage";
+import { addToCartAction } from "../../redux/cart/cart.thunk";
 
 const ProductDetailPage = () => {
   const dispatch = useAppDispatch();

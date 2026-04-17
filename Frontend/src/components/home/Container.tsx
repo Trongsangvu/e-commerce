@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import images from "../../assets/images/images";
 import { categories } from "../../config/menu";
 import { useAppDispatch } from "../../hooks/use-redux";
-import { setCategory } from "../../redux/slices/filter-product-slice";
+import { setCategory } from "../../redux/product/filter-product-slice";
 import { RootStore } from "../../redux/store";
 import LANGUAGE from "../../utils/language.util";
 

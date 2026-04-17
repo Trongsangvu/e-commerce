@@ -1,7 +1,7 @@
 import { CloseIcon } from "../../assets/images/icons/icons";
 import { usePreventScroll } from "../../hooks/use-prevent-scroll";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
-import { sideBarHide } from "../../redux/slices/sidebar-slice";
+import { sideBarHide } from "../../redux/app/sidebar-slice";
 import { RootStore } from "../../redux/store";
 import { Overlay } from "../common/Overlay";
 import MenuList from "../menu/MenuList";

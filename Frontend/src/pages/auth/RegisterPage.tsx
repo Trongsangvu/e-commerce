@@ -5,8 +5,8 @@ import { AddressIcon, EyeSlashIcon } from "../../assets/images/icons/icons";
 import images from "../../assets/images/images";
 import { ROUTES } from "../../config/routes";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
-import { register } from "../../redux/actions/auth-action";
 import { RootStore } from "../../redux/store";
+import { register } from "../../redux/auth/auth.thunk";
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();

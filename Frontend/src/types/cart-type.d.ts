@@ -23,6 +23,7 @@ export interface ICart {
   items: ICartItem[];
   totalQuantity?: number;
   totalAmount?: number;
+  status?: string;
 }
 
 export interface ICartResponse extends ICart {

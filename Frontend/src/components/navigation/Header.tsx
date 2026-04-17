@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { useScroll } from "../../hooks/use-scroll";
 import { ShoppingBag } from "../../pages/shop/ShoppingBagPage";
 import { logout } from "../../redux/actions/auth-action";
-import { sideBarShow } from "../../redux/slices/sidebar-slice";
+import { sideBarShow } from "../../redux/app/sidebar-slice";
 import { RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
 import LANGUAGE from "../../utils/language.util";

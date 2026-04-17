@@ -8,8 +8,8 @@ import {
 import { handleLoginGoogle } from "../../auth/GoogleLoginButton";
 import { ROUTES } from "../../config/routes";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
-import { login } from "../../redux/actions/auth-action";
 import { RootStore } from "../../redux/store";
+import { login } from "../../redux/auth/auth.thunk";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();

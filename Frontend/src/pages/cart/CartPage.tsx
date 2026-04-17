@@ -5,12 +5,12 @@ import images from "../../assets/images/images";
 import Button from "../../components/common/Button";
 import { ROUTES } from "../../config/routes";
 import { useAppDispatch } from "../../hooks/use-redux";
-import { updateCartAction } from "../../redux/actions/cart-action";
 import {
   addQuantity,
   decreaseQuantity,
   setCartItems,
-} from "../../redux/slices/cart-slice";
+} from "../../redux/cart/cart-slice";
+import { updateCartAction } from "../../redux/cart/cart.thunk";
 import { getCart } from "../../services/cart-service";
 import { ICartItem } from "../../types/cart-type";
 import LANGUAGE from "../../utils/language.util";
