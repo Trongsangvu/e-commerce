@@ -19,8 +19,7 @@ const list = async (
       .find(query)
       .skip(skip)
       .limit(limit)
-      .sort("-created_at")
-      .lean(),
+      .sort("-created_at"),
     Product.countDocuments(query),
   ]);
   return { products, count };
