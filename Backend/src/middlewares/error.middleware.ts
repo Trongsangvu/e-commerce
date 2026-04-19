@@ -8,7 +8,7 @@ export const errorHandler = (
   res: Response,
 ): void => {
   logger.error(err);
-  ApiResponse.InternalServerError(res, "Internal Server Error");
+  ApiResponse.InternalServerError(res, err);
 };
 
 export const notFoundHandler = (_req: Request, res: Response): void => {
