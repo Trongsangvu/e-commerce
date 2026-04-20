@@ -67,7 +67,7 @@ const ProductList = () => {
                         {product.name}
                       </span>
                       <span className="text-[#666] font-[Poppins-regular] text-sm">
-                        {product.price}
+                        {product.formattedPrice}
                       </span>
                     </div>
                     <div className="flex">

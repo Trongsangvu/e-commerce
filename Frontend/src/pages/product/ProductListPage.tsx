@@ -44,7 +44,7 @@ const ProductListPage = () => {
                 {product?.name}
               </span>
               <span className="font-[Poppins-regular] text-[#888]">
-                {product?.price}
+                {product?.formattedPrice}
               </span>
             </div>
           </li>
