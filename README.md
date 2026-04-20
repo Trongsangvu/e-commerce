@@ -16,7 +16,7 @@ This repository contains a full-stack e-commerce application with a TypeScript N
 
 ## Prerequisites
 
-# 🛍️ E-Commerce (Monorepo)
+# 🛍️ E-Commerce
 
 - Node.js (v16+ recommended)
 - npm or yarn
