@@ -23,6 +23,17 @@ import { logout } from "../../redux/auth/auth.thunk";
 
 const Header = () => {
   const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector(
+    (state: RootStore) => state.auth.isAuthenticated,
+  );
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isLoginPage = location.pathname === ROUTES.login;
+  const isRegisterPage = location.pathname === ROUTES.register;
+
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowBag, setIsShowBag] = useState(false);
@@ -30,69 +41,24 @@ const Header = () => {
 
   const scroll = useScroll();
 
-  const location = useLocation();
-  const isLoginPage = location.pathname === ROUTES.login;
-  const isRegisterPage = location.pathname === ROUTES.register;
-
-  const navigate = useNavigate();
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const isAuthenticated = useAppSelector(
-    (state: RootStore) => state.auth.isAuthenticated,
-  );
-
-  // Handle show sidebar
-  const handleShow = () => {
-    dispatch(sideBarShow());
-  };
-
-  // Handle show search bar
-  const handleSearch = () => {
-    setIsSearchVisible(!isSearchVisible);
-  };
-
-  // Handle show menu profile
-  const handleShowMenuProfile = () => {
-    setIsShowMenu(!isShowMenu);
-  };
-
-  // Handle logout
-  const handleLogout = () => {
-    dispatch(logout());
-    setIsShowBag(false);
-    setIsShowMenu(false);
-    navigate(ROUTES.login);
-  };
-
-  // Handle hide menu profile when transition page
-  useEffect(() => {
-    setIsShowMenu(false);
-  }, [location.pathname]);
-
-  // Handle show shopping bag
-  const handleShowShoppingBag = useCallback(() => {
-    if (!isShowBag) {
-      setIsShowBag(true);
-      setTimeout(() => {
-        setDelayedShowBag(true);
-      }, 300);
-    } else {
-      setDelayedShowBag(false);
-      setTimeout(() => {
-        setIsShowBag(false);
-      }, 300);
-    }
-  }, [isShowBag]);
-
-  // Get cart items
   const { data } = useQuery({
     queryKey: ["shopping-bag"],
     queryFn: getCart,
     enabled: isAuthenticated,
   });
 
-  // count cart items
   const cartItemsCount = data?.items?.length ?? 0;
+
+  const filteredMenu = MENU_PROFILE.filter((item) => {
+    if (isAuthenticated) {
+      return item.id !== "sign in";
+    }
+    return item.id !== "my account" && item.id !== "sign out";
+  });
+
+  useEffect(() => {
+    setIsShowMenu(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -107,13 +73,38 @@ const Header = () => {
     };
   }, []);
 
-  const filteredMenu = MENU_PROFILE.filter((item) => {
-    if (isAuthenticated) {
-      return item.id !== "sign in";
-    }
+  const handleShow = () => {
+    dispatch(sideBarShow());
+  };
 
-    return item.id !== "my account" && item.id !== "sign out";
-  });
+  const handleSearch = () => {
+    setIsSearchVisible(!isSearchVisible);
+  };
+
+  const handleShowMenuProfile = () => {
+    setIsShowMenu(!isShowMenu);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setIsShowBag(false);
+    setIsShowMenu(false);
+    navigate(ROUTES.login);
+  };
+
+  const handleShowShoppingBag = useCallback(() => {
+    if (!isShowBag) {
+      setIsShowBag(true);
+      setTimeout(() => {
+        setDelayedShowBag(true);
+      }, 300);
+    } else {
+      setDelayedShowBag(false);
+      setTimeout(() => {
+        setIsShowBag(false);
+      }, 300);
+    }
+  }, [isShowBag]);
 
   const renderMenuProfile = () => {
     return filteredMenu.map((item) => (
