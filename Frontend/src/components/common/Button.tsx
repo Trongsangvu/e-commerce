@@ -1,10 +1,10 @@
 import React from "react";
 
 interface ButtonProps {
-  className?: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  className?: string;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
 }
@@ -12,20 +12,20 @@ interface ButtonProps {
 type Props = React.PropsWithChildren<ButtonProps>;
 
 const Button = ({
-  className,
   onClick,
-  children,
   onMouseEnter,
   onMouseLeave,
+  className,
+  children,
   disabled,
   type = "button",
 }: Props) => {
   return (
     <button
-      className={className}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      className={className}
       disabled={disabled}
       type={type}
     >
