@@ -59,11 +59,11 @@ const RegisterPage = () => {
               <label
                 htmlFor="name"
                 className="absolute left-10 font-[GucciSansPro-light] uppercase top-[5%] -translate-y-[5%] text-sm text-[#666] transition-all
-                                    peer-placeholder-shown:top-1/2
-                                    peer-placeholder-shown:text-sm 
-                                    peer-placeholder-shown:text-[#666] 
-                                    peer-focus:top-32 peer-focus:text-xs peer-focus:text-[#666]
-                                    peer-not-placeholder-shown:top-32 peer-not-placeholder-shown:text-xs"
+                  peer-placeholder-shown:top-1/2
+                  peer-placeholder-shown:text-sm 
+                  peer-placeholder-shown:text-[#666] 
+                  peer-focus:top-32 peer-focus:text-xs peer-focus:text-[#666]
+                  peer-not-placeholder-shown:top-32 peer-not-placeholder-shown:text-xs"
               >
                 username*
               </label>
@@ -83,11 +83,11 @@ const RegisterPage = () => {
               <label
                 htmlFor="email"
                 className="absolute left-10 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
-                                        peer-placeholder-shown:top-1/2 
-                                        peer-placeholder-shown:text-sm 
-                                        peer-placeholder-shown:text-[#666] 
-                                        peer-focus:top-13 peer-focus:text-xs peer-focus:text-[#666]
-                                        peer-not-placeholder-shown:top-13 peer-not-placeholder-shown:text-xs"
+                  peer-placeholder-shown:top-1/2 
+                  peer-placeholder-shown:text-sm 
+                  peer-placeholder-shown:text-[#666] 
+                  peer-focus:top-13 peer-focus:text-xs peer-focus:text-[#666]
+                  peer-not-placeholder-shown:top-13 peer-not-placeholder-shown:text-xs"
               >
                 email*
               </label>
@@ -108,11 +108,11 @@ const RegisterPage = () => {
               <label
                 htmlFor="password"
                 className="absolute left-10 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
-                                    peer-placeholder-shown:top-1/2 
-                                    peer-placeholder-shown:text-sm 
-                                    peer-placeholder-shown:text-[#666] 
-                                    peer-focus:top-3.5 peer-focus:text-xs peer-focus:text-[#666]
-                                    peer-not-placeholder-shown:top-3.5 peer-not-placeholder-shown:text-xs"
+                  peer-placeholder-shown:top-1/2 
+                  peer-placeholder-shown:text-sm 
+                  peer-placeholder-shown:text-[#666] 
+                  peer-focus:top-3.5 peer-focus:text-xs peer-focus:text-[#666]
+                  peer-not-placeholder-shown:top-3.5 peer-not-placeholder-shown:text-xs"
               >
                 create password*
               </label>

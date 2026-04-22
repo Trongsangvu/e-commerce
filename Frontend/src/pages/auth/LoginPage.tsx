@@ -7,27 +7,33 @@ import {
 } from "../../assets/images/icons/icons";
 import { handleLoginGoogle } from "../../auth/GoogleLoginButton";
 import { ROUTES } from "../../config/routes";
-import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
-import { RootStore } from "../../redux/store";
-import { login } from "../../redux/auth/auth.thunk";
+import { useAppDispatch } from "../../hooks/use-redux";
+import { checkAuth } from "../../redux/auth/auth-slice";
+import { setAuth } from "../../redux/auth/auth.helper";
+import { login as loginService } from "../../services/auth-service";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const { error } = useAppSelector((state: RootStore) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   // Handle Form submit events
-  const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login({ email, password }))
-      .then(() => console.log("Login action dispatched"))
-      .catch((error) => console.log("Error dispatching login action: ", error));
 
-    navigate(ROUTES.home);
+    try {
+      setError("");
+      const res = await loginService({ email, password });
+      setAuth(res.token, res.user);
+      dispatch(checkAuth());
+      navigate(ROUTES.home);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Login failed");
+    }
   };
 
   return (
@@ -66,11 +72,11 @@ const LoginPage = () => {
               <label
                 htmlFor="email"
                 className="absolute left-10 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
-                            peer-placeholder-shown:top-1/2 
-                            peer-placeholder-shown:text-sm 
-                            peer-placeholder-shown:text-[#666] 
-                            peer-focus:top-13 peer-focus:text-xs peer-focus:text-[#666]
-                            peer-not-placeholder-shown:top-13 peer-not-placeholder-shown:text-xs"
+                  peer-placeholder-shown:top-1/2 
+                  peer-placeholder-shown:text-sm 
+                  peer-placeholder-shown:text-[#666] 
+                  peer-focus:top-13 peer-focus:text-xs peer-focus:text-[#666]
+                  peer-not-placeholder-shown:top-13 peer-not-placeholder-shown:text-xs"
               >
                 email*
               </label>
@@ -82,7 +88,7 @@ const LoginPage = () => {
             <div className="relative flex flex-col mb-50 max-w-450">
               <input
                 className="peer font-[GucciSansPro-light] flex items-center text-sm text-[#666] h-56 w-328 bg-white p-10 border border-solid border-[#1b1b1b]"
-                type="text"
+                type="password"
                 placeholder=" "
                 id="password"
                 value={password.toString()}
@@ -91,11 +97,11 @@ const LoginPage = () => {
               <label
                 htmlFor="password"
                 className="absolute left-10 font-[GucciSansPro-light] uppercase top-1/2 -translate-y-1/2 text-sm text-[#666] transition-all 
-                            peer-placeholder-shown:top-1/2 
-                            peer-placeholder-shown:text-sm 
-                            peer-placeholder-shown:text-[#666] 
-                            peer-focus:top-14 peer-focus:text-xs peer-focus:text-[#666]
-                            peer-not-placeholder-shown:top-14 peer-not-placeholder-shown:text-xs"
+                  peer-placeholder-shown:top-1/2 
+                  peer-placeholder-shown:text-sm 
+                  peer-placeholder-shown:text-[#666] 
+                  peer-focus:top-14 peer-focus:text-xs peer-focus:text-[#666]
+                  peer-not-placeholder-shown:top-14 peer-not-placeholder-shown:text-xs"
               >
                 password*
               </label>

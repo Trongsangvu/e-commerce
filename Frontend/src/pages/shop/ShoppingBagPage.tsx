@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircleExcelIcon } from "../../assets/images/icons/icons";
+import { ROUTES } from "../../config/routes";
+import { useFetch } from "../../hooks/use-fetch";
 import { getCart } from "../../services/cart-service";
 
 interface Props {
@@ -15,17 +16,17 @@ const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
   // Handle direct to checkout
   const handleCheckout = () => {
     handleShowBag();
-    navigate("/checkout");
+    navigate(ROUTES.checkout);
   };
 
   // Handle direct to cart
   const handleCheckBag = () => {
     handleShowBag();
-    navigate("/cart");
+    navigate(ROUTES.cart);
   };
 
   // Query data
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useFetch({
     queryKey: ["shopping-bag"],
     queryFn: getCart,
   });

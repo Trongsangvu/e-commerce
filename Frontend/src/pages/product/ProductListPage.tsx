@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
@@ -9,7 +9,7 @@ const ProductListPage = () => {
     data: products = [],
     isLoading,
     error,
-  } = useQuery({
+  } = useFetch({
     queryKey: ["products"],
     queryFn: list,
   });

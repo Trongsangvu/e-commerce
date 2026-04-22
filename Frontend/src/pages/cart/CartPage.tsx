@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
 import Button from "../../components/common/Button";
 import { ROUTES } from "../../config/routes";
+import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch } from "../../hooks/use-redux";
 import {
   addQuantity,
@@ -21,7 +21,7 @@ const CartPage = () => {
   const dispatch = useAppDispatch();
 
   // Query data
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, error, refetch } = useFetch({
     queryKey: ["cart"],
     queryFn: getCart,
   });
@@ -38,7 +38,6 @@ const CartPage = () => {
 
   // Cart items
   const cartItems = data?.items ?? [];
-  console.log("Cart Items:", cartItems);
 
   // Handle update cart
   const handleUpdateCart = async (

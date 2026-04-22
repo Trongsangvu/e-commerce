@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../../components/common/CustomArrow";
 import { ROUTES } from "../../config/routes";
+import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
@@ -25,7 +25,7 @@ const ProductSuggestPage = () => {
     data: products = [],
     isLoading,
     error,
-  } = useQuery({
+  } = useFetch({
     queryKey: ["products"],
     queryFn: list,
   });

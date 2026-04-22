@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import images from "../../assets/images/images";
 import { MENU_SIZE } from "../../config/menu";
+import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
+import { addToCartAction } from "../../redux/cart/cart.thunk";
 import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
 import SuggestProducts from "./ProductSuggestPage";
-import { addToCartAction } from "../../redux/cart/cart.thunk";
 
 const ProductDetailPage = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ const ProductDetailPage = () => {
     data: product,
     isLoading,
     error,
-  } = useQuery({
+  } = useFetch({
     queryKey: ["product", id],
     queryFn: () => byId(id!),
     enabled: !!id,
