@@ -4,6 +4,7 @@ import { CircleExcelIcon } from "../../assets/images/icons/icons";
 import { ROUTES } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { getCart } from "../../services/cart-service";
+import Button from "../../components/common/Button";
 
 interface Props {
   isVisible: boolean;
@@ -12,6 +13,12 @@ interface Props {
 
 const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
   const navigate = useNavigate();
+
+  // Query data
+  const { data, isLoading } = useFetch({
+    queryKey: ["shopping-bag"],
+    queryFn: getCart,
+  });
 
   // Handle direct to checkout
   const handleCheckout = () => {
@@ -24,12 +31,6 @@ const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
     handleShowBag();
     navigate(ROUTES.cart);
   };
-
-  // Query data
-  const { data, isLoading } = useFetch({
-    queryKey: ["shopping-bag"],
-    queryFn: getCart,
-  });
 
   const cartItems = data?.items ?? [];
 
@@ -71,9 +72,9 @@ const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
             adding to Shopping Bag
           </h2>
           <div className="py-20">
-            <button className="cursor-pointer" onClick={handleShowBag}>
+            <Button className="cursor-pointer" onClick={handleShowBag}>
               x
-            </button>
+            </Button>
           </div>
         </div>
         <div className="px-10 pt-20  border-b border-[#ccc] max-h-340 overflow-y-auto">
@@ -108,20 +109,20 @@ const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
         </div>
         <div className="my-16 mx-24">
           <div className="flex justify-center items-center w-440 h-48 bg-black rounded-2 cursor-pointer">
-            <button
+            <Button
               className="cursor-pointer uppercase font-[GucciSansPro-bold] text-white tracking-[-0.03rem] text-12"
               onClick={handleCheckout}
             >
               checkout
-            </button>
+            </Button>
           </div>
           <div className="flex justify-center items-center w-440 h-48 bg-white rounded-2 cursor-pointer mt-15 border">
-            <button
+            <Button
               className="cursor-pointer uppercase font-[GucciSansPro-bold] text-black tracking-[-0.03rem] text-12"
               onClick={handleCheckBag}
             >
               view shopping bag
-            </button>
+            </Button>
           </div>
         </div>
       </div>

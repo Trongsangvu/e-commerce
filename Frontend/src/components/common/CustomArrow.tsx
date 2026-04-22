@@ -1,23 +1,25 @@
+import Button from "./Button";
+
 export const PrevArrow = (props: { onClick?: () => void }) => {
   const { onClick } = props;
   return (
-    <button
+    <Button
       className="absolute cursor-pointer left-0 top-1/2 -translate-y-1/2 bg-white/80 p-10 shadow-md z-10"
       onClick={onClick}
     >
       ←
-    </button>
+    </Button>
   );
 };
 
 export const NextArrow = (props: { onClick?: () => void }) => {
   const { onClick } = props;
   return (
-    <button
-      className="absolute right-25 top-1/2 -translate-y-1/2 bg-white/80 p-10 cursor-pointer shadow-md z-10"
+    <Button
+      className="absolute cursor-pointer right-0 top-1/2 -translate-y-1/2 bg-white/80 p-10 shadow-md z-10"
       onClick={onClick}
     >
       →
-    </button>
+    </Button>
   );
 };

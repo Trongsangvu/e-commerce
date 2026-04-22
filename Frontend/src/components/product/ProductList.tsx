@@ -1,13 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
 import { ROUTES } from "../../config/routes";
+import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 import { IProduct } from "../../types/product-type";
 import LANGUAGE from "../../utils/language.util";
 import { SkeletonCustom } from "../common/SkeletonCustom";
+import Button from "../common/Button";
 
 const ProductList = () => {
   // Query data
@@ -15,7 +16,7 @@ const ProductList = () => {
     data: products = [],
     isLoading,
     error,
-  } = useQuery({
+  } = useFetch({
     queryKey: ["products"],
     queryFn: list,
   });
@@ -23,6 +24,10 @@ const ProductList = () => {
   const selectedCategory = useAppSelector(
     (state: RootStore) => state.category.selectedCategory,
   );
+
+  const handleQuickView = () => {
+    // Handle quick view action
+  };
 
   // Filter products by categories
   const filteredProducts =
@@ -54,12 +59,12 @@ const ProductList = () => {
                       alt={product.name}
                       loading="lazy"
                     />
-                    <button
+                    <Button
                       className="absolute cursor-pointer flex justify-center hover:bg-[#222] hover:text-[white] hover:border-[#222] items-center mb-20 -bottom-5 left-1/2 -translate-x-1/2 bg-white rounded-20 min-w-139 h-40 font-[Poppins-regular] text-[#333] text-12 opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-90"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={handleQuickView}
                     >
                       {LANGUAGE.PRODUCT.QUICK_VIEW}
-                    </button>
+                    </Button>
                   </div>
                   <div className="flex items-start justify-between pt-14 max-w-270">
                     <div className="flex flex-col">

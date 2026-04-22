@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -9,17 +8,19 @@ import {
 } from "../../assets/images/icons/icons";
 import { MENU_HEADER, MENU_PROFILE } from "../../config/menu";
 import { ROUTES } from "../../config/routes";
+import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { useScroll } from "../../hooks/use-scroll";
 import { ShoppingBag } from "../../pages/shop/ShoppingBagPage";
 import { sideBarShow } from "../../redux/app/sidebar-slice";
+import { logout } from "../../redux/auth/auth.thunk";
 import { RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
 import LANGUAGE from "../../utils/language.util";
 import { MenuProfile } from "../menu/MenuProfile";
 import Search from "../search/Search";
 import Sidebar from "./Sidebar";
-import { logout } from "../../redux/auth/auth.thunk";
+import Button from "../common/Button";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ const Header = () => {
 
   const scroll = useScroll();
 
-  const { data } = useQuery({
+  const { data } = useFetch({
     queryKey: ["shopping-bag"],
     queryFn: getCart,
     enabled: isAuthenticated,
@@ -160,8 +161,8 @@ const Header = () => {
           </div>
           <ul className="flex">
             <li className="">
-              <button
-                className="hover:opacity-80 hover:cursor-pointer transition-opacity"
+              <Button
+                className="relative hover:opacity-80 hover:cursor-pointer transition-opacity"
                 onClick={handleShowShoppingBag}
               >
                 <ShoppingCartIcon
@@ -174,7 +175,7 @@ const Header = () => {
                     {cartItemsCount}
                   </span>
                 )}
-              </button>
+              </Button>
               {delayedShowBag && (
                 <div className="absolute left-[50%]">
                   <ShoppingBag
@@ -185,7 +186,7 @@ const Header = () => {
               )}
             </li>
             <li className="pl-15">
-              <button
+              <Button
                 className="hover:opacity-80 hover:cursor-pointer transition-opacity"
                 onClick={handleShowMenuProfile}
               >
@@ -194,7 +195,7 @@ const Header = () => {
                     isLoginPage || isRegisterPage || scroll ? "black" : "white"
                   }`}
                 />
-              </button>
+              </Button>
               {isShowMenu && (
                 <div
                   className="absolute right-1/9 h-auto rounded-sm bg-white shadow-xl"
@@ -205,7 +206,7 @@ const Header = () => {
               )}
             </li>
             <li className="pl-15">
-              <button
+              <Button
                 className="hover:opacity-80 hover:cursor-pointer transition-opacity"
                 onClick={handleSearch}
               >
@@ -214,7 +215,7 @@ const Header = () => {
                     isLoginPage || isRegisterPage || scroll ? "black" : "white"
                   }`}
                 />
-              </button>
+              </Button>
             </li>
             {isSearchVisible && (
               <Search

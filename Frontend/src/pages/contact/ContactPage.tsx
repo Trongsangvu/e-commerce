@@ -2,6 +2,7 @@ import { useState } from "react";
 import images from "../../assets/images/images";
 import { GoogleMapComponent } from "../../components/google/GoolgeMap";
 import { sendEmail } from "../../services/email-service";
+import Button from "../../components/common/Button";
 
 const ContactPage = () => {
   const [recipient, setRecipient] = useState("");
@@ -93,13 +94,13 @@ const ContactPage = () => {
                   ></textarea>
                 </div>
                 <div className="bg-[#222222] h-46 rounded-22 flex justify-center items-center mb-20 cursor-pointer">
-                  <button
+                  <Button
                     disabled={isSending}
                     type="submit"
                     className="uppercase text-white font-[Poppins-medium]"
                   >
                     {isSending ? "Sending..." : "Send Email"}
-                  </button>
+                  </Button>
                 </div>
               </form>
 

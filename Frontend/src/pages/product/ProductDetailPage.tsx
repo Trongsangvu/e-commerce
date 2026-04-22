@@ -8,6 +8,8 @@ import { addToCartAction } from "../../redux/cart/cart.thunk";
 import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
 import SuggestProducts from "./ProductSuggestPage";
+import { toast } from "react-toastify";
+import Button from "../../components/common/Button";
 
 const ProductDetailPage = () => {
   const dispatch = useAppDispatch();
@@ -52,6 +54,7 @@ const ProductDetailPage = () => {
       setQuantity((prev) => prev - 1);
     }
   };
+
   // Handle add product to cart
   const addProductToCart = () => {
     if (!id) return;
@@ -61,7 +64,7 @@ const ProductDetailPage = () => {
         quantity: updateQuantity,
       }),
     );
-    alert("Add product to cart successfully!");
+    toast.success("Add product to cart successfully!");
   };
 
   return (
@@ -93,11 +96,7 @@ const ProductDetailPage = () => {
                   {MENU_SIZE.map((item) => (
                     <li
                       className={`border border-[#ccc] font-[GucciSansPro-light] text-sm w-80 text-center py-10 px-10 cursor-pointer mr-10 rounded-sm
-                                  ${
-                                    isActive === item.size
-                                      ? "text-[#6774d5] border-[#6774d5]"
-                                      : "text-[#ccc] border-[#ccc]"
-                                  }`}
+                        ${isActive === item.size ? "text-[#6774d5] border-[#6774d5]" : "text-[#ccc] border-[#ccc]"}`}
                       onClick={() => handleActive(item.size)}
                       key={item.id}
                     >
@@ -108,32 +107,32 @@ const ProductDetailPage = () => {
               </div>
               <div className="flex justify-center flex-col items-center mt-20">
                 <div className="mb-10 flex">
-                  <button
+                  <Button
                     className="w-45 h-44 cursor-pointer border border-[#ccc]"
                     onClick={handleDecreaseQuantity}
                   >
                     -
-                  </button>
+                  </Button>
                   <input
                     className="pl-10 bg-[#f7f7f7] w-50 h-44 text-center border-t border-b outline-none border-[#ccc]"
                     type="number"
                     value={quantity}
                     readOnly
                   />
-                  <button
+                  <Button
                     className="w-45 h-44 cursor-pointer border border-[#ccc]"
                     onClick={handleAddQuantity}
                   >
                     +
-                  </button>
+                  </Button>
                 </div>
                 <div>
-                  <button
+                  <Button
                     className="cursor-pointer uppercase font-[GucciSansPro-bold] bg-[#6774d5] text-white py-10 px-20 rounded-23"
                     onClick={addProductToCart}
                   >
                     Add to cart
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

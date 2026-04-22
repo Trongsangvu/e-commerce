@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { SearchProductIcon } from "../../assets/images/icons/icons";
+import { useFetch } from "../../hooks/use-fetch";
 import { searchProducts } from "../../services/search-service";
 import { IProduct } from "../../types/search-type";
 import Button from "../common/Button";
@@ -17,6 +17,17 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
   const [inputValue, setInputValue] = useState("");
   const [debounceTerm, setDebounceTerm] = useState("");
 
+  // Query Data
+  const {
+    data: products = [],
+    isLoading,
+    error,
+  } = useFetch({
+    queryKey: ["search", debounceTerm],
+    queryFn: () => searchProducts({ name: debounceTerm }),
+    enabled: !!debounceTerm,
+  });
+
   // Debounced function to dispatch the search item
   const debouncedSetSearchItem = useRef(
     debounce((query: string) => {
@@ -29,17 +40,6 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
       debouncedSetSearchItem.cancel();
     };
   }, [debouncedSetSearchItem]);
-
-  // Query Data
-  const {
-    data: products = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["search", debounceTerm],
-    queryFn: () => searchProducts({ name: debounceTerm }),
-    enabled: !!debounceTerm,
-  });
 
   // Handle Input when typing
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

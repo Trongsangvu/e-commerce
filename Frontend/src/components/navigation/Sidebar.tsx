@@ -3,6 +3,7 @@ import { usePreventScroll } from "../../hooks/use-prevent-scroll";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { sideBarHide } from "../../redux/app/sidebar-slice";
 import { RootStore } from "../../redux/store";
+import Button from "../common/Button";
 import { Overlay } from "../common/Overlay";
 import MenuList from "../menu/MenuList";
 
@@ -24,12 +25,12 @@ const Sidebar = () => {
       >
         <div>
           <div className="flex items-center justify-end">
-            <button
+            <Button
               className="absolute z-10 top-10 right-10 flex items-center justify-center w-48 h-48 rounded-full cursor-pointer before:absolute before:w-full before:h-full before:bg-black before:rounded-full before:transition-transform before:duration-500 hover:before:scale-90"
               onClick={handleClose}
             >
               <CloseIcon className="relative text-white text-5xl" />
-            </button>
+            </Button>
           </div>
           <div className="h-full overflow-y-auto">
             <div className="px-80 pb-80 pt-70">
