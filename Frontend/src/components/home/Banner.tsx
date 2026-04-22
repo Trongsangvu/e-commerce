@@ -3,7 +3,7 @@ import images from "../../assets/images/images";
 import { ROUTES } from "../../config/routes";
 import LANGUAGE from "../../utils/language.util";
 
-export const Banner = () => {
+const Banner = () => {
   return (
     <nav>
       <div className="pt-150 pb-150">
@@ -90,3 +90,5 @@ export const Banner = () => {
     </nav>
   );
 };
+
+export default Banner;
