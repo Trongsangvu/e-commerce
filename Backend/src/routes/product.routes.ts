@@ -20,7 +20,7 @@ router.get(
 
 router.get(
   "/search",
-  allTokenRequired,
+  // allTokenRequired,
   productController.searchProduct,
 );
 

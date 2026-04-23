@@ -12,7 +12,7 @@ import CartPage from "../pages/cart/CartPage";
 import ContactPage from "../pages/contact/ContactPage";
 import HomePage from "../pages/HomePage";
 import ProductDetailPage from "../pages/product/ProductDetailPage";
-import ProductListPage from "../pages/product/ProductListPage";
+// import ProductListPage from "../pages/product/ProductListPage";
 import ShopPage from "../pages/shop/ShopPage";
 
 const router = createBrowserRouter([
@@ -36,10 +36,10 @@ const router = createBrowserRouter([
         path: ROUTES.register,
         element: <RegisterPage />,
       },
-      {
-        path: ROUTES.products,
-        element: <ProductListPage />,
-      },
+      // {
+      //   path: ROUTES.products,
+      //   element: <ProductListPage />,
+      // },
       {
         path: ROUTES.productDetail,
         element: <ProductDetailPage />,

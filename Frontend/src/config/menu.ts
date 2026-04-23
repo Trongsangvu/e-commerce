@@ -55,7 +55,7 @@ export const categories = [
 export const MENU_HEADER: MenuItems[] = [
   { id: "home", title: "Home", path: ROUTES.home },
   { id: "shop", title: "Shop", path: ROUTES.shop },
-  { id: "features", title: "Features", path: ROUTES.products },
+  // { id: "features", title: "Features", path: ROUTES.products },
   { id: "blog", title: "Blog", path: ROUTES.blog },
   { id: "about", title: "About", path: ROUTES.about },
   { id: "contact", title: "Contact", path: ROUTES.contact },

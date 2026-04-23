@@ -1,28 +1,28 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import images from "../assets/images/images";
 import Banner from "../components/home/Banner";
 import Container from "../components/home/Container";
 import ProductList from "../components/product/ProductList";
 
 const HomePage = () => {
-  const [isFixed, setIsFixed] = useState(true);
   const bannerRef = useRef<HTMLDivElement>(null);
+  const [isBannerVisible, setIsBannerVisible] = useState(true);
 
-  // Handle scroll
-  const handleScroll = useCallback(() => {
-    if (!bannerRef.current) return;
-
-    const scrollY = window.scrollY;
-    const bannerHeight = 450;
-    const threshold = bannerHeight - 100;
-
-    setIsFixed(scrollY < threshold);
-  }, []);
-
+  // Observe whether the banner is in the viewport so the control stays inside it
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    const el = bannerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsBannerVisible(entry.isIntersecting);
+      },
+      { root: null, threshold: 0.1 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -32,11 +32,7 @@ const HomePage = () => {
             <img src={images.slider} />
             <div
               className={`transition-[transform] duration-300 ease-in-out text-center w-full   
-                ${
-                  isFixed
-                    ? "fixed top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    : "absolute bottom-40 left-1/2 -translate-x-1/2"
-                }`}
+                ${isBannerVisible ? "absolute bottom-40 left-1/2 -translate-x-1/2" : "hidden"}`}
             >
               <span className="capitalize text-32 tracking-3 font-(--font-family) leading-10 text-white">
                 Spring Summer {new Date().getFullYear()}
@@ -58,7 +54,7 @@ const HomePage = () => {
               <Banner />
             </div>
           </div>
-          <div className="container max-w-1600 h-auto flex flex-col mx-auto">
+          <div className="container max-w-1200 h-auto flex flex-col mx-auto">
             <Container />
             <ProductList />
             <div className="flex justify-center mb-89">

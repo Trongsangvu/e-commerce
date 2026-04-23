@@ -7,6 +7,7 @@ import {
 } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
 import productService from "../services/product.service";
+import { buildSearchFilter } from "../utils/query.util";
 
 const getProducts = async (_req: Request, res: Response): Promise<void> => {
   try {
@@ -42,7 +43,15 @@ const list = async (req: Request, res: Response): Promise<void> => {
     const page = parseInt(req.query.page as string, 10);
     const limit = parseInt(req.query.limit as string, 10);
     const skip = (page - 1) * limit;
-    const { products, count } = await productService.list({}, skip, limit);
+    const search = req.query.search as string;
+
+    const searchFilter = buildSearchFilter(search);
+
+    const filter = {
+      ...searchFilter,
+    };
+
+    const { products, count } = await productService.list(filter, skip, limit);
     ApiResponse.OK(res, { products, count });
   } catch (error) {
     ApiResponse.InternalServerError(res, error);

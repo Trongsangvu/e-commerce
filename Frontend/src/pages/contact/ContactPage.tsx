@@ -40,7 +40,7 @@ const ContactPage = () => {
     <div>
       <div className="mb-90">
         <div className="relative">
-          <img src={images.bannerAbout} alt="Banner Contact" />
+          <img src={images.bannerAbout} alt="Banner Contact" className="w-full" />
           <div className="absolute top-[70%] left-[45%]">
             <span className="uppercase font-[GucciSansPro-bold] text-white text-4xl">
               contact
@@ -71,7 +71,7 @@ const ContactPage = () => {
                 <div className="relative flex items-center rounded-2 h-50 border border-[#e6e6e6] px-30 mb-20">
                   <div className="pr-30">
                     <img
-                      className="w-22 h-18"
+                      className="w-full h-18"
                       src={images.emailAddress}
                       alt="email address"
                     />

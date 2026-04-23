@@ -13,12 +13,10 @@ const ShopPage = () => {
           </div>
         </div>
       </div>
-      <main className="container px-173 max-w-1600 h-auto mt-100">
+      <div className="max-w-1200 h-auto mt-100 mx-auto mb-89">
         <Container showTitle={false} />
-        <div>
-          <ProductList />
-        </div>
-      </main>
+        <ProductList />
+      </div>
     </div>
   );
 };

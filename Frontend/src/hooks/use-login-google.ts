@@ -4,57 +4,6 @@ import { oauthLogin } from "../redux/auth/auth.thunk";
 import { AppDispatch } from "../redux/store";
 import { account } from "../services/appwrite-service";
 
-// export const useGoogleLogin = () => {
-//     const dispatch: AppDispatch = useDispatch();
-//     const navigate = useNavigate();
-//     const [userName, setUserName] = useState('');
-//     const handleLoginWithGoogle = async () =>{
-//         try {
-//             const success = 'http://localhost:5173/'; // URL to redirect on success
-//             const failure = 'http://localhost:5173/login'; // URL to redirect on failure
-
-//             account.createOAuth2Session(OAuthProvider.Google, success, failure);
-//         }
-//         catch(error) {
-//             console.error('Google login failed: ', error);
-//         }
-//     }
-
-//     const fetchUserAfterRedirect = async () => {
-//         try {
-//              // Get current session after successful login
-//              const session = await account.getSession('current');
-//              if (session) {
-//                 const user = await account.get();
-//                 setUserName(user.name);
-
-//                 console.log('Tên người dùng:', user.name);
-
-//                 const response = await dispatch(oauthLogin(user)).unwrap();
-//                 console.log('Logged in with Google: ', response);
-
-//                  // Save the token in LocalStorage
-//                 if (response.token) {
-//                     localStorage.setItem('token', response.token);
-//                     // Redirect
-//                     navigate('/profile');
-//                 }
-
-//              } else {
-//                  console.log('No session after Google login');}
-//         } catch(error) {
-//             console.error('Error fetching user after Google login: ', error);
-//         }
-//     }
-
-//     useEffect(() => {
-//         fetchUserAfterRedirect();
-//     }, []);
-
-//     return { handleLoginWithGoogle, userName }; // userName
-// }
-// Initiate the OAuth login process with a provider
-
 const initiateOAuthLogin = async (provider: OAuthProvider) => {
   try {
     const success = "http://localhost:5173/"; // URL to redirect on success
@@ -127,12 +76,3 @@ export const handleLoginWithGoogle = async (
     console.error("Google login process failed:", error);
   }
 };
-
-// Example usage:
-// In your component:
-// const dispatch = useDispatch();
-// const navigate = useNavigate();
-//
-// <button onClick={() => handleLoginWithGoogle(dispatch, navigate)}>
-//   Login with Google
-// </button>

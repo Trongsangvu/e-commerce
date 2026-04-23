@@ -198,7 +198,7 @@ const Header = () => {
               </Button>
               {isShowMenu && (
                 <div
-                  className="absolute right-1/9 h-auto rounded-sm bg-white shadow-xl"
+                  className="absolute right-[16%] top-75 h-auto rounded-sm bg-white shadow-xl"
                   ref={menuRef}
                 >
                   <ul className="px-16 pt-32">{renderMenuProfile()}</ul>

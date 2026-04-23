@@ -44,7 +44,7 @@ const ProductList = () => {
       {isLoading ? (
         <SkeletonCustom count={6} />
       ) : (
-        <ul className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-6 place-items-center">
+        <ul className="grid grid-cols-[repeat(auto-fit,minmax(270px,0fr))] gap-40 place-items-center">
           {filteredProducts &&
             filteredProducts?.map((product: IProduct) => (
               <Link

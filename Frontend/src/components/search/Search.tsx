@@ -62,7 +62,7 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
               onChange={handleInputChange}
               value={inputValue}
               type="text"
-              placeholder="Search..."
+              placeholder="Search for: clothing"
               className="w-645  p-2 outline-none"
             />
           </div>
