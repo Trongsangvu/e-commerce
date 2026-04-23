@@ -19,12 +19,6 @@ router.get(
 );
 
 router.get(
-  "/search",
-  // allTokenRequired,
-  productController.searchProduct,
-);
-
-router.get(
   "/:id",
   allTokenRequired,
   productController.getById,

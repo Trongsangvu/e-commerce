@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import {
   messageDeleted,
-  messageInvalid,
-  messageNotFound,
-  messageProduct,
+  messageNotFound
 } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
 import productService from "../services/product.service";
@@ -101,44 +99,11 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const searchProduct = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const keyword = req.query.name;
-
-    if (!keyword) {
-      ApiResponse.BadRequest(res, messageProduct.MISSING_SEARCH_KEYWORD);
-      return;
-    }
-
-    let searchKeyWord: string;
-
-    // If keyword is an array, join it into a string
-    if (Array.isArray(keyword)) {
-      searchKeyWord = keyword.join(" ");
-    } else {
-      // convert keyword to string
-      searchKeyWord = String(keyword);
-    }
-
-    if (!searchKeyWord.trim()) {
-      ApiResponse.BadRequest(res, messageInvalid("Search keyword"));
-      return;
-    }
-
-    const products = await productService.search(searchKeyWord);
-
-    ApiResponse.OK(res, { products });
-  } catch (error) {
-    ApiResponse.InternalServerError(res, error);
-  }
-};
-
 export default {
   getProducts,
   getById,
   create,
   update,
   deleteProduct,
-  searchProduct,
   list,
 };
