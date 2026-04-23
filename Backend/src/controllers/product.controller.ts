@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
-import {
-  messageDeleted,
-  messageNotFound
-} from "../configs/messages";
+import { messageDeleted, messageNotFound } from "../configs/messages";
 import { ApiResponse } from "../configs/response";
 import productService from "../services/product.service";
 import { buildSearchFilter } from "../utils/query.util";
@@ -43,7 +40,7 @@ const list = async (req: Request, res: Response): Promise<void> => {
     const skip = (page - 1) * limit;
     const search = req.query.search as string;
 
-    const searchFilter = buildSearchFilter(search);
+    const searchFilter = buildSearchFilter(search, ["name"]);
 
     const filter = {
       ...searchFilter,
