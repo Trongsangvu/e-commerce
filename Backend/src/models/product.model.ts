@@ -1,8 +1,9 @@
-import { model, HydratedDocument } from "mongoose";
+import { HydratedDocument, model } from "mongoose";
 import { ProductCategory } from "../configs/enum";
 import { IProduct } from "../types/product-types";
-import { baseSchema } from "./base.model";
+import { computeProductBadges } from "../utils/badge.util";
 import formatCurrency from "../utils/currency.util";
+import { baseSchema } from "./base.model";
 
 const productSchema = baseSchema<IProduct>(
   {
@@ -34,7 +35,7 @@ const productSchema = baseSchema<IProduct>(
       required: false,
     },
     tags: {
-      type: String,
+      type: [String],
       required: false,
     },
   },
@@ -42,6 +43,7 @@ const productSchema = baseSchema<IProduct>(
     toJSON: {
       transform(_doc, ret: any) {
         ret.formattedPrice = formatCurrency(ret.price, ret.currency);
+        ret.badges = computeProductBadges(ret);
         return ret;
       },
     },

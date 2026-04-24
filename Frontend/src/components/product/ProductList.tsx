@@ -18,7 +18,7 @@ const ProductList = () => {
     error,
   } = useFetch({
     queryKey: ["products"],
-    queryFn: list,
+    queryFn: () => list(),
   });
 
   const selectedCategory = useAppSelector(

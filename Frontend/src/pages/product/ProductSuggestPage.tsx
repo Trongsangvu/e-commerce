@@ -27,7 +27,7 @@ const ProductSuggestPage = () => {
     error,
   } = useFetch({
     queryKey: ["products"],
-    queryFn: list,
+    queryFn: () => list(),
   });
 
   const productByCategory = useAppSelector(

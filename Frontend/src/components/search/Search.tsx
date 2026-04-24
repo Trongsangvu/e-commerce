@@ -2,7 +2,7 @@ import { debounce } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { SearchProductIcon } from "../../assets/images/icons/icons";
 import { useFetch } from "../../hooks/use-fetch";
-import { searchProducts } from "../../services/search-service";
+import { list } from "../../services/product-service";
 import { IProduct } from "../../types/search-type";
 import Button from "../common/Button";
 import ProductItem from "../product/ProductItem";
@@ -23,8 +23,8 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
     isLoading,
     error,
   } = useFetch({
-    queryKey: ["search", debounceTerm],
-    queryFn: () => searchProducts({ name: debounceTerm }),
+    queryKey: ["product", debounceTerm],
+    queryFn: () => list({ search: debounceTerm }),
     enabled: !!debounceTerm,
   });
 
@@ -32,7 +32,7 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
   const debouncedSetSearchItem = useRef(
     debounce((query: string) => {
       setDebounceTerm(query.trim());
-    }, 300),
+    }, 400),
   ).current;
 
   useEffect(() => {
@@ -54,16 +54,16 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
   };
 
   return (
-    <div className="fixed w-745 h-430 top-[9%] left-[40%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
-      <div className="flex justify-between mx-auto mb-15 px-16 pt-16 pb-18">
+    <div className="fixed w-900 top-[9%] left-[40%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
+      <div className="flex gap-10 justify-between mx-auto mb-15 px-16 pt-16 pb-18">
         <form action="">
-          <div className="border-0 border-b-2 border-b-amber-400">
+          <div className="border-0 border-b-2 border-b-gray-300 w-full">
             <input
               onChange={handleInputChange}
               value={inputValue}
               type="text"
               placeholder="Search for: clothing"
-              className="w-645  p-2 outline-none"
+              className="p-2 max-w-700 w-700 outline-none"
             />
           </div>
         </form>
@@ -88,7 +88,7 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
         ) : products.length === 0 ? (
           <p className="text-center font font-semibold">No products found</p>
         ) : (
-          <div className="flex justify-between">
+          <div className="flex gap-30">
             <ul className="list-none p-0 m-0">
               {products.map((product: IProduct) => (
                 <li
@@ -104,7 +104,7 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
                 </li>
               ))}
             </ul>
-            <ul className="grid grid-cols-3 gap-10 p-0 m-0 list-none">
+            <ul className="grid grid-cols-4 gap-10 p-0 m-0 list-none">
               {products.map((product: IProduct) => (
                 <li key={product._id} className="mb-16 ml-16 cursor-pointer">
                   <ProductItem product={product} />

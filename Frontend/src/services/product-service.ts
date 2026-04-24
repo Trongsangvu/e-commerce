@@ -6,11 +6,20 @@ import {
 } from "../types/product-type";
 import httpService from "./http-service";
 
-export const list = async (): Promise<IProductListResponse> => {
-  const res = await httpService.get<{
-    success: boolean;
-    data: { products: IProduct[]; count?: number };
-  }>(productEndpoints.list);
+interface Params {
+  search?: string;
+  page?: number;
+  limit?: number;
+}
+
+export const list = async (params?: Params): Promise<IProductListResponse> => {
+  const res = await httpService.get<
+    {
+      success: boolean;
+      data: { products: IProduct[]; count?: number };
+    },
+    Params
+  >(productEndpoints.list, params);
 
   return res.data.data.products;
 };

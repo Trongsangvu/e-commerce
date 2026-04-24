@@ -3,6 +3,7 @@ import app from "./app";
 import { CONSTANTS } from "./configs/constants";
 import { createServer, Server } from "http";
 import MongoDBConnectionManager from "./configs/mongodb";
+import { BadgeJob } from "./jobs/badge.job";
 
 // configuration
 const config = {
@@ -64,10 +65,12 @@ class ServerManager {
 class Application {
   private dbManager: MongoDBConnectionManager;
   private serverManager: ServerManager;
+  private badgeJob: BadgeJob;
 
   constructor() {
     this.dbManager = MongoDBConnectionManager.getInstance();
     this.serverManager = new ServerManager(config.port);
+    this.badgeJob = new BadgeJob();
   }
 
   public async start(): Promise<void> {
@@ -80,7 +83,10 @@ class Application {
       // 2. Start the HTTP Server
       this.serverManager.start();
 
-      // 3. Setup Shutdown
+      // 3. Start Background Jobs
+      this.badgeJob.start();
+
+      // 4. Setup Shutdown
       this.setupShutdownHandlers();
     } catch (error) {
       logger.error("Failed to start application:");

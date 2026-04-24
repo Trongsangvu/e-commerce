@@ -7,10 +7,7 @@ export const baseSchema = <T>(
   new Schema(
     { ...schema },
     {
-      timestamps: {
-        createdAt: "created_at",
-        updatedAt: "updated_at",
-      },
+      timestamps: true,
       toJSON: {
         virtuals: true,
         versionKey: false,

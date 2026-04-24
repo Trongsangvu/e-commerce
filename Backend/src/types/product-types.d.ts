@@ -7,4 +7,6 @@ export interface IProduct {
   image_url?: string;
   tags?: string[];
   brand: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

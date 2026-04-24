@@ -3081,6 +3081,7 @@ __metadata:
     mongodb: "npm:^6.13.1"
     mongoose: "npm:^8.10.1"
     ms: "npm:^2.1.3"
+    node-cron: "npm:^4.2.1"
     nodemon: "npm:^3.1.9"
     punycode: "npm:^2.3.1"
     redis: "npm:^4.7.0"
@@ -6901,6 +6902,13 @@ __metadata:
   dependencies:
     node-gyp: "npm:latest"
   checksum: 10c0/31a03b00f6b0753ab08360952fdf80a1abb619dcf8125fa1ab07e3a414da050963440c3a86c77a0334c0be7a71acb5e242dc468b79201ee6151c7b943afe946d
+  languageName: node
+  linkType: hard
+
+"node-cron@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "node-cron@npm:4.2.1"
+  checksum: 10c0/804df01df230e96fd2f8ffcde004f4d5af953bccdf3ccf993dc450526dd65f553a2f2ad4bc0faf55c90c38cbc99c9ddbb88ee16cba3fc6bc74e606da6efb249e
   languageName: node
   linkType: hard
 
