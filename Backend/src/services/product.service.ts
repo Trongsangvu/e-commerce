@@ -1,5 +1,6 @@
 import { Product, ProductDocument } from "../models/product.model";
 import { IProduct } from "../types/product-types";
+import { generateSystemTags } from "../utils/generate-tags.util";
 
 const find = async () => {
   return await Product.find({});
@@ -15,22 +16,28 @@ const list = async (
   limit: number,
 ): Promise<{ products: IProduct[]; count: number }> => {
   const [products, count] = await Promise.all([
-    Product
-      .find(query)
-      .skip(skip)
-      .limit(limit)
-      .sort("-created_at"),
+    Product.find(query).skip(skip).limit(limit).sort("-created_at"),
     Product.countDocuments(query),
   ]);
   return { products, count };
 };
 
 const create = async (data: IProduct): Promise<ProductDocument> => {
+  const systemTags = generateSystemTags(data);
+  // const aiTags = generateAITags(data);
+  const adminTags = data.tags || [];
+
+  const tags = Array.from(new Set([...systemTags, ...adminTags]));
+  data.tags = tags;
+
   const product = new Product(data);
   return await product.save();
 };
 
-const update = async (id: string, data: IProduct): Promise<ProductDocument | null> => {
+const update = async (
+  id: string,
+  data: IProduct,
+): Promise<ProductDocument | null> => {
   return await Product.findByIdAndUpdate(id, data, { new: true });
 };
 

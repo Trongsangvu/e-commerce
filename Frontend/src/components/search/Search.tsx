@@ -6,6 +6,7 @@ import { list } from "../../services/product-service";
 import { IProduct } from "../../types/search-type";
 import Button from "../common/Button";
 import ProductItem from "../product/ProductItem";
+import DotsLoading from "../common/DotsLoading";
 
 interface SearchProps {
   isSearchVisible: boolean;
@@ -13,7 +14,6 @@ interface SearchProps {
 }
 
 const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
-  const [isHovered, setIsHovered] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [debounceTerm, setDebounceTerm] = useState("");
 
@@ -54,39 +54,34 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
   };
 
   return (
-    <div className="fixed w-900 top-[9%] left-[40%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
+    <div className="fixed w-900 top-[9%] left-[25%] border rounded-sm bg-white border-gray-300 shadow-md transition-all duration-300 ease-in-out z-50">
       <div className="flex gap-10 justify-between mx-auto mb-15 px-16 pt-16 pb-18">
         <form action="">
-          <div className="border-0 border-b-2 border-b-gray-300 w-full">
+          <div className="border border-gray-300 w-full rounded-sm p-5">
             <input
               onChange={handleInputChange}
               value={inputValue}
               type="text"
               placeholder="Search for: clothing"
-              className="p-2 max-w-700 w-700 outline-none"
+              className="p-2 max-w-700 w-700 outline-none font-medium"
             />
           </div>
         </form>
         <Button
           onClick={toggleSearchVisible}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className={`relative cursor-pointer font-normal text-lg inline-block underline-offset-4 ml-11 ${isHovered ? "none" : "underline"}`}
+          className="relative cursor-pointer font-medium text-lg inline-block underline-offset-4 ml-11"
         >
           <span>Cancel</span>
-          <span
-            className={`absolute left-0 bottom-2 h-1.5 bg-black transition-all duration-300 ${isHovered ? "w-full" : "w-0"}`}
-          ></span>
         </Button>
       </div>
 
       <div className="px-16 pb-16">
         {isLoading ? (
-          <p>Loading...</p>
+          <DotsLoading />
         ) : error ? (
           <p className="text-red-500">Error fetching products</p>
         ) : products.length === 0 ? (
-          <p className="text-center font font-semibold">No products found</p>
+          <DotsLoading />
         ) : (
           <div className="flex gap-30">
             <ul className="list-none p-0 m-0">

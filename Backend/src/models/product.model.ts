@@ -36,6 +36,7 @@ const productSchema = baseSchema<IProduct>(
     },
     tags: {
       type: [String],
+      default: [],
       required: false,
     },
   },

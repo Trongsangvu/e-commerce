@@ -27,7 +27,7 @@ const getById = async (req: Request, res: Response): Promise<void> => {
 const create = async (req: Request, res: Response): Promise<void> => {
   try {
     const product = await productService.create(req.body);
-    ApiResponse.Created(res, { products: product });
+    ApiResponse.Created(res, { product });
   } catch (error) {
     ApiResponse.InternalServerError(res, error);
   }

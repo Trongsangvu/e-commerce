@@ -23,4 +23,9 @@ export enum PaymentMethod {
 export enum ProductCategory {
   MEN = "men",
   WOMEN = "women",
+  SHOES = "shoes",
+  WATCH = "watch",
+  JACKET = "jacket",
+  T_SHIRT = "t_shirt",
+  LONG_SLEEVE = "long_sleeve",
 }
