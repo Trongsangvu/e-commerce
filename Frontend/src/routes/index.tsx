@@ -23,6 +23,10 @@ const router = createBrowserRouter([
         path: ROUTES.login,
         element: <LoginPage />,
       },
+      {
+        path: ROUTES.register,
+        element: <RegisterPage />,
+      },
     ],
   },
   {
@@ -31,10 +35,6 @@ const router = createBrowserRouter([
       {
         path: ROUTES.home,
         element: <HomePage />,
-      },
-      {
-        path: ROUTES.register,
-        element: <RegisterPage />,
       },
       // {
       //   path: ROUTES.products,

@@ -1,12 +1,12 @@
 import { debounce } from "lodash";
+import { Search as SearchIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { SearchProductIcon } from "../../assets/images/icons/icons";
 import { useFetch } from "../../hooks/use-fetch";
 import { list } from "../../services/product-service";
 import { IProduct } from "../../types/search-type";
 import Button from "../common/Button";
-import ProductItem from "../product/ProductItem";
 import DotsLoading from "../common/DotsLoading";
+import ProductItem from "../product/ProductItem";
 
 interface SearchProps {
   isSearchVisible: boolean;
@@ -88,11 +88,11 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: SearchProps) => {
               {products.map((product: IProduct) => (
                 <li
                   key={product._id}
-                  className="cursor-pointer text-sm mb-18 font-medium list-none underline underline-offset-5"
+                  className="cursor-pointer text-sm mb-18 font-medium list-none"
                 >
                   <a href="#" className="flex items-center gap-5">
                     <span>
-                      <SearchProductIcon />
+                      <SearchIcon size={15} />
                     </span>
                     <span>{product.name}</span>
                   </a>
