@@ -110,7 +110,7 @@ const Header = () => {
   const renderMenuProfile = () => {
     return filteredMenu.map((item) => (
       <MenuProfile
-        key={item.id}
+        key={item.id ?? item.title}
         item={item}
         onLogout={item.id === "sign out" ? handleLogout : undefined}
       />
@@ -143,7 +143,7 @@ const Header = () => {
               </Link>
             </div>
             <ul className="flex gap-4">
-              {MENU_HEADER.map((item) => (
+              {MENU_HEADER.map((item, index) => (
                 <li
                   className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-book] hover:text-[#6774d5] transition-colors duration-300 ${
                     location.pathname === item.path
@@ -152,7 +152,7 @@ const Header = () => {
                         ? "text-black"
                         : "text-white"
                   }`}
-                  key={item.id}
+                  key={item.id ?? item.title ?? index}
                 >
                   <Link to={item.path || "#"}>{item.title}</Link>
                 </li>

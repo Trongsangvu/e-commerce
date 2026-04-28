@@ -18,9 +18,16 @@ interface AuthState extends AsyncState {
   isAuthenticated: boolean;
 }
 
-const storedUser = localStorage.getItem("user")
-  ? JSON.parse(localStorage.getItem("user")!)
-  : null;
+const parseStoredUser = (raw: string | null) => {
+  if (!raw || raw === "undefined") return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+};
+
+const storedUser = parseStoredUser(localStorage.getItem("user"));
 
 const initialState: AuthState = {
   user: storedUser,
@@ -36,7 +43,8 @@ const authSlice = createSlice({
   reducers: {
     checkAuth: (state) => {
       const token = getToken();
-      const user = localStorage.getItem("user");
+      const rawUser = localStorage.getItem("user");
+      const user = parseStoredUser(rawUser);
       if (!token && !user) {
         state.isAuthenticated = false;
         state.user = null;
@@ -45,7 +53,7 @@ const authSlice = createSlice({
         removeRefreshToken();
       } else {
         state.isAuthenticated = true;
-        state.user = user ? JSON.parse(user) : null;
+        state.user = user;
       }
     },
   },

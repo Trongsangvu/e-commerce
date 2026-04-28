@@ -14,3 +14,8 @@ export const handleAxiosError = (error: unknown): RejectType => {
     status: err.response?.status,
   };
 };
+
+export const toastErrorMessage = (error: unknown): string => {
+  const err = error as AxiosError<{ message: string }>;
+  return err.response?.data?.message || err.message || "Something went wrong";
+};

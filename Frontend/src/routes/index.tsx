@@ -13,6 +13,7 @@ import ContactPage from "../pages/contact/ContactPage";
 import HomePage from "../pages/HomePage";
 import ProductDetailPage from "../pages/product/ProductDetailPage";
 // import ProductListPage from "../pages/product/ProductListPage";
+import AccountPage from "../pages/account/AccountPage";
 import ShopPage from "../pages/shop/ShopPage";
 
 const router = createBrowserRouter([
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.shop,
         element: <ShopPage />,
+      },
+      {
+        path: ROUTES.account,
+        element: <AccountPage />,
       },
     ],
   },

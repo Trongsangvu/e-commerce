@@ -11,13 +11,14 @@ import { useAppDispatch } from "../../hooks/use-redux";
 import { checkAuth } from "../../redux/auth/auth-slice";
 import { setAuth } from "../../redux/auth/auth.helper";
 import { login as loginService } from "../../services/auth-service";
+import { toast } from "react-toastify";
+import { toastErrorMessage } from "../../utils/error.util";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,13 +27,12 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      setError("");
       const res = await loginService({ email, password });
       setAuth(res.token, res.user);
       dispatch(checkAuth());
       navigate(ROUTES.home);
     } catch (error) {
-      setError(error instanceof Error ? error.message : "Login failed");
+      toast.error(toastErrorMessage(error));
     }
   };
 
@@ -140,8 +140,6 @@ const LoginPage = () => {
               <button className="uppercase cursor-pointer">sign up</button>
             </Link>
           </div>
-
-          {error && <p className="text-red-500">{error}</p>}
         </form>
       </div>
       <div className="pb-70 text-center flex flex-col items-center">
