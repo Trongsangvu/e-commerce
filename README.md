@@ -12,7 +12,6 @@ This repository contains a full-stack e-commerce application with a TypeScript N
 - Backend: Node.js, TypeScript, Express, MongoDB, Redis
 - Frontend: React, TypeScript, Vite
 - Integrations: Stripe, PayPal, Firebase, Twilio, Kafka
-- Dev tooling: ESLint, Prettier, Docker
 
 ## Prerequisites
 
