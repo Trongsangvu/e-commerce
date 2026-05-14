@@ -1,9 +1,4 @@
-import axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 import authEndpoints from "../api/auth.api";
 
@@ -86,7 +81,7 @@ class HttpService {
 
   // Refresh token
   private refreshToken() {
-    return this.instance.post<{ accessToken: string }>(
+    return this.instance.post<{ accessToken: string; }>(
       authEndpoints.refreshToken,
       {
         refreshToken: getRefreshToken(),
