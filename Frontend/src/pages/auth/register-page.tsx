@@ -1,64 +1,75 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  AddressIcon,
-  EyeSlashIcon,
-  GoogleIcon,
-} from "../../assets/images/icons/icons";
-import { handleLoginGoogle } from "../../auth/GoogleLoginButton";
+import { useNavigate } from "react-router-dom";
+
+import { AddressIcon, EyeSlashIcon } from "../../assets/images/icons/icons";
+import images from "../../assets/images/images";
 import { ROUTES } from "../../config/routes";
-import { useAppDispatch } from "../../hooks/use-redux";
-import { checkAuth } from "../../redux/auth/auth-slice";
-import { setAuth } from "../../redux/auth/auth.helper";
-import { login as loginService } from "../../services/auth-service";
-import { toast } from "react-toastify";
-import { toastErrorMessage } from "../../utils/error.util";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
+import { RootStore } from "../../redux/store";
+import { register } from "../../redux/auth/auth-thunk";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const dispatch = useAppDispatch();
+  const { error } = useAppSelector((state: RootStore) => state.auth);
+  const navigate = useNavigate();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
-
   // Handle Form submit events
-  const handleFormSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(register({ name, email, password }))
+      .then(() => console.log("Register action dispatched"))
+      .catch((error) =>
+        console.log("Error dispatching register action: ", error),
+      );
 
-    try {
-      const res = await loginService({ email, password });
-      setAuth(res.token, res.user);
-      dispatch(checkAuth());
-      navigate(ROUTES.home);
-    } catch (error) {
-      toast.error(toastErrorMessage(error));
-    }
+    navigate(ROUTES.login);
   };
 
   return (
     <div className="flex flex-col min-h-screen mt-30 gap-100">
       <div className="flex flex-col items-center w-full">
-        <div
-          className="bg-white w-328 mt-90 mb-5 border border-[#1a1a1a] uppercase flex items-center justify-center h-56 text-black cursor-pointer text-center p-2.5 font-[GucciSansPro-medium]"
-          onClick={handleLoginGoogle}
-        >
-          <button
-            type="button"
-            className="uppercase cursor-pointer flex items-center gap-10"
-          >
-            <GoogleIcon />
-            Continue with Google
-          </button>
-        </div>
         <form
           action=""
           onSubmit={handleFormSubmit}
-          className="flex flex-col items-center p-10 mt-20"
+          className="flex flex-col items-center p-10 mt-90"
         >
           <h3 className="text-black text-center uppercase text-3xl mb-30 font-[GucciSansPro-book]">
             Continue with your email address
           </h3>
+          <div className="relative flex flex-col mb-50 max-w-450">
+            <label
+              htmlFor="name"
+              className="mb-10 text-[#838383] text-xs font-[GucciSansPro-light]"
+            >
+              *Required field
+            </label>
+            <input
+              className="peer font-[GucciSansPro-light] text-sm text-[#666] bg-white h-56 w-328 p-10 border border-solid border-[#1b1b1b]"
+              type="text"
+              placeholder=" "
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <label
+              htmlFor="name"
+              className="absolute left-10 font-[GucciSansPro-light] uppercase top-[5%] -translate-y-[5%] text-sm text-[#666] transition-all
+                  peer-placeholder-shown:top-1/2
+                  peer-placeholder-shown:text-sm 
+                  peer-placeholder-shown:text-[#666] 
+                  peer-focus:top-32 peer-focus:text-xs peer-focus:text-[#666]
+                  peer-not-placeholder-shown:top-32 peer-not-placeholder-shown:text-xs"
+            >
+              username*
+            </label>
+            <span className="w-15 absolute top-[59%] right-20">
+              <img src={images.pencilIcon} alt="pencilIcon" />
+            </span>
+          </div>
           <div className="relative flex flex-col mb-50 max-w-450">
             <input
               className="peer font-[GucciSansPro-light] text-sm text-[#666] bg-white h-56 w-328 p-10 border border-solid border-[#1b1b1b]"
@@ -87,7 +98,7 @@ const LoginPage = () => {
           <div className="relative flex flex-col mb-50 max-w-450">
             <input
               className="peer font-[GucciSansPro-light] flex items-center text-sm text-[#666] h-56 w-328 bg-white p-10 border border-solid border-[#1b1b1b]"
-              type="password"
+              type="text"
               placeholder=" "
               id="password"
               value={password.toString()}
@@ -99,16 +110,16 @@ const LoginPage = () => {
                   peer-placeholder-shown:top-1/2 
                   peer-placeholder-shown:text-sm 
                   peer-placeholder-shown:text-[#666] 
-                  peer-focus:top-14 peer-focus:text-xs peer-focus:text-[#666]
-                  peer-not-placeholder-shown:top-14 peer-not-placeholder-shown:text-xs"
+                  peer-focus:top-13 peer-focus:text-xs peer-focus:text-[#666]
+                  peer-not-placeholder-shown:top-13 peer-not-placeholder-shown:text-xs"
             >
-              password*
+              create password*
             </label>
             <span className="w-15 absolute bottom-[35%] right-20">
               <EyeSlashIcon />
             </span>
           </div>
-          <div className="w-328 flex flex-col items-center p-10 mb-20">
+          <div className="w-328 flex flex-col items-center p-10 mb-5">
             <p className="text-justify font-[GucciSansPro-light] text-[#666] text-sm">
               By choosing "Create my profile", you confirm that you agree to our
               <a
@@ -129,46 +140,40 @@ const LoginPage = () => {
           </div>
           <div className="bg-[#1a1a1a] w-328 uppercase flex items-center justify-center h-56 text-white cursor-pointer text-center p-10 font-[GucciSansPro-medium]">
             <button type="submit" className="uppercase cursor-pointer">
-              sign in
+              create my profile
             </button>
           </div>
-          <span className="font-[GucciSansPro-book] uppercase my-10 text-xl">
-            or
-          </span>
-          <div className="bg-[#1a1a1a] w-328 uppercase flex items-center justify-center h-56 text-white cursor-pointer text-center p-10 font-[GucciSansPro-medium]">
-            <Link to={ROUTES.register}>
-              <button className="uppercase cursor-pointer">sign up</button>
-            </Link>
-          </div>
+
+          {error && <p className="text-red-500">{error}</p>}
         </form>
       </div>
       <div className="pb-70 text-center flex flex-col items-center">
-        <h2 className=" font-[GucciSansPro-book] text-[30px] text-black mb-32">
+        <h2 className="font-[GucciSansPro-book] text-[30px] text-black mb-32">
           JOIN MY COZASTORE
         </h2>
         <div>
           <div className="grid grid-cols-3 gap-6">
             <div className="max-w-380 px-36">
-              <h3 className=" font-[GucciSansPro-bold] mb-12 text-black">
+              <h3 className="font-[GucciSansPro-bold] mb-12 text-black">
                 TRACK YOUR ORDERS
               </h3>
-              <p className=" font-[GucciSansPro-light]">
+              <p className="font-[GucciSansPro-light]">
                 Follow your orders every step of the way.
               </p>
             </div>
             <div className="max-w-380 px-36">
-              <h3 className=" font-[GucciSansPro-bold] mb-12 text-black">
+              <h3 className="font-[GucciSansPro-bold] mb-12 text-black">
                 STREAMLINE CHECKOUT
               </h3>
-              <p className=" font-[GucciSansPro-light]">
+              <p className="font-[GucciSansPro-light]">
                 Check out faster with saved addresses and payment methods.
               </p>
             </div>
             <div className="max-w-380 px-36">
-              <h3 className=" font-[GucciSansPro-bold] mb-12 text-black">
+              <h3 className="font-[GucciSansPro-bold] mb-12 text-black">
                 BOOK AN APPOINTMENT
               </h3>
-              <p className=" font-[GucciSansPro-light]">
+              <p className="font-[GucciSansPro-light]">
                 Enjoy priority access to the boutique of your choice at the time
                 and date that suits you.
               </p>
@@ -180,4 +185,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

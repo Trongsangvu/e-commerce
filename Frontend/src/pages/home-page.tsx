@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import images from "../assets/images/images";
 import Banner from "../components/home/Banner";
 import Container from "../components/home/Container";
-import ProductList from "../components/product/ProductList";
+import ProductList from "../components/product/product-list";
 
 const HomePage = () => {
   const bannerRef = useRef<HTMLDivElement>(null);

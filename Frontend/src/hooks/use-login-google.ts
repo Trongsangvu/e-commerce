@@ -1,6 +1,6 @@
 import { Models, OAuthProvider } from "appwrite";
 import { ROUTES } from "../config/routes";
-import { oauthLogin } from "../redux/auth/auth.thunk";
+import { oauthLogin } from "../redux/auth/auth-thunk";
 import { AppDispatch } from "../redux/store";
 import { account } from "../services/appwrite-service";
 

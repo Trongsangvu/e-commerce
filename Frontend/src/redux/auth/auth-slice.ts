@@ -11,7 +11,7 @@ import {
   IRegisterResponse,
 } from "../../types/auth-type";
 import { AsyncState, pending, rejected } from "../../utils/async-handler.util";
-import { login, logout, oauthLogin, register } from "./auth.thunk";
+import { login, logout, oauthLogin, register } from "./auth-thunk";
 
 interface AuthState extends AsyncState {
   user: AuthUser | null;

@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { sideBarHide } from "../../redux/app/sidebar-slice";
 import { RootStore } from "../../redux/store";
 import Button from "../common/Button";
-import { Overlay } from "../common/Overlay";
-import MenuList from "../menu/MenuList";
+import { Overlay } from "../common/over-lay";
+import MenuList from "../menu/menu-list";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();

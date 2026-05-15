@@ -1,5 +1,5 @@
 import { MENU_ITEMS, MENU_ITEMS_2 } from "../../config/menu";
-import MenuItem from "./MenuItem";
+import MenuItem from "./menu-item";
 
 interface MenuListProps {
   isOpen: boolean;

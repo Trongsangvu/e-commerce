@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICartItem } from "../../types/cart-type";
 import { AsyncState, pending, rejected } from "../../utils/async-handler.util";
 import { updateTotals } from "../../utils/cart.util";
-import { addToCartAction, updateCartAction } from "../cart/cart.thunk";
+import { addToCartAction, updateCartAction } from "./cart-thunk";
 
 export interface CartState extends AsyncState {
   items: ICartItem[];
@@ -26,7 +26,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addQuantity(state, action: PayloadAction<{ index: number }>) {
+    addQuantity(state, action: PayloadAction<{ index: number; }>) {
       const item = state.items[action.payload.index];
 
       if (item) {
@@ -36,7 +36,7 @@ const cartSlice = createSlice({
         state.quantity += 1;
       }
     },
-    decreaseQuantity(state, action: PayloadAction<{ index: number }>) {
+    decreaseQuantity(state, action: PayloadAction<{ index: number; }>) {
       const item = state.items[action.payload.index];
 
       if (item && item.quantity > 1) {

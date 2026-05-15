@@ -11,13 +11,13 @@ import { ROUTES } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { useScroll } from "../../hooks/use-scroll";
-import { ShoppingBag } from "../../pages/shop/ShoppingBagPage";
+import { ShoppingBag } from "../../pages/shop/shopping-bag-page";
 import { sideBarShow } from "../../redux/app/sidebar-slice";
-import { logout } from "../../redux/auth/auth.thunk";
+import { logout } from "../../redux/auth/auth-thunk";
 import { RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
 import LANGUAGE from "../../utils/language.util";
-import { MenuProfile } from "../menu/MenuProfile";
+import { MenuProfile } from "../menu/menu-profile";
 import Search from "../search/Search";
 import Sidebar from "./Sidebar";
 import Button from "../common/Button";
@@ -121,10 +121,9 @@ const Header = () => {
     <>
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out 
-          ${
-            isLoginPage || isRegisterPage || scroll
-              ? "bg-white shadow-md"
-              : "bg-transparent"
+          ${isLoginPage || isRegisterPage || scroll
+            ? "bg-white shadow-md"
+            : "bg-transparent"
           }`}
       >
         <div className="height-72 z-1 shadow-xs flex items-center flex-1 justify-around pt-20 pb-20 px-7">
@@ -132,11 +131,10 @@ const Header = () => {
             <div className="flex items-center mr-40">
               <Link to={ROUTES.home}>
                 <h3
-                  className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${
-                    isLoginPage || isRegisterPage || scroll
+                  className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${isLoginPage || isRegisterPage || scroll
                       ? "text-black"
                       : "text-white"
-                  }`}
+                    }`}
                 >
                   {LANGUAGE.GENERAL.NAME}
                 </h3>
@@ -145,13 +143,12 @@ const Header = () => {
             <ul className="flex gap-4">
               {MENU_HEADER.map((item, index) => (
                 <li
-                  className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-book] hover:text-[#6774d5] transition-colors duration-300 ${
-                    location.pathname === item.path
+                  className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-book] hover:text-[#6774d5] transition-colors duration-300 ${location.pathname === item.path
                       ? "text-[#6774d5]"
                       : isLoginPage || isRegisterPage || scroll
                         ? "text-black"
                         : "text-white"
-                  }`}
+                    }`}
                   key={item.id ?? item.title ?? index}
                 >
                   <Link to={item.path || "#"}>{item.title}</Link>
@@ -166,9 +163,8 @@ const Header = () => {
                 onClick={handleShowShoppingBag}
               >
                 <ShoppingCartIcon
-                  fillColor={`${
-                    isLoginPage || isRegisterPage || scroll ? "black" : "white"
-                  }`}
+                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                    }`}
                 />
                 {cartItemsCount > 0 && (
                   <span className="absolute top-26 right-[20.7%] text-[10px] text-white">
@@ -191,9 +187,8 @@ const Header = () => {
                 onClick={handleShowMenuProfile}
               >
                 <UserIcon
-                  strokeColor={`${
-                    isLoginPage || isRegisterPage || scroll ? "black" : "white"
-                  }`}
+                  strokeColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                    }`}
                 />
               </Button>
               {isShowMenu && (
@@ -211,9 +206,8 @@ const Header = () => {
                 onClick={handleSearch}
               >
                 <SearchIcon
-                  fillColor={`${
-                    isLoginPage || isRegisterPage || scroll ? "black" : "white"
-                  }`}
+                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                    }`}
                 />
               </Button>
             </li>
@@ -229,16 +223,14 @@ const Header = () => {
                 onClick={handleShow}
               >
                 <MenuToggle
-                  fillColor={`${
-                    isLoginPage || isRegisterPage || scroll ? "black" : "white"
-                  }`}
+                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                    }`}
                 />
                 <span
                   className={`font-[GucciSansPro-book] uppercase text-xs transition-colors duration-300 
-                    ${
-                      isLoginPage || isRegisterPage || scroll
-                        ? "text-black"
-                        : "text-white"
+                    ${isLoginPage || isRegisterPage || scroll
+                      ? "text-black"
+                      : "text-white"
                     }`}
                 >
                   {LANGUAGE.GENERAL.MENU}

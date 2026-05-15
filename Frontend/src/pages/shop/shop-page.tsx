@@ -1,6 +1,6 @@
 import images from "../../assets/images/images";
 import Container from "../../components/home/Container";
-import ProductList from "../../components/product/ProductList";
+import ProductList from "../../components/product/product-list";
 
 const ShopPage = () => {
   return (

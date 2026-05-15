@@ -1,6 +1,6 @@
 import { useState } from "react";
 import images from "../../assets/images/images";
-import { GoogleMapComponent } from "../../components/google/GoolgeMap";
+import { GoogleMapComponent } from "../../components/google/google-map";
 import { sendEmail } from "../../services/email-service";
 import Button from "../../components/common/Button";
 

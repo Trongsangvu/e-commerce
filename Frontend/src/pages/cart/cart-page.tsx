@@ -10,7 +10,7 @@ import {
   decreaseQuantity,
   setCartItems,
 } from "../../redux/cart/cart-slice";
-import { updateCartAction } from "../../redux/cart/cart.thunk";
+import { updateCartAction } from "../../redux/cart/cart-thunk";
 import { getCart } from "../../services/cart-service";
 import { ICartItem } from "../../types/cart-type";
 import LANGUAGE from "../../utils/language.util";

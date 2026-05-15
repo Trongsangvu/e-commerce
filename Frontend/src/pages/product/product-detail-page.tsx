@@ -4,10 +4,10 @@ import images from "../../assets/images/images";
 import { MENU_SIZE } from "../../config/menu";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
-import { addToCartAction } from "../../redux/cart/cart.thunk";
+import { addToCartAction } from "../../redux/cart/cart-thunk";
 import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
-import SuggestProducts from "./ProductSuggestPage";
+import SuggestProducts from "./product-suggest-page";
 import { toast } from "react-toastify";
 import Button from "../../components/common/Button";
 
@@ -15,7 +15,7 @@ const ProductDetailPage = () => {
   const dispatch = useAppDispatch();
   const [isActive, setIsActive] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string; }>();
 
   const updateQuantity = useAppSelector((state: RootStore) => {
     const cartItem = state.cart.items.find((item) => {

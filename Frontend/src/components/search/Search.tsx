@@ -5,8 +5,8 @@ import { useFetch } from "../../hooks/use-fetch";
 import { list } from "../../services/product-service";
 import { IProduct } from "../../types/search-type";
 import Button from "../common/Button";
-import DotsLoading from "../common/DotsLoading";
-import ProductItem from "../product/ProductItem";
+import DotsLoading from "../common/dots-loading";
+import ProductItem from "../product/product-item";
 
 interface SearchProps {
   isSearchVisible: boolean;

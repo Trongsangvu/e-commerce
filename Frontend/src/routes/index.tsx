@@ -1,20 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
-import ProtectedRoute from "../components/guards/ProtectedRoute";
-import AuthLayout from "../components/layout/AuthLayout";
-import DefaultLayout from "../components/layout/DefaultLayout";
+import ProtectedRoute from "../components/guards/protected-route";
+import AuthLayout from "../components/layout/auth-layout";
+import DefaultLayout from "../components/layout/default-layout";
 import { ROLES } from "../config/constants";
 import { ROUTES } from "../config/routes";
-import AboutPage from "../pages/about/AboutPage";
-import LoginPage from "../pages/auth/LoginPage";
-import RegisterPage from "../pages/auth/RegisterPage";
-import BlogPage from "../pages/blog/BlogPage";
-import CartPage from "../pages/cart/CartPage";
-import ContactPage from "../pages/contact/ContactPage";
-import HomePage from "../pages/HomePage";
-import ProductDetailPage from "../pages/product/ProductDetailPage";
+import AboutPage from "../pages/about/about-page";
+import LoginPage from "../pages/auth/login-page";
+import RegisterPage from "../pages/auth/register-page";
+import BlogPage from "../pages/blog/blog-page";
+import CartPage from "../pages/cart/cart-page";
+import ContactPage from "../pages/contact/contact-page";
+import HomePage from "../pages/home-page";
+import ProductDetailPage from "../pages/product/product-detail-page";
 // import ProductListPage from "../pages/product/ProductListPage";
-import AccountPage from "../pages/account/AccountPage";
-import ShopPage from "../pages/shop/ShopPage";
+import AccountPage from "../pages/account/account-page";
+import ShopPage from "../pages/shop/shop-page";
 
 const router = createBrowserRouter([
   {

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { NextArrow, PrevArrow } from "../../components/common/CustomArrow";
+import { NextArrow, PrevArrow } from "../../components/common/custom-arrow";
 import { ROUTES } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";

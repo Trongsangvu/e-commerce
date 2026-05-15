@@ -1,6 +1,6 @@
 import images from "../../assets/images/images";
 import LANGUAGE from "../../utils/language.util";
-import ProductFeatures from "../product/ProductListPage";
+import ProductFeatures from "../product/product-list-page";
 
 const BlogPage = () => {
   return (

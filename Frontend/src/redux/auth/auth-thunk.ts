@@ -6,7 +6,7 @@ import {
 } from "../../services/auth-service";
 import { ILogin, IOAuthUser, IRegister } from "../../types/auth-type";
 import { createAppThunk } from "../../utils/create-app-thunk-util";
-import { clearAuth, setAuth } from "./auth.helper";
+import { clearAuth, setAuth } from "./auth-helper";
 
 export const login = createAppThunk(
   "auth/login",
