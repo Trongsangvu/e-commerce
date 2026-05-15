@@ -12,7 +12,7 @@ import { checkAuth } from "../../redux/auth/auth-slice";
 import { setAuth } from "../../redux/auth/auth-helper";
 import { login as loginService } from "../../services/auth-service";
 import { toast } from "react-toastify";
-import { toastErrorMessage } from "../../utils/error.util";
+import { toastErrorMessage } from "../../utils/error-util";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();

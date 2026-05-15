@@ -16,7 +16,7 @@ import { sideBarShow } from "../../redux/app/sidebar-slice";
 import { logout } from "../../redux/auth/auth-thunk";
 import { RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
-import LANGUAGE from "../../utils/language.util";
+import LANGUAGE from "../../utils/language-util";
 import { MenuProfile } from "../menu/menu-profile";
 import Search from "../search/Search";
 import Sidebar from "./Sidebar";
@@ -132,8 +132,8 @@ const Header = () => {
               <Link to={ROUTES.home}>
                 <h3
                   className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${isLoginPage || isRegisterPage || scroll
-                      ? "text-black"
-                      : "text-white"
+                    ? "text-black"
+                    : "text-white"
                     }`}
                 >
                   {LANGUAGE.GENERAL.NAME}
@@ -144,10 +144,10 @@ const Header = () => {
               {MENU_HEADER.map((item, index) => (
                 <li
                   className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-book] hover:text-[#6774d5] transition-colors duration-300 ${location.pathname === item.path
-                      ? "text-[#6774d5]"
-                      : isLoginPage || isRegisterPage || scroll
-                        ? "text-black"
-                        : "text-white"
+                    ? "text-[#6774d5]"
+                    : isLoginPage || isRegisterPage || scroll
+                      ? "text-black"
+                      : "text-white"
                     }`}
                   key={item.id ?? item.title ?? index}
                 >

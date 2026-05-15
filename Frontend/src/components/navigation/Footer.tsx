@@ -4,7 +4,7 @@ import {
   WhatsAppIcon,
 } from "../../assets/images/icons/icons";
 import images from "../../assets/images/images";
-import LANGUAGE from "../../utils/language.util";
+import LANGUAGE from "../../utils/language-util";
 
 const Footer = () => {
   return (

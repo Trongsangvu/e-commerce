@@ -4,7 +4,7 @@ import { categories } from "../../config/menu";
 import { useAppDispatch } from "../../hooks/use-redux";
 import { setCategory } from "../../redux/product/filter-product-slice";
 import { RootStore } from "../../redux/store";
-import LANGUAGE from "../../utils/language.util";
+import LANGUAGE from "../../utils/language-util";
 
 interface ContainerProps {
   showTitle?: boolean;

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
 import { ROUTES } from "../../config/routes";
-import LANGUAGE from "../../utils/language.util";
+import LANGUAGE from "../../utils/language-util";
 
 const Banner = () => {
   return (

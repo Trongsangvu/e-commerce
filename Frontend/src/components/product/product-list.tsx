@@ -6,7 +6,7 @@ import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 import { IProduct } from "../../types/product-type";
-import LANGUAGE from "../../utils/language.util";
+import LANGUAGE from "../../utils/language-util";
 import { SkeletonCustom } from "../common/skeleton-custom";
 import Button from "../common/Button";
 
@@ -34,8 +34,8 @@ const ProductList = () => {
     selectedCategory === "all"
       ? products
       : products.filter(
-          (product: IProduct) => product.category === selectedCategory,
-        );
+        (product: IProduct) => product.category === selectedCategory,
+      );
 
   if (error) return <p>Error fetching products</p>;
 

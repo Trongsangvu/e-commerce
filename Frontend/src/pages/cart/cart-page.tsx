@@ -13,7 +13,7 @@ import {
 import { updateCartAction } from "../../redux/cart/cart-thunk";
 import { getCart } from "../../services/cart-service";
 import { ICartItem } from "../../types/cart-type";
-import LANGUAGE from "../../utils/language.util";
+import LANGUAGE from "../../utils/language-util";
 
 const CartPage = () => {
   const [selectedValue, setSelectedValue] = useState("option1");

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICartItem } from "../../types/cart-type";
-import { AsyncState, pending, rejected } from "../../utils/async-handler.util";
+import { AsyncState, pending, rejected } from "../../utils/async-handler-util";
 import { updateTotals } from "../../utils/cart.util";
 import { addToCartAction, updateCartAction } from "./cart-thunk";
 

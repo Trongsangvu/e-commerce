@@ -10,7 +10,7 @@ import {
   IOAuthResponse,
   IRegisterResponse,
 } from "../../types/auth-type";
-import { AsyncState, pending, rejected } from "../../utils/async-handler.util";
+import { AsyncState, pending, rejected } from "../../utils/async-handler-util";
 import { login, logout, oauthLogin, register } from "./auth-thunk";
 
 interface AuthState extends AsyncState {
