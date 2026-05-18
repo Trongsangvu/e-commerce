@@ -42,7 +42,7 @@ This project can use Yarn 4 (Berry) via Corepack. To set up Yarn 4 for this repo
 - Backend contains `migrations/` — check `Backend/src/migrations` for scripts to migrate or seed products. Run them with `ts-node` or the npm scripts provided in `Backend/package.json`.
 
 After activating Yarn 4 at the repo root, install dependencies per package:
-- Build and run containers (if Dockerfiles and compose are configured):
+- Build and run containers (if Docker files and compose are configured):
 
 ```bash
 cd Backend
@@ -150,7 +150,7 @@ Backend `.env` (example)
 
 ```
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/ecommerce
+MONGO_URI=mongodb://localhost:27017/e-commerce
 ...
 ```
 
@@ -167,7 +167,7 @@ VITE_API_BASE_URL=http://localhost:5000/api/v1
 
 ## Running with Docker (production preview)
 
-- Build and run containers (if Dockerfiles and compose are configured):
+- Build and run containers (if Docker files and compose are configured):
 
 ```bash
 cd Backend
