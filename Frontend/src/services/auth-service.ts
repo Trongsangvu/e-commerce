@@ -2,21 +2,13 @@ import { AxiosResponse } from "axios";
 
 import authEndpoints from "../api/auth.api";
 import userEndpoints from "../api/user.api";
-import {
-  ILogin,
-  ILoginResponse,
-  IOAuthResponse,
-  IOAuthUser,
-  IRegister,
-  IRegisterResponse,
-  IUserResponse,
-} from "../types/auth-type";
+import { ILogin, ILoginResponse, IOAuthResponse, IOAuthUser, IRegister, IRegisterResponse, IUserResponse } from "../types/auth-type";
 import httpService from "./http-service";
 
 // Login service
 export const login = async (data: ILogin): Promise<ILoginResponse> => {
   const res = await httpService.post<
-    { success: boolean; data: ILoginResponse },
+    { success: boolean; data: ILoginResponse; },
     ILogin
   >(authEndpoints.login, data, {
     requiresAuth: false,
@@ -33,7 +25,7 @@ export const logout = (): Promise<AxiosResponse> => {
 // Register service
 export const register = async (data: IRegister): Promise<IRegisterResponse> => {
   const res = await httpService.post<
-    { success: boolean; data: IRegisterResponse },
+    { success: boolean; data: IRegisterResponse; },
     IRegister
   >(authEndpoints.register, data);
 
@@ -43,7 +35,7 @@ export const register = async (data: IRegister): Promise<IRegisterResponse> => {
 // Oauth Login service
 export const oauthLogin = async (data: IOAuthUser): Promise<IOAuthResponse> => {
   const res = await httpService.post<
-    { success: boolean; data: IOAuthResponse },
+    { success: boolean; data: IOAuthResponse; },
     IOAuthUser
   >(authEndpoints.oauthLogin, data);
 
@@ -52,7 +44,7 @@ export const oauthLogin = async (data: IOAuthUser): Promise<IOAuthResponse> => {
 
 // Get profile user
 export const getProfileUser = async (): Promise<IUserResponse> => {
-  const res = await httpService.get<{ success: boolean; data: IUserResponse }>(
+  const res = await httpService.get<{ success: boolean; data: IUserResponse; }>(
     userEndpoints.profile,
   );
   return res.data.data;

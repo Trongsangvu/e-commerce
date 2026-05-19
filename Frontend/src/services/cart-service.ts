@@ -20,7 +20,7 @@ export const addToCart = async (data: CartData): Promise<ICartResponse> => {
 };
 
 export const updateCart = async (data: CartData): Promise<ICartResponse> => {
-  const res = await httpService.put<ICartResponse, { quantity: number }>(
+  const res = await httpService.put<ICartResponse, { quantity: number; }>(
     cartEndpoints.byId(data.productId),
     data,
   );
