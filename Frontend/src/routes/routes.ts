@@ -1,6 +1,6 @@
 import { OAuthSuccess } from "../auth/oauth-success";
 import DefaultLayout from "../components/layout/default-layout";
-import { ROUTES } from "../config/routes";
+import { routes } from "../config/routes";
 import AboutPage from "../pages/about/about-page";
 import AccountPage from "../pages/account/account-page";
 import LoginPage from "../pages/auth/login-page";
@@ -14,42 +14,42 @@ import ProductDetailPage from "../pages/product/product-detail-page";
 import ShopPage from "../pages/shop/shop-page";
 
 // Public routes: no need sign in to access
-const publicRoutes = [
-  { path: ROUTES.home, component: HomePage, layout: DefaultLayout },
-  { path: ROUTES.login, component: LoginPage, layout: DefaultLayout },
+const publicroutes = [
+  { path: routes.home, component: HomePage, layout: DefaultLayout },
+  { path: routes.login, component: LoginPage, layout: DefaultLayout },
   {
-    path: ROUTES.register,
+    path: routes.register,
     component: RegisterPage,
     layout: DefaultLayout,
   },
   {
-    path: ROUTES.account,
+    path: routes.account,
     component: AccountPage,
     layout: DefaultLayout,
   },
   {
-    path: ROUTES.productDetail,
+    path: routes.productDetail,
     component: ProductDetailPage,
     layout: DefaultLayout,
   },
-  { path: ROUTES.cart, component: CartPage, layout: DefaultLayout },
-  { path: ROUTES.shop, component: ShopPage, layout: DefaultLayout },
-  { path: ROUTES.about, component: AboutPage, layout: DefaultLayout },
-  { path: ROUTES.blog, component: BlogPage, layout: DefaultLayout },
+  { path: routes.cart, component: CartPage, layout: DefaultLayout },
+  { path: routes.shop, component: ShopPage, layout: DefaultLayout },
+  { path: routes.about, component: AboutPage, layout: DefaultLayout },
+  { path: routes.blog, component: BlogPage, layout: DefaultLayout },
   {
-    path: ROUTES.contact,
+    path: routes.contact,
     component: ContactPage,
     layout: DefaultLayout,
   },
-  { path: ROUTES.oauthSuccess, component: OAuthSuccess },
+  { path: routes.oauthSuccess, component: OAuthSuccess },
 
-  { path: ROUTES.checkout, component: CheckoutPage, layout: null },
+  { path: routes.checkout, component: CheckoutPage, layout: null },
 ];
 
-const standaloneRoutes = [];
+const standaloneroutes = [];
 
 // Private routes: need sign in to access
-const privateRoutes = [];
+const privateroutes = [];
 
-export { privateRoutes, publicRoutes, standaloneRoutes };
+export { privateroutes, publicroutes, standaloneroutes };
 
