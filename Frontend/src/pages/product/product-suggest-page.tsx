@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { NextArrow, PrevArrow } from "../../components/common/custom-arrow";
 import Slider from "../../components/common/slick-slider";
-import { routes } from "../../config/routes";
+import { routes_gen } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
@@ -50,7 +50,7 @@ const ProductSuggestPage = () => {
           {filterProductsByCty.map((product) => (
             <div key={product._id} className="px-2">
               <Link
-                to={routes.productDetail.replace(":id", product._id)}
+                to={routes_gen.productDetail(product._id)}
               >
                 <div className="group relative overflow-hidden min-h-300">
                   <img
