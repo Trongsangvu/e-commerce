@@ -5,7 +5,7 @@ This repository contains a full-stack e-commerce application with a TypeScript N
 **Project Layout**
 
 - **Backend/**: Node + TypeScript API, services, integrations, and webhooks.
-- **Frontend/**: Vite + React + TypeScript single-page app.
+- **Frontend/**: Vite + React + TypeScript
 
 ## Tech Stack
 
