@@ -3,7 +3,7 @@ import ProtectedRoute from "../components/guards/protected-route";
 import AuthLayout from "../components/layout/auth-layout";
 import DefaultLayout from "../components/layout/default-layout";
 import { ROLES } from "../config/constants";
-import { ROUTES } from "../config/routes";
+import { routes } from "../config/routes";
 import AboutPage from "../pages/about/about-page";
 import LoginPage from "../pages/auth/login-page";
 import RegisterPage from "../pages/auth/register-page";
@@ -21,11 +21,11 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        path: ROUTES.login,
+        path: routes.login,
         element: <LoginPage />,
       },
       {
-        path: ROUTES.register,
+        path: routes.register,
         element: <RegisterPage />,
       },
     ],
@@ -34,39 +34,39 @@ const router = createBrowserRouter([
     element: <DefaultLayout />,
     children: [
       {
-        path: ROUTES.home,
+        path: routes.home,
         element: <HomePage />,
       },
       // {
-      //   path: ROUTES.products,
+      //   path: routes.products,
       //   element: <ProductListPage />,
       // },
       {
-        path: ROUTES.productDetail,
+        path: routes.productDetail,
         element: <ProductDetailPage />,
       },
       {
-        path: ROUTES.cart,
+        path: routes.cart,
         element: <CartPage />,
       },
       {
-        path: ROUTES.about,
+        path: routes.about,
         element: <AboutPage />,
       },
       {
-        path: ROUTES.blog,
+        path: routes.blog,
         element: <BlogPage />,
       },
       {
-        path: ROUTES.contact,
+        path: routes.contact,
         element: <ContactPage />,
       },
       {
-        path: ROUTES.shop,
+        path: routes.shop,
         element: <ShopPage />,
       },
       {
-        path: ROUTES.account,
+        path: routes.account,
         element: <AccountPage />,
       },
     ],

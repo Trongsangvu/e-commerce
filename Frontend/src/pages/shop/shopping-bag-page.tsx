@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircleExcelIcon } from "../../assets/images/icons/icons";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { getCart } from "../../services/cart-service";
 import Button from "../../components/common/Button";
@@ -23,13 +23,13 @@ const ShoppingBagPage = ({ isVisible, handleShowBag }: Props) => {
   // Handle direct to checkout
   const handleCheckout = () => {
     handleShowBag();
-    navigate(ROUTES.checkout);
+    navigate(routes.checkout);
   };
 
   // Handle direct to cart
   const handleCheckBag = () => {
     handleShowBag();
-    navigate(ROUTES.cart);
+    navigate(routes.cart);
   };
 
   const cartItems = data?.items ?? [];

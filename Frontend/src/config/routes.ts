@@ -1,4 +1,4 @@
-export const ROUTES = {
+export const routes = {
   home: "/",
   cart: "/cart",
   login: "/login",
@@ -15,4 +15,4 @@ export const ROUTES = {
   oauthSuccess: "/oauth-success",
 };
 
-export type Routes = typeof ROUTES;
+export type Routes = typeof routes;

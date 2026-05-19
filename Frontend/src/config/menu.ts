@@ -1,4 +1,4 @@
-import { ROUTES } from "./routes";
+import { routes } from "./routes";
 
 export interface MenuItems {
   id?: string;
@@ -30,8 +30,8 @@ export const MENU_ITEMS_2: MenuItems[] = [
 
 // Menu Profile
 export const MENU_PROFILE: MenuItems[] = [
-  { id: "my account", title: "my account", path: ROUTES.account },
-  { id: "sign in", title: "sign in", path: ROUTES.login },
+  { id: "my account", title: "my account", path: routes.account },
+  { id: "sign in", title: "sign in", path: routes.login },
   { title: "my orders" },
   { title: "account setting" },
   { title: "address book" },
@@ -53,12 +53,12 @@ export const categories = [
 
 // Menu header
 export const MENU_HEADER: MenuItems[] = [
-  { id: "home", title: "Home", path: ROUTES.home },
-  { id: "shop", title: "Shop", path: ROUTES.shop },
-  // { id: "features", title: "Features", path: ROUTES.products },
-  { id: "blog", title: "Blog", path: ROUTES.blog },
-  { id: "about", title: "About", path: ROUTES.about },
-  { id: "contact", title: "Contact", path: ROUTES.contact },
+  { id: "home", title: "Home", path: routes.home },
+  { id: "shop", title: "Shop", path: routes.shop },
+  // { id: "features", title: "Features", path: routes.products },
+  { id: "blog", title: "Blog", path: routes.blog },
+  { id: "about", title: "About", path: routes.about },
+  { id: "contact", title: "Contact", path: routes.contact },
 ];
 
 // Menu size

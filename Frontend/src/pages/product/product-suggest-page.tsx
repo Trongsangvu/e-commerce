@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { NextArrow, PrevArrow } from "../../components/common/custom-arrow";
 import Slider from "../../components/common/slick-slider";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
@@ -17,9 +17,9 @@ const ProductSuggestPage = () => {
     arrows: true,
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
+    centerPadding: "10px",
   };
 
-  // Query data
   const {
     data: products = [],
     isLoading,
@@ -33,7 +33,6 @@ const ProductSuggestPage = () => {
     (state: RootStore) => state.category.featureProductByWomen,
   );
 
-  // Filter products by category
   const filterProductsByCty = products.filter(
     (product) => product.category === productByCategory,
   );
@@ -46,13 +45,13 @@ const ProductSuggestPage = () => {
       <h3 className="uppercase font-[GucciSansPro-medium] pb-10">
         you may also like
       </h3>
-      <div className="mx-auto px-4">
+      <div className="relative">
         <Slider {...settings}>
           {filterProductsByCty.map((product) => (
-            <Link
-              to={ROUTES.productDetail.replace(":id", product._id)}
-            >
-              <div key={product._id} className="px-3">
+            <div key={product._id} className="px-2">
+              <Link
+                to={routes.productDetail.replace(":id", product._id)}
+              >
                 <div className="group relative overflow-hidden min-h-300">
                   <img
                     className="w-full h-300 cursor-pointer transition-transform duration-500 group-hover:scale-110"
@@ -60,12 +59,16 @@ const ProductSuggestPage = () => {
                     alt={product.name}
                   />
                 </div>
+
                 <p className="font-[GucciSansPro-light] pt-10 pb-6">
                   {product.name}
                 </p>
-                <p className="font-[GucciSansPro-book]">{product.formattedPrice}</p>
-              </div>
-            </Link>
+
+                <p className="font-[GucciSansPro-book]">
+                  {product.formattedPrice}
+                </p>
+              </Link>
+            </div>
           ))}
         </Slider>
       </div>

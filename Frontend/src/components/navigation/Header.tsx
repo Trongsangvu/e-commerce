@@ -7,7 +7,7 @@ import {
   UserIcon,
 } from "../../assets/images/icons/icons";
 import { MENU_HEADER, MENU_PROFILE } from "../../config/menu";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { useScroll } from "../../hooks/use-scroll";
@@ -30,8 +30,8 @@ const Header = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const isLoginPage = location.pathname === ROUTES.login;
-  const isRegisterPage = location.pathname === ROUTES.register;
+  const isLoginPage = location.pathname === routes.login;
+  const isRegisterPage = location.pathname === routes.register;
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -90,7 +90,7 @@ const Header = () => {
     dispatch(logout());
     setIsShowBag(false);
     setIsShowMenu(false);
-    navigate(ROUTES.login);
+    navigate(routes.login);
   };
 
   const handleShowShoppingBag = useCallback(() => {
@@ -129,7 +129,7 @@ const Header = () => {
         <div className="height-72 z-1 shadow-xs flex items-center flex-1 justify-around pt-20 pb-20 px-7">
           <div className="flex items-center justify-between">
             <div className="flex items-center mr-40">
-              <Link to={ROUTES.home}>
+              <Link to={routes.home}>
                 <h3
                   className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${isLoginPage || isRegisterPage || scroll
                     ? "text-black"

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import LANGUAGE from "../../utils/language-util";
 
 const Banner = () => {
@@ -11,7 +11,7 @@ const Banner = () => {
           <div className="flex flex-wrap justify-center">
             <div className="px-15 pb-30">
               <div className="w-369 h-247 m-0 border border-[#e6e6e6] cursor-pointer relative group overflow-hidden">
-                <Link to={ROUTES.products}>
+                <Link to={routes.products}>
                   <div className="absolute inset-0 bg-[rgba(103,117,214,0.8)] opacity-0 group-hover:opacity-90 transition-all duration-400 ease-in-out"></div>
                   <img
                     className="h-[245.5px]"
@@ -36,7 +36,7 @@ const Banner = () => {
             </div>
             <div className="px-15 pb-30">
               <div className="w-369 h-247 border border-[#e6e6e6] cursor-pointer relative group overflow-hidden">
-                <Link to={ROUTES.products}>
+                <Link to={routes.products}>
                   <div className="absolute inset-0 bg-[rgba(103,117,214,0.8)] opacity-0 group-hover:opacity-90 transition-all duration-400 ease-in-out"></div>
                   <img
                     className="h-[245.5px]"
@@ -61,7 +61,7 @@ const Banner = () => {
             </div>
             <div className="px-15 pb-30">
               <div className="w-369 h-247 border border-[#e6e6e6] cursor-pointer relative group overflow-hidden">
-                <Link to={ROUTES.products}>
+                <Link to={routes.products}>
                   <div className="absolute inset-0 bg-[rgba(103,117,214,0.8)] opacity-0 group-hover:opacity-90 transition-all duration-400 ease-in-out"></div>
                   <img
                     className="h-[245.5px]"

@@ -6,7 +6,7 @@ import {
   GoogleIcon,
 } from "../../assets/images/icons/icons";
 import { handleLoginGoogle } from "../../auth/goole-auth";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import { useAppDispatch } from "../../hooks/use-redux";
 import { checkAuth } from "../../redux/auth/auth-slice";
 import { setAuth } from "../../redux/auth/auth-helper";
@@ -30,7 +30,7 @@ const LoginPage = () => {
       const res = await loginService({ email, password });
       setAuth(res.token, res.user);
       dispatch(checkAuth());
-      navigate(ROUTES.home);
+      navigate(routes.home);
     } catch (error) {
       toast.error(toastErrorMessage(error));
     }
@@ -136,7 +136,7 @@ const LoginPage = () => {
             or
           </span>
           <div className="bg-[#1a1a1a] w-328 uppercase flex items-center justify-center h-56 text-white cursor-pointer text-center p-10 font-[GucciSansPro-medium]">
-            <Link to={ROUTES.register}>
+            <Link to={routes.register}>
               <button className="uppercase cursor-pointer">sign up</button>
             </Link>
           </div>

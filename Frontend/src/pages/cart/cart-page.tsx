@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
 import Button from "../../components/common/Button";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch } from "../../hooks/use-redux";
 import {
@@ -85,7 +85,7 @@ const CartPage = () => {
           </div>
         </div>
         <div className="flex items-center justify-start max-w-680 mt-30 mb-20">
-          <Link to={ROUTES.home}>
+          <Link to={routes.home}>
             <span className="pl-150 font-[Poppins-regular] text-sm text-[#555]">
               {LANGUAGE.GENERAL.HOME}
             </span>

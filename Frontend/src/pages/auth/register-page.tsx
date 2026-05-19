@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { AddressIcon, EyeSlashIcon } from "../../assets/images/icons/icons";
 import images from "../../assets/images/images";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { register } from "../../redux/auth/auth-thunk";
@@ -26,7 +26,7 @@ const RegisterPage = () => {
         console.log("Error dispatching register action: ", error),
       );
 
-    navigate(ROUTES.login);
+    navigate(routes.login);
   };
 
   return (

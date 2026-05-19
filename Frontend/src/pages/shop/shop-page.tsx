@@ -4,7 +4,7 @@ import ProductList from "../../components/product/product-list";
 
 const ShopPage = () => {
   return (
-    <div>
+    <div className="min-h-1200">
       <div>
         <div className="relative">
           <img src={images.profileBanner} alt="profile" />

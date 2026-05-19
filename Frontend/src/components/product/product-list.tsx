@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
-import { ROUTES } from "../../config/routes";
+import { routes } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
@@ -49,7 +49,7 @@ const ProductList = () => {
             filteredProducts?.map((product: IProduct) => (
               <Link
                 key={product._id}
-                to={ROUTES.productDetail.replace(":id", product._id)}
+                to={routes.productDetail.replace(":id", product._id)}
               >
                 <li className="mb-35 max-w-270 w-full mx-auto">
                   <div className="max-w-270 w-full overflow-hidden relative group">

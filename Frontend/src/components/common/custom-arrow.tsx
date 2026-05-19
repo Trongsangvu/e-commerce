@@ -1,10 +1,13 @@
 import Button from "./Button";
 
-export const PrevArrow = (props: { onClick?: () => void; }) => {
-  const { onClick } = props;
+export const PrevArrow = ({
+  onClick,
+}: {
+  onClick?: () => void;
+}) => {
   return (
     <Button
-      className="absolute cursor-pointer left-0 top-1/2 -translate-y-1/2 bg-white/80 p-10 shadow-md z-10"
+      className="absolute z-10 top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 cursor-pointer bg-white/80 p-10 shadow-md"
       onClick={onClick}
     >
       ←
@@ -12,11 +15,14 @@ export const PrevArrow = (props: { onClick?: () => void; }) => {
   );
 };
 
-export const NextArrow = (props: { onClick?: () => void; }) => {
-  const { onClick } = props;
+export const NextArrow = ({
+  onClick,
+}: {
+  onClick?: () => void;
+}) => {
   return (
     <Button
-      className="absolute cursor-pointer right-0 top-1/2 -translate-y-1/2 bg-white/80 p-10 shadow-md z-10"
+      className="absolute z-10 top-1/2 right-0 translate-x-1/2 -translate-y-1/2 cursor-pointer bg-white/80 p-10 shadow-md"
       onClick={onClick}
     >
       →

@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import images from "../../assets/images/images";
 import { MENU_SIZE } from "../../config/menu";
 import { useFetch } from "../../hooks/use-fetch";
-import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
+import { useAppDispatch } from "../../hooks/use-redux";
 import { addToCartAction } from "../../redux/cart/cart-thunk";
-import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
 import ProductSuggestPage from "./product-suggest-page";
 import { toast } from "react-toastify";
@@ -17,14 +16,6 @@ const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams<{ id: string; }>();
 
-  const updateQuantity = useAppSelector((state: RootStore) => {
-    const cartItem = state.cart.items.find((item) => {
-      return item.productId._id === id;
-    });
-    return cartItem?.quantity || quantity;
-  });
-
-  // Query data
   const {
     data: product,
     isLoading,
@@ -38,30 +29,26 @@ const ProductDetailPage = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error fetching products</p>;
 
-  // Handle active
   const handleActive = (size: string) => {
     setIsActive(size);
   };
 
-  // Handle add quantity
   const handleAddQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
 
-  // Handle decrease quantity
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
   };
 
-  // Handle add product to cart
   const addProductToCart = () => {
     if (!id) return;
     dispatch(
       addToCartAction({
-        productId: id!,
-        quantity: updateQuantity,
+        productId: id,
+        quantity,
       }),
     );
     toast.success("Add product to cart successfully!");
@@ -73,9 +60,9 @@ const ProductDetailPage = () => {
         <img src={images.detailBanner} alt="bannerBlog" />
       </div>
       <div className="bg-[#ffffffd9] mb-20">
-        <div className="mx-100 mt-100">
-          <div className="flex flex-row gap-50">
-            <div className="w-auto flex flex-row px-25 gap-50">
+        <div className="mt-100">
+          <div className="flex flex-row gap-50 mx-auto max-w-1200 justify-start">
+            <div className="w-auto flex flex-row pr-25 gap-50">
               <img
                 className="w-340 h-420"
                 src={product?.image_url}
@@ -89,16 +76,21 @@ const ProductDetailPage = () => {
               <p className="font-[GucciSansPro-light] my-10">
                 {product?.description}
               </p>
-              <span className="font-[GucciSansPro-bold]">{product?.formattedPrice}</span>
+              <span className="font-[GucciSansPro-bold]">
+                {product?.formattedPrice}
+              </span>
               <div className="mb-10 flex items-center gap-10">
                 <span className="font-[GucciSansPro-bold]">Size:</span>
                 <ul className="flex mt-10">
                   {MENU_SIZE.map((item) => (
                     <li
-                      className={`border border-[#ccc] font-[GucciSansPro-light] text-sm w-80 text-center py-10 px-10 cursor-pointer mr-10 rounded-sm
-                        ${isActive === item.size ? "text-[#6774d5] border-[#6774d5]" : "text-[#ccc] border-[#ccc]"}`}
-                      onClick={() => handleActive(item.size)}
                       key={item.id}
+                      className={`border font-[GucciSansPro-light] text-sm w-80 text-center py-10 px-10 cursor-pointer mr-10 rounded-sm
+                        ${isActive === item.size
+                          ? "text-[#6774d5] border-[#6774d5]"
+                          : "text-[#ccc] border-[#ccc]"
+                        }`}
+                      onClick={() => handleActive(item.size)}
                     >
                       {item.size}
                     </li>
@@ -107,10 +99,10 @@ const ProductDetailPage = () => {
               </div>
               <div className="flex justify-center flex-col items-start mt-20">
                 <div className="flex items-center gap-10 mb-20">
-                  <p className="font-[GucciSansPro-bold]">Quantity: </p>
+                  <p className="font-[GucciSansPro-bold]">Quantity:</p>
                   <div className="flex items-center">
                     <Button
-                      className="w-45 h-44 cursor-pointer border border-[#ccc]"
+                      className="w-45 h-44 cursor-pointer border border-[#ccc] rounded-l-sm"
                       onClick={handleDecreaseQuantity}
                     >
                       -
@@ -122,7 +114,7 @@ const ProductDetailPage = () => {
                       readOnly
                     />
                     <Button
-                      className="w-45 h-44 cursor-pointer border border-[#ccc]"
+                      className="w-45 h-44 cursor-pointer border border-[#ccc] rounded-r-sm"
                       onClick={handleAddQuantity}
                     >
                       +
@@ -131,7 +123,7 @@ const ProductDetailPage = () => {
                 </div>
                 <div>
                   <Button
-                    className="cursor-pointer uppercase font-[GucciSansPro-bold] bg-[#6774d5] text-white py-10 px-20 rounded-23"
+                    className="cursor-pointer uppercase font-[GucciSansPro-bold] border border-[#ccc] rounded-sm py-10 px-20 rounded-23"
                     onClick={addProductToCart}
                   >
                     Add to cart
