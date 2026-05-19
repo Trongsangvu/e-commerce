@@ -14,7 +14,7 @@ import ProductDetailPage from "../pages/product/product-detail-page";
 import ShopPage from "../pages/shop/shop-page";
 
 // Public routes: no need sign in to access
-const publicroutes = [
+const publicRoutes = [
   { path: routes.home, component: HomePage, layout: DefaultLayout },
   { path: routes.login, component: LoginPage, layout: DefaultLayout },
   {
@@ -46,10 +46,10 @@ const publicroutes = [
   { path: routes.checkout, component: CheckoutPage, layout: null },
 ];
 
-const standaloneroutes = [];
+const standaloneRoutes = [];
 
 // Private routes: need sign in to access
-const privateroutes = [];
+const privateRoutes = [];
 
-export { privateroutes, publicroutes, standaloneroutes };
+export { privateRoutes, publicRoutes, standaloneRoutes };
 
