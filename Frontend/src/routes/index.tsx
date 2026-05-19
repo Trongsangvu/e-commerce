@@ -37,10 +37,6 @@ const router = createBrowserRouter([
         path: routes.home,
         element: <HomePage />,
       },
-      // {
-      //   path: routes.products,
-      //   element: <ProductListPage />,
-      // },
       {
         path: routes.productDetail,
         element: <ProductDetailPage />,

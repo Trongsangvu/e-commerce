@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
@@ -8,10 +9,12 @@ const ProductListPage = () => {
   const {
     data: products = [],
     isLoading,
-    error,
   } = useFetch({
     queryKey: ["products"],
     queryFn: () => list(),
+    onError: () => {
+      toast.error("Failed to load products");
+    }
   });
 
   const productByCategory = useAppSelector(
@@ -24,7 +27,6 @@ const ProductListPage = () => {
   );
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching products</p>;
 
   return (
     <div>

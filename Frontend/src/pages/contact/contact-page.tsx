@@ -3,6 +3,8 @@ import images from "../../assets/images/images";
 import { GoogleMapComponent } from "../../components/google/google-map";
 import { sendEmail } from "../../services/email-service";
 import Button from "../../components/common/Button";
+import { toast } from "react-toastify";
+import { toastErrorMessage } from "../../utils/error-util";
 
 const ContactPage = () => {
   const [recipient, setRecipient] = useState("");
@@ -27,17 +29,17 @@ const ContactPage = () => {
         return;
       }
 
-      console.log("Email sent successfully");
+      toast.success("Email sent successfully");
 
       return response;
     } catch (error) {
-      console.error("Error sending email:", error);
       setResult({ success: false, message: "Error sending email" });
+      toast.error(toastErrorMessage(error));
     }
   };
 
   return (
-    <div>
+    <div className="min-h-1200">
       <div className="mb-90">
         <div className="relative">
           <img src={images.bannerAbout} alt="Banner Contact" className="w-full" />
@@ -60,9 +62,8 @@ const ContactPage = () => {
 
                 {result.message && (
                   <div
-                    className={`alert ${
-                      result.success ? "alert-success" : "alert-error"
-                    }`}
+                    className={`alert ${result.success ? "alert-success" : "alert-error"
+                      }`}
                   >
                     {result.message}
                   </div>
@@ -119,7 +120,7 @@ const ContactPage = () => {
                         Address
                       </span>
                       <p className="font-[Poppins-regular] text-[#888] pt-20">
-                        Coza Store Center 8th floor, 379 Hudson St, New York, NY
+                        CozaStore Center 8th floor, 379 Hudson St, New York, NY
                         10018 US
                       </p>
                     </div>

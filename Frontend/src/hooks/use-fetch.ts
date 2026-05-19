@@ -1,10 +1,11 @@
 import { QueryKey, useQuery, UseQueryOptions } from "@tanstack/react-query";
 
-interface UseFetchProps<T> {
+interface UseFetchProps<T, TError = Error> {
   queryKey: QueryKey;
   queryFn: () => Promise<T>;
   enabled?: boolean;
   options?: UseQueryOptions<T>;
+  onError?: (error: TError) => void;
 }
 
 export const useFetch = <T>({

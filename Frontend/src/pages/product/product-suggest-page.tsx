@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { NextArrow, PrevArrow } from "../../components/common/custom-arrow";
 import Slider from "../../components/common/slick-slider";
+import ProductSuggestSkeleton from "../../components/product/product-suggest-skeleton";
 import { routes_gen } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
@@ -23,10 +25,12 @@ const ProductSuggestPage = () => {
   const {
     data: products = [],
     isLoading,
-    error,
   } = useFetch({
     queryKey: ["products"],
     queryFn: () => list(),
+    onError: () => {
+      toast.error("Failed to load products");
+    }
   });
 
   const productByCategory = useAppSelector(
@@ -37,8 +41,9 @@ const ProductSuggestPage = () => {
     (product) => product.category === productByCategory,
   );
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching products</p>;
+  if (isLoading) {
+    return <ProductSuggestSkeleton />;
+  }
 
   return (
     <div className="mt-50 pt-50 max-w-1200 mx-auto">
