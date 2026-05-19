@@ -20,7 +20,7 @@ router.get(
 
 router.get(
   "/:id",
-  allTokenRequired,
+  // allTokenRequired,
   productController.getById,
 );
 

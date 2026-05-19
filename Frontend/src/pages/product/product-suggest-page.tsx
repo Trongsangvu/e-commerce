@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../../components/common/custom-arrow";
+import Slider from "../../components/common/slick-slider";
 import { ROUTES } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
@@ -15,7 +15,6 @@ const ProductSuggestPage = () => {
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: true,
-    className: "gap-20",
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
   };
@@ -43,21 +42,20 @@ const ProductSuggestPage = () => {
   if (error) return <p>Error fetching products</p>;
 
   return (
-    <div className="mt-50 pt-50">
-      <h3 className="uppercase font-[GucciSansPro-medium] pb-10 pl-12">
+    <div className="mt-50 pt-50 max-w-1200 mx-auto">
+      <h3 className="uppercase font-[GucciSansPro-medium] pb-10">
         you may also like
       </h3>
-      <div className="mx-auto px-4 max-w-1300">
+      <div className="mx-auto px-4">
         <Slider {...settings}>
-          {filterProductsByCty.map((product, index) => (
+          {filterProductsByCty.map((product) => (
             <Link
-              key={index}
               to={ROUTES.productDetail.replace(":id", product._id)}
             >
-              <div key={index}>
-                <div className="group relative overflow-hidden min-h-300 max-w-230">
+              <div key={product._id} className="px-3">
+                <div className="group relative overflow-hidden min-h-300">
                   <img
-                    className="w-auto h-300 cursor-pointer transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-300 cursor-pointer transition-transform duration-500 group-hover:scale-110"
                     src={product.image_url}
                     alt={product.name}
                   />
@@ -65,7 +63,7 @@ const ProductSuggestPage = () => {
                 <p className="font-[GucciSansPro-light] pt-10 pb-6">
                   {product.name}
                 </p>
-                <p className="font-[GucciSansPro-book]">{product.price}</p>
+                <p className="font-[GucciSansPro-book]">{product.formattedPrice}</p>
               </div>
             </Link>
           ))}

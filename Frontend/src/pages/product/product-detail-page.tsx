@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { addToCartAction } from "../../redux/cart/cart-thunk";
 import { RootStore } from "../../redux/store";
 import { byId } from "../../services/product-service";
-import SuggestProducts from "./product-suggest-page";
+import ProductSuggestPage from "./product-suggest-page";
 import { toast } from "react-toastify";
 import Button from "../../components/common/Button";
 
@@ -89,8 +89,8 @@ const ProductDetailPage = () => {
               <p className="font-[GucciSansPro-light] my-10">
                 {product?.description}
               </p>
-              <span className="font-[GucciSansPro-bold]">{product?.price}</span>
-              <div className="mb-10">
+              <span className="font-[GucciSansPro-bold]">{product?.formattedPrice}</span>
+              <div className="mb-10 flex items-center gap-10">
                 <span className="font-[GucciSansPro-bold]">Size:</span>
                 <ul className="flex mt-10">
                   {MENU_SIZE.map((item) => (
@@ -100,31 +100,34 @@ const ProductDetailPage = () => {
                       onClick={() => handleActive(item.size)}
                       key={item.id}
                     >
-                      Size {item.size}
+                      {item.size}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="flex justify-center flex-col items-center mt-20">
-                <div className="mb-10 flex">
-                  <Button
-                    className="w-45 h-44 cursor-pointer border border-[#ccc]"
-                    onClick={handleDecreaseQuantity}
-                  >
-                    -
-                  </Button>
-                  <input
-                    className="pl-10 bg-[#f7f7f7] w-50 h-44 text-center border-t border-b outline-none border-[#ccc]"
-                    type="number"
-                    value={quantity}
-                    readOnly
-                  />
-                  <Button
-                    className="w-45 h-44 cursor-pointer border border-[#ccc]"
-                    onClick={handleAddQuantity}
-                  >
-                    +
-                  </Button>
+              <div className="flex justify-center flex-col items-start mt-20">
+                <div className="flex items-center gap-10 mb-20">
+                  <p className="font-[GucciSansPro-bold]">Quantity: </p>
+                  <div className="flex items-center">
+                    <Button
+                      className="w-45 h-44 cursor-pointer border border-[#ccc]"
+                      onClick={handleDecreaseQuantity}
+                    >
+                      -
+                    </Button>
+                    <input
+                      className="pl-10 bg-[#f7f7f7] w-50 h-44 text-center border-t border-b outline-none border-[#ccc]"
+                      type="number"
+                      value={quantity}
+                      readOnly
+                    />
+                    <Button
+                      className="w-45 h-44 cursor-pointer border border-[#ccc]"
+                      onClick={handleAddQuantity}
+                    >
+                      +
+                    </Button>
+                  </div>
                 </div>
                 <div>
                   <Button
@@ -138,7 +141,7 @@ const ProductDetailPage = () => {
             </div>
           </div>
           <div>
-            <SuggestProducts />
+            <ProductSuggestPage />
           </div>
         </div>
       </div>

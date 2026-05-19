@@ -1,6 +1,6 @@
 import Button from "./Button";
 
-export const PrevArrow = (props: { onClick?: () => void }) => {
+export const PrevArrow = (props: { onClick?: () => void; }) => {
   const { onClick } = props;
   return (
     <Button
@@ -12,7 +12,7 @@ export const PrevArrow = (props: { onClick?: () => void }) => {
   );
 };
 
-export const NextArrow = (props: { onClick?: () => void }) => {
+export const NextArrow = (props: { onClick?: () => void; }) => {
   const { onClick } = props;
   return (
     <Button
