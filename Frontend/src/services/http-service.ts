@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 import authEndpoints from "../api/auth.api";
 
@@ -7,7 +7,11 @@ const BASE_URL =
 
 const getToken = () => Cookies.get("token");
 const getRefreshToken = () => Cookies.get("refreshToken");
-const setToken = (token: string) => Cookies.set("token", token);
+
+const setToken = (token: string) => {
+  Cookies.set("token", token);
+};
+
 const removeTokens = () => {
   Cookies.remove("token");
   Cookies.remove("refreshToken");
@@ -18,122 +22,227 @@ type Configs<D = unknown> = AxiosRequestConfig<D> & {
   _retry?: boolean;
 };
 
+type InternalConfigs<D = unknown> =
+  InternalAxiosRequestConfig<D> & {
+    requiresAuth?: boolean;
+    _retry?: boolean;
+  };
+
+interface FailedQueue {
+  resolve: (token: string) => void;
+  reject: (error: unknown) => void;
+};
+
 class HttpService {
   private instance: AxiosInstance;
 
+  private refreshInstance: AxiosInstance;
+
+  private isRefreshing = false;
+
+  private failedQueue: FailedQueue[] = [];
+
   constructor() {
-    // Create an instance with default configuration
     this.instance = axios.create({
       baseURL: BASE_URL,
-      timeout: 10000,
-      withCredentials: true, // Important for send cookies
+      timeout: 5000,
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
       },
     });
 
+    // separate instance
+    this.refreshInstance = axios.create({
+      baseURL: BASE_URL,
+      timeout: 5000,
+      withCredentials: true,
+    });
+
     this.setupInterceptors();
+  }
+
+  private processQueue(
+    error: unknown,
+    token?: string,
+  ) {
+    this.failedQueue.forEach((request) => {
+      if (error) {
+        request.reject(error);
+      } else {
+        request.resolve(token!);
+      }
+    });
+
+    this.failedQueue = [];
   }
 
   private setupInterceptors() {
     // Request interceptor
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
-        const token = getToken();
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+        const customConfig = config as InternalConfigs;
+
+        if (customConfig.requiresAuth !== false) {
+          const token = getToken();
+
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          }
         }
+
         return config;
       },
-      (error) => Promise.reject(error),
+
+      (error: AxiosError) => Promise.reject(error),
     );
 
     // Response interceptor
     this.instance.interceptors.response.use(
       (response) => response,
-      async (err) => {
-        const originalRequest = err.config as Configs;
+
+      async (error: AxiosError) => {
+        const originalRequest = error.config as Configs;
+
+        if (!originalRequest) {
+          return Promise.reject(error);
+        }
+
+        const isUnauthorized = error.response?.status === 401;
+
+        const hasRefreshToken = !!getRefreshToken();
+
+        const isRefreshCall = originalRequest.url?.includes(
+          authEndpoints.refreshToken,
+        );
 
         if (
-          err.response?.status === 401 &&
+          isUnauthorized &&
           !originalRequest._retry &&
-          getRefreshToken()
+          hasRefreshToken &&
+          !isRefreshCall
         ) {
+          // queue while refreshing
+          if (this.isRefreshing) {
+            return new Promise((resolve, reject) => {
+              this.failedQueue.push({
+                resolve: (token) => {
+                  originalRequest.headers = {
+                    ...originalRequest.headers,
+                    Authorization: `Bearer ${token}`,
+                  };
+
+                  resolve(this.instance(originalRequest));
+                },
+
+                reject,
+              });
+            });
+          }
+
           originalRequest._retry = true;
+          this.isRefreshing = true;
+
           try {
-            const res = await this.refreshToken();
-            const newToken = res.data.accessToken;
+            const response = await this.refreshToken();
+            const newToken = response.data.accessToken;
 
             setToken(newToken);
 
-            // retry original request
+            this.processQueue(null, newToken);
+
+            originalRequest.headers = {
+              ...originalRequest.headers,
+              Authorization: `Bearer ${newToken}`,
+            };
+
             return this.instance(originalRequest);
           } catch (refreshError) {
+            this.processQueue(refreshError);
+
             removeTokens();
+
             return Promise.reject(refreshError);
+          } finally {
+            this.isRefreshing = false;
           }
         }
 
-        return Promise.reject(err);
+        return Promise.reject(error);
       },
     );
   }
 
-  // Refresh token
   private refreshToken() {
-    return this.instance.post<{ accessToken: string; }>(
+    return this.refreshInstance.post<{
+      accessToken: string;
+    }>(
       authEndpoints.refreshToken,
       {
         refreshToken: getRefreshToken(),
       },
-      {
-        requiresAuth: false,
-      } as Configs,
     );
   }
 
-  // Generic request method
   request<T, D = unknown>(
     config: AxiosRequestConfig<D>,
   ): Promise<AxiosResponse<T>> {
     return this.instance.request<T>(config);
   }
 
-  // GET
   get<T, P = Record<string, unknown>>(
     url: string,
     params?: P,
     config?: Configs,
-  ): Promise<AxiosResponse<T>> {
-    return this.request<T>({ method: "GET", url, params, ...config });
+  ) {
+    return this.request<T>({
+      method: "GET",
+      url,
+      params,
+      ...config,
+    });
   }
 
-  // POST
   post<T, P = Record<string, unknown>>(
     url: string,
     data?: P,
     config?: Configs,
-  ): Promise<AxiosResponse<T>> {
-    return this.request<T>({ method: "POST", url, data, ...config });
+  ) {
+    return this.request<T>({
+      method: "POST",
+      url,
+      data,
+      ...config,
+    });
   }
 
-  // PUT
   put<T, P = Record<string, unknown>>(
     url: string,
     data?: P,
     config?: Configs,
-  ): Promise<AxiosResponse<T>> {
-    return this.request<T>({ method: "PUT", url, data, ...config });
+  ) {
+    return this.request<T>({
+      method: "PUT",
+      url,
+      data,
+      ...config,
+    });
   }
 
-  // DELETE
   delete<T, P = Record<string, unknown>>(
     url: string,
     params?: P,
     config?: Configs,
-  ): Promise<AxiosResponse<T>> {
-    return this.request<T>({ method: "DELETE", url, params, ...config });
+  ) {
+    return this.request<T>({
+      method: "DELETE",
+      url,
+      params,
+      ...config,
+    });
   }
 }
 
-export default new HttpService();
+const httpService = new HttpService();
+
+export default httpService;
