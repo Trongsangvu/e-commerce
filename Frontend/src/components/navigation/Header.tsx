@@ -133,7 +133,7 @@ const Header = () => {
                 <h3
                   className={`text-2xl font-[GucciSansPro-medium] uppercase transition-colors duration-300 ${isLoginPage || isRegisterPage || scroll
                     ? "text-black"
-                    : "text-white"
+                    : "text-black"
                     }`}
                 >
                   {LANGUAGE.GENERAL.NAME}
@@ -147,7 +147,7 @@ const Header = () => {
                     ? "text-[#6774d5]"
                     : isLoginPage || isRegisterPage || scroll
                       ? "text-black"
-                      : "text-white"
+                      : "text-black"
                     }`}
                   key={item.id ?? item.title ?? index}
                 >
@@ -163,7 +163,7 @@ const Header = () => {
                 onClick={handleShowShoppingBag}
               >
                 <ShoppingCartIcon
-                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "black"
                     }`}
                 />
                 {cartItemsCount > 0 && (
@@ -187,7 +187,7 @@ const Header = () => {
                 onClick={handleShowMenuProfile}
               >
                 <UserIcon
-                  strokeColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                  strokeColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "black"
                     }`}
                 />
               </Button>
@@ -206,7 +206,7 @@ const Header = () => {
                 onClick={handleSearch}
               >
                 <SearchIcon
-                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "black"
                     }`}
                 />
               </Button>
@@ -223,14 +223,14 @@ const Header = () => {
                 onClick={handleShow}
               >
                 <MenuToggle
-                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "white"
+                  fillColor={`${isLoginPage || isRegisterPage || scroll ? "black" : "black"
                     }`}
                 />
                 <span
                   className={`font-[GucciSansPro-book] uppercase text-xs transition-colors duration-300 
                     ${isLoginPage || isRegisterPage || scroll
                       ? "text-black"
-                      : "text-white"
+                      : "text-black"
                     }`}
                 >
                   {LANGUAGE.GENERAL.MENU}

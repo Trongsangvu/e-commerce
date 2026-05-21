@@ -1,158 +1,57 @@
-import {
-  FacebookIcon,
-  IgIcon,
-  WhatsAppIcon,
-} from "../../assets/images/icons/icons";
-import images from "../../assets/images/images";
-import LANGUAGE from "../../utils/language-util";
+import { FOOTER_ITEMS } from "../../config/constants";
 
 const Footer = () => {
   return (
-    <footer className="mt-auto">
-      <div className="bg-[#222222] px-41 py-40">
-        <div className="grid grid-cols-4 gap-10">
-          <div>
-            <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              {LANGUAGE.GENERAL.CATEGORIES}
-            </h4>
-            <ul>
-              <li className="pb-10">
-                <a
-                  href="#"
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.WOMEN}
-                </a>
-              </li>
-              <li className="pb-10">
-                <a
-                  href="#"
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.MEN}
-                </a>
-              </li>
-              <li className="pb-10">
-                <a
-                  href="#"
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.SHOES}
-                </a>
-              </li>
-              <li className="pb-10">
-                <a
-                  href="#"
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.WATCHES}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              {LANGUAGE.GENERAL.HELP}
-            </h4>
-            <ul>
-              <li className="pb-10">
-                <a
-                  href=""
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.TRACK_ORDER}
-                </a>
-              </li>
-              <li className="pb-10">
-                <a
-                  href=""
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.RETURNS}
-                </a>
-              </li>
-              <li className="pb-10">
-                <a
-                  href=""
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.SHIPPING}
-                </a>
-              </li>
-              <li className="pb-10">
-                <a
-                  href=""
-                  className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]"
-                >
-                  {LANGUAGE.GENERAL.FAQS}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              {LANGUAGE.GENERAL.GET_IN_TOUCH}
-            </h4>
-            <p className="font-[Poppins-regular] text-[#b2b2b2] text-[13px]">
-              {LANGUAGE.GENERAL.QUESTION}
-            </p>
-            <div className="flex items-center gap-10 pt-30">
-              <a href="#">
-                <FacebookIcon className={"hover:fill-[#6774d5]"} />
-              </a>
-              <a href="#">
-                <IgIcon className={"hover:fill-[#6774d5]"} />
-              </a>
-              <a href="#">
-                <WhatsAppIcon className={"hover:fill-[#6774d5]"} />
-              </a>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-white text-[15px] leading-[1.6] uppercase pb-7.5 font-[Montserrat-Bold]">
-              {LANGUAGE.GENERAL.NEWS_LETTER}
-            </h4>
-            <form action="">
-              <div>
-                <div className="relative group inline-block">
-                  <input
-                    className="pb-5 text-[13px] font-[Poppins-regular] border-none outline-none text-[white] w-auto min-w-[15ch] max-w-full"
-                    type="text"
-                    placeholder="email@gmail.com"
-                  />
-                  <div className="absolute bottom-0 left-0 w-full border-b transition-all duration-500 ease-in-out border-[#ccc] origin-left scale-x-100 group-focus-within:border-[#6774d5] group-focus-within:scale-x-100"></div>
-                </div>
-              </div>
-              <div className="pt-18">
-                <button className="cursor-pointer px-20 uppercase transition-all duration-500 hover:bg-white hover:text-[#6774d5] bg-[#6774d5] font-[Poppins-medium] rounded-3xl h-42 min-w-44.75 text-white">
-                  {LANGUAGE.GENERAL.SUBSCRIBE}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="pt-35">
-          <p className=" flex justify-center font-[Poppins-regular] text-[#717475] text-[13px]">
-            Copyright © {new Date().getFullYear()}. All Rights Reserved | Made
-            with
-            <img
-              className="w-16 h-16 mx-4 transition-all duration-300 invert"
-              src={images.heartIcon}
-              alt="heart icon"
-            />{" "}
-            by
-            <a href="#" className="mx-5 text-[#6774d5]">
-              Colorlib
-            </a>
-            & distributed by
-            <a
-              href="https://github.com/mangtrungzos"
-              className="ml-5 text-[#6774d5]"
-            >
-              Mangtrungzos
-            </a>
+    <footer className="bg-[#0a0908] px-48 pt-64 pb-32 text-white/45">
+      <div className="grid grid-cols-[2fr_1fr_1fr_1fr] gap-48 mb-48 pb-48 border-b border-white/8">
+        <div>
+          <p className="font-['Cormorant_Garamond',Georgia,serif] text-2xl font-light tracking-[0.15em] text-[#fefcf8] mb-4">
+            COZA
           </p>
+
+          <p className="text-[0.82rem] leading-[1.8] max-w-240 mb-6">
+            Curated fashion for those who believe that how you dress is how you
+            present yourself to the world.
+          </p>
+
+          <div className="flex gap-3">
+            {["f", "in", "tw", "yt"].map((social) => (
+              <a
+                key={social}
+                href="#"
+                className="w-34 h-34 border border-white/12 flex items-center justify-center text-white/40 no-underline text-[0.8rem] hover:text-[#fefcf8] hover:border-white/30 transition-colors"
+              >
+                {social}
+              </a>
+            ))}
+          </div>
         </div>
+
+        {FOOTER_ITEMS.map(({ title, links }) => (
+          <div key={title}>
+            <p className="text-[0.72rem] tracking-[0.18em] uppercase text-[#fefcf8] mb-5">
+              {title}
+            </p>
+
+            <ul className="list-none p-0 flex flex-col gap-2">
+              {links.map((link) => (
+                <li key={link}>
+                  <a
+                    href="#"
+                    className="text-[0.82rem] text-white/40 no-underline hover:text-[#fefcf8] transition-colors"
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-between text-xs">
+        <span>© {new Date().getFullYear()} COZA Store. All rights reserved.</span>
+        <span>Privacy · Terms · Cookies</span>
       </div>
     </footer>
   );

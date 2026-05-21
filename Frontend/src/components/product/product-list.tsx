@@ -1,22 +1,13 @@
-import { Link } from "react-router-dom";
-import images from "../../assets/images/images";
-import { routes } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 import { IProduct } from "../../types/product-type";
-import LANGUAGE from "../../utils/language-util";
 import { SkeletonCustom } from "../common/skeleton-custom";
-import Button from "../common/Button";
+import ProductCard from "./product-card";
 
 const ProductList = () => {
-  // Query data
-  const {
-    data: products = [],
-    isLoading,
-    error,
-  } = useFetch({
+  const { data: products = [], isLoading, error } = useFetch({
     queryKey: ["products"],
     queryFn: () => list(),
   });
@@ -25,69 +16,26 @@ const ProductList = () => {
     (state: RootStore) => state.category.selectedCategory,
   );
 
-  const handleQuickView = () => {
-    // Handle quick view action
-  };
-
-  // Filter products by categories
   const filteredProducts =
     selectedCategory === "all"
       ? products
-      : products.filter(
-        (product: IProduct) => product.category === selectedCategory,
-      );
+      : products.filter((p: IProduct) => p.category === selectedCategory);
 
-  if (error) return <p>Error fetching products</p>;
+  if (error) return (
+    <p className="text-center py-20 text-[#8a8278] text-sm tracking-wide">
+      Unable to load products. Please try again.
+    </p>
+  );
 
   return (
     <div>
       {isLoading ? (
-        <SkeletonCustom count={6} />
+        <SkeletonCustom count={8} />
       ) : (
-        <ul className="grid grid-cols-[repeat(auto-fit,minmax(270px,0fr))] gap-40 place-items-center">
-          {filteredProducts &&
-            filteredProducts?.map((product: IProduct) => (
-              <Link
-                key={product._id}
-                to={routes.productDetail.replace(":id", product._id)}
-              >
-                <li className="mb-35 max-w-270 w-full mx-auto">
-                  <div className="max-w-270 w-full overflow-hidden relative group">
-                    <img
-                      className="max-w-270 w-full h-335 cursor-pointer transition-transform duration-500 group-hover:scale-110"
-                      src={product.image_url}
-                      alt={product.name}
-                      loading="lazy"
-                    />
-                    <Button
-                      className="absolute cursor-pointer flex justify-center hover:bg-[#222] hover:text-[white] hover:border-[#222] items-center mb-20 -bottom-5 left-1/2 -translate-x-1/2 bg-white rounded-20 min-w-139 h-40 font-[Poppins-regular] text-[#333] text-12 opacity-0 scale-50 transition-all duration-500 ease-out group-hover:bottom-2 group-hover:text-lg group-hover:opacity-100 group-hover:scale-90"
-                      onClick={handleQuickView}
-                    >
-                      {LANGUAGE.PRODUCT.QUICK_VIEW}
-                    </Button>
-                  </div>
-                  <div className="flex items-start justify-between pt-14 max-w-270">
-                    <div className="flex flex-col">
-                      <span className="text-[#999] pb-6 font-[Poppins-regular] text-sm">
-                        {product.name}
-                      </span>
-                      <span className="text-[#666] font-[Poppins-regular] text-sm">
-                        {product.formattedPrice}
-                      </span>
-                    </div>
-                    <div className="flex">
-                      <button>
-                        <img
-                          className="w-18 h-16"
-                          src={images.heartIcon}
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                  </div>
-                </li>
-              </Link>
-            ))}
+        <ul className="grid grid-cols-4 gap-24 list-none p-0 m-0">
+          {filteredProducts.map((product: IProduct) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
         </ul>
       )}
     </div>
