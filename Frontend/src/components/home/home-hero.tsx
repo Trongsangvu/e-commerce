@@ -11,7 +11,7 @@ const HomeHero = ({ bannerRef, isBannerVisible }: HomeHeroProps) => {
   return (
     <div ref={bannerRef} className="grid grid-cols-2 min-h-screen pt-72">
       <div className="relative flex flex-col justify-center bg-[#f5f2ec] px-96 py-80 overflow-hidden">
-        <div className="absolute -top-80 -right-80 w-300 h-300 rounded-full border border-[#c2b9a8] opacity-40 pointer-events-none" />
+        {/* <div className="absolute -top-80 -right-80 w-300 h-300 rounded-full border border-[#c2b9a8] opacity-40 pointer-events-none" /> */}
 
         <div className="flex items-center gap-3 mb-6 text-[11px] tracking-[0.22em] uppercase text-[#b5854a]">
           <span className="inline-block w-8 h-px bg-[#b5854a]" />
