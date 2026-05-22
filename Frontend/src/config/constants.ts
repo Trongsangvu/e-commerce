@@ -1,3 +1,4 @@
+import { CalendarDays, Package, Zap } from "lucide-react";
 import LANGUAGE from "../utils/language-util";
 
 export const APP_STATE = {};
@@ -88,5 +89,23 @@ export const FOOTER_ITEMS = [
       "Press",
       "Affiliates",
     ],
+  },
+];
+
+export const LOGIN_ITEMS = [
+  {
+    icon: Package,
+    title: "Track Your Orders",
+    desc: "Follow your orders every step of the way.",
+  },
+  {
+    icon: Zap,
+    title: "Streamline Checkout",
+    desc: "Check out faster with saved addresses and payment methods.",
+  },
+  {
+    icon: CalendarDays,
+    title: "Book an Appointment",
+    desc: "Enjoy priority access to the boutique of your choice at the time and date that suits you.",
   },
 ];
