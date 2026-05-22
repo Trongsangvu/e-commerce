@@ -29,7 +29,7 @@ const ProductListPage = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="min-h-1200 mt-72">
       <h3 className="font-[Poppins-bold] text-3xl mt-20 text-[#333]">
         Feature Products
       </h3>
