@@ -66,7 +66,7 @@ const ProductSuggestPage = () => {
                   className="no-underline block group"
                 >
                   <div
-                    className="relative overflow-hidden bg-[#e8e1d5] mb-3"
+                    className="relative overflow-hidden bg-[#e8e1d5] mb-12"
                     style={{ aspectRatio: "3/4" }}
                   >
                     <img
@@ -74,14 +74,14 @@ const ProductSuggestPage = () => {
                       src={product.image_url}
                       alt={product.name}
                     />
-                    <div className="absolute bottom-0 left-0 h-0.5 bg-[#b5854a] w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                    <div className="absolute bottom-0 left-0 h-2 bg-[#b5854a] w-0 group-hover:w-full transition-all duration-500 ease-out" />
                   </div>
 
-                  <p className="text-[0.62rem] tracking-[0.14em] uppercase text-[#b5854a] mb-0.5">
+                  <p className="text-[0.62rem] tracking-[0.14em] uppercase text-[#b5854a] mb-2">
                     {product.category}
                   </p>
                   <h3
-                    className="text-[#0f0e0c] leading-snug mb-1 group-hover:text-[#b5854a] transition-colors duration-200"
+                    className="text-[#0f0e0c] leading-snug mb-4 group-hover:text-[#b5854a] transition-colors duration-200"
                     style={{ ...serif, fontSize: "0.95rem", fontWeight: 400 }}
                   >
                     {product.name}
