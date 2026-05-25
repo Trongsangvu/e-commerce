@@ -9,6 +9,8 @@ import { useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { list } from "../../services/product-service";
 
+const serif = { fontFamily: "'Cormorant Garamond', Georgia, serif" } as const;
+
 const ProductSuggestPage = () => {
   const settings = {
     dots: false,
@@ -22,15 +24,10 @@ const ProductSuggestPage = () => {
     centerPadding: "10px",
   };
 
-  const {
-    data: products = [],
-    isLoading,
-  } = useFetch({
+  const { data: products = [], isLoading } = useFetch({
     queryKey: ["products"],
     queryFn: () => list(),
-    onError: () => {
-      toast.error("Failed to load products");
-    }
+    onError: () => toast.error("Failed to load products"),
   });
 
   const productByCategory = useAppSelector(
@@ -38,46 +35,67 @@ const ProductSuggestPage = () => {
   );
 
   const filterProductsByCty = products.filter(
-    (product) => product.category === productByCategory,
+    product => product.category === productByCategory,
   );
 
-  if (isLoading) {
-    return <ProductSuggestSkeleton />;
-  }
+  if (isLoading) return <ProductSuggestSkeleton />;
 
   return (
-    <div className="mt-50 pt-50 max-w-1200 mx-auto">
-      <h3 className="uppercase font-[GucciSansPro-medium] pb-10">
-        you may also like
-      </h3>
-      <div className="relative">
-        <Slider {...settings}>
-          {filterProductsByCty.map((product) => (
-            <div key={product._id} className="px-2">
-              <Link
-                to={routes_gen.productDetail(product._id)}
-              >
-                <div className="group relative overflow-hidden min-h-300">
-                  <img
-                    className="w-full h-300 cursor-pointer transition-transform duration-500 group-hover:scale-110"
-                    src={product.image_url}
-                    alt={product.name}
-                  />
-                </div>
+    <section className="bg-[#f5f2ec] px-12 py-80">
+      <div className="max-w-1200 mx-auto">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="text-[0.72rem] tracking-[0.2em] uppercase text-[#b5854a] mb-2">
+              You May Also Like
+            </p>
+            <h2
+              className="text-[#0f0e0c] font-light leading-[1.1]"
+              style={{ ...serif, fontSize: "clamp(1.8rem, 2.5vw, 2.5rem)" }}
+            >
+              Related Pieces
+            </h2>
+          </div>
+        </div>
 
-                <p className="font-[GucciSansPro-light] pt-10 pb-6">
-                  {product.name}
-                </p>
+        <div className="relative">
+          <Slider {...settings}>
+            {filterProductsByCty.map(product => (
+              <div key={product._id} className="px-2">
+                <Link
+                  to={routes_gen.productDetail(product._id)}
+                  className="no-underline block group"
+                >
+                  <div
+                    className="relative overflow-hidden bg-[#e8e1d5] mb-3"
+                    style={{ aspectRatio: "3/4" }}
+                  >
+                    <img
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      src={product.image_url}
+                      alt={product.name}
+                    />
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-[#b5854a] w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                  </div>
 
-                <p className="font-[GucciSansPro-book]">
-                  {product.formattedPrice}
-                </p>
-              </Link>
-            </div>
-          ))}
-        </Slider>
+                  <p className="text-[0.62rem] tracking-[0.14em] uppercase text-[#b5854a] mb-0.5">
+                    {product.category}
+                  </p>
+                  <h3
+                    className="text-[#0f0e0c] leading-snug mb-1 group-hover:text-[#b5854a] transition-colors duration-200"
+                    style={{ ...serif, fontSize: "0.95rem", fontWeight: 400 }}
+                  >
+                    {product.name}
+                  </h3>
+                  <p className="text-[0.82rem] font-medium text-[#0f0e0c]">
+                    {product.formattedPrice}
+                  </p>
+                </Link>
+              </div>
+            ))}
+          </Slider>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

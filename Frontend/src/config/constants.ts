@@ -109,3 +109,22 @@ export const LOGIN_ITEMS = [
     desc: "Enjoy priority access to the boutique of your choice at the time and date that suits you.",
   },
 ];
+
+export const PERKS_DETAIL = [
+  { icon: "✓", text: "Free standard shipping on orders over $75" },
+  { icon: "↺", text: "Free returns within 30 days" },
+  { icon: "◈", text: "Authentic product — 100% guaranteed" },
+];
+
+export const ACCORDION_DETAIL = [
+  {
+    key: "details",
+    title: "Product Details",
+    content: ["85% polyester, 15% elastane", "Machine washable at 30°C", "Regular fit — model wears size S"],
+  },
+  {
+    key: "shipping",
+    title: "Shipping & Returns",
+    content: ["Standard delivery: 3–5 business days", "Express delivery: 1–2 business days", "Free returns within 30 days of purchase"],
+  },
+];
