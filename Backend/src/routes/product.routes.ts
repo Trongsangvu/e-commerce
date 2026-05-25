@@ -1,8 +1,9 @@
 import express from "express";
 import productController from "../controllers/product.controller";
-import { adminTokenRequired, allTokenRequired } from "../middlewares/auth.middleware";
+import { adminTokenRequired } from "../middlewares/auth.middleware";
 import { validateRequest } from "../middlewares/validate.middleware";
 import { createProductRequest, updateProductRequest } from "../requests/product.request";
+
 const router = express.Router();
 
 router.post(
@@ -14,13 +15,11 @@ router.post(
 
 router.get(
   "/",
-  // allTokenRequired,
   productController.list,
 );
 
 router.get(
   "/:id",
-  // allTokenRequired,
   productController.getById,
 );
 
