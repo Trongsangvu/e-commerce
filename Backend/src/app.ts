@@ -9,8 +9,32 @@ import logger from "./configs/logger";
 import { ApiResponse } from "./configs/response";
 import { errorHandler, notFoundHandler } from "./middlewares/error.middleware";
 import router from "./routes";
+import mongoose from "mongoose";
 
 const app: Application = express();
+
+// Check health
+app.get("/health", (_, res) => {
+  ApiResponse.OK(res, {
+    status: "ok",
+    timeStamp: new Date().toISOString(),
+  });
+});
+
+// Ping DB - unnecessary (use mongo atlas free)
+app.get("/ping-db", async (_req, res) => {
+  try {
+    await mongoose.connection.db?.admin().ping();
+
+    ApiResponse.OK(res, {
+      status: "Database is awake!",
+      timeStamp: new Date().toISOString()
+    });
+  } catch (error) {
+    logger.error("Failed to ping database", error);
+    res.status(500).json({ error: "Error waking up DB" });
+  }
+});
 
 // Security Middleware
 app.use(
