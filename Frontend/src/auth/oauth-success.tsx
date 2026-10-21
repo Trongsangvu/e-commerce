@@ -15,17 +15,16 @@ export const OAuthSuccess = () => {
   useEffect(() => {
     const processAuth = async () => {
       try {
-        const session = await account.getSession("current");
+        const session = await account.getSession({
+          sessionId: "current",
+        });
+
         if (!session) {
-          console.warn("No session found");
-          navigate(routes.login);
+          navigate(routes.login, { replace: true });
           return;
         }
 
         const user = await account.get();
-        if (user.email !== "vusangtrong58@gmail.com") {
-          console.warn("Logged in with a different email:", user.email);
-        }
 
         const response = await dispatch(
           oauthLogin({
@@ -33,29 +32,26 @@ export const OAuthSuccess = () => {
             name: user.name,
             email: user.email,
           }),
-        ).unwrap(); // This will automatically extract and type the payload
+        ).unwrap();
 
-        // Access payload here, not `data`
         const { token, user: userData } = response;
 
-        // Store token and user data in localStorage
         Cookies.set("token", token, { expires: 7 });
         Cookies.set("user", JSON.stringify(userData), { expires: 7 });
 
-        // Dispatch user data
         dispatch(setUser(userData));
 
-        // Navigate to profile page
-        navigate(routes.account);
+        navigate(routes.account, { replace: true });
       } catch (error) {
-        console.error("Error during Google login: ", error);
-        // navigate('/login');
+        console.error("Error during Google login:", error);
+        navigate(routes.login, { replace: true });
       }
     };
-    processAuth();
+
+    void processAuth();
   }, [dispatch, navigate]);
 
-  return <p>Progress in login...</p>;
+  return <p>Processing login...</p>;
 };
 
 // Prepare data for oauthLogin

@@ -6,7 +6,7 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from "../../assets/images/icons/icons";
-import { MENU_HEADER, MENU_PROFILE } from "../../config/menu";
+import { menuHeader, menuProfile } from "../../config/menu";
 import { routes } from "../../config/routes";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
@@ -17,10 +17,10 @@ import { logout } from "../../redux/auth/auth-thunk";
 import { RootStore } from "../../redux/store";
 import { getCart } from "../../services/cart-service";
 import LANGUAGE from "../../utils/language-util";
+import Button from "../common/Button";
 import { MenuProfile } from "../menu/menu-profile";
 import Search from "../search/Search";
 import Sidebar from "./Sidebar";
-import Button from "../common/Button";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +50,7 @@ const Header = () => {
 
   const cartItemsCount = data?.items?.length ?? 0;
 
-  const filteredMenu = MENU_PROFILE.filter((item) => {
+  const filteredMenu = menuProfile.filter((item) => {
     if (isAuthenticated) {
       return item.id !== "sign in";
     }
@@ -141,7 +141,7 @@ const Header = () => {
               </Link>
             </div>
             <ul className="flex gap-4">
-              {MENU_HEADER.map((item, index) => (
+              {menuHeader.map((item, index) => (
                 <li
                   className={`px-10 mx-10 cursor-pointer font-[GucciSansPro-book] hover:text-[#6774d5] transition-colors duration-300 ${location.pathname === item.path
                     ? "text-[#6774d5]"

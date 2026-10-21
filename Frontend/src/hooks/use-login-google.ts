@@ -1,16 +1,18 @@
 import { Models, OAuthProvider } from "appwrite";
+import { oauthState } from "../config/constants";
 import { routes } from "../config/routes";
 import { oauthLogin } from "../redux/auth/auth-thunk";
 import { AppDispatch } from "../redux/store";
 import { account } from "../services/appwrite-service";
 
-const initiateOAuthLogin = async (provider: OAuthProvider) => {
+const initiateOAuthLogin = (provider: OAuthProvider): boolean => {
   try {
-    const success = "http://localhost:5173/"; // URL to redirect on success
-    const failure = "http://localhost:5173/login"; // URL to redirect on failure
+    account.createOAuth2Session({
+      provider,
+      success: oauthState.success,
+      failure: oauthState.failure,
+    });
 
-    // Start the OAuth session
-    await account.createOAuth2Session(provider, success, failure);
     return true;
   } catch (error) {
     console.error(`Failed to initiate ${provider} login:`, error);
@@ -21,12 +23,17 @@ const initiateOAuthLogin = async (provider: OAuthProvider) => {
 // Process the OAuth session after successful authentication
 const processOAuthSession = async () => {
   try {
-    const session = await account.getSession("current");
+    const session = await account.getSession({
+      sessionId: "current",
+    });
+
     if (!session) {
       console.log("No active session found");
       return null;
     }
+
     const user = await account.get();
+
     return user;
   } catch (error) {
     console.error("Failed to process session:", error);

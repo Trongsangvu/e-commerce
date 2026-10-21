@@ -1,4 +1,4 @@
-import { MENU_ITEMS, MENU_ITEMS_2 } from "../../config/menu";
+import { menuItems, menuItems2 } from "../../config/menu";
 import MenuItem from "./menu-item";
 
 interface MenuListProps {
@@ -11,18 +11,18 @@ const MenuList = ({ isOpen }: MenuListProps) => {
       className={`transition-all duration-500 delay-200 
         ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
     >
-      {MENU_ITEMS.map((item, index) => (
+      {menuItems.map((item, index) => (
         <MenuItem
           key={`menu1-${index}`}
           title={item.title}
           delay={index * 50}
         />
       ))}
-      {MENU_ITEMS_2.map((item, index) => (
+      {menuItems2.map((item, index) => (
         <MenuItem
           key={`menu2-${index}`}
           title={item.title}
-          delay={(index + MENU_ITEMS.length) * 50}
+          delay={(index + menuItems.length) * 50}
         />
       ))}
     </ul>

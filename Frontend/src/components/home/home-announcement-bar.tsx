@@ -1,4 +1,4 @@
-import { ANNOUNCEMENTS } from "../../config/constants";
+import { announcements } from "../../config/constants";
 
 const HomeAnnouncementBar = () => {
   return (
@@ -18,14 +18,14 @@ const HomeAnnouncementBar = () => {
           animation: "coz-marquee 18s linear infinite",
         }}
       >
-        {ANNOUNCEMENTS.map((text, index) => (
+        {announcements.map((text, index) => (
           <span
             key={text}
             className="shrink-0 flex items-center gap-8 text-[0.72rem] tracking-[0.2em] uppercase text-[#fefcf8]"
           >
             {text}
 
-            {index !== ANNOUNCEMENTS.length - 1 && (
+            {index !== announcements.length - 1 && (
               <span className="w-5 h-5 rounded-full bg-white/50 shrink-0" />
             )}
           </span>

@@ -1,14 +1,19 @@
 import { CalendarDays, Package, Zap } from "lucide-react";
 import LANGUAGE from "../utils/language-util";
 
-export const APP_STATE = {};
+export const appState = {};
 
-export const ROLES = {
-  ADMIN: "admin",
-  USER: "user",
+export const oauthState = {
+  success: "http://localhost:5173/oauth-success",
+  failure: "http://localhost:5173/login"
 };
 
-export const BENEFITS = [
+export const roles = {
+  admin: "admin",
+  user: "user",
+};
+
+export const benefits = [
   {
     icon: "✓",
     title: "Free Shipping",
@@ -31,7 +36,7 @@ export const BENEFITS = [
   },
 ];
 
-export const REVIEWS = [
+export const reviews = [
   {
     initials: "SA",
     name: "Sofia A.",
@@ -52,20 +57,20 @@ export const REVIEWS = [
   },
 ];
 
-export const ANNOUNCEMENTS = [
+export const announcements = [
   "Free Shipping Over $75",
   "New Arrivals Every Week",
   "Sustainable Materials",
   "30-Day Returns",
 ];
 
-export const BANNER_ITEMS = [
+export const bannerItems = [
   { imgKey: "banner1" as const, label: LANGUAGE.GENERAL.WOMEN, bg: "bg-[#1c1814]" },
   { imgKey: "banner2" as const, label: LANGUAGE.GENERAL.MEN, bg: "bg-[#2c2825]" },
   { imgKey: "banner3" as const, label: LANGUAGE.GENERAL.ACCESSORIES, bg: "bg-[#1e1c1a]" },
 ];
 
-export const FOOTER_ITEMS = [
+export const footerItems = [
   {
     title: "Shop",
     links: ["Women", "Men", "Accessories", "New Arrivals", "Sale"],
@@ -92,7 +97,7 @@ export const FOOTER_ITEMS = [
   },
 ];
 
-export const LOGIN_ITEMS = [
+export const loginItems = [
   {
     icon: Package,
     title: "Track Your Orders",
@@ -110,13 +115,13 @@ export const LOGIN_ITEMS = [
   },
 ];
 
-export const PERKS_DETAIL = [
+export const perksDetail = [
   { icon: "✓", text: "Free standard shipping on orders over $75" },
   { icon: "↺", text: "Free returns within 30 days" },
   { icon: "◈", text: "Authentic product — 100% guaranteed" },
 ];
 
-export const ACCORDION_DETAIL = [
+export const accordionDetail = [
   {
     key: "details",
     title: "Product Details",

@@ -1,4 +1,4 @@
-const LANGUAGE = {
+const languages = {
   GENERAL: {
     NAME: "cozastore",
     HOME: "home",
@@ -44,4 +44,4 @@ const LANGUAGE = {
   },
 };
 
-export default LANGUAGE;
+export default languages;

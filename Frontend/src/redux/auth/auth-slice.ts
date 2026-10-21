@@ -1,16 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  getToken,
-  removeRefreshToken,
-  removeToken,
-} from "../../auth/auth-token";
-import {
-  AuthUser,
-  ILoginResponse,
-  IOAuthResponse,
-  IRegisterResponse,
-} from "../../types/auth-type";
+import { AuthUser, ILoginResponse, IOAuthResponse, IRegisterResponse } from "../../types/auth-type";
 import { AsyncState, pending, rejected } from "../../utils/async-handler-util";
+import { getToken, removeRefreshToken, removeToken } from "../../utils/auth.util";
 import { login, logout, oauthLogin, register } from "./auth-thunk";
 
 interface AuthState extends AsyncState {
@@ -108,4 +99,4 @@ const authSlice = createSlice({
 });
 
 export const { checkAuth } = authSlice.actions;
-export default authSlice.reducer;
+export default authSlice;

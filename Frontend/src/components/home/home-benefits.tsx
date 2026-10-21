@@ -1,9 +1,9 @@
-import { BENEFITS } from "../../config/constants";
+import { benefits } from "../../config/constants";
 
 const HomeBenefits = () => {
   return (
     <div className="border-t border-b border-[#e8e1d5] grid grid-cols-4 gap-8 px-48 py-40 bg-[#fefcf8]">
-      {BENEFITS.map(({ icon, title, desc }) => (
+      {benefits.map(({ icon, title, desc }) => (
         <div key={title} className="flex items-start gap-16">
           <div className="w-40 h-40 border border-[#e8e1d5] flex items-center justify-center text-[#b5854a] text-base shrink-0">
             {icon}

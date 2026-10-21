@@ -1,4 +1,5 @@
 import productEndpoints from "../api/product.api";
+import { ApiResponse } from "../types/api-type";
 import { IProduct, IProductDetailResponse, IProductListResponse } from "../types/product-type";
 import httpService from "./http-service";
 
@@ -9,22 +10,18 @@ interface Params {
 }
 
 export const list = async (params?: Params): Promise<IProductListResponse> => {
-  const res = await httpService.get<
-    {
-      success: boolean;
-      data: { products: IProduct[]; count?: number; };
-    },
+  const { data: res } = await httpService.get<
+    ApiResponse<{ products: IProduct[]; count?: number; }>,
     Params
   >(productEndpoints.list, params);
 
-  return res.data.data.products;
+  return res.data.products;
 };
 
 export const byId = async (id: string): Promise<IProductDetailResponse> => {
-  const response = await httpService.get<{
-    success: boolean;
-    data: { products: IProduct; };
-  }>(productEndpoints.byId(id));
+  const { data: res } = await httpService.get<
+    ApiResponse<{ products: IProduct; }>
+  >(productEndpoints.byId(id));
 
-  return response.data.data.products;
+  return res.data.products;
 };

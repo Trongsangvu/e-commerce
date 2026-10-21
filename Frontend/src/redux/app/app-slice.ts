@@ -24,4 +24,4 @@ const appSlice = createSlice({
 });
 
 export const { setState } = appSlice.actions;
-export default appSlice.reducer;
+export default appSlice;

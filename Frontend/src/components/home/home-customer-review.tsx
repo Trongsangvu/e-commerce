@@ -1,4 +1,4 @@
-import { REVIEWS } from "../../config/constants";
+import { reviews } from "../../config/constants";
 
 const HomeCustomerReviews = () => {
   return (
@@ -23,7 +23,7 @@ const HomeCustomerReviews = () => {
         </div>
 
         <div className="grid grid-cols-3 gap-24">
-          {REVIEWS.map(({ initials, name, stars, text }) => (
+          {reviews.map(({ initials, name, stars, text }) => (
             <div key={name} className="bg-[#fefcf8] p-32 border border-[#e8e1d5]">
               <p className="text-[#b5854a] tracking-widest mb-16">{stars}</p>
 

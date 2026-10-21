@@ -8,7 +8,7 @@ export interface MenuItems {
 }
 
 // Menu Sidebar 1
-export const MENU_ITEMS: MenuItems[] = [
+export const menuItems: MenuItems[] = [
   { title: "Gifts" },
   { title: "New In" },
   { title: "Handbags" },
@@ -22,14 +22,14 @@ export const MENU_ITEMS: MenuItems[] = [
 ];
 
 // Menu Sidebar 2
-export const MENU_ITEMS_2: MenuItems[] = [
+export const menuItems2: MenuItems[] = [
   { title: "Gucci Services" },
   { title: "World of Gucci" },
   { title: "Store Locator" },
 ];
 
 // Menu Profile
-export const MENU_PROFILE: MenuItems[] = [
+export const menuProfile: MenuItems[] = [
   { id: "my account", title: "my account", path: routes.account },
   { id: "sign in", title: "sign in", path: routes.login },
   { title: "my orders" },
@@ -52,7 +52,7 @@ export const categories = [
 ];
 
 // Menu header
-export const MENU_HEADER: MenuItems[] = [
+export const menuHeader: MenuItems[] = [
   { id: "home", title: "Home", path: routes.home },
   { id: "shop", title: "Shop", path: routes.shop },
   // { id: "features", title: "Features", path: routes.products },
@@ -62,7 +62,7 @@ export const MENU_HEADER: MenuItems[] = [
 ];
 
 // Menu size
-export const MENU_SIZE = [
+export const menuSize = [
   { id: "s", size: "S" },
   { id: "m", size: "M" },
   { id: "l", size: "L" },

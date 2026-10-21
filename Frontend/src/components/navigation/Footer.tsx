@@ -1,4 +1,4 @@
-import { FOOTER_ITEMS } from "../../config/constants";
+import { footerItems } from "../../config/constants";
 
 const Footer = () => {
   return (
@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {FOOTER_ITEMS.map(({ title, links }) => (
+        {footerItems.map(({ title, links }) => (
           <div key={title}>
             <p className="text-[0.72rem] tracking-[0.18em] uppercase text-[#fefcf8] mb-5">
               {title}

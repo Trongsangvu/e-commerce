@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "../components/guards/protected-route";
 import AuthLayout from "../components/layout/auth-layout";
 import DefaultLayout from "../components/layout/default-layout";
-import { ROLES } from "../config/constants";
+import { roles } from "../config/constants";
 import { routes } from "../config/routes";
 import AboutPage from "../pages/about/about-page";
 import AccountPage from "../pages/account/account-page";
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <ProtectedRoute roles={[ROLES.USER, ROLES.ADMIN]} />,
+    element: <ProtectedRoute roles={[roles.user, roles.admin]} />,
     children: [
       {
         element: <DefaultLayout />,

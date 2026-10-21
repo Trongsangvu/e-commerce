@@ -6,7 +6,7 @@ import { routes } from "../../config/routes";
 import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
 import { RootStore } from "../../redux/store";
 import { register } from "../../redux/auth/auth-thunk";
-import { LOGIN_ITEMS } from "../../config/constants";
+import { loginItems } from "../../config/constants";
 
 const serif = { fontFamily: "'Cormorant Garamond', Georgia, serif" } as const;
 
@@ -222,7 +222,7 @@ const RegisterPage = () => {
               </h2>
             </div>
             <div className="grid grid-cols-3 gap-32 text-center">
-              {LOGIN_ITEMS.map(({ icon: Icon, title, desc }) => (
+              {loginItems.map(({ icon: Icon, title, desc }) => (
                 <div key={title}>
                   <div className="w-40 h-40 border border-[#e8e1d5] flex items-center justify-center text-[#b5854a] mx-auto mb-16">
                     <Icon size={18} strokeWidth={1.5} />

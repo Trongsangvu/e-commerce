@@ -64,13 +64,13 @@ class HttpService {
 
   private processQueue(
     error: unknown,
-    token?: string,
+    token?: string
   ) {
     this.failedQueue.forEach((request) => {
-      if (error) {
-        request.reject(error);
+      if (error || !token) {
+        request.reject(error ?? new Error("Refresh token failed"));
       } else {
-        request.resolve(token!);
+        request.resolve(token);
       }
     });
 
@@ -83,12 +83,12 @@ class HttpService {
       (config: InternalAxiosRequestConfig) => {
         const customConfig = config as InternalConfigs;
 
-        if (customConfig.requiresAuth !== false) {
-          const token = getToken();
+        const token = customConfig.requiresAuth === false ? null : getToken();
 
-          if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-          }
+        if (token) {
+          config.headers.set("Authorization", `Bearer ${token}`);
+        } else {
+          config.headers.delete("Authorization");
         }
 
         return config;
@@ -118,6 +118,7 @@ class HttpService {
 
         if (
           isUnauthorized &&
+          originalRequest.requiresAuth !== false &&
           !originalRequest._retry &&
           hasRefreshToken &&
           !isRefreshCall
@@ -185,9 +186,9 @@ class HttpService {
   }
 
   request<T, D = unknown>(
-    config: AxiosRequestConfig<D>,
+    config: Configs<D>,
   ): Promise<AxiosResponse<T>> {
-    return this.instance.request<T>(config);
+    return this.instance.request<T, AxiosResponse<T>, D>(config);
   }
 
   get<T, P = Record<string, unknown>>(

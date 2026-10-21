@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AddressIcon, EyeSlashIcon, GoogleIcon } from "../../assets/images/icons/icons";
-import { handleLoginGoogle } from "../../auth/google-auth";
-import { LOGIN_ITEMS } from "../../config/constants";
+import images from "../../assets/images/images";
+import { loginItems } from "../../config/constants";
 import { routes } from "../../config/routes";
 import { useAppDispatch } from "../../hooks/use-redux";
 import { setAuth } from "../../redux/auth/auth-helper";
 import { checkAuth } from "../../redux/auth/auth-slice";
 import { login as loginService } from "../../services/auth-service";
 import { toastErrorMessage } from "../../utils/error-util";
-import images from "../../assets/images/images";
+import { handleLoginGoogle } from "../../utils/oauth.util";
 
 const serif = { fontFamily: "'Cormorant Garamond', Georgia, serif" } as const;
 
@@ -197,7 +197,7 @@ const LoginPage = () => {
               </h2>
             </div>
             <div className="grid grid-cols-3 gap-32 text-center">
-              {LOGIN_ITEMS.map(({ icon: Icon, title, desc }) => (
+              {loginItems.map(({ icon: Icon, title, desc }) => (
                 <div key={title}>
                   <div className="w-40 h-40 border border-[#e8e1d5] flex items-center justify-center text-[#b5854a] mx-auto mb-16">
                     <Icon size={18} strokeWidth={1.5} />

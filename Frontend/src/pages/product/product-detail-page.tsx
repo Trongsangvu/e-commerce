@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import images from "../../assets/images/images";
 import Button from "../../components/common/Button";
 import ProductDetailSkeleton from "../../components/product/product-detail-skeleton";
-import { ACCORDION_DETAIL, PERKS_DETAIL } from "../../config/constants";
-import { MENU_SIZE } from "../../config/menu";
+import { accordionDetail, perksDetail } from "../../config/constants";
+import { menuSize } from "../../config/menu";
 import { useFetch } from "../../hooks/use-fetch";
 import { useAppDispatch } from "../../hooks/use-redux";
 import { addToCartAction } from "../../redux/cart/cart-thunk";
@@ -175,7 +175,7 @@ const ProductDetailPage = () => {
                     </button>
                   </div>
                   <ul className="flex flex-wrap gap-8">
-                    {MENU_SIZE.map(item => (
+                    {menuSize.map(item => (
                       <li
                         key={item.id}
                         onClick={() => handleActive(item.size)}
@@ -236,7 +236,7 @@ const ProductDetailPage = () => {
                 <div className="h-px bg-[#e8e1d5]" />
 
                 <div className="flex flex-col gap-12">
-                  {PERKS_DETAIL.map(({ icon, text }) => (
+                  {perksDetail.map(({ icon, text }) => (
                     <div key={text} className="flex items-center gap-12">
                       <span className="w-20 h-20 border border-[#e8e1d5] flex items-center justify-center text-[#b5854a] text-[10px] shrink-0">
                         {icon}
@@ -246,7 +246,7 @@ const ProductDetailPage = () => {
                   ))}
                 </div>
 
-                {ACCORDION_DETAIL.map(({ key, title, content }) => (
+                {accordionDetail.map(({ key, title, content }) => (
                   <div key={key} className="border-t border-[#e8e1d5] pt-16">
                     <button
                       onClick={() => toggleAcc(key)}

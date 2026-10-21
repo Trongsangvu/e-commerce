@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import images from "../../assets/images/images";
-import { BANNER_ITEMS } from "../../config/constants";
+import { bannerItems } from "../../config/constants";
 import { routes } from "../../config/routes";
 import LANGUAGE from "../../utils/language-util";
 
@@ -28,7 +28,7 @@ const HomeBanner = () => (
       </div>
 
       <div className="grid grid-cols-3 gap-16">
-        {BANNER_ITEMS.map(({ imgKey, label, bg }) => (
+        {bannerItems.map(({ imgKey, label, bg }) => (
           <div key={imgKey} className="w-389 h-247 relative overflow-hidden">
             <Link
               to={routes.products}
